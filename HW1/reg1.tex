@@ -1,0 +1,39 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Basic regression table \label{reg1}}
+\begin{tabular}{l*{5}{c}}
+\toprule
+                    &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         &\multicolumn{1}{c}{(5)}         \\
+\midrule
+years of work experience&       0.014\sym{***}&       0.014\sym{***}&       0.014\sym{***}&       0.014\sym{***}&       0.014\sym{***}\\
+                    &     (0.003)         &     (0.003)         &     (0.003)         &     (0.003)         &     (0.003)         \\
+\addlinespace
+years with current employer&       0.012\sym{***}&       0.012\sym{***}&       0.012\sym{***}&       0.012\sym{***}&       0.012\sym{***}\\
+                    &     (0.003)         &     (0.003)         &     (0.003)         &     (0.003)         &     (0.003)         \\
+\addlinespace
+=1 if married       &       0.199\sym{***}&       0.199\sym{***}&       0.199\sym{***}&       0.199\sym{***}&       0.199\sym{***}\\
+                    &     (0.040)         &     (0.040)         &     (0.040)         &     (0.040)         &     (0.040)         \\
+\addlinespace
+=1 if live in south &      -0.091\sym{***}&      -0.091\sym{***}&      -0.091\sym{***}&      -0.091\sym{***}&      -0.091\sym{***}\\
+                    &     (0.027)         &     (0.027)         &     (0.027)         &     (0.027)         &     (0.027)         \\
+\addlinespace
+=1 if live in SMSA  &       0.184\sym{***}&       0.184\sym{***}&       0.184\sym{***}&       0.184\sym{***}&       0.184\sym{***}\\
+                    &     (0.027)         &     (0.027)         &     (0.027)         &     (0.027)         &     (0.027)         \\
+\addlinespace
+=1 if black         &      -0.188\sym{***}&      -0.188\sym{***}&      -0.188\sym{***}&      -0.188\sym{***}&      -0.188\sym{***}\\
+                    &     (0.037)         &     (0.037)         &     (0.037)         &     (0.037)         &     (0.037)         \\
+\addlinespace
+years of education  &       0.065\sym{***}&       0.065\sym{***}&       0.065\sym{***}&       0.065\sym{***}&       0.065\sym{***}\\
+                    &     (0.006)         &     (0.006)         &     (0.006)         &     (0.006)         &     (0.006)         \\
+\addlinespace
+Constant            &       5.395\sym{***}&       5.395\sym{***}&       5.395\sym{***}&       5.395\sym{***}&       5.395\sym{***}\\
+                    &     (0.113)         &     (0.113)         &     (0.113)         &     (0.113)         &     (0.113)         \\
+\midrule
+Observations        &         935         &         935         &         935         &         935         &         935         \\
+\bottomrule
+\multicolumn{6}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{6}{l}{\footnotesize Data: websuse nlswork}\\
+\multicolumn{6}{l}{\footnotesize Second line note}\\
+\multicolumn{6}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{tabular}
+\end{table}
