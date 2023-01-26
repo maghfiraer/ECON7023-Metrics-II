@@ -133,7 +133,7 @@ To estimate the asymptotic standard error we can use the Delta Method. We have t
 with the Jacobian in this case is only $1\times 1$, i.e, a scalar. From \eqref{h1.5} we take the square root to find $\se(\hat{\theta}_2),$ we have
 \begin{align*}
     \se[\hat{\theta}_2(\hat{\beta}_2)]&=\left(\frac{\partial\hat{\theta}_2}{\partial \hat{\beta}_2} \right) \se(\hat{\beta}_2) \\
-    &=100\cdot\exp(\hat{\beta}_2 \Delta educ)\cdot \se(\hat{\beta_2}).
+    &=100\cdot |\Delta educ| \cdot\exp(\hat{\beta}_2 \Delta educ)\cdot \se(\hat{\beta_2}).
 \end{align*}\qed
 
 
