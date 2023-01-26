@@ -139,9 +139,16 @@ with the Jacobian in this case is only $1\times 1$, i.e, a scalar. From \eqref{h
 \end{align*}\qed
 
 
-\item[d.] Use the data in NLS80.RAW to estimate equation \eqref{h1.0}, where \textbf{z} contains the remaining variables in equation \eqref{h1.0} (except ability, of course). Find $\hat{\theta}_1$ and its standard error; find $\hat{\theta}_2$ and its standard error when $\Delta educ=4.$ 
+\item[d.] Use the data in NLS80.RAW to estimate equation \eqref{h1.0}, where \textbf{z} contains the remaining variables in equation (4.29) (except ability, of course). Find $\hat{\theta}_1$ and its standard error; find $\hat{\theta}_2$ and its standard error when $\Delta educ=4.$ 
 \\ Answer:\\
 
+Recall the previous result, we have
+\begin{align*}
+    \hat{\theta}_1&=100\cdot[\exp{(\hat{\beta}_1)}-1]\\
+    \se[\hat{\theta}_1]&=100\cdot\exp(\hat{\beta}_1)\cdot \se(\hat{\beta_1})\\
+    \hat{\theta}_2&=100\cdot[\exp{(\hat{\beta_2}\Delta educ)}-1] \\
+    \se[\hat{\theta}_2]&=100\cdot |\Delta educ| \cdot\exp(\hat{\beta}_2 \Delta educ)\cdot \se(\hat{\beta_2}).
+\end{align*}
 \end{enumerate}
 
 \subsection*{Problem 4.2}
