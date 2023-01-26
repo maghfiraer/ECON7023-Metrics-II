@@ -1,0 +1,223 @@
+\documentclass[10pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+\usepackage{mathtools}
+
+\newcommand\iid{\stackrel{\mathclap{iid}}{\sim}}
+\newcommand\asym{\stackrel{\mathclap{a}}{\sim}}
+\newcommand\convprob{\xrightarrow{p}}
+\newcommand\convdist{\xrightarrow{d}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\E}{\text{E}}
+\newcommand{\V}{\text{Var}}
+\newcommand{\Av}{\text{Avar}}
+\newcommand{\se}{\text{se}}
+\newcommand{\corr}{\text{Corr}}
+\newcommand{\cov}{\text{Cov}}
+\newcommand{\norm}{\text{Normal}}
+ 
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+ 
+\title{Homework 1}
+\author{ECON 7023: Econometrics II\\
+Maghfira Ramadhani\\
+January 26, 2022}
+\date{Spring 2023}
+\maketitle
+
+\section*{Part 1}
+\subsection*{Problem 3.5}
+Let $\left\{y_i:i=1,2,3,\ldots\right\}$ be an independent, identically distributed sequence with $\E(y_i^2)<\infty$. Let $\mu=\E(y_i)$ and $\sigma^2=\V(y_i).$
+\begin{enumerate}
+\item[a.] Let $\bar{y}_N$ denote the sample average based on a sample size of $N$. Find $\V[\sqrt{N}(\bar{y}_N-\mu)].$
+\\ Answer: \\
+By definition of sample mean, we have $\V(\bar{y}_N) = \V \left(\frac{1}{N}\sum_{i=1}^{N}{y_i}\right).$
+Recall property of variance that $\V(ax)=a^2 \V(x)$ for random variable $x$ and constant $a$. Since $N$ is constant, thus we have
+$\V(\bar{y}_N) = \left(\frac{1}{N}\right)^2 \V \left(\sum_{i=1}^{N}{y_i}\right).$
+It is given that $y_i\iid(\mu,\sigma^2) \text{ for } i\in\left\{1,2,..,n\right\}$. Therefore $\V(y_i)=\sigma^2$ and is constant, and  since $y_i$'s are independent we have $\V \left(\sum_{i=1}^{N}{y_i}\right) = \sum_{i=1}^{N}{\V(y_i)}.$
+Finally, combining these results, we have
+\begin{align*}
+    \V(\bar{y}_N) = \left(\frac{1}{N}\right)^2 \sum_{i=1}^{N}{\V(y_i)}=\left(\frac{1}{N}\right)^2 N\sigma^2=\sigma^2/N.
+\end{align*}
+Now, we can calculate $\V[\sqrt{N}(\bar{y}_N-\mu)].$ Since $N$ and $\mu$ are constant, we have
+\begin{align*}
+    \V[\sqrt{N}(\bar{y}_N-\mu)]=\V[\sqrt{N}(\bar{y}_N)]=(\sqrt{N})^2\V(\bar{y}_N)=N(\sigma^2/N)=\sigma^2.
+\end{align*}\qed
+
+\item[b.] What is the asymptotic variance of $\sqrt{N}(\bar{y}_N-\mu)$?
+\\ Answer:\\
+By Central Limit Theorem, since $y_i\iid(\mu,\sigma^2)$, then we have $\sqrt{N}(\bar{y}_N-\mu)\asym\norm(0,\sigma^2)$. So, the asymptotic variance of  $\sqrt{N}(\bar{y}_N-\mu)$ is $\Av[\sqrt{N}(\bar{y}_N-\mu)]=\sigma^2.$\\ \qed
+
+\item[c.] What is the asymptotic variance of $\bar{y}_N$? Compare this with $\V(\bar{y}_N).$
+\\ Answer:\\
+From the result in (c) we have $\Av[\sqrt{N}(\bar{y}_N-\mu)]=\sigma^2.$ Since $N$ and $\mu$ are constant we have $\Av[\sqrt{N}(\bar{y}_N-\mu)]=\Av[\sqrt{N}(\bar{y}_N)]$. Recall property of variance that $\V(ax)=a^2 \V(x)$ for random variable $x$ and constant $a$. Applying this property to the asymptotic variance we have $\Av(\bar{y}_N))=\frac{1}{N}\Av[\sqrt{N}(\bar{y}_N)]=\frac{1}{N}\Av[\sqrt{N}(\bar{y}_N-\mu)]=\sigma^2/N.$ We get the same result as in (a).\\ \qed
+
+\item[d.] What is the asymptotic standard deviation of $\bar{y}_N$?
+\\ Answer:\\
+By definition, the asymptotic standard deviation is the square root of the asymptotic variance that we have from previous result, formally, $\sqrt{\Av(\bar{y}_N)}=\sqrt{\sigma^2/N}=\sigma/\sqrt{N}.$\\ \qed
+\item[e.] How would you obtain the asymptotic standard error of $\bar{y}_N$?
+\\ Answer:\\
+Applying \textbf{Definition 3.10} from the textbook, the asymptotic standard error of $\bar{y}_N$ is $\se(\bar{y}_N)=\hat{\sigma}/\sqrt{N},$ with $\hat{\sigma}$ a consistent estimator for $\sigma$, formally, $\hat{\sigma}^2\convprob\sigma^2$. Because we deal with $y_i$ as a single random variable, the consistent estimator for $\sigma^2$ will be $\hat{\sigma}^2=\frac{1}{N-1}\sum_{i=1}^N (y_i-\bar{y_N})^2.$ Then take the $|\sqrt{\hat{\sigma}^2}|$ as the $\hat{\sigma}$.
+\begin{proof}
+We need to show that $\hat{\sigma}^2=\frac{1}{N-1}\sum_{i=1}^N (y_i-\bar{y_N})^2$ is a consistent estimator for $\sigma^2$.
+\end{proof}
+\end{enumerate}
+
+
+\subsection*{Problem 4.1}
+Consider a standard $\log(wage)$ equation for men under the assumption that all explanatory variables are exogenous:
+\begin{align*}
+    &\log(wage)=\beta_0+\beta_1 married +\beta_2 educ+\mathbf{z\pmb{\gamma}}+u, \tag{4.49} \label{h1.0}\\
+    &\E(u|married,educ,\mathbf{z})=0,
+\end{align*}
+where $\mathbf{z}$ contains factors other than marital status and education that can affect wages. When $\beta_1$ is small, $100\cdot \beta_1$ is approximately the ceteris paribus difference in wages between married and unmarried men. When $\beta_1$ is large, it might be preferable to use the exact percentage difference in $\E(wage|married,educ,\mathbf{z})$. Call this $\theta_1$.
+\begin{enumerate}
+\item[a.] Show that if $u$ is independent of all explanatory variables in equation \eqref{h1.0}, then $\theta_1=100\cdot[\exp(\beta_1)-1]$. (Hint: Find $\E(wage|married,educ,\mathbf{z})$ for $married=1$ and $married=0$, and find the percentage difference). A natural, consistent, estimator of $\theta_1$ is $\hat{\theta}_1=100\cdot[\exp(\hat{\beta}_1)-1]$, where $\hat{\beta_1}$ is the OLS estimator from equation \eqref{h1.0}.
+\\ Answer:\\
+Rewrite equation \eqref{h1.1},
+\begin{align}
+    &\log(wage)=\beta_0+\beta_1 married +\beta_2 educ+\mathbf{z\pmb{\gamma}}+u \notag\\
+    &\Leftrightarrow wage=\exp{(\beta_0+\beta_1 married +\beta_2 educ+\mathbf{z\pmb{\gamma}}+u)} \notag\\
+    &\Leftrightarrow wage=\exp{(u)}\exp{[\beta_0+\beta_1 married +\beta_2 educ+\mathbf{z\pmb{\gamma}})}. \label{h1.1}
+\end{align}
+Now take the expectation of \eqref{h1.1} with respect to all explanatory variables, we have
+\begin{align}
+    &\E(wage|married,educ,\mathbf{z})=\E(\exp{(u)}|married,educ,\mathbf{z})\exp{(\beta_0+\beta_1 married +\beta_2 educ+\mathbf{z}\pmb{\gamma})}.\label{h1.2}
+\end{align}
+If $u$ is independent of all explanatory variables, then $exp(u)$ will also be independent with all those variables, i.e, $\E(\exp{(u)}|married,educ,\mathbf{z})=E(\exp(u))=c,$ where $c$ is a constant. Now from \eqref{h1.2} we have
+\begin{align}
+    \E(wage|married,educ,\mathbf{z})=c\exp{(\beta_0+\beta_1 married +\beta_2 educ+\mathbf{z}\pmb{\gamma})}. \label{h1.3}
+\end{align}
+Then, we can compute the exact percentage different $\theta_1=100\cdot\frac{\E(wage|married=1)-\E(wage|married=0)}{\E(wage|married=0)}$ from \eqref{h1.3}, we have
+\begin{align}
+    \theta_1&=100\cdot\left[\frac{c\exp{(\beta_0+\beta_1 (1) +\beta_2 educ+\mathbf{z}\pmb{\gamma})}-c\exp{(\beta_0+\beta_1 (0) +\beta_2 educ+\mathbf{z}\pmb{\gamma})}}{c\exp{(\beta_0+\beta_1 (0) +\beta_2 educ+\mathbf{z}\pmb{\gamma})}}\right] \notag \\
+    &=100\cdot\left[\frac{\exp{(\beta_0+\beta_1 +\beta_2 educ+\mathbf{z}\pmb{\gamma})}}{\exp{(\beta_0÷ +\beta_2 educ+\mathbf{z}\pmb{\gamma})}}-1\right] \notag \\
+    &=100\cdot[\exp{(\beta_1)}-1]. \notag
+\end{align} \qed
+
+\item[b.] Use the delta method (see Section 3.5.2) to show that asymptotic standard error of $\hat{\theta}_1$ is $100\cdot[\exp(\hat{\beta}_1)]\cdot \se(\hat{\beta_1})$.
+\\ Answer:\\
+From previous result we have $\theta_1:\beta_1\to\mathbb{R}$ defined as $\theta_1=100\cdot[\exp{(\beta_1)}-1].$ We can use the OLS estimator $\hat{\beta_1}$ from \eqref{h1.0} to estimate $\hat{\theta}_1=100\cdot[\exp(\hat{\beta}_1)-1]$. We are interested in finding $\se(\hat{\theta}_1).$ By Delta Method we have
+\begin{align}
+    \Av[\hat{\theta}_1(\hat{\beta}_1)]=\left(\frac{\partial\hat{\theta}_1}{\partial \hat{\beta}_1} \right)^2 \Av(\hat{\beta}_1), \label{h1.4}
+\end{align}
+with the Jacobian in this case is only $1\times 1$, i.e, a scalar. From \eqref{h1.4} we take the square root to find $\se(\hat{\theta}_1),$ we have
+\begin{align*}
+    \se[\hat{\theta}_1(\hat{\beta}_1)]&=\left(\frac{\partial\hat{\theta}_1}{\partial \hat{\beta}_1} \right) \se(\hat{\beta}_1) \\
+    &=100\cdot\exp(\hat{\beta}_1)\cdot \se(\hat{\beta_1}).
+\end{align*}\qed
+
+\item[c.] Repeat parts a and b by finding the exact percentage change in $\E(wage|married,educ,\mathbf{z})$ for any given change in $educ,\ \Delta educ.$ Call this $\theta_2.$ Explain how to estimate $\theta_2$ and obtain its asymptotic standard error.
+\\ Answer:\\
+The step involved is similar with the previous result. Recall \eqref{h1.3}, we have
+\begin{align*}
+    \E(wage|married,educ,\mathbf{z})=c\exp{(\beta_0+\beta_1 married +\beta_2 educ+\mathbf{z}\pmb{\gamma})}.
+\end{align*}
+Then, we can compute the exact percentage different for an additional years of education $\Delta educ$, that is $\theta_2=100\cdot\frac{\E(wage|educ=\epsilon+\Delta educ)-\E(wage|educ=\epsilon)}{\E(wage|educ=\epsilon)}$ from \eqref{h1.3}, we have
+\begin{align}
+    \theta_2&=100\cdot\left[\frac{c\exp{(\beta_0+\beta_1 married +\beta_2 (\epsilon+ \Delta educ)+\mathbf{z}\pmb{\gamma})}-c\exp{(\beta_0+\beta_1 married +\beta_2 (\epsilon)+\mathbf{z}\pmb{\gamma})}}{c\exp{(\beta_0+\beta_1 married +\beta_2 (\epsilon)+\mathbf{z}\pmb{\gamma})}}\right] \notag \\
+    &=100\cdot\left[\frac{c\exp{(\beta_0+\beta_1 married +\beta_2 (\epsilon+ \Delta educ)+\mathbf{z}\pmb{\gamma})}}{c\exp{(\beta_0+\beta_1 married +\beta_2 (\epsilon)+\mathbf{z}\pmb{\gamma})}}-1\right] \notag \\
+    &=100\cdot[\exp{(\beta_2\Delta educ)}-1]. \notag
+\end{align} 
+We can use the OLS estimator $\hat{\beta_2}$ from \eqref{h1.0} to estimate $\hat{\theta}_2=100\cdot[\exp{(\beta_2)}\Delta educ-1]$ for a given change in $educ,\ \Delta educ.$ 
+\\ \qed \\
+To estimate the asymptotic standard error we can use the Delta Method. We have that $\theta_2:\beta_2\to\mathbb{R}$ defined as $\theta_2=100\cdot[\exp{(\beta_2\Delta educ)} -1].$ Here we treat $\Delta educ$ as a constant because it is given. By Delta Method we have
+\begin{align}
+    \Av[\hat{\theta}_2(\hat{\beta}_2)]=\left(\frac{\partial\hat{\theta}_2}{\partial \hat{\beta}_2} \right)^2 \Av(\hat{\beta}_2), \label{h1.5}
+\end{align}
+with the Jacobian in this case is only $1\times 1$, i.e, a scalar. From \eqref{h1.5} we take the square root to find $\se(\hat{\theta}_2),$ we have
+\begin{align*}
+    \se[\hat{\theta}_2(\hat{\beta}_2)]&=\left(\frac{\partial\hat{\theta}_2}{\partial \hat{\beta}_2} \right) \se(\hat{\beta}_2) \\
+    &=100\cdot\exp(\hat{\beta}_2 \Delta educ)\cdot \se(\hat{\beta_2}).
+\end{align*}\qed
+
+
+\item[d.] Use the data in NLS80.RAW to estimate equation \eqref{h1.0}, where \textbf{z} contains the remaining variables in equation \eqref{h1.0} (except ability, of course). Find $\hat{\theta}_1$ and its standard error; find $\hat{\theta}_2$ and its standard error when $\Delta educ=4.$ 
+\\ Answer:\\
+
+\end{enumerate}
+
+\subsection*{Problem 4.2}
+\begin{enumerate}
+\item[a.] Show that, under random sampling and the zero conditional mean assumption $\E(u|\mathbf{x})=0,\E(\hat{\pmb{\beta}}|\mathbf{X})=\pmb{\beta}$ if $\mathbf{X}'\mathbf{X}$ is nonsingular.
+\\ Answer:\\
+
+Recall our OLS estimator
+\begin{align*}
+\hat{\pmb{\beta}}=\left(N^{-1}\sum_{i=1}^N\mathbf{x}_i'\mathbf{x}_i\right)^{-1}\left(N^{-1}\sum_{i=1}^N\mathbf{x}_i'y_i\right)=\pmb{\beta}+\left(N^{-1}\sum_{i=1}^N\mathbf{x}_i'\mathbf{x}_i\right)^{-1}\left(N^{-1}\sum_{i=1}^N\mathbf{x}_i'u_i\right),
+\end{align*}
+or in matrix notation
+\begin{align}
+\hat{\pmb{\beta}}=(\mathbf{X'X})^{-1}(\mathbf{X'y})=\pmb{\beta}+(\mathbf{X'X})^{-1}(\mathbf{X'u}), \label{h1.6}
+\end{align}
+with $\mathbf{X}$ a $N\times K$ data matrix of regressors with \textit{i}th row $\textbf{x}_i$, $\mathbf{y}$ a $N\times 1$ data vector with \textit{i}th element $y_i$, $\textbf{u}$ a $N\times 1$ matrix of errors. Now take the expectation of \eqref{h1.6} with respect to $\textbf{X}$, we have
+\begin{align}
+    \E(\hat{\pmb{\beta}}|\textbf{X})=\pmb{\beta}+(\mathbf{X'X})^{-1}\mathbf{X'}\E(\textbf{u}|\textbf{X})=\pmb{\beta}+(\mathbf{X'X})^{-1}\mathbf{X'}\textbf{0}=\pmb{\beta}. \label{h1.7}
+\end{align}
+In order for equation \eqref{h1.7} to hold, we need the zero conditional mean assumption, that is given, and we also need $(\mathbf{X'X})$ to be nonsingular so that the inverse, $(\mathbf{X'X})^{-1}$, exists.\\ \qed
+
+\item[b.] In addition to the assumption from part a, assume that $\V(u|\mathbf{x})=\sigma^2.$ Show that $\V({\hat{\pmb{\beta}}}|\mathbf{X})=\sigma^2(\mathbf{X}'\mathbf{X})^{-1}.$
+\\ Answer:\\
+Recall previous result from (a) in equation \eqref{h1.6} we have
+\begin{align*}
+    \hat{\pmb{\beta}}=\pmb{\beta}+(\mathbf{X'X})^{-1}(\mathbf{X'u}).
+\end{align*}
+In this $\pmb{\beta}$ a vector of constants because it is a population property. Thus, if we take the conditional variance, we have
+\begin{align}
+    \V(\hat{\pmb{\beta}}|\textbf{X})&=\V((\mathbf{X'X})^{-1}\mathbf{X'u}|\textbf{X}) \notag \\
+    &=[(\mathbf{X'X})^{-1}\mathbf{X'}]\V({u}|\textbf{X})[(\mathbf{X'X})^{-1}\textbf{X}']' \notag \\
+    &=[(\mathbf{X'X})^{-1}\mathbf{X'}]\V({u}|\textbf{X})[\textbf{X}(\mathbf{X'X})^{-1}] \label{h1.7}
+\end{align}
+Now we are given $\V(u_i|\mathbf{x}_i)=\sigma^2$, but in equation \eqref{h1.7} we need to get rid of $\V({\textbf{u}}|\textbf{X})$. Recall that $\V({\textbf{u}}|\textbf{X})=\E[\mathbf{u'u}|\textbf{X}]-\E[\mathbf{u}|\textbf{X}]^2=\E[\mathbf{u'u}|\textbf{X}]$ since it is given in (a) that $\E[\mathbf{u}|\textbf{X}]=0$
+\end{enumerate}
+
+\subsection*{Problem 4.4}
+Show that estimator $\hat{\mathbf{B}}\equiv N^{-1} \sum_{i=1}^{N}\hat{u}_i^2 \mathbf{x}_i'\mathbf{x}_i$ is consistent for $\mathbf{B}=\E(u^2\mathbf{x}'\mathbf{x})$ by showing that 
+\[N^{-1} \sum_{i=1}^{N}\hat{u}_i^2 \mathbf{x}_i'\mathbf{x}_i=N^{-1} \sum_{i=1}^{N}\hat{u}_i^2 \mathbf{x}_i'\mathbf{x}_i+o_p(1).\]
+(Hint: Write $\hat{u}_i^2=u_i^2-2\mathbf{x}_i u_i (\pmb{\hat{\beta}}-\pmb{\beta})+[\mathbf{x}_i (\pmb{\hat{\beta}}-\pmb{\beta})]^2$, and use the facts that sample averages are $O_p(1)$ when expectations exist and that $\pmb{\hat{\beta}}-\pmb{\beta}=o_p(1).$ Assume that all necessary expectations exist and are finite.)
+\\ Answer:\\
+
+\subsection*{Problem 4.9}
+Consider a linear model where the dependent variable is in logarithmic form, and the lag of $\log(y)$ is also an explanatory variable:
+\[\log(y)=\beta_0+\textbf{x}\pmb{\beta}+\alpha_1\log(y_{-1})+u,\ \ \E(u|\textbf{x},y_{-1})=0,\]
+where the inclusion of $y_{-1}$ might be to control for correlation between policy variables in \textbf{x} and a previous value of $y$; see Example 4.4.
+\begin{enumerate}
+\item[a.] For estimating $\pmb{\beta}$, why do we obtain the same estimator if the \textit{growth} in $y$, $\log(y)-\log(y_{-1}),$ is used instead as the dependent variable?
+\\ Answer: \\
+Rearrange the equation by defining $\Delta \log(y)=\log(y)-\log(y_{-1})$, we have
+\[\Delta \log(y)=\beta_0+\textbf{x}\pmb{\beta}+(\alpha_1-1)\log(y_{-1})+u.\]
+So if we regress using the dependent variable $\Delta \log(y)$ we will have the same estimator for $\pmb{\beta}$. The only change in the estimator will happen with the regression on $\log(y_{-1}).$ \\ \qed
+
+\item[b.] Suppose that there are no covariates \textbf{x} in the equation. Show that, if the distributions of $y$ and $y_{-1}$ are identical, then $|\alpha_1|<1$. This is the \textit{regression-to-the-mean}
+phenomenon in a dynamic setting. (Hint: Show that $\alpha_1=\corr[\log(y),\log(y_{-1})].$)
+\\ Answer: \\
+Based on the prompt we will have the following linear model,
+\[\log(y)=\beta_0+\alpha_1\log(y_{-1})+u.\]
+It is also given that the distribution of $y$ and $y_{-1}$ are identical, formally, $y,y_{-1}\iid(\mu,\sigma^2)$ for some finite mean $\mu$, and variance $\sigma^2$. Recall the coefficient for simple regression, for this case we have
+\begin{align}
+    \alpha_1=\frac{\cov[\log(y),\log(y_{-1})]}{\V[\log(y_{-1})]}
+\end{align}
+Recall the correlation relation with covariance and variance, we have
+\begin{align}
+    \corr[\log(y),\log(y_{-1})]&=\frac{\cov[\log(y),\log(y_{-1})]}{\sqrt{\V[\log(y_{-1})]\V[\log(y)]}} \notag \\
+    \Leftrightarrow \cov[\log(y),\log(y_{-1})]&= \corr[\log(y),\log(y_{-1})] \sqrt{\V[\log(y_{-1})]\V[\log(y)]}
+\end{align}
+Combining both of these equation, and the fact that we assume $\V[\log(y_{-1})]=\V[\log(y)]=\sigma^2$, we have
+\begin{align}
+    \alpha_1&=\frac{\corr[\log(y),\log(y_{-1})] \sqrt{\V[\log(y_{-1})]\V[\log(y)]}}{\V[\log(y_{-1})]} \notag \\
+    &=\frac{\corr[\log(y),\log(y_{-1})] \sqrt{\sigma^2\cdot \sigma^2}}{\sigma^2} \notag \\
+    &=\corr[\log(y),\log(y_{-1})]
+\end{align}
+Since we know $-1< \alpha_1=\corr[\log(y),\log(y_{-1})]<1,$ thus we can conclude that $|\alpha_1|<1.$ \\ \qed
+\end{enumerate}
+
+\section*{Part 2}
+Show that for a regression model, if a regressor $x_j$ is measured with error, then it will be endogenous.
+\\ Answer: \\
+
+\end{document}
