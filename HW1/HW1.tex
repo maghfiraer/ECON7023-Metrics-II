@@ -17,6 +17,8 @@
 \newcommand{\corr}{\text{Corr}}
 \newcommand{\cov}{\text{Cov}}
 \newcommand{\norm}{\text{Normal}}
+\newcommand{\indep}{\perp \!\!\! \perp}
+
  
 \newenvironment{problem}[2][Problem]{\begin{trivlist}
 \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
@@ -133,13 +135,20 @@ To estimate the asymptotic standard error we can use the Delta Method. We have t
 with the Jacobian in this case is only $1\times 1$, i.e, a scalar. From \eqref{h1.5} we take the square root to find $\se(\hat{\theta}_2),$ we have
 \begin{align*}
     \se[\hat{\theta}_2(\hat{\beta}_2)]&=\left(\frac{\partial\hat{\theta}_2}{\partial \hat{\beta}_2} \right) \se(\hat{\beta}_2) \\
-    &=100\cdot\exp(\hat{\beta}_2 \Delta educ)\cdot \se(\hat{\beta_2}).
+    &=100\cdot |\Delta educ| \cdot\exp(\hat{\beta}_2 \Delta educ)\cdot \se(\hat{\beta_2}).
 \end{align*}\qed
 
 
-\item[d.] Use the data in NLS80.RAW to estimate equation \eqref{h1.0}, where \textbf{z} contains the remaining variables in equation \eqref{h1.0} (except ability, of course). Find $\hat{\theta}_1$ and its standard error; find $\hat{\theta}_2$ and its standard error when $\Delta educ=4.$ 
+\item[d.] Use the data in NLS80.RAW to estimate equation \eqref{h1.0}, where \textbf{z} contains the remaining variables in equation (4.29) (except ability, of course). Find $\hat{\theta}_1$ and its standard error; find $\hat{\theta}_2$ and its standard error when $\Delta educ=4.$ 
 \\ Answer:\\
 
+Recall the previous result, we have
+\begin{align*}
+    \hat{\theta}_1&=100\cdot[\exp{(\hat{\beta}_1)}-1]\\
+    \se[\hat{\theta}_1]&=100\cdot\exp(\hat{\beta}_1)\cdot \se(\hat{\beta_1})\\
+    \hat{\theta}_2&=100\cdot[\exp{(\hat{\beta_2}\Delta educ)}-1] \\
+    \se[\hat{\theta}_2]&=100\cdot |\Delta educ| \cdot\exp(\hat{\beta}_2 \Delta educ)\cdot \se(\hat{\beta_2}).
+\end{align*}
 \end{enumerate}
 
 \subsection*{Problem 4.2}
@@ -171,14 +180,34 @@ In this $\pmb{\beta}$ a vector of constants because it is a population property.
 \begin{align}
     \V(\hat{\pmb{\beta}}|\textbf{X})&=\V((\mathbf{X'X})^{-1}\mathbf{X'u}|\textbf{X}) \notag \\
     &=[(\mathbf{X'X})^{-1}\mathbf{X'}]\V({u}|\textbf{X})[(\mathbf{X'X})^{-1}\textbf{X}']' \notag \\
-    &=[(\mathbf{X'X})^{-1}\mathbf{X'}]\V({u}|\textbf{X})[\textbf{X}(\mathbf{X'X})^{-1}] \label{h1.7}
+    &=[(\mathbf{X'X})^{-1}\mathbf{X'}]\V({u}|\textbf{X})[\textbf{X}(\mathbf{X'X})^{-1}] \label{h1.8}
 \end{align}
-Now we are given $\V(u_i|\mathbf{x}_i)=\sigma^2$, but in equation \eqref{h1.7} we need to get rid of $\V({\textbf{u}}|\textbf{X})$. Recall that $\V({\textbf{u}}|\textbf{X})=\E[\mathbf{u'u}|\textbf{X}]-\E[\mathbf{u}|\textbf{X}]^2=\E[\mathbf{u'u}|\textbf{X}]$ since it is given in (a) that $\E[\mathbf{u}|\textbf{X}]=0$
+In equation \eqref{h1.8} we need to get rid of $\V({\textbf{u}}|\textbf{X})$, so recall that
+\begin{align*}
+\V({\textbf{u}}|\textbf{X})&=\E[\mathbf{u'u}|\textbf{X}]-\E[\mathbf{u}|\textbf{X}]^2 \\
+&=\E[\mathbf{u'u}|\textbf{X}],
+\end{align*}
+which is a variance covariance matrix, since it is given in (a) that $\E[\mathbf{u}|\textbf{X}]=0.$ We are also given $\V(u_i|\mathbf{x}_i)=\E(u_i^2|\mathbf{x}_i)=\sigma^2$. Note that since $\textbf{x}_i$ is iid across $i$ and that the matrix is symmetric, we have \[\E(u_i^2|\mathbf{x}_i)=\E(u_i^2|\mathbf{x}_i,\mathbf{x}_j)=\E(u_i^2|\mathbf{X})=\sigma^2,\] 
+where $u_i^2$ is a diagonal of variance covariance matrix. To transform the matrix quadratic form in \eqref{h1.8} to scalar multiplication, we need the covariance part of the matrix to be zero, i.e., $\E(u_iu_j|\mathbf{X})=\E(u_iu_j|\mathbf{x}_i,\mathbf{x}_j)=0$.  Note that since $u_i$ and $\textbf{x}_i$ are iid across $i$, by Law of Iterated Expectation we have 
+\begin{align*}
+    \E(u_iu_j|\mathbf{x}_i,\mathbf{x}_j)&=\E(u_iu_j|\mathbf{x}_i,\mathbf{x}_j,u_j)& &[\text{since } u_i,u_j \text{ are independent}]\\
+    &=u_j\E(u_i|\mathbf{x}_i,\mathbf{x}_j,u_j)&\\
+    &=u_j\E(u_i|\mathbf{x}_i,\mathbf{x}_j)&\\
+    &=u_j\cdot 0& &[\text{from given assumption in point (a)}]\\
+    &=0.
+\end{align*}
+Now we have that $\V({\textbf{u}}|\textbf{X})=\E[\mathbf{u'u}|\textbf{X}]$ is a diagonal matrix with the diagonal elements $\sigma^2$. Thus from \eqref{h1.8} the matrix inside the sandwich form can be transformed into scalar multiplication. Finally, we have
+\begin{align*}
+    \V(\hat{\pmb{\beta}}|\textbf{X})&=[(\mathbf{X'X})^{-1}\mathbf{X'}]\V({u}|\textbf{X})[\textbf{X}(\mathbf{X'X})^{-1}] \\
+    &=\sigma^2[(\mathbf{X'X})^{-1}\mathbf{X'}\textbf{X}(\mathbf{X'X})^{-1}] \\
+    &=\sigma^2[(\mathbf{X'X})^{-1}\textbf{I}] \\
+    &=\sigma^2(\mathbf{X'X})^{-1}.
+\end{align*}\qed
 \end{enumerate}
 
 \subsection*{Problem 4.4}
 Show that estimator $\hat{\mathbf{B}}\equiv N^{-1} \sum_{i=1}^{N}\hat{u}_i^2 \mathbf{x}_i'\mathbf{x}_i$ is consistent for $\mathbf{B}=\E(u^2\mathbf{x}'\mathbf{x})$ by showing that 
-\[N^{-1} \sum_{i=1}^{N}\hat{u}_i^2 \mathbf{x}_i'\mathbf{x}_i=N^{-1} \sum_{i=1}^{N}\hat{u}_i^2 \mathbf{x}_i'\mathbf{x}_i+o_p(1).\]
+\[N^{-1} \sum_{i=1}^{N}\hat{u}_i^2 \mathbf{x}_i'\mathbf{x}_i=N^{-1} \sum_{i=1}^{N}u_i^2 \mathbf{x}_i'\mathbf{x}_i+o_p(1).\]
 (Hint: Write $\hat{u}_i^2=u_i^2-2\mathbf{x}_i u_i (\pmb{\hat{\beta}}-\pmb{\beta})+[\mathbf{x}_i (\pmb{\hat{\beta}}-\pmb{\beta})]^2$, and use the facts that sample averages are $O_p(1)$ when expectations exist and that $\pmb{\hat{\beta}}-\pmb{\beta}=o_p(1).$ Assume that all necessary expectations exist and are finite.)
 \\ Answer:\\
 
@@ -219,5 +248,27 @@ Since we know $-1< \alpha_1=\corr[\log(y),\log(y_{-1})]<1,$ thus we can conclude
 \section*{Part 2}
 Show that for a regression model, if a regressor $x_j$ is measured with error, then it will be endogenous.
 \\ Answer: \\
-
+Consider a regression with $j$ variables:
+\begin{align}
+    y=\beta_0+\beta_1x_1+\ldots+\beta_jx_j^*+v,
+\end{align}
+where $y,x_1,\ldots,x_{j-1}$ are observable, but $x_j^*$ is not, instead we observe $x_j$ that is measured with error. We assume that $v$ has zero mean, i.e $\E(v)=0$, and is uncorrelated with $x_1,\ldots,x_{j-1},x_j^*$. We also assume $v$ is uncorrelated with $x_j$, i.e $\cov(x_j,v)=0$. Now define the measurement error of the population, $u_j$, as follows
+\begin{align}
+x_j=x_j^*+u_j\Leftrightarrow x_j^*=x_j-u_j.
+\end{align}
+We assume that $u_j$ has zero mean, i.e $\E(u_j)=0$, and is uncorrelated with $x_1,\ldots,x_{j-1},x_j^*$. Now substituting these into the previous equation we have
+\begin{align}
+    y&=\beta_0+\beta_1x_1+\ldots+\beta_j(x_j-u_j)+v \notag \\
+    \Leftrightarrow y&=\beta_0+\beta_1x_1+\ldots+\beta_jx_j+(v-\beta_ju_j) \notag \\
+    \Leftrightarrow y&=\beta_0+\beta_1x_1+\ldots+\beta_jx_j+e
+\end{align}
+Let's denote $e=v-\beta_ju_j$, and we assume $u_j$ and $v$ are independent. With this measurement error, equation is the actual regression that we will be estimating rather that the original one. Previously, we have assume that $\E(v)=0$, and $\E(u_j)=0$, and are uncorrelated with each $x_i$ including $x_j$, thus, we also have $\E(e)=0$. We want to assume that $x_j$ is exogenous, i.e $\cov(x_j,e)=\E(x_je)=0$. But we will have a problem of endogeneity in this case, that is
+\begin{align*}
+    \cov(x_j,e)&=\E(x_je)\\
+    &=\E((x_j^*+u_j)(v-\beta_ju_j))\\
+    &=\E(x_j^*v)+\E(u_jv)-\beta_j\E(x_j^*u_j)-\beta_j\E(u_j^2)\\
+    &=0+0+0-\beta_j\E(u_j^2)& &\text{[because }x_j^*\indep v,x_j^*\indep u_j, u_j\indep v]\\
+    &=-\beta_j\V(u_j) \\
+    &\neq 0.
+\end{align*}\qed
 \end{document}
