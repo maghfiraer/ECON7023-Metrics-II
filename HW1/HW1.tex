@@ -3,6 +3,7 @@
 \usepackage[margin=1in]{geometry} 
 \usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
 \usepackage{mathtools}
+\usepackage{booktabs}
 
 \newcommand\iid{\stackrel{\mathclap{iid}}{\sim}}
 \newcommand\asym{\stackrel{\mathclap{a}}{\sim}}
@@ -66,7 +67,32 @@ By definition, the asymptotic standard deviation is the square root of the asymp
 \\ Answer:\\
 Applying \textbf{Definition 3.10} from the textbook, the asymptotic standard error of $\bar{y}_N$ is $\se(\bar{y}_N)=\hat{\sigma}/\sqrt{N},$ with $\hat{\sigma}$ a consistent estimator for $\sigma$, formally, $\hat{\sigma}^2\convprob\sigma^2$. Because we deal with $y_i$ as a single random variable, the consistent estimator for $\sigma^2$ will be $\hat{\sigma}^2=\frac{1}{N-1}\sum_{i=1}^N (y_i-\bar{y_N})^2.$ Then take the $|\sqrt{\hat{\sigma}^2}|$ as the $\hat{\sigma}$.
 \begin{proof}
-We need to show that $\hat{\sigma}^2=\frac{1}{N-1}\sum_{i=1}^N (y_i-\bar{y_N})^2$ is a consistent estimator for $\sigma^2$.
+We need to show that $\hat{\sigma}^2=\frac{1}{N-1}\sum_{i=1}^N (y_i-\bar{y_N})^2$ is a consistent and unbiased estimator for $\sigma^2$.\\
+We know that $y_i\iid(\mu,\sigma^2)$. From the Weak Law of Large Number, we have $\E(\bar{y}_N)=\mu.$
+From previous result, we already have the following properties $\V(\bar{y}_N) = \sigma^2/N.$ Recall that $\V(\bar{y}_N)=\E(\bar{y}_N^2)-\E(\bar{y}_N)^2,$ thus we have $\E(\bar{y}_N^2)=\V(\bar{y}_N)+\E(\bar{y}_N)^2=\sigma^2/N+\mu^2.$ We also know that $\mu=\E(y_i)$ and $\sigma^2=\V(y_i),$ thus we have $\E(y_i^2)=\V(y_i)+\E(y_i)^2=\sigma^2+\mu^2.$ Now take expectation of our estimator
+\begin{align*}
+    \E(\hat{\sigma}^2)&=\frac{1}{N-1}\E\left(\sum_{i=1}^N (y_i-\bar{y_N})^2\right)\\
+    &=\frac{1}{N-1}\E\left(\sum_{i=1}^N (y_i^2-2y_i\bar{y_N}+\bar{y_N}^2)\right)\\
+    &=\frac{1}{N-1}\E\left(\sum_{i=1}^N y_i^2-2\bar{y_N}\sum_{i=1}^Ny_i+\sum_{i=1}^N\bar{y_N}^2\right)\\
+    &=\frac{1}{N-1}\E\left(\sum_{i=1}^N y_i^2-2N\bar{y_N}^2+N\bar{y_N}^2\right)\\
+    &=\frac{1}{N-1}\E\left(\sum_{i=1}^N y_i^2-N\bar{y_N}^2\right)\\
+    &=\frac{1}{N-1}\left[\E\left(\sum_{i=1}^N y_i^2\right)-N\E(\bar{y_N}^2)\right]\\
+    &=\frac{1}{N-1}[N(\sigma^2+\mu^2)-N(\sigma^2/N+\mu^2)]\\
+    &=\frac{1}{N-1}(N-1)\sigma^2\\
+    &=\sigma^2.
+\end{align*}
+We show that the estimator is unbiased. Now we need to show consistency. By Weak Law of Large Number, we have $\bar{y}_N\convprob\mu$ Again, by Weak Law of Large Number we have $\frac{1}{N}\sum_{i=1}^Ny_i^2\convprob \E(y_i^2).$ Recall our estimator
+\begin{align}
+    \hat{\sigma}^2=\frac{1}{N-1}\sum_{i=1}^N (y_i-\bar{y_N})^2=\frac{1}{N-1}\left(\sum_{i=1}^N y_i^2-N\bar{y_N}^2\right)=\frac{N}{N-1}\left(\frac{1}{N}\sum_{i=1}^N y_i^2-\bar{y_N}^2\right). \label{h1.1}
+\end{align}
+Take the $plim$ of equation \eqref{h1.1} we have
+\begin{align*}
+    plim \hat{\sigma}^2&=plim\left(\frac{N}{N-1}\left(\frac{1}{N}\sum_{i=1}^N y_i^2-\bar{y_N}^2\right)\right)\\
+    &=\lim_{N\to\infty}\left(\frac{N}{N-1}\right)\left(plim\left(\frac{1}{N}\sum_{i=1}^N y_i^2\right)-plim(\bar{y_N})^2\right) \ \ \ [\text{by Slutsky's theorem}]\\
+    &=1\cdot(\E(y_i^2)-\E(y_i)^2)\\
+    &=\V(y_i)=\sigma^2.
+\end{align*}
+We showed that the estimator is consistent.
 \end{proof}
 \end{enumerate}
 
@@ -81,21 +107,21 @@ where $\mathbf{z}$ contains factors other than marital status and education that
 \begin{enumerate}
 \item[a.] Show that if $u$ is independent of all explanatory variables in equation \eqref{h1.0}, then $\theta_1=100\cdot[\exp(\beta_1)-1]$. (Hint: Find $\E(wage|married,educ,\mathbf{z})$ for $married=1$ and $married=0$, and find the percentage difference). A natural, consistent, estimator of $\theta_1$ is $\hat{\theta}_1=100\cdot[\exp(\hat{\beta}_1)-1]$, where $\hat{\beta_1}$ is the OLS estimator from equation \eqref{h1.0}.
 \\ Answer:\\
-Rewrite equation \eqref{h1.1},
+Rewrite equation \eqref{h1.0},
 \begin{align}
     &\log(wage)=\beta_0+\beta_1 married +\beta_2 educ+\mathbf{z\pmb{\gamma}}+u \notag\\
     &\Leftrightarrow wage=\exp{(\beta_0+\beta_1 married +\beta_2 educ+\mathbf{z\pmb{\gamma}}+u)} \notag\\
-    &\Leftrightarrow wage=\exp{(u)}\exp{[\beta_0+\beta_1 married +\beta_2 educ+\mathbf{z\pmb{\gamma}})}. \label{h1.1}
+    &\Leftrightarrow wage=\exp{(u)}\exp{[\beta_0+\beta_1 married +\beta_2 educ+\mathbf{z\pmb{\gamma}})}. \label{h1.2}
 \end{align}
-Now take the expectation of \eqref{h1.1} with respect to all explanatory variables, we have
+Now take the expectation of \eqref{h1.2} with respect to all explanatory variables, we have
 \begin{align}
-    &\E(wage|married,educ,\mathbf{z})=\E(\exp{(u)}|married,educ,\mathbf{z})\exp{(\beta_0+\beta_1 married +\beta_2 educ+\mathbf{z}\pmb{\gamma})}.\label{h1.2}
+    &\E(wage|married,educ,\mathbf{z})=\E(\exp{(u)}|married,educ,\mathbf{z})\exp{(\beta_0+\beta_1 married +\beta_2 educ+\mathbf{z}\pmb{\gamma})}.\label{h1.3}
 \end{align}
-If $u$ is independent of all explanatory variables, then $exp(u)$ will also be independent with all those variables, i.e, $\E(\exp{(u)}|married,educ,\mathbf{z})=E(\exp(u))=c,$ where $c$ is a constant. Now from \eqref{h1.2} we have
+If $u$ is independent of all explanatory variables, then $exp(u)$ will also be independent with all those variables, i.e, $\E(\exp{(u)}|married,educ,\mathbf{z})=E(\exp(u))=c,$ where $c$ is a constant. Now from \eqref{h1.3} we have
 \begin{align}
-    \E(wage|married,educ,\mathbf{z})=c\exp{(\beta_0+\beta_1 married +\beta_2 educ+\mathbf{z}\pmb{\gamma})}. \label{h1.3}
+    \E(wage|married,educ,\mathbf{z})=c\exp{(\beta_0+\beta_1 married +\beta_2 educ+\mathbf{z}\pmb{\gamma})}. \label{h1.4}
 \end{align}
-Then, we can compute the exact percentage different $\theta_1=100\cdot\frac{\E(wage|married=1)-\E(wage|married=0)}{\E(wage|married=0)}$ from \eqref{h1.3}, we have
+Then, we can compute the exact percentage different $\theta_1=100\cdot\frac{\E(wage|married=1)-\E(wage|married=0)}{\E(wage|married=0)}$ from \eqref{h1.4}, we have
 \begin{align}
     \theta_1&=100\cdot\left[\frac{c\exp{(\beta_0+\beta_1 (1) +\beta_2 educ+\mathbf{z}\pmb{\gamma})}-c\exp{(\beta_0+\beta_1 (0) +\beta_2 educ+\mathbf{z}\pmb{\gamma})}}{c\exp{(\beta_0+\beta_1 (0) +\beta_2 educ+\mathbf{z}\pmb{\gamma})}}\right] \notag \\
     &=100\cdot\left[\frac{\exp{(\beta_0+\beta_1 +\beta_2 educ+\mathbf{z}\pmb{\gamma})}}{\exp{(\beta_0÷ +\beta_2 educ+\mathbf{z}\pmb{\gamma})}}-1\right] \notag \\
@@ -106,9 +132,9 @@ Then, we can compute the exact percentage different $\theta_1=100\cdot\frac{\E(w
 \\ Answer:\\
 From previous result we have $\theta_1:\beta_1\to\mathbb{R}$ defined as $\theta_1=100\cdot[\exp{(\beta_1)}-1].$ We can use the OLS estimator $\hat{\beta_1}$ from \eqref{h1.0} to estimate $\hat{\theta}_1=100\cdot[\exp(\hat{\beta}_1)-1]$. We are interested in finding $\se(\hat{\theta}_1).$ By Delta Method we have
 \begin{align}
-    \Av[\hat{\theta}_1(\hat{\beta}_1)]=\left(\frac{\partial\hat{\theta}_1}{\partial \hat{\beta}_1} \right)^2 \Av(\hat{\beta}_1), \label{h1.4}
+    \Av[\hat{\theta}_1(\hat{\beta}_1)]=\left(\frac{\partial\hat{\theta}_1}{\partial \hat{\beta}_1} \right)^2 \Av(\hat{\beta}_1), \label{h1.5}
 \end{align}
-with the Jacobian in this case is only $1\times 1$, i.e, a scalar. From \eqref{h1.4} we take the square root to find $\se(\hat{\theta}_1),$ we have
+with the Jacobian in this case is only $1\times 1$, i.e, a scalar. From \eqref{h1.5} we take the square root to find $\se(\hat{\theta}_1),$ we have
 \begin{align*}
     \se[\hat{\theta}_1(\hat{\beta}_1)]&=\left(\frac{\partial\hat{\theta}_1}{\partial \hat{\beta}_1} \right) \se(\hat{\beta}_1) \\
     &=100\cdot\exp(\hat{\beta}_1)\cdot \se(\hat{\beta_1}).
@@ -116,11 +142,11 @@ with the Jacobian in this case is only $1\times 1$, i.e, a scalar. From \eqref{h
 
 \item[c.] Repeat parts a and b by finding the exact percentage change in $\E(wage|married,educ,\mathbf{z})$ for any given change in $educ,\ \Delta educ.$ Call this $\theta_2.$ Explain how to estimate $\theta_2$ and obtain its asymptotic standard error.
 \\ Answer:\\
-The step involved is similar with the previous result. Recall \eqref{h1.3}, we have
+The step involved is similar with the previous result. Recall \eqref{h1.4}, we have
 \begin{align*}
     \E(wage|married,educ,\mathbf{z})=c\exp{(\beta_0+\beta_1 married +\beta_2 educ+\mathbf{z}\pmb{\gamma})}.
 \end{align*}
-Then, we can compute the exact percentage different for an additional years of education $\Delta educ$, that is $\theta_2=100\cdot\frac{\E(wage|educ=\epsilon+\Delta educ)-\E(wage|educ=\epsilon)}{\E(wage|educ=\epsilon)}$ from \eqref{h1.3}, we have
+Then, we can compute the exact percentage different for an additional years of education $\Delta educ$, that is $\theta_2=100\cdot\frac{\E(wage|educ=\epsilon+\Delta educ)-\E(wage|educ=\epsilon)}{\E(wage|educ=\epsilon)}$ from \eqref{h1.4}, we have
 \begin{align}
     \theta_2&=100\cdot\left[\frac{c\exp{(\beta_0+\beta_1 married +\beta_2 (\epsilon+ \Delta educ)+\mathbf{z}\pmb{\gamma})}-c\exp{(\beta_0+\beta_1 married +\beta_2 (\epsilon)+\mathbf{z}\pmb{\gamma})}}{c\exp{(\beta_0+\beta_1 married +\beta_2 (\epsilon)+\mathbf{z}\pmb{\gamma})}}\right] \notag \\
     &=100\cdot\left[\frac{c\exp{(\beta_0+\beta_1 married +\beta_2 (\epsilon+ \Delta educ)+\mathbf{z}\pmb{\gamma})}}{c\exp{(\beta_0+\beta_1 married +\beta_2 (\epsilon)+\mathbf{z}\pmb{\gamma})}}-1\right] \notag \\
@@ -130,9 +156,9 @@ We can use the OLS estimator $\hat{\beta_2}$ from \eqref{h1.0} to estimate $\hat
 \\ \qed \\
 To estimate the asymptotic standard error we can use the Delta Method. We have that $\theta_2:\beta_2\to\mathbb{R}$ defined as $\theta_2=100\cdot[\exp{(\beta_2\Delta educ)} -1].$ Here we treat $\Delta educ$ as a constant because it is given. By Delta Method we have
 \begin{align}
-    \Av[\hat{\theta}_2(\hat{\beta}_2)]=\left(\frac{\partial\hat{\theta}_2}{\partial \hat{\beta}_2} \right)^2 \Av(\hat{\beta}_2), \label{h1.5}
+    \Av[\hat{\theta}_2(\hat{\beta}_2)]=\left(\frac{\partial\hat{\theta}_2}{\partial \hat{\beta}_2} \right)^2 \Av(\hat{\beta}_2), \label{h1.6}
 \end{align}
-with the Jacobian in this case is only $1\times 1$, i.e, a scalar. From \eqref{h1.5} we take the square root to find $\se(\hat{\theta}_2),$ we have
+with the Jacobian in this case is only $1\times 1$, i.e, a scalar. From \eqref{h1.6} we take the square root to find $\se(\hat{\theta}_2),$ we have
 \begin{align*}
     \se[\hat{\theta}_2(\hat{\beta}_2)]&=\left(\frac{\partial\hat{\theta}_2}{\partial \hat{\beta}_2} \right) \se(\hat{\beta}_2) \\
     &=100\cdot |\Delta educ| \cdot\exp(\hat{\beta}_2 \Delta educ)\cdot \se(\hat{\beta_2}).
@@ -141,15 +167,15 @@ with the Jacobian in this case is only $1\times 1$, i.e, a scalar. From \eqref{h
 
 \item[d.] Use the data in NLS80.RAW to estimate equation \eqref{h1.0}, where \textbf{z} contains the remaining variables in equation (4.29) (except ability, of course). Find $\hat{\theta}_1$ and its standard error; find $\hat{\theta}_2$ and its standard error when $\Delta educ=4.$ 
 \\ Answer:\\
-From the data we get these regression result in the following table
-\input{HW1/reg1.tex}
-Recall the previous result, we have
+From the data we get these regression result in Table 1.\\
+\input{HW1/reg1.tex}\\
+Recall the previous result, we can calculate
 \begin{align*}
-    \hat{\theta}_1&=100\cdot[\exp{(\hat{\beta}_1)}-1]\\
-    \se[\hat{\theta}_1]&=100\cdot\exp(\hat{\beta}_1)\cdot \se(\hat{\beta_1})\\
-    \hat{\theta}_2&=100\cdot[\exp{(\hat{\beta_2}\Delta educ)}-1] \\
-    \se[\hat{\theta}_2]&=100\cdot |\Delta educ| \cdot\exp(\hat{\beta}_2 \Delta educ)\cdot \se(\hat{\beta_2}).
-\end{align*}
+    \hat{\theta}_1&=100\cdot[\exp{(\hat{\beta}_1)}-1]=100\cdot[\exp{(0.199)}-1]=22.018\%\\
+    \se[\hat{\theta}_1]&=100\cdot\exp(\hat{\beta}_1)\cdot \se(\hat{\beta_1})=100\cdot\exp(0.199)\cdot(0.040)=4.881\%\\
+    \hat{\theta}_2&=100\cdot[\exp{(\hat{\beta_2}\Delta educ)}-1]=100\cdot[\exp{(0.065\cdot 4)}-1]= 29.693\%\\
+    \se[\hat{\theta}_2]&=100\cdot |\Delta educ| \cdot\exp(\hat{\beta}_2 \Delta educ)\cdot \se(\hat{\beta_2})=100\cdot 4 \cdot\exp(0.065 \cdot 4)\cdot (0.006)=3.113\%.
+\end{align*}\qed
 \end{enumerate}
 
 \subsection*{Problem 4.2}
@@ -163,17 +189,17 @@ Recall our OLS estimator
 \end{align*}
 or in matrix notation
 \begin{align}
-\hat{\pmb{\beta}}=(\mathbf{X'X})^{-1}(\mathbf{X'y})=\pmb{\beta}+(\mathbf{X'X})^{-1}(\mathbf{X'u}), \label{h1.6}
+\hat{\pmb{\beta}}=(\mathbf{X'X})^{-1}(\mathbf{X'y})=\pmb{\beta}+(\mathbf{X'X})^{-1}(\mathbf{X'u}), \label{h1.7}
 \end{align}
-with $\mathbf{X}$ a $N\times K$ data matrix of regressors with \textit{i}th row $\textbf{x}_i$, $\mathbf{y}$ a $N\times 1$ data vector with \textit{i}th element $y_i$, $\textbf{u}$ a $N\times 1$ matrix of errors. Now take the expectation of \eqref{h1.6} with respect to $\textbf{X}$, we have
+with $\mathbf{X}$ a $N\times K$ data matrix of regressors with \textit{i}th row $\textbf{x}_i$, $\mathbf{y}$ a $N\times 1$ data vector with \textit{i}th element $y_i$, $\textbf{u}$ a $N\times 1$ matrix of errors. Now take the expectation of \eqref{h1.7} with respect to $\textbf{X}$, we have
 \begin{align}
-    \E(\hat{\pmb{\beta}}|\textbf{X})=\pmb{\beta}+(\mathbf{X'X})^{-1}\mathbf{X'}\E(\textbf{u}|\textbf{X})=\pmb{\beta}+(\mathbf{X'X})^{-1}\mathbf{X'}\textbf{0}=\pmb{\beta}. \label{h1.7}
+    \E(\hat{\pmb{\beta}}|\textbf{X})=\pmb{\beta}+(\mathbf{X'X})^{-1}\mathbf{X'}\E(\textbf{u}|\textbf{X})=\pmb{\beta}+(\mathbf{X'X})^{-1}\mathbf{X'}\textbf{0}=\pmb{\beta}. \label{h1.8}
 \end{align}
-In order for equation \eqref{h1.7} to hold, we need the zero conditional mean assumption, that is given, and we also need $(\mathbf{X'X})$ to be nonsingular so that the inverse, $(\mathbf{X'X})^{-1}$, exists.\\ \qed
+In order for equation \eqref{h1.8} to hold, we need the zero conditional mean assumption, that is given, and we also need $(\mathbf{X'X})$ to be nonsingular so that the inverse, $(\mathbf{X'X})^{-1}$, exists.\\ \qed
 
 \item[b.] In addition to the assumption from part a, assume that $\V(u|\mathbf{x})=\sigma^2.$ Show that $\V({\hat{\pmb{\beta}}}|\mathbf{X})=\sigma^2(\mathbf{X}'\mathbf{X})^{-1}.$
 \\ Answer:\\
-Recall previous result from (a) in equation \eqref{h1.6} we have
+Recall previous result from (a) in equation \eqref{h1.7} we have
 \begin{align*}
     \hat{\pmb{\beta}}=\pmb{\beta}+(\mathbf{X'X})^{-1}(\mathbf{X'u}).
 \end{align*}
@@ -181,15 +207,15 @@ In this $\pmb{\beta}$ a vector of constants because it is a population property.
 \begin{align}
     \V(\hat{\pmb{\beta}}|\textbf{X})&=\V((\mathbf{X'X})^{-1}\mathbf{X'u}|\textbf{X}) \notag \\
     &=[(\mathbf{X'X})^{-1}\mathbf{X'}]\V({u}|\textbf{X})[(\mathbf{X'X})^{-1}\textbf{X}']' \notag \\
-    &=[(\mathbf{X'X})^{-1}\mathbf{X'}]\V({u}|\textbf{X})[\textbf{X}(\mathbf{X'X})^{-1}] \label{h1.8}
+    &=[(\mathbf{X'X})^{-1}\mathbf{X'}]\V({u}|\textbf{X})[\textbf{X}(\mathbf{X'X})^{-1}] \label{h1.9}
 \end{align}
-In equation \eqref{h1.8} we need to get rid of $\V({\textbf{u}}|\textbf{X})$, so recall that
+In equation \eqref{h1.9} we need to get rid of $\V({\textbf{u}}|\textbf{X})$, so recall that
 \begin{align*}
 \V({\textbf{u}}|\textbf{X})&=\E[\mathbf{u'u}|\textbf{X}]-\E[\mathbf{u}|\textbf{X}]^2 \\
 &=\E[\mathbf{u'u}|\textbf{X}],
 \end{align*}
 which is a variance covariance matrix, since it is given in (a) that $\E[\mathbf{u}|\textbf{X}]=0.$ We are also given $\V(u_i|\mathbf{x}_i)=\E(u_i^2|\mathbf{x}_i)=\sigma^2$. Note that since $\textbf{x}_i$ is iid across $i$ and that the matrix is symmetric, we have \[\E(u_i^2|\mathbf{x}_i)=\E(u_i^2|\mathbf{x}_i,\mathbf{x}_j)=\E(u_i^2|\mathbf{X})=\sigma^2,\] 
-where $u_i^2$ is a diagonal of variance covariance matrix. To transform the matrix quadratic form in \eqref{h1.8} to scalar multiplication, we need the covariance part of the matrix to be zero, i.e., $\E(u_iu_j|\mathbf{X})=\E(u_iu_j|\mathbf{x}_i,\mathbf{x}_j)=0$.  Note that since $u_i$ and $\textbf{x}_i$ are iid across $i$, by Law of Iterated Expectation we have 
+where $u_i^2$ is a diagonal of variance covariance matrix. To transform the matrix quadratic form in \eqref{h1.9} to scalar multiplication, we need the covariance part of the matrix to be zero, i.e., $\E(u_iu_j|\mathbf{X})=\E(u_iu_j|\mathbf{x}_i,\mathbf{x}_j)=0$.  Note that since $u_i$ and $\textbf{x}_i$ are iid across $i$, by Law of Iterated Expectation we have 
 \begin{align*}
     \E(u_iu_j|\mathbf{x}_i,\mathbf{x}_j)&=\E(u_iu_j|\mathbf{x}_i,\mathbf{x}_j,u_j)& &[\text{since } u_i,u_j \text{ are independent}]\\
     &=u_j\E(u_i|\mathbf{x}_i,\mathbf{x}_j,u_j)&\\
@@ -197,7 +223,7 @@ where $u_i^2$ is a diagonal of variance covariance matrix. To transform the matr
     &=u_j\cdot 0& &[\text{from given assumption in point (a)}]\\
     &=0.
 \end{align*}
-Now we have that $\V({\textbf{u}}|\textbf{X})=\E[\mathbf{u'u}|\textbf{X}]$ is a diagonal matrix with the diagonal elements $\sigma^2$. Thus from \eqref{h1.8} the matrix inside the sandwich form can be transformed into scalar multiplication. Finally, we have
+Now we have that $\V({\textbf{u}}|\textbf{X})=\E[\mathbf{u'u}|\textbf{X}]$ is a diagonal matrix with the diagonal elements $\sigma^2$. Thus from \eqref{h1.9} the matrix inside the sandwich form can be transformed into scalar multiplication. Finally, we have
 \begin{align*}
     \V(\hat{\pmb{\beta}}|\textbf{X})&=[(\mathbf{X'X})^{-1}\mathbf{X'}]\V({u}|\textbf{X})[\textbf{X}(\mathbf{X'X})^{-1}] \\
     &=\sigma^2[(\mathbf{X'X})^{-1}\mathbf{X'}\textbf{X}(\mathbf{X'X})^{-1}] \\
@@ -211,6 +237,32 @@ Show that estimator $\hat{\mathbf{B}}\equiv N^{-1} \sum_{i=1}^{N}\hat{u}_i^2 \ma
 \[N^{-1} \sum_{i=1}^{N}\hat{u}_i^2 \mathbf{x}_i'\mathbf{x}_i=N^{-1} \sum_{i=1}^{N}u_i^2 \mathbf{x}_i'\mathbf{x}_i+o_p(1).\]
 (Hint: Write $\hat{u}_i^2=u_i^2-2\mathbf{x}_i u_i (\pmb{\hat{\beta}}-\pmb{\beta})+[\mathbf{x}_i (\pmb{\hat{\beta}}-\pmb{\beta})]^2$, and use the facts that sample averages are $O_p(1)$ when expectations exist and that $\pmb{\hat{\beta}}-\pmb{\beta}=o_p(1).$ Assume that all necessary expectations exist and are finite.)
 \\ Answer:\\
+Rewrite $\hat{\mathbf{B}}$ as follow
+\begin{align*}
+    \hat{\mathbf{B}}&= N^{-1} \sum_{i=1}^{N}\hat{u}_i^2 \mathbf{x}_i'\mathbf{x}_i \\
+    &=N^{-1} \sum_{i=1}^{N}\left[u_i^2-2\mathbf{x}_i u_i (\pmb{\hat{\beta}}-\pmb{\beta})+[\mathbf{x}_i (\pmb{\hat{\beta}}-\pmb{\beta})]^2\right] \mathbf{x}_i'\mathbf{x}_i \\
+    &=N^{-1} \sum_{i=1}^{N}u_i^2 \mathbf{x}_i'\mathbf{x}_i
+    -2N^{-1} \sum_{i=1}^{N}\mathbf{x}_i u_i (\pmb{\hat{\beta}}-\pmb{\beta})\mathbf{x}_i'\mathbf{x}_i
+    +N^{-1} \sum_{i=1}^{N}[\mathbf{x}_i (\pmb{\hat{\beta}}-\pmb{\beta})]^2 \mathbf{x}_i'\mathbf{x}_i.
+\end{align*}
+Denote the first, second, and last term respectively as $P, Q, R$. Rewrite the second term as follow
+\begin{align*}
+    Q&=-2N^{-1} \sum_{i=1}^{N}\mathbf{x}_i u_i (\pmb{\hat{\beta}}-\pmb{\beta})\mathbf{x}_i'\mathbf{x}_i\\
+    &=-2\left[\sum_{k=1}^{N}N^{-1}\left(\sum_{i=1}^{N}x_{ij}u_i (\hat{\beta}_j-\beta_j)\mathbf{x}_i'\mathbf{x}_i\right)\right]\\
+    &=-2\left[\sum_{k=1}^{N}(\hat{\beta}_j-\beta_j)N^{-1}\left(\sum_{i=1}^{N}x_{ij}u_i \mathbf{x}_i'\mathbf{x}_i\right)\right].
+\end{align*}
+Note that $\hat{\beta}_j-\beta_j=o_p(1)$, and $N^{-1}\left(\sum_{i=1}^{N}x_{ij}u_i \mathbf{x}_i'\mathbf{x}_i\right)=O_p(1).$ Therefore, we have the second term $Q=o_p(1)\cdot O_p(1)=o_p(1).$
+Then, rewrite the third term as follow
+\begin{align*}
+    R&=N^{-1} \sum_{i=1}^{N}[\mathbf{x}_i (\pmb{\hat{\beta}}-\pmb{\beta})]^2 \mathbf{x}_i'\mathbf{x}_i\\
+    &=\sum_{k=1}^{N}\sum_{j=1}^{N}\left[(\hat{\beta}_k-\beta_k)(\hat{\beta}_j-\beta_j)N^{-1}\left(\sum_{i=1}^{N}[x_{ij}x_{ik}] \mathbf{x}_i'\mathbf{x}_i\right)\right].
+\end{align*}
+Similarly, note that $\hat{\beta}_j-\beta_j=o_p(1)$, and $N^{-1}\left(\sum_{i=1}^{N}[x_{ij}x_{ik}] \mathbf{x}_i'\mathbf{x}_i\right)=O_p(1).$ Therefore, we have the third term $R=o_p(1)\cdot o_p(1)\cdot O_p(1)=o_p(1).$ Finally, we have
+\begin{align*}
+    \hat{\mathbf{B}}&=P+Q+R\\
+    &=P+o_p(1)+o_p(1)\\
+    &=N^{-1} \sum_{i=1}^{N}u_i^2 \mathbf{x}_i'\mathbf{x}_i+o_p(1).
+\end{align*}\qed
 
 \subsection*{Problem 4.9}
 Consider a linear model where the dependent variable is in logarithmic form, and the lag of $\log(y)$ is also an explanatory variable:
@@ -230,18 +282,18 @@ Based on the prompt we will have the following linear model,
 \[\log(y)=\beta_0+\alpha_1\log(y_{-1})+u.\]
 It is also given that the distribution of $y$ and $y_{-1}$ are identical, formally, $y,y_{-1}\iid(\mu,\sigma^2)$ for some finite mean $\mu$, and variance $\sigma^2$. Recall the coefficient for simple regression, for this case we have
 \begin{align}
-    \alpha_1=\frac{\cov[\log(y),\log(y_{-1})]}{\V[\log(y_{-1})]}
+    \alpha_1=\frac{\cov[\log(y),\log(y_{-1})]}{\V[\log(y_{-1})]}\label{h1.10}
 \end{align}
 Recall the correlation relation with covariance and variance, we have
 \begin{align}
     \corr[\log(y),\log(y_{-1})]&=\frac{\cov[\log(y),\log(y_{-1})]}{\sqrt{\V[\log(y_{-1})]\V[\log(y)]}} \notag \\
-    \Leftrightarrow \cov[\log(y),\log(y_{-1})]&= \corr[\log(y),\log(y_{-1})] \sqrt{\V[\log(y_{-1})]\V[\log(y)]}
+    \Leftrightarrow \cov[\log(y),\log(y_{-1})]&= \corr[\log(y),\log(y_{-1})] \sqrt{\V[\log(y_{-1})]\V[\log(y)]}\label{h1.11}
 \end{align}
-Combining both of these equation, and the fact that we assume $\V[\log(y_{-1})]=\V[\log(y)]=\sigma^2$, we have
+Combining equations \eqref{h1.10} and \eqref{h1.11}, and our assumption, $\V[\log(y_{-1})]=\V[\log(y)]=\sigma^2$, we have
 \begin{align}
     \alpha_1&=\frac{\corr[\log(y),\log(y_{-1})] \sqrt{\V[\log(y_{-1})]\V[\log(y)]}}{\V[\log(y_{-1})]} \notag \\
     &=\frac{\corr[\log(y),\log(y_{-1})] \sqrt{\sigma^2\cdot \sigma^2}}{\sigma^2} \notag \\
-    &=\corr[\log(y),\log(y_{-1})]
+    &=\corr[\log(y),\log(y_{-1})]\notag
 \end{align}
 Since we know $-1< \alpha_1=\corr[\log(y),\log(y_{-1})]<1,$ thus we can conclude that $|\alpha_1|<1.$ \\ \qed
 \end{enumerate}
@@ -251,25 +303,27 @@ Show that for a regression model, if a regressor $x_j$ is measured with error, t
 \\ Answer: \\
 Consider a regression with $j$ variables:
 \begin{align}
-    y=\beta_0+\beta_1x_1+\ldots+\beta_jx_j^*+v,
+    y=\beta_0+\beta_1x_1+\ldots+\beta_jx_j^*+v,\label{h1.12}
 \end{align}
 where $y,x_1,\ldots,x_{j-1}$ are observable, but $x_j^*$ is not, instead we observe $x_j$ that is measured with error. We assume that $v$ has zero mean, i.e $\E(v)=0$, and is uncorrelated with $x_1,\ldots,x_{j-1},x_j^*$. We also assume $v$ is uncorrelated with $x_j$, i.e $\cov(x_j,v)=0$. Now define the measurement error of the population, $u_j$, as follows
 \begin{align}
-x_j=x_j^*+u_j\Leftrightarrow x_j^*=x_j-u_j.
+x_j=x_j^*+u_j\Leftrightarrow x_j^*=x_j-u_j.\label{h1.13}
 \end{align}
-We assume that $u_j$ has zero mean, i.e $\E(u_j)=0$, and is uncorrelated with $x_1,\ldots,x_{j-1},x_j^*$. Now substituting these into the previous equation we have
+We assume that $u_j$ has zero mean, i.e $\E(u_j)=0$, and is uncorrelated with $x_1,\ldots,x_{j-1},x_j^*$. Now substituting equation \eqref{h1.13} into \eqref{h1.12} we have
 \begin{align}
     y&=\beta_0+\beta_1x_1+\ldots+\beta_j(x_j-u_j)+v \notag \\
-    \Leftrightarrow y&=\beta_0+\beta_1x_1+\ldots+\beta_jx_j+(v-\beta_ju_j) \notag \\
-    \Leftrightarrow y&=\beta_0+\beta_1x_1+\ldots+\beta_jx_j+e
+    \Leftrightarrow y&=\beta_0+\beta_1x_1+\ldots+\beta_jx_j+(v-\beta_ju_j) \label{h1.14} \\
+    \Leftrightarrow y&=\beta_0+\beta_1x_1+\ldots+\beta_jx_j+e \notag
 \end{align}
-Let's denote $e=v-\beta_ju_j$, and we assume $u_j$ and $v$ are independent. With this measurement error, equation is the actual regression that we will be estimating rather that the original one. Previously, we have assume that $\E(v)=0$, and $\E(u_j)=0$, and are uncorrelated with each $x_i$ including $x_j$, thus, we also have $\E(e)=0$. We want to assume that $x_j$ is exogenous, i.e $\cov(x_j,e)=\E(x_je)=0$. But we will have a problem of endogeneity in this case, that is
+Let's denote $e=v-\beta_ju_j$ in equation \eqref{h1.14}, and we assume $u_j$ and $v$ are independent. With this measurement error, equation is the actual regression that we will be estimating rather that the original one. Previously, we have assume that $\E(v)=0$, and $\E(u_j)=0$, and are uncorrelated with each $x_i$ including $x_j$, thus, we also have $\E(e)=0$. We want to assume that $x_j$ is exogenous, i.e $\cov(x_j,e)=\E(x_je)=0$. But we will have a problem of endogeneity in this case, that is
 \begin{align*}
     \cov(x_j,e)&=\E(x_je)\\
     &=\E((x_j^*+u_j)(v-\beta_ju_j))\\
     &=\E(x_j^*v)+\E(u_jv)-\beta_j\E(x_j^*u_j)-\beta_j\E(u_j^2)\\
     &=0+0+0-\beta_j\E(u_j^2)& &\text{[because }x_j^*\indep v,x_j^*\indep u_j, u_j\indep v]\\
     &=-\beta_j\V(u_j) \\
-    &\neq 0.
-\end{align*}\qed
+    &\neq 0.& &\text{[if }\beta_j\neq0, \V(u_j)\neq0]
+\end{align*}
+Not that in the presence of measurement error then $\V(u_j)\neq0$. Thus in our case of explanatory variable measured with error, we have endogeneity.\\
+\qed
 \end{document}
