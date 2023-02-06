@@ -25,251 +25,141 @@
 
 \begin{document}
  
-\title{Homework 1}
+\title{Homework 2}
 \author{ECON 7023: Econometrics II\\
 Maghfira Ramadhani\\
-January 26, 2022}
+February 9, 2022}
 \date{Spring 2023}
 \maketitle
 
-\section*{Part 1}
-\subsection*{Problem 3.5}
-Let $\left\{y_i:i=1,2,3,\ldots\right\}$ be an independent, identically distributed sequence with $\E(y_i^2)<\infty$. Let $\mu=\E(y_i)$ and $\sigma^2=\V(y_i).$
+\section*{Chapter 4}
+\subsection*{Problem 4.11}
 \begin{enumerate}
-\item[a.] Let $\bar{y}_N$ denote the sample average based on a sample size of $N$. Find $\V[\sqrt{N}(\bar{y}_N-\mu)].$
+\item[a.] In Example 4.3, use \textit{KWW} and \textit{IQ} simultaneously as proxies for ability in equation (4.29). Compare the estimated return to education without a proxy for ability and with \textit{IQ} as the only proxy for ability.
 \\ Answer: \\
-By definition of sample mean, we have $\V(\bar{y}_N) = \V \left(\frac{1}{N}\sum_{i=1}^{N}{y_i}\right).$
-Recall property of variance that $\V(ax)=a^2 \V(x)$ for random variable $x$ and constant $a$. Since $N$ is constant, thus we have
-$\V(\bar{y}_N) = \left(\frac{1}{N}\right)^2 \V \left(\sum_{i=1}^{N}{y_i}\right).$
-It is given that $y_i\iid(\mu,\sigma^2) \text{ for } i\in\left\{1,2,..,n\right\}$. Therefore $\V(y_i)=\sigma^2$ and is constant, and  since $y_i$'s are independent we have $\V \left(\sum_{i=1}^{N}{y_i}\right) = \sum_{i=1}^{N}{\V(y_i)}.$
-Finally, combining these results, we have
-\begin{align*}
-    \V(\bar{y}_N) = \left(\frac{1}{N}\right)^2 \sum_{i=1}^{N}{\V(y_i)}=\left(\frac{1}{N}\right)^2 N\sigma^2=\sigma^2/N.
-\end{align*}
-Now, we can calculate $\V[\sqrt{N}(\bar{y}_N-\mu)].$ Since $N$ and $\mu$ are constant, we have
-\begin{align*}
-    \V[\sqrt{N}(\bar{y}_N-\mu)]=\V[\sqrt{N}(\bar{y}_N)]=(\sqrt{N})^2\V(\bar{y}_N)=N(\sigma^2/N)=\sigma^2.
-\end{align*}\qed
 
-\item[b.] What is the asymptotic variance of $\sqrt{N}(\bar{y}_N-\mu)$?
+\item[b.] Test \textit{KWW} and \textit{IQ} for joint significance in the estimated equation from part a.
 \\ Answer:\\
-By Central Limit Theorem, since $y_i\iid(\mu,\sigma^2)$, then we have $\sqrt{N}(\bar{y}_N-\mu)\asym\norm(0,\sigma^2)$. So, the asymptotic variance of  $\sqrt{N}(\bar{y}_N-\mu)$ is $\Av[\sqrt{N}(\bar{y}_N-\mu)]=\sigma^2.$\\ \qed
 
-\item[c.] What is the asymptotic variance of $\bar{y}_N$? Compare this with $\V(\bar{y}_N).$
+\item[c.] When \textit{KWW} and \textit{IQ} are used as proxies for \textit{abil}, does the wage differential between nonblacks and blacks dissapear? What is the estimated differential?
 \\ Answer:\\
-From the result in (c) we have $\Av[\sqrt{N}(\bar{y}_N-\mu)]=\sigma^2.$ Since $N$ and $\mu$ are constant we have $\Av[\sqrt{N}(\bar{y}_N-\mu)]=\Av[\sqrt{N}(\bar{y}_N)]$. Recall property of variance that $\V(ax)=a^2 \V(x)$ for random variable $x$ and constant $a$. Applying this property to the asymptotic variance we have $\Av(\bar{y}_N))=\frac{1}{N}\Av[\sqrt{N}(\bar{y}_N)]=\frac{1}{N}\Av[\sqrt{N}(\bar{y}_N-\mu)]=\sigma^2/N.$ We get the same result as in (a).\\ \qed
 
-\item[d.] What is the asymptotic standard deviation of $\bar{y}_N$?
+\item[d.] Add the interaction $educ(IQ-100)$ and $educ(KWW-\overline{KWW})$ to the regression from part a, where $\overline{KWW}$ is the average score in the sample. Are these terms jointly significant using a standard \textit{F} test? Does adding them affect any important conclusions?
 \\ Answer:\\
-By definition, the asymptotic standard deviation is the square root of the asymptotic variance that we have from previous result, formally, $\sqrt{\Av(\bar{y}_N)}=\sqrt{\sigma^2/N}=\sigma/\sqrt{N}.$\\ \qed
-\item[e.] How would you obtain the asymptotic standard error of $\bar{y}_N$?
-\\ Answer:\\
-Applying \textbf{Definition 3.10} from the textbook, the asymptotic standard error of $\bar{y}_N$ is $\se(\bar{y}_N)=\hat{\sigma}/\sqrt{N},$ with $\hat{\sigma}$ a consistent estimator for $\sigma$, formally, $\hat{\sigma}^2\convprob\sigma^2$. Because we deal with $y_i$ as a single random variable, the consistent estimator for $\sigma^2$ will be $\hat{\sigma}^2=\frac{1}{N-1}\sum_{i=1}^N (y_i-\bar{y_N})^2.$ Then take the $|\sqrt{\hat{\sigma}^2}|$ as the $\hat{\sigma}$.
-\begin{proof}
-We need to show that $\hat{\sigma}^2=\frac{1}{N-1}\sum_{i=1}^N (y_i-\bar{y_N})^2$ is a consistent estimator for $\sigma^2$.
-\end{proof}
 \end{enumerate}
 
 
-\subsection*{Problem 4.1}
-Consider a standard $\log(wage)$ equation for men under the assumption that all explanatory variables are exogenous:
-\begin{align*}
-    &\log(wage)=\beta_0+\beta_1 married +\beta_2 educ+\mathbf{z\pmb{\gamma}}+u, \tag{4.49} \label{h1.0}\\
-    &\E(u|married,educ,\mathbf{z})=0,
-\end{align*}
-where $\mathbf{z}$ contains factors other than marital status and education that can affect wages. When $\beta_1$ is small, $100\cdot \beta_1$ is approximately the ceteris paribus difference in wages between married and unmarried men. When $\beta_1$ is large, it might be preferable to use the exact percentage difference in $\E(wage|married,educ,\mathbf{z})$. Call this $\theta_1$.
+\subsection*{Problem 4.13}
+Use the data in CORNWELL.RAW (from Cornwell and Trumball, 1994) to estimate a model of county-level crime rates, using the year 1987 only.
 \begin{enumerate}
-\item[a.] Show that if $u$ is independent of all explanatory variables in equation \eqref{h1.0}, then $\theta_1=100\cdot[\exp(\beta_1)-1]$. (Hint: Find $\E(wage|married,educ,\mathbf{z})$ for $married=1$ and $married=0$, and find the percentage difference). A natural, consistent, estimator of $\theta_1$ is $\hat{\theta}_1=100\cdot[\exp(\hat{\beta}_1)-1]$, where $\hat{\beta_1}$ is the OLS estimator from equation \eqref{h1.0}.
+\item[a.] Using logarithms of all variables, estimate a model relating the crime rate to the deterrent variables $prbarr, prbconv, prbpris$, and $avgsen.$
 \\ Answer:\\
-Rewrite equation \eqref{h1.1},
-\begin{align}
-    &\log(wage)=\beta_0+\beta_1 married +\beta_2 educ+\mathbf{z\pmb{\gamma}}+u \notag\\
-    &\Leftrightarrow wage=\exp{(\beta_0+\beta_1 married +\beta_2 educ+\mathbf{z\pmb{\gamma}}+u)} \notag\\
-    &\Leftrightarrow wage=\exp{(u)}\exp{[\beta_0+\beta_1 married +\beta_2 educ+\mathbf{z\pmb{\gamma}})}. \label{h1.1}
-\end{align}
-Now take the expectation of \eqref{h1.1} with respect to all explanatory variables, we have
-\begin{align}
-    &\E(wage|married,educ,\mathbf{z})=\E(\exp{(u)}|married,educ,\mathbf{z})\exp{(\beta_0+\beta_1 married +\beta_2 educ+\mathbf{z}\pmb{\gamma})}.\label{h1.2}
-\end{align}
-If $u$ is independent of all explanatory variables, then $exp(u)$ will also be independent with all those variables, i.e, $\E(\exp{(u)}|married,educ,\mathbf{z})=E(\exp(u))=c,$ where $c$ is a constant. Now from \eqref{h1.2} we have
-\begin{align}
-    \E(wage|married,educ,\mathbf{z})=c\exp{(\beta_0+\beta_1 married +\beta_2 educ+\mathbf{z}\pmb{\gamma})}. \label{h1.3}
-\end{align}
-Then, we can compute the exact percentage different $\theta_1=100\cdot\frac{\E(wage|married=1)-\E(wage|married=0)}{\E(wage|married=0)}$ from \eqref{h1.3}, we have
-\begin{align}
-    \theta_1&=100\cdot\left[\frac{c\exp{(\beta_0+\beta_1 (1) +\beta_2 educ+\mathbf{z}\pmb{\gamma})}-c\exp{(\beta_0+\beta_1 (0) +\beta_2 educ+\mathbf{z}\pmb{\gamma})}}{c\exp{(\beta_0+\beta_1 (0) +\beta_2 educ+\mathbf{z}\pmb{\gamma})}}\right] \notag \\
-    &=100\cdot\left[\frac{\exp{(\beta_0+\beta_1 +\beta_2 educ+\mathbf{z}\pmb{\gamma})}}{\exp{(\beta_0÷ +\beta_2 educ+\mathbf{z}\pmb{\gamma})}}-1\right] \notag \\
-    &=100\cdot[\exp{(\beta_1)}-1]. \notag
-\end{align} \qed
-
-\item[b.] Use the delta method (see Section 3.5.2) to show that asymptotic standard error of $\hat{\theta}_1$ is $100\cdot[\exp(\hat{\beta}_1)]\cdot \se(\hat{\beta_1})$.
-\\ Answer:\\
-From previous result we have $\theta_1:\beta_1\to\mathbb{R}$ defined as $\theta_1=100\cdot[\exp{(\beta_1)}-1].$ We can use the OLS estimator $\hat{\beta_1}$ from \eqref{h1.0} to estimate $\hat{\theta}_1=100\cdot[\exp(\hat{\beta}_1)-1]$. We are interested in finding $\se(\hat{\theta}_1).$ By Delta Method we have
-\begin{align}
-    \Av[\hat{\theta}_1(\hat{\beta}_1)]=\left(\frac{\partial\hat{\theta}_1}{\partial \hat{\beta}_1} \right)^2 \Av(\hat{\beta}_1), \label{h1.4}
-\end{align}
-with the Jacobian in this case is only $1\times 1$, i.e, a scalar. From \eqref{h1.4} we take the square root to find $\se(\hat{\theta}_1),$ we have
-\begin{align*}
-    \se[\hat{\theta}_1(\hat{\beta}_1)]&=\left(\frac{\partial\hat{\theta}_1}{\partial \hat{\beta}_1} \right) \se(\hat{\beta}_1) \\
-    &=100\cdot\exp(\hat{\beta}_1)\cdot \se(\hat{\beta_1}).
-\end{align*}\qed
-
-\item[c.] Repeat parts a and b by finding the exact percentage change in $\E(wage|married,educ,\mathbf{z})$ for any given change in $educ,\ \Delta educ.$ Call this $\theta_2.$ Explain how to estimate $\theta_2$ and obtain its asymptotic standard error.
-\\ Answer:\\
-The step involved is similar with the previous result. Recall \eqref{h1.3}, we have
-\begin{align*}
-    \E(wage|married,educ,\mathbf{z})=c\exp{(\beta_0+\beta_1 married +\beta_2 educ+\mathbf{z}\pmb{\gamma})}.
-\end{align*}
-Then, we can compute the exact percentage different for an additional years of education $\Delta educ$, that is $\theta_2=100\cdot\frac{\E(wage|educ=\epsilon+\Delta educ)-\E(wage|educ=\epsilon)}{\E(wage|educ=\epsilon)}$ from \eqref{h1.3}, we have
-\begin{align}
-    \theta_2&=100\cdot\left[\frac{c\exp{(\beta_0+\beta_1 married +\beta_2 (\epsilon+ \Delta educ)+\mathbf{z}\pmb{\gamma})}-c\exp{(\beta_0+\beta_1 married +\beta_2 (\epsilon)+\mathbf{z}\pmb{\gamma})}}{c\exp{(\beta_0+\beta_1 married +\beta_2 (\epsilon)+\mathbf{z}\pmb{\gamma})}}\right] \notag \\
-    &=100\cdot\left[\frac{c\exp{(\beta_0+\beta_1 married +\beta_2 (\epsilon+ \Delta educ)+\mathbf{z}\pmb{\gamma})}}{c\exp{(\beta_0+\beta_1 married +\beta_2 (\epsilon)+\mathbf{z}\pmb{\gamma})}}-1\right] \notag \\
-    &=100\cdot[\exp{(\beta_2\Delta educ)}-1]. \notag
-\end{align} 
-We can use the OLS estimator $\hat{\beta_2}$ from \eqref{h1.0} to estimate $\hat{\theta}_2=100\cdot[\exp{(\beta_2)}\Delta educ-1]$ for a given change in $educ,\ \Delta educ.$ 
-\\ \qed \\
-To estimate the asymptotic standard error we can use the Delta Method. We have that $\theta_2:\beta_2\to\mathbb{R}$ defined as $\theta_2=100\cdot[\exp{(\beta_2\Delta educ)} -1].$ Here we treat $\Delta educ$ as a constant because it is given. By Delta Method we have
-\begin{align}
-    \Av[\hat{\theta}_2(\hat{\beta}_2)]=\left(\frac{\partial\hat{\theta}_2}{\partial \hat{\beta}_2} \right)^2 \Av(\hat{\beta}_2), \label{h1.5}
-\end{align}
-with the Jacobian in this case is only $1\times 1$, i.e, a scalar. From \eqref{h1.5} we take the square root to find $\se(\hat{\theta}_2),$ we have
-\begin{align*}
-    \se[\hat{\theta}_2(\hat{\beta}_2)]&=\left(\frac{\partial\hat{\theta}_2}{\partial \hat{\beta}_2} \right) \se(\hat{\beta}_2) \\
-    &=100\cdot |\Delta educ| \cdot\exp(\hat{\beta}_2 \Delta educ)\cdot \se(\hat{\beta_2}).
-\end{align*}\qed
 
 
-\item[d.] Use the data in NLS80.RAW to estimate equation \eqref{h1.0}, where \textbf{z} contains the remaining variables in equation (4.29) (except ability, of course). Find $\hat{\theta}_1$ and its standard error; find $\hat{\theta}_2$ and its standard error when $\Delta educ=4.$ 
+\item[b.] Add $\log(crmrte)$ for 1986 as an additional explanatory variable, and comment on how the estimated elasticities differ from part a.
 \\ Answer:\\
-From the data we get these regression result in the following table
-\input{HW1/reg1.tex}
-Recall the previous result, we have
-\begin{align*}
-    \hat{\theta}_1&=100\cdot[\exp{(\hat{\beta}_1)}-1]\\
-    \se[\hat{\theta}_1]&=100\cdot\exp(\hat{\beta}_1)\cdot \se(\hat{\beta_1})\\
-    \hat{\theta}_2&=100\cdot[\exp{(\hat{\beta_2}\Delta educ)}-1] \\
-    \se[\hat{\theta}_2]&=100\cdot |\Delta educ| \cdot\exp(\hat{\beta}_2 \Delta educ)\cdot \se(\hat{\beta_2}).
-\end{align*}
+
+
+\item[c.] Compute the $F$ statistic for joint significance of all of the wage variables (again in logs), using the restricted model from part b.
+\\ Answer:\\
+
+
+\item[d.] Redo part c, but make the test robust to heteroskedasticity of unknown form.
+\\ Answer:\\
 \end{enumerate}
 
-\subsection*{Problem 4.2}
+\subsection*{Problem 4.14}
+Use the data in ATTEND.RAW to answer this question
 \begin{enumerate}
-\item[a.] Show that, under random sampling and the zero conditional mean assumption $\E(u|\mathbf{x})=0,\E(\hat{\pmb{\beta}}|\mathbf{X})=\pmb{\beta}$ if $\mathbf{X}'\mathbf{X}$ is nonsingular.
+\item[a.] To determine the effects of attending lecture on final exam performance, estimate a model relating $stndfnl$ (the standardized final exam score) to $atndrte$ (the percent of lectures attended). Include the binary variables $frosh$ and $soph$ as explanatory variables. Interpret the coefficient on $atndrte$, and discuss its significance.
 \\ Answer:\\
 
-Recall our OLS estimator
-\begin{align*}
-\hat{\pmb{\beta}}=\left(N^{-1}\sum_{i=1}^N\mathbf{x}_i'\mathbf{x}_i\right)^{-1}\left(N^{-1}\sum_{i=1}^N\mathbf{x}_i'y_i\right)=\pmb{\beta}+\left(N^{-1}\sum_{i=1}^N\mathbf{x}_i'\mathbf{x}_i\right)^{-1}\left(N^{-1}\sum_{i=1}^N\mathbf{x}_i'u_i\right),
-\end{align*}
-or in matrix notation
-\begin{align}
-\hat{\pmb{\beta}}=(\mathbf{X'X})^{-1}(\mathbf{X'y})=\pmb{\beta}+(\mathbf{X'X})^{-1}(\mathbf{X'u}), \label{h1.6}
-\end{align}
-with $\mathbf{X}$ a $N\times K$ data matrix of regressors with \textit{i}th row $\textbf{x}_i$, $\mathbf{y}$ a $N\times 1$ data vector with \textit{i}th element $y_i$, $\textbf{u}$ a $N\times 1$ matrix of errors. Now take the expectation of \eqref{h1.6} with respect to $\textbf{X}$, we have
-\begin{align}
-    \E(\hat{\pmb{\beta}}|\textbf{X})=\pmb{\beta}+(\mathbf{X'X})^{-1}\mathbf{X'}\E(\textbf{u}|\textbf{X})=\pmb{\beta}+(\mathbf{X'X})^{-1}\mathbf{X'}\textbf{0}=\pmb{\beta}. \label{h1.7}
-\end{align}
-In order for equation \eqref{h1.7} to hold, we need the zero conditional mean assumption, that is given, and we also need $(\mathbf{X'X})$ to be nonsingular so that the inverse, $(\mathbf{X'X})^{-1}$, exists.\\ \qed
-
-\item[b.] In addition to the assumption from part a, assume that $\V(u|\mathbf{x})=\sigma^2.$ Show that $\V({\hat{\pmb{\beta}}}|\mathbf{X})=\sigma^2(\mathbf{X}'\mathbf{X})^{-1}.$
+\item[b.] How confident are you that the OLS estimates from part a are estimating the causal effect of attendance? Explain.
 \\ Answer:\\
-Recall previous result from (a) in equation \eqref{h1.6} we have
-\begin{align*}
-    \hat{\pmb{\beta}}=\pmb{\beta}+(\mathbf{X'X})^{-1}(\mathbf{X'u}).
-\end{align*}
-In this $\pmb{\beta}$ a vector of constants because it is a population property. Thus, if we take the conditional variance, we have
-\begin{align}
-    \V(\hat{\pmb{\beta}}|\textbf{X})&=\V((\mathbf{X'X})^{-1}\mathbf{X'u}|\textbf{X}) \notag \\
-    &=[(\mathbf{X'X})^{-1}\mathbf{X'}]\V({u}|\textbf{X})[(\mathbf{X'X})^{-1}\textbf{X}']' \notag \\
-    &=[(\mathbf{X'X})^{-1}\mathbf{X'}]\V({u}|\textbf{X})[\textbf{X}(\mathbf{X'X})^{-1}] \label{h1.8}
-\end{align}
-In equation \eqref{h1.8} we need to get rid of $\V({\textbf{u}}|\textbf{X})$, so recall that
-\begin{align*}
-\V({\textbf{u}}|\textbf{X})&=\E[\mathbf{u'u}|\textbf{X}]-\E[\mathbf{u}|\textbf{X}]^2 \\
-&=\E[\mathbf{u'u}|\textbf{X}],
-\end{align*}
-which is a variance covariance matrix, since it is given in (a) that $\E[\mathbf{u}|\textbf{X}]=0.$ We are also given $\V(u_i|\mathbf{x}_i)=\E(u_i^2|\mathbf{x}_i)=\sigma^2$. Note that since $\textbf{x}_i$ is iid across $i$ and that the matrix is symmetric, we have \[\E(u_i^2|\mathbf{x}_i)=\E(u_i^2|\mathbf{x}_i,\mathbf{x}_j)=\E(u_i^2|\mathbf{X})=\sigma^2,\] 
-where $u_i^2$ is a diagonal of variance covariance matrix. To transform the matrix quadratic form in \eqref{h1.8} to scalar multiplication, we need the covariance part of the matrix to be zero, i.e., $\E(u_iu_j|\mathbf{X})=\E(u_iu_j|\mathbf{x}_i,\mathbf{x}_j)=0$.  Note that since $u_i$ and $\textbf{x}_i$ are iid across $i$, by Law of Iterated Expectation we have 
-\begin{align*}
-    \E(u_iu_j|\mathbf{x}_i,\mathbf{x}_j)&=\E(u_iu_j|\mathbf{x}_i,\mathbf{x}_j,u_j)& &[\text{since } u_i,u_j \text{ are independent}]\\
-    &=u_j\E(u_i|\mathbf{x}_i,\mathbf{x}_j,u_j)&\\
-    &=u_j\E(u_i|\mathbf{x}_i,\mathbf{x}_j)&\\
-    &=u_j\cdot 0& &[\text{from given assumption in point (a)}]\\
-    &=0.
-\end{align*}
-Now we have that $\V({\textbf{u}}|\textbf{X})=\E[\mathbf{u'u}|\textbf{X}]$ is a diagonal matrix with the diagonal elements $\sigma^2$. Thus from \eqref{h1.8} the matrix inside the sandwich form can be transformed into scalar multiplication. Finally, we have
-\begin{align*}
-    \V(\hat{\pmb{\beta}}|\textbf{X})&=[(\mathbf{X'X})^{-1}\mathbf{X'}]\V({u}|\textbf{X})[\textbf{X}(\mathbf{X'X})^{-1}] \\
-    &=\sigma^2[(\mathbf{X'X})^{-1}\mathbf{X'}\textbf{X}(\mathbf{X'X})^{-1}] \\
-    &=\sigma^2[(\mathbf{X'X})^{-1}\textbf{I}] \\
-    &=\sigma^2(\mathbf{X'X})^{-1}.
-\end{align*}\qed
+
+\item[c.] As proxy variables for student ability, add to the regression $priGPA$ (prior cumulative GPA) and $ACT$ (achievement test score). Now what is the effect of $atndrte$? Discuss how the effect differs from that in part a.
+\\ Answer:\\
+
+\item[d.] What happens to the significance of the dummy variables in part c as compared with part a? Explain.
+\\ Answer:\\
+
+\item[e.] Add the squares of $priGPA$ and $ACT$ to the equation. What happens to the coefficient $atndrte$? Are the quadratics jointly significant?
+\\ Answer:\\
+
+\item[f.] To test for a nonlinear effect of $atndrte$, add its square to the equation from part e. What do you conclude? 
+\\ Answer:\\
 \end{enumerate}
 
-\subsection*{Problem 4.4}
-Show that estimator $\hat{\mathbf{B}}\equiv N^{-1} \sum_{i=1}^{N}\hat{u}_i^2 \mathbf{x}_i'\mathbf{x}_i$ is consistent for $\mathbf{B}=\E(u^2\mathbf{x}'\mathbf{x})$ by showing that 
-\[N^{-1} \sum_{i=1}^{N}\hat{u}_i^2 \mathbf{x}_i'\mathbf{x}_i=N^{-1} \sum_{i=1}^{N}u_i^2 \mathbf{x}_i'\mathbf{x}_i+o_p(1).\]
-(Hint: Write $\hat{u}_i^2=u_i^2-2\mathbf{x}_i u_i (\pmb{\hat{\beta}}-\pmb{\beta})+[\mathbf{x}_i (\pmb{\hat{\beta}}-\pmb{\beta})]^2$, and use the facts that sample averages are $O_p(1)$ when expectations exist and that $\pmb{\hat{\beta}}-\pmb{\beta}=o_p(1).$ Assume that all necessary expectations exist and are finite.)
+\subsection*{Problem 4.15}
+Assume that $y$ and $x_j$ have finite second moments, and write the linear projection of $y$ on $(1,x_1,\ldots,x_K)$ as
+\begin{align*}
+    &y=\beta_0+\beta_1 x_1+\cdots +\beta_K x_K +u=\beta_0 + \textbf{x}\pmb{\beta}+u,\\
+    &E(u)=0,\ \ \ \ \ E(x_j u)=0, \ \ \ \ \ j=1,2,\ldots,K.
+\end{align*}
+\begin{enumerate}
+\item[a.] Show that $\sigma_y^2=\V(\textbf{x}\pmb{\beta})+\sigma_u^2.$ 
 \\ Answer:\\
 
-\subsection*{Problem 4.9}
-Consider a linear model where the dependent variable is in logarithmic form, and the lag of $\log(y)$ is also an explanatory variable:
-\[\log(y)=\beta_0+\textbf{x}\pmb{\beta}+\alpha_1\log(y_{-1})+u,\ \ \E(u|\textbf{x},y_{-1})=0,\]
-where the inclusion of $y_{-1}$ might be to control for correlation between policy variables in \textbf{x} and a previous value of $y$; see Example 4.4.
-\begin{enumerate}
-\item[a.] For estimating $\pmb{\beta}$, why do we obtain the same estimator if the \textit{growth} in $y$, $\log(y)-\log(y_{-1}),$ is used instead as the dependent variable?
-\\ Answer: \\
-Rearrange the equation by defining $\Delta \log(y)=\log(y)-\log(y_{-1})$, we have
-\[\Delta \log(y)=\beta_0+\textbf{x}\pmb{\beta}+(\alpha_1-1)\log(y_{-1})+u.\]
-So if we regress using the dependent variable $\Delta \log(y)$ we will have the same estimator for $\pmb{\beta}$. The only change in the estimator will happen with the regression on $\log(y_{-1}).$ \\ \qed
+\item[b.] For a random draw $i$ from the population, write $y_i=\beta_0+\textbf{x}_i\pmb{\beta}+u_i.$ Evaluate the following assumption, which has been known to appear in econometrics textbooks: $``\V(u_i)=\sigma^2=\V(y_i) \text{ for all }i."$
+\\ Answer:\\
 
-\item[b.] Suppose that there are no covariates \textbf{x} in the equation. Show that, if the distributions of $y$ and $y_{-1}$ are identical, then $|\alpha_1|<1$. This is the \textit{regression-to-the-mean}
-phenomenon in a dynamic setting. (Hint: Show that $\alpha_1=\corr[\log(y),\log(y_{-1})].$)
-\\ Answer: \\
-Based on the prompt we will have the following linear model,
-\[\log(y)=\beta_0+\alpha_1\log(y_{-1})+u.\]
-It is also given that the distribution of $y$ and $y_{-1}$ are identical, formally, $y,y_{-1}\iid(\mu,\sigma^2)$ for some finite mean $\mu$, and variance $\sigma^2$. Recall the coefficient for simple regression, for this case we have
-\begin{align}
-    \alpha_1=\frac{\cov[\log(y),\log(y_{-1})]}{\V[\log(y_{-1})]}
-\end{align}
-Recall the correlation relation with covariance and variance, we have
-\begin{align}
-    \corr[\log(y),\log(y_{-1})]&=\frac{\cov[\log(y),\log(y_{-1})]}{\sqrt{\V[\log(y_{-1})]\V[\log(y)]}} \notag \\
-    \Leftrightarrow \cov[\log(y),\log(y_{-1})]&= \corr[\log(y),\log(y_{-1})] \sqrt{\V[\log(y_{-1})]\V[\log(y)]}
-\end{align}
-Combining both of these equation, and the fact that we assume $\V[\log(y_{-1})]=\V[\log(y)]=\sigma^2$, we have
-\begin{align}
-    \alpha_1&=\frac{\corr[\log(y),\log(y_{-1})] \sqrt{\V[\log(y_{-1})]\V[\log(y)]}}{\V[\log(y_{-1})]} \notag \\
-    &=\frac{\corr[\log(y),\log(y_{-1})] \sqrt{\sigma^2\cdot \sigma^2}}{\sigma^2} \notag \\
-    &=\corr[\log(y),\log(y_{-1})]
-\end{align}
-Since we know $-1< \alpha_1=\corr[\log(y),\log(y_{-1})]<1,$ thus we can conclude that $|\alpha_1|<1.$ \\ \qed
+\item[c.] Define the population \textit{R}-squared by $\rho^2 \equiv 1-\sigma_u^2 / \sigma_y^2=\V(\textbf{x}\pmb{\beta})/\sigma_y^2.$ Show that the \textit{R}-squared, $R^2=1-SSR/SST,$ is a consistent estimator of $\rho^2,$ where SSR is the OLS sum of squared residuals and SST$=\sum_{i=1}^N (y_i-\bar{y})^2$ is the total sum of squares.
+\\ Answer:\\
+
+\item[d.] Evaluate the following statement: ``In the presence of heteroskedasticity, the \textit{R}-squared from an OLS regression is meaningless" (This kind of statement also tends to appear in econometrics texts.)
+\\ Answer:\\
 \end{enumerate}
 
-\section*{Part 2}
-Show that for a regression model, if a regressor $x_j$ is measured with error, then it will be endogenous.
-\\ Answer: \\
-Consider a regression with $j$ variables:
-\begin{align}
-    y=\beta_0+\beta_1x_1+\ldots+\beta_jx_j^*+v,
-\end{align}
-where $y,x_1,\ldots,x_{j-1}$ are observable, but $x_j^*$ is not, instead we observe $x_j$ that is measured with error. We assume that $v$ has zero mean, i.e $\E(v)=0$, and is uncorrelated with $x_1,\ldots,x_{j-1},x_j^*$. We also assume $v$ is uncorrelated with $x_j$, i.e $\cov(x_j,v)=0$. Now define the measurement error of the population, $u_j$, as follows
-\begin{align}
-x_j=x_j^*+u_j\Leftrightarrow x_j^*=x_j-u_j.
-\end{align}
-We assume that $u_j$ has zero mean, i.e $\E(u_j)=0$, and is uncorrelated with $x_1,\ldots,x_{j-1},x_j^*$. Now substituting these into the previous equation we have
-\begin{align}
-    y&=\beta_0+\beta_1x_1+\ldots+\beta_j(x_j-u_j)+v \notag \\
-    \Leftrightarrow y&=\beta_0+\beta_1x_1+\ldots+\beta_jx_j+(v-\beta_ju_j) \notag \\
-    \Leftrightarrow y&=\beta_0+\beta_1x_1+\ldots+\beta_jx_j+e
-\end{align}
-Let's denote $e=v-\beta_ju_j$, and we assume $u_j$ and $v$ are independent. With this measurement error, equation is the actual regression that we will be estimating rather that the original one. Previously, we have assume that $\E(v)=0$, and $\E(u_j)=0$, and are uncorrelated with each $x_i$ including $x_j$, thus, we also have $\E(e)=0$. We want to assume that $x_j$ is exogenous, i.e $\cov(x_j,e)=\E(x_je)=0$. But we will have a problem of endogeneity in this case, that is
+\section*{Chapter 5}
+\subsection*{Problem 5.1}
+In this problem you are to establish the algebraic equivalence between 2SLS and OLS estimation of an equation containing additional regressor. Although the result is completely general, for simplicity consider a model with a single (suspected) endogenous variable:
 \begin{align*}
-    \cov(x_j,e)&=\E(x_je)\\
-    &=\E((x_j^*+u_j)(v-\beta_ju_j))\\
-    &=\E(x_j^*v)+\E(u_jv)-\beta_j\E(x_j^*u_j)-\beta_j\E(u_j^2)\\
-    &=0+0+0-\beta_j\E(u_j^2)& &\text{[because }x_j^*\indep v,x_j^*\indep u_j, u_j\indep v]\\
-    &=-\beta_j\V(u_j) \\
-    &\neq 0.
-\end{align*}\qed
+    &y_1=\textbf{z}_1\pmb{\delta}_1+\alpha_1y_2+u_1,\\
+    &y_2=\textbf{z}\pmb{\pi}_2+v_2.
+\end{align*}
+For notational clarity, we use $y_2$ as the suspected endogenous variable and \textbf{z} as the vector of all exogenous variables. The second equation is the reduced form for $y_2.$ Assume that \textbf{z} has at least one more element than $\textbf{z}_1.$
+We know that one estimator of $(\pmb{\delta}_1,\alpha_1)$ is the 2SLS estimator using instruments \textbf{x}. Consider an alternative estimator of $(\pmb{\delta}_1,\alpha_1):$ (a) estimate the reduced form by OLS, save the residuals $\hat{v}_2$; (b) estimate the following equation by OLS:
+\begin{align}
+    y_1=\textbf{z}_1\pmb{\delta}_1+alpha_1+y_2+\rho_1+\hat{v}_2+error. \tag{5.52} \label{5.52}
+\end{align}
+Show that the OLS estimates of $\pmb{\delta}_1$ and $alpha_1$ from this regression are identical to the 2SLS estimators. (Hint: Use the partitioned regression algebra of OLS. In particular, if $\hat{y}=\textbf{x}_1\hat{\pmb{\beta}}_1+\textbf{x}_2\hat{\pmb{\beta}}_2$ is an OLS regression, $\hat{\pmb{\beta}}_1$ can be obtained by first regressing $\textbf{x}_1$ on $\textbf{x}_2$, getting the residuals, say $\ddot{\textbf{x}}_1$, and then regressing $y$ on $\ddot{\textbf{x}}_1$; see, for example, Davidson and MacKinnon (1993, Section 1.4). You must also use the fact that $\textbf{z}_1$ and $\hat{v}_2$ are orthogonal in the sample.)\\ 
+Answer: \\
+
+\subsection*{Problem 5.3}
+Consider the following model to estimate the effects of several variables, including cigarette smoking, on the weight of newborns:
+\begin{align}
+    \log(bwght)=\beta_0+\beta_1male+\beta_2parity+\beta_3\log(faminc)+\beta_4packs+u, \tag{5.54}\label{5.54}
+\end{align}
+where $male$ is a binary indicator equal to one if the child is male, $parity$ is the birth order of this child, $faminc$ is family income, and $packs$ is the average number of packs of cigarettes smoked per day during pregnancy.
+\begin{enumerate}
+\item[a.] Why might you expect $packs$ to be correlated with $u$?
+\\ Answer:\\
+
+\item[b.] Suppose that you have data on average cigarette price in each woman's state of residence. Discuss whether this information is likely to satisfy the properties of a good instrumental variable for packs.
+\\ Answer:\\
+
+\item[c.] Use the data in BWGHT.RAW to estimate equation \eqref{5.54}. First, use OLS. Then, use 2SLS, where $cigprice$ is an instrument for packs. Discuss any important differences in the OLS and 2SLS estimates.
+\\ Answer:\\
+
+\item[d.] Estimate the reduced form for $packs$. What do you conclude about identification of equation \eqref{5.54} using $cigprice$ as an instrument for $packs$? What bearing does this conclusion have on your answer from part c?
+\\ Answer:\\
+\end{enumerate}
+
+\subsection*{Problem 5.5}
+One occasionally sees the following reasoning used in applied work for choosing instrumental variables in the context of omitted variables. The model is
+\begin{align*}
+    y_1=\textbf{z}_1\pmb{\delta}_1+\alpha_1y_2+\gamma q+a_1.
+\end{align*}
+where $q$ is the omitted factor. We assume that $a_1$ satisfies the structural error assumption $\E(a_1|\textbf{z}_1,y_2,q)=0$, that $\textbf{z}_1$ is exogenous in the sense that $\E(q|\textbf{z}_1)=0,$ but that $y_2$ and $q$ may be correlated. Let $\textbf{z}_2$ be a vector of instrumental variable candidates for $y_2$. Suppose it is known that $\textbf{z}_2$ appears in the linear projection of $y_2$ onto $(\textbf{z}_1,\textbf{z}_2)$, and so the requirement that $\textbf{z}_2$ be partially correlated with $y_2$ is satisfied. Also, we are willing to assume that $\textbf{z}_2$ is redundant in the structural equation, so that $a_1$ is uncorrelated with $\textbf{z}_2$. What we are unsure of is whether $\textbf{z}_2$ is correlated with the omitted variable $q$, in which case $\textbf{z}_2$ would not contain valid IVs.
+To ``test" whether $\textbf{z}_2$ is in fact uncorrelated with $q$, it has been suggested to use OLS on the equation
+\begin{align}
+    y=\textbf{z}_1\pmb{\delta}_1+\alpha_1y_2+\textbf{z}_2\pmb{\psi}_1+u_1, \tag{5.55}\label{5.55}
+\end{align}
+where $u_1=\gamma q+a_1,$ and test $\text{H}_0:\pmb{\psi}_1=0.$ Why does this method not work?
+\\ Answer:\\
+
+\section*{Non-textbook Problem}
+Show that IV estimation can be implemented as the 2SLS procedure.
+\\ Answer:\\
+
 \end{document}
