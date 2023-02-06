@@ -25,16 +25,11 @@ esttab using ".\HW2\reg411a.tex", replace ///
 texdoc do ".\HW2\411b.texdoc"
 
 *4.11d
-gen educiq=educ*(iq-100)
-egen meankww=mean(kww)
-gen educkww=educ*(kww-meankww)
-label variable educkww "educ*(kww-mean(kww))"
-label variable educiq "educ*(iq-100)"
+texdoc do ".\HW2\411d.texdoc"
 est clear
 eststo: reg lwage exper tenure married south urban black educ iq kww educiq educkww
 esttab using ".\HW2\reg411d.tex", replace ///
  b(3) se(3) nomtitle label star(* 0.10 ** 0.05 *** 0.01) ///
  booktabs ///
- title("Regression result for Problem 4.11.a. \label{reg1}")   ///
+ title("Regression result for Problem 4.11.d. \label{reg2}")   ///
  addnotes("Data: NLS80.DTA" "Wooldridge (2011)")
-texdoc do ".\HW2\411d.texdoc"

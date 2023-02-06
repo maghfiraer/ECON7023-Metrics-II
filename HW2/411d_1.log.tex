@@ -1,3 +1,13 @@
+. gen educiq=educ*(iq-100)
+{\smallskip}
+. egen meankww=mean(kww)
+{\smallskip}
+. gen educkww=educ*(kww-meankww)
+{\smallskip}
+. label variable educkww "educ*(kww-mean(kww))"
+{\smallskip}
+. label variable educiq "educ*(iq-100)"
+{\smallskip}
 . quietly reg lwage exper tenure married south urban black educ iq kww educiq ed
 > uckww
 {\smallskip}
