@@ -1,6 +1,7 @@
 texdoc init ".\HW2\411a.tex", replace
 
-texdoc stlog
+texdoc stlog, cmdlog
 reg lwage exper tenure married south urban black educ iq kww
 reg lwage exper tenure married south urban black educ iq
+reg lwage exper tenure married south urban black educ
 texdoc stlog close
