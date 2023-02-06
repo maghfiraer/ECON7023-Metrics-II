@@ -1,0 +1,44 @@
+. gen educiq=educ*(iq-100)
+{\smallskip}
+. egen meankww=mean(kww)
+{\smallskip}
+. gen educkww=educ*(kww-meankww)
+{\smallskip}
+. label variable educkww "educ*(kww-mean(kww))"
+{\smallskip}
+. label variable educiq "educ*(iq-100)"
+{\smallskip}
+. reg lwage exper tenure married south urban black educ iq kww educiq educkww
+{\smallskip}
+      Source {\VBAR}       SS           df       MS      Number of obs   =       935
+\HLI{13}{\PLUS}\HLI{34}   F(11, 923)      =     31.48
+       Model {\VBAR}  45.1916885        11  4.10833532   Prob > F        =    0.0000
+    Residual {\VBAR}  120.464595       923  .130514187   R-squared       =    0.2728
+\HLI{13}{\PLUS}\HLI{34}   Adj R-squared   =    0.2641
+       Total {\VBAR}  165.656283       934  .177362188   Root MSE        =    .36127
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+       lwage {\VBAR} Coefficient  Std. err.      t    P>|t|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+       exper {\VBAR}   .0121544   .0032358     3.76   0.000      .005804    .0185047
+      tenure {\VBAR}   .0107206   .0024383     4.40   0.000     .0059353     .015506
+     married {\VBAR}   .1978269   .0388272     5.10   0.000     .1216271    .2740267
+       south {\VBAR}  -.0807609   .0261374    -3.09   0.002    -.1320565   -.0294652
+       urban {\VBAR}    .178431    .026871     6.64   0.000     .1256957    .2311664
+       black {\VBAR}  -.1381481   .0399615    -3.46   0.001    -.2165741   -.0597221
+        educ {\VBAR}    .045241   .0076469     5.92   0.000     .0302338    .0602483
+          iq {\VBAR}   .0048228   .0057333     0.84   0.400     -.006429    .0160745
+         kww {\VBAR}  -.0248007   .0107382    -2.31   0.021    -.0458749   -.0037266
+      educiq {\VBAR}  -.0001138   .0004228    -0.27   0.788    -.0009436    .0007161
+     educkww {\VBAR}    .002161   .0007957     2.72   0.007     .0005994    .0037227
+       _cons {\VBAR}   6.080005   .5610875    10.84   0.000     4.978849     7.18116
+\HLI{13}{\BOTT}\HLI{64}
+{\smallskip}
+. test educiq educkww
+{\smallskip}
+ ( 1)  educiq = 0
+ ( 2)  educkww = 0
+{\smallskip}
+       F(  2,   923) =    4.19
+            Prob > F =    0.0154
+{\smallskip}

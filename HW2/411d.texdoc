@@ -1,0 +1,11 @@
+texdoc init ".\HW2\411d.tex", replace
+
+texdoc stlog
+gen educiq=educ*(iq-100)
+egen meankww=mean(kww)
+gen educkww=educ*(kww-meankww)
+label variable educkww "educ*(kww-mean(kww))"
+label variable educiq "educ*(iq-100)"
+reg lwage exper tenure married south urban black educ iq kww educiq educkww
+test educiq educkww
+texdoc stlog close

@@ -23,3 +23,6 @@ esttab using ".\HW2\reg411a.tex", replace ///
 
 *4.11b
 texdoc do ".\HW2\411b.texdoc"
+
+*4.11d
+texdoc do ".\HW2\411d.texdoc"
