@@ -1,6 +1,7 @@
 texdoc init ".\HW2\411a.tex", replace
 
 /*** 
+\documentclass[10pt]{article}
 \usepackage{stata}
 \begin{document}
 
