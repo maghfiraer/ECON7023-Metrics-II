@@ -1,0 +1,17 @@
+texdoc init ".\HW2\411a.tex", replace
+
+/*** 
+\usepackage{stata}
+\begin{document}
+
+Comparing the two regression output
+***/
+
+texdoc stlog
+reg lwage exper tenure married south urban black educ iq kww
+reg lwage exper tenure married south urban black educ iq
+texdoc stlog close
+
+/***
+\end{document}
+***/

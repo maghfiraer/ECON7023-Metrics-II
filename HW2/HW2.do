@@ -8,7 +8,7 @@ Name	: Maghfira Ramadhani
 cd "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II"
 use ".\data\nls80.dta"
 
-texdoc do ".\HW2\411a.do"
+texdoc do ".\HW2\411a.texdoc"
 
 est clear
 eststo: reg lwage exper tenure married south urban black educ iq kww
