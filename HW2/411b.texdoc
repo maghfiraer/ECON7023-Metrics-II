@@ -1,0 +1,6 @@
+texdoc init ".\HW2\411b.tex", replace
+
+texdoc stlog
+quietly reg lwage exper tenure married south urban black educ iq kww
+test kww iq
+texdoc stlog close
