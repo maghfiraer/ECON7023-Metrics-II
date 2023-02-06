@@ -44,6 +44,14 @@ Below are the regression output as in Example 4.3 by using \textit{KWW} and \tex
 \input{HW2/reg411a.tex}
 \item[b.] Test \textit{KWW} and \textit{IQ} for joint significance in the estimated equation from part a.
 \\ Answer:\\
+We can use the $F$-test for joint significance of both variable with the following hypothesis,
+\begin{align*}
+    &\text{H}_0:\ \beta_{KWW}=\beta_{IQ}=0\\
+    &\text{H}_1:\ \text{at least one of }\beta_{KWW}\text{ or }\beta_{IQ} \text{ is not zero}
+\end{align*}
+Below are the output for testing joint significance of $KWW$ and $IQ$, the $P$-value is smaller than either $0.1, 0.05$ or $0.01$. Thus we can reject the null hypothesis. And we can conclude that there is enough certainty to say that \textit{KWW} and \textit{IQ} are jointly significant.
+\\
+\input{HW2/411b.tex}
 
 \item[c.] When \textit{KWW} and \textit{IQ} are used as proxies for \textit{abil}, does the wage differential between nonblacks and blacks dissapear? What is the estimated differential?
 \\ Answer:\\
