@@ -1,0 +1,42 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Regression result for Problem 4.14.a., 4.14.c, 4.14.e, and 4.14.f}
+\begin{tabular}{l*{4}{c}}
+\toprule
+                    &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         \\
+\midrule
+percent classes attended&       0.008\sym{***}&       0.005\sym{**} &       0.006\sym{***}&       0.006         \\
+                    &     (0.002)         &     (0.002)         &     (0.002)         &     (0.011)         \\
+\addlinespace
+=1 if freshman      &      -0.290\sym{**} &      -0.049         &      -0.105         &      -0.105         \\
+                    &     (0.116)         &     (0.108)         &     (0.107)         &     (0.107)         \\
+\addlinespace
+=1 if sophomore     &      -0.118         &      -0.160\sym{*}  &      -0.181\sym{**} &      -0.181\sym{**} \\
+                    &     (0.099)         &     (0.090)         &     (0.089)         &     (0.089)         \\
+\addlinespace
+cumulative GPA prior to term&                     &       0.427\sym{***}&      -1.526\sym{***}&      -1.525\sym{***}\\
+                    &                     &     (0.082)         &     (0.474)         &     (0.476)         \\
+\addlinespace
+ACT score           &                     &       0.084\sym{***}&      -0.112         &      -0.112         \\
+                    &                     &     (0.011)         &     (0.098)         &     (0.098)         \\
+\addlinespace
+priGPA^2            &                     &                     &       0.368\sym{***}&       0.368\sym{***}\\
+                    &                     &                     &     (0.089)         &     (0.089)         \\
+\addlinespace
+ACT^2               &                     &                     &       0.004\sym{*}  &       0.004\sym{*}  \\
+                    &                     &                     &     (0.002)         &     (0.002)         \\
+\addlinespace
+atndrte^2           &                     &                     &                     &       0.000         \\
+                    &                     &                     &                     &     (0.000)         \\
+\addlinespace
+Constant            &      -0.502\sym{**} &      -3.297\sym{***}&       1.385         &       1.394         \\
+                    &     (0.196)         &     (0.309)         &     (1.239)         &     (1.267)         \\
+\midrule
+Observations        &         680         &         680         &         680         &         680         \\
+\bottomrule
+\multicolumn{5}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{5}{l}{\footnotesize Data: ATTEND.DTA}\\
+\multicolumn{5}{l}{\footnotesize Wooldridge (2011)}\\
+\multicolumn{5}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{tabular}
+\end{table}
