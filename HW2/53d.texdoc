@@ -1,4 +1,4 @@
-texdoc init ".\HW2\53c.tex", replace
+texdoc init ".\HW2\53d.tex", replace
 
 texdoc stlog
 /***

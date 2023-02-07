@@ -1,22 +1,48 @@
 . /***
-> Reduce form Regression for $packs$\\\\
+> OLS Regression\\\\
 > ***/
-. reg packs male parity lfaminc cigprice
+. reg lbwght male parity lfaminc packs
 {\smallskip}
       Source {\VBAR}       SS           df       MS      Number of obs   =     1,388
-\HLI{13}{\PLUS}\HLI{34}   F(4, 1383)      =     10.86
-       Model {\VBAR}  3.76705108         4   .94176277   Prob > F        =    0.0000
-    Residual {\VBAR}  119.929078     1,383  .086716615   R-squared       =    0.0305
-\HLI{13}{\PLUS}\HLI{34}   Adj R-squared   =    0.0276
-       Total {\VBAR}  123.696129     1,387  .089182501   Root MSE        =    .29448
+\HLI{13}{\PLUS}\HLI{34}   F(4, 1383)      =     12.55
+       Model {\VBAR}  1.76664363         4  .441660908   Prob > F        =    0.0000
+    Residual {\VBAR}    48.65369     1,383  .035179819   R-squared       =    0.0350
+\HLI{13}{\PLUS}\HLI{34}   Adj R-squared   =    0.0322
+       Total {\VBAR}  50.4203336     1,387  .036352079   Root MSE        =    .18756
 {\smallskip}
 \HLI{13}{\TOPT}\HLI{64}
-       packs {\VBAR} Coefficient  Std. err.      t    P>|t|     [95\% conf. interval]
+      lbwght {\VBAR} Coefficient  Std. err.      t    P>|t|     [95\% conf. interval]
 \HLI{13}{\PLUS}\HLI{64}
-        male {\VBAR}  -.0047261   .0158539    -0.30   0.766    -.0358264    .0263742
-      parity {\VBAR}   .0181491   .0088802     2.04   0.041     .0007291    .0355692
-     lfaminc {\VBAR}  -.0526374   .0086991    -6.05   0.000    -.0697023   -.0355724
-    cigprice {\VBAR}    .000777   .0007763     1.00   0.317    -.0007459    .0022999
-       _cons {\VBAR}   .1374075   .1040005     1.32   0.187    -.0666084    .3414234
+        male {\VBAR}   .0262407   .0100894     2.60   0.009     .0064486    .0460328
+      parity {\VBAR}   .0147292   .0056646     2.60   0.009     .0036171    .0258414
+     lfaminc {\VBAR}   .0180498   .0055837     3.23   0.001     .0070964    .0290032
+       packs {\VBAR}  -.0837281   .0171209    -4.89   0.000    -.1173139   -.0501423
+       _cons {\VBAR}   4.675618   .0218813   213.68   0.000     4.632694    4.718542
 \HLI{13}{\BOTT}\HLI{64}
+{\smallskip}
+. /***
+> 2SLS Regression using $cigprice$ as instrument for $packs$
+> ***/
+. ivreg lbwght male parity lfaminc (packs = cigprice)
+{\smallskip}
+Instrumental variables 2SLS regression
+{\smallskip}
+      Source {\VBAR}       SS           df       MS      Number of obs   =     1,388
+\HLI{13}{\PLUS}\HLI{34}   F(4, 1383)      =      2.39
+       Model {\VBAR}  -91.350027         4 -22.8375067   Prob > F        =    0.0490
+    Residual {\VBAR}  141.770361     1,383  .102509299   R-squared       =         .
+\HLI{13}{\PLUS}\HLI{34}   Adj R-squared   =         .
+       Total {\VBAR}  50.4203336     1,387  .036352079   Root MSE        =    .32017
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+      lbwght {\VBAR} Coefficient  Std. err.      t    P>|t|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+       packs {\VBAR}   .7971063   1.086275     0.73   0.463    -1.333819    2.928031
+        male {\VBAR}   .0298205    .017779     1.68   0.094    -.0050562    .0646972
+      parity {\VBAR}  -.0012391   .0219322    -0.06   0.955     -.044263    .0417848
+     lfaminc {\VBAR}    .063646   .0570128     1.12   0.264    -.0481949    .1754869
+       _cons {\VBAR}   4.467861   .2588289    17.26   0.000     3.960122    4.975601
+\HLI{13}{\BOTT}\HLI{64}
+Instrumented: packs
+ Instruments: male parity lfaminc cigprice
 {\smallskip}

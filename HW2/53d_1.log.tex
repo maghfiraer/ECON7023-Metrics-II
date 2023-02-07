@@ -1,0 +1,22 @@
+. /***
+> Reduce form Regression for $packs$\\\\
+> ***/
+. reg packs male parity lfaminc cigprice
+{\smallskip}
+      Source {\VBAR}       SS           df       MS      Number of obs   =     1,388
+\HLI{13}{\PLUS}\HLI{34}   F(4, 1383)      =     10.86
+       Model {\VBAR}  3.76705108         4   .94176277   Prob > F        =    0.0000
+    Residual {\VBAR}  119.929078     1,383  .086716615   R-squared       =    0.0305
+\HLI{13}{\PLUS}\HLI{34}   Adj R-squared   =    0.0276
+       Total {\VBAR}  123.696129     1,387  .089182501   Root MSE        =    .29448
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+       packs {\VBAR} Coefficient  Std. err.      t    P>|t|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+        male {\VBAR}  -.0047261   .0158539    -0.30   0.766    -.0358264    .0263742
+      parity {\VBAR}   .0181491   .0088802     2.04   0.041     .0007291    .0355692
+     lfaminc {\VBAR}  -.0526374   .0086991    -6.05   0.000    -.0697023   -.0355724
+    cigprice {\VBAR}    .000777   .0007763     1.00   0.317    -.0007459    .0022999
+       _cons {\VBAR}   .1374075   .1040005     1.32   0.187    -.0666084    .3414234
+\HLI{13}{\BOTT}\HLI{64}
+{\smallskip}
