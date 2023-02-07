@@ -83,6 +83,13 @@ esttab using ".\HW2\reg414acef.tex", replace ///
  booktabs ///
  title("Regression result for Problem 4.14.a., 4.14.c, 4.14.e, and 4.14.f")   ///
  addnotes("Data: ATTEND.DTA" "Wooldridge (2011)")
-
  
- clear
+clear
+
+*Problem 5.3
+*5.3c
+use ".\data\bwght.dta"
+texdoc do  ".\HW2\53c.texdoc"
+
+*5.3d
+texdoc do  ".\HW2\53d.texdoc"

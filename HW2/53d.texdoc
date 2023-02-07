@@ -1,0 +1,8 @@
+texdoc init ".\HW2\53c.tex", replace
+
+texdoc stlog
+/***
+Reduce form Regression for $packs$\\
+***/
+reg packs male parity lfaminc cigprice
+texdoc stlog close
