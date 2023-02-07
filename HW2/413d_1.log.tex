@@ -1,0 +1,18 @@
+. quietly reg lcrmrte lprbarr lprbconv lprbpris lavgsen lcrmrte1 lwcon-lwloc if d87, 
+> robust
+{\smallskip}
+. testparm lwcon-lwloc
+{\smallskip}
+ ( 1)  lwcon = 0
+ ( 2)  lwtuc = 0
+ ( 3)  lwtrd = 0
+ ( 4)  lwfir = 0
+ ( 5)  lwser = 0
+ ( 6)  lwmfg = 0
+ ( 7)  lwfed = 0
+ ( 8)  lwsta = 0
+ ( 9)  lwloc = 0
+{\smallskip}
+       F(  9,    75) =    2.19
+            Prob > F =    0.0319
+{\smallskip}
