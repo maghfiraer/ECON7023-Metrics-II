@@ -4,10 +4,12 @@ Course	: ECON 7023, Spring 2023
 Name	: Maghfira Ramadhani
 */
 
-*Problem 4.11
+
+clear
 cd "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II"
 use ".\data\nls80.dta"
 
+*Problem 4.11
 *4.11a
 texdoc do ".\HW2\411a.texdoc"
 
