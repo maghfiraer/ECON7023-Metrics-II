@@ -39,7 +39,7 @@ February 9, 2022}
 \begin{enumerate}
 \item[a.] In Example 4.3, use \textit{KWW} and \textit{IQ} simultaneously as proxies for ability in equation (4.29). Compare the estimated return to education without a proxy for ability and with \textit{IQ} as the only proxy for ability.
 \\ Answer: \\
-Below are the estimates for return to education with and without proxies for ability.
+Table 1 show the estimates for return to education with and without proxies for ability.
 \input{HW2/reg411a.tex}\\
 The following code is used to run the regression.
 \input{HW2/411a.tex}
@@ -61,7 +61,14 @@ Below are the output for testing joint significance of $KWW$ and $IQ$, the $P$-v
 
 \item[d.] Add the interaction $educ(IQ-100)$ and $educ(KWW-\overline{KWW})$ to the regression from part a, where $\overline{KWW}$ is the average score in the sample. Are these terms jointly significant using a standard \textit{F} test? Does adding them affect any important conclusions?
 \\ Answer:\\
+\input{HW2/reg411d.tex}
 \input{HW2/411d.tex}
+We can use the $F$-test for joint significance of the interaction variables with the following hypothesis,
+\begin{align*}
+    &\text{H}_0:\ \beta_{educ(KWW-\overline{KWW})}=\beta_{educ(IQ-100)}=0\\
+    &\text{H}_1:\ \text{at least one of }\beta_{educ(KWW-\overline{KWW})}\text{ or }\beta_{educ(IQ-100)} \text{ is not zero}
+\end{align*}
+From the $F$-test, the $P$-value is smaller than $0.1$ and $0.05$. Thus we can reject the null hypothesis. And we can conclude that there is enough certainty to say that $educ(IQ-100)$ and $educ(KWW-\overline{KWW})$ are jointly significant.
 \end{enumerate}
 
 
