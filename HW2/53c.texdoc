@@ -1,12 +1,15 @@
 texdoc init ".\HW2\53c.tex", replace
 
-texdoc stlog
+
 /***
 OLS Regression\\
 ***/
+texdoc stlog
 reg lbwght male parity lfaminc packs
+texdoc stlog close
 /***
 2SLS Regression using $cigprice$ as instrument for $packs$
 ***/
+texdoc stlog
 ivreg lbwght male parity lfaminc (packs = cigprice)
 texdoc stlog close
