@@ -89,7 +89,7 @@ texdoc do ".\HW2\414e.texdoc"
 est clear
 estpost correlate atndrte atndrtesq, matrix listwise
 esttab using ".\HW2\414f.tex", replace ///
- unstack not noobs compress b(2) label star(* 0.10 ** 0.05 *** 0.01) ///
+ unstack not noobs compress b(3) nomtitle label star(* 0.10 ** 0.05 *** 0.01) ///
  booktabs ///
  title("Correlation coefficient for Problem 4.14.f")   ///
  addnotes("Data: ATTEND.DTA" "Wooldridge (2011)")
