@@ -43,7 +43,7 @@ Table 1 show the estimates for return to education with and without proxies for 
 \input{HW2/reg411a.tex}\\
 The following code is used to run the regression.
 \input{HW2/411a.tex}
-The regression estimates by using $KWW$ and $IQ$ as proxies is shown in (1) with the estimated return to education of about 5\%. From (2), When only $IQ$ is used as proxy the estimated return is approximately 5.4\%. The case when no proxy is used the return to education estimates is about 6.5\% as shown in (3). OVerall, we have lower estimates when more proxy is used and the inference is still statistically significant.
+The regression estimates by using $KWW$ and $IQ$ as proxies is shown in model (1) with the estimated return to education of about 5\%. From model (2), When only $IQ$ is used as proxy the estimated return is approximately 5.4\%. The case when no proxy is used the return to education estimates is about 6.5\% as shown in model (3). OVerall, we have lower estimates when more proxy is used and the inference is still statistically significant.
 
 \item[b.] Test \textit{KWW} and \textit{IQ} for joint significance in the estimated equation from part a.
 \\ Answer:\\
@@ -68,7 +68,7 @@ We can use the $F$-test for joint significance of the interaction variables with
 \end{align*}
 \input{HW2/411d.tex}
 From the $F$-test, the $P$-value is around $0.015$, which indicates significant level of 1.5\%. Thus we can reject the null hypothesis. And we can conclude that there is enough certainty to say that $educ(IQ-100)$ and $educ(KWW-\overline{KWW})$ are jointly significant.\\
-Table 2 show the estimates for return to education by adding interaction terms interaction $educ(IQ-100)$ and $educ(KWW-\overline{KWW})$. The return to education is even smaller know compared to estimates in Table 1 from part a, about 4.5\%. Regarding the effect of $KWW$, as it increases above its mean, the return of education will be larger. If the $KWW$ is one point above the mean, the return to education will be 4.5\%+0.02\% or about 4.52\%. This evidence show that the effect of knowledge of world work score to the return of education is positive, consistent with common intuition or at least my instuition.
+Model (1) in Table 2 show the estimates for return to education by adding interaction terms interaction $educ(IQ-100)$ and $educ(KWW-\overline{KWW})$. The return to education is even smaller know compared to estimates in Table 1 from part a, about 4.5\%. Regarding the effect of $KWW$, as it increases above its mean, the return of education will be larger. If the $KWW$ is one point above the mean, the return to education will be 4.5\%+0.02\% or about 4.52\%. This evidence show that the effect of knowledge of world work score to the return of education is positive, consistent with common intuition or at least my instuition.
 \input{HW2/reg411d.tex}
 \end{enumerate}
 
@@ -80,11 +80,11 @@ Use the data in CORNWELL.RAW (from Cornwell and Trumball, 1994) to estimate a mo
 \\ Answer:\\
 Table 3 show the estimate a constant elasticities model (log-log model) of crime rate. 
 \input{HW2/reg413ab.tex}\\
-We might expect that crime rate will decrease as the probability of arrest and probability of conviction increase. As shown in (1) the elasticities of crime or coefficient on probability of arrest and probability of conviction have negative sign as expected and are statistically significant. The elasticities of crime on probability of serving prison term and average sentence length showing positive sign but statistically not significant.
+We might expect that crime rate will decrease as the probability of arrest and probability of conviction increase. As shown in model (1), the elasticities of crime or coefficient on probability of arrest and probability of conviction have negative sign as expected and are statistically significant. The elasticities of crime on probability of serving prison term and average sentence length showing positive sign but statistically not significant.
 
 \item[b.] Add $\log(crmrte)$ for 1986 as an additional explanatory variable, and comment on how the estimated elasticities differ from part a.
 \\ Answer:\\
-As shown in estimate in (2) in Table 3, by adding $\log(crmrte)$ for 1986 as an additional explanatory variable there are some change in the elasticities. First, the elasticity of crime rate on probability of arrest decrease significantly and still statistically significant. Second, the elasticity of crime rate with respect to probability of conviction also decrease significantly and become statistically insignificant. The elasticities on probability of serving prison term and on average sentence length remain insignificant and both change sign, with the latter become statistically significant at 10\% level. The elasticities on the lagged crime rate is comparably large and statistically significant.
+As shown in estimate of model (2) in Table 3, by adding $\log(crmrte)$ for 1986 as an additional explanatory variable there are some change in the elasticities. First, the elasticity of crime rate on probability of arrest decrease significantly and still statistically significant. Second, the elasticity of crime rate with respect to probability of conviction also decrease significantly and become statistically insignificant. The elasticities on probability of serving prison term and on average sentence length remain insignificant and both change sign, with the latter become statistically significant at 10\% level. The elasticities on the lagged crime rate is comparably large and statistically significant.
 
 \item[c.] Compute the $F$ statistic for joint significance of all of the wage variables (again in logs), using the restricted model from part b.
 \\ Answer:\\
@@ -104,7 +104,7 @@ Analogous to c, we use the $F$-test for joint significance of all of the wage va
     &\text{H}_1:\ \text{at least one of }\beta_{lwcon}\text{ or }\ldots\text{ or }\beta_{lwloc} \text{ is not zero}
 \end{align*}
 \input{HW2/413d.tex}
-Since the $P$-value is less than 0.1 we reject the null hypothesis. Now the $F$-test show that we have all of the wage variables jointly significant.
+Since the $P$-value is less than 0.1, we will reject the null hypothesis. Now the $F$-test show that we have all of the wage variables jointly significant. Looking at individual significance, the only statistically significant elasticity is on variable $lwcon$ with negative sign.
 \end{enumerate}
 
 \subsection*{Problem 4.14}
@@ -112,18 +112,28 @@ Use the data in ATTEND.RAW to answer this question
 \begin{enumerate}
 \item[a.] To determine the effects of attending lecture on final exam performance, estimate a model relating $stndfnl$ (the standardized final exam score) to $atndrte$ (the percent of lectures attended). Include the binary variables $frosh$ and $soph$ as explanatory variables. Interpret the coefficient on $atndrte$, and discuss its significance.
 \\ Answer:\\
-\input{HW2/reg414acef.tex}
+Model (1) in Table 4 shows estimate of a model relating standardized final exam score to the percent of lectures attended and include the binary variables $frosh$ and $soph$. The coefficient of the percent of lectures attended is significant at 5\% level. Note that final exam score is standardized so, the interpretation is if the attendance rate increase by 10\% the standardized test score will increase by around $10\times0.008$ or 0.08 standard deviation.
 \item[b.] How confident are you that the OLS estimates from part a are estimating the causal effect of attendance? Explain.
 \\ Answer:\\
+It looks like the data is not from a random experiment, which indicate that there is likely to be a selection bias. It may also be possible that the student with higher exam grade or better students is the one who attend the class regularly, not because they attend the class regularly so that they get a good grade. There is also other variable that may be omitted but affect attendance rate for example the distance of the class room from the place where student lives on campus. Thus, controlling for only year in college by adding $frosh$ and $soph$ dummy may not solve the endogeneity problem. 
 
 \item[c.] As proxy variables for student ability, add to the regression $priGPA$ (prior cumulative GPA) and $ACT$ (achievement test score). Now what is the effect of $atndrte$? Discuss how the effect differs from that in part a.
 \\ Answer:\\
+Model (2) in Table 4 shows the estimate. Now the effect of attendance rate decrease compared to the result from part a. The effect is still statistically significant but at 5\% level which is weaker than the 1\% level in part a. The effect of $priGPA$ (prior cumulative GPA) and $ACT$ (achievement test score) is positive on the standardized exam score and both very significant.
+\input{HW2/reg414acef.tex}
 
 \item[d.] What happens to the significance of the dummy variables in part c as compared with part a? Explain.
 \\ Answer:\\
+The significance of the dummy variable changes after controlling for $priGPA$ (prior cumulative GPA) and $ACT$ (achievement test score). The coefficient of $soph$, which indicate the effect of being in sophomore relative to being in year three or above, still have same sign with decreased magnitude, and become statistically significant at 10\% level. The coefficient of $frosh$, which indicate the effect of being in freshmen relative to being in year three or above, still have same sign with significantly lower magnitude, and become statistically insignificant. We can say that adding the two new dummy eliminate the effect of being a freshman.
 
 \item[e.] Add the squares of $priGPA$ and $ACT$ to the equation. What happens to the coefficient $atndrte$? Are the quadratics jointly significant?
 \\ Answer:\\
+Model (3) in Table 4 show the estimate after adding the squares of $priGPA$ and $ACT$. The coefficient on the square of $priGPA$ is very significant, while the coefficient on the square of $ACT$ is significant only at 10\% level. The effect on the attendance rate after adding the two variables now increases compared to model (2) and become more statistically significant. However, note that the effect on $ACT$ now become insignificant and changes sign compared to model (2). 
+We can also test using $F$-test by using the following hypothesis.
+\begin{align*}
+    &\text{H}_0:\ \beta_{priGPAsq}=\beta_{ACT}=0\\
+    &\text{H}_1:\ \text{at least one of }\beta_{lwcon}\text{ or }\ldots\text{ or }\beta_{lwloc} \text{ is not zero}
+\end{align*}
 
 \item[f.] To test for a nonlinear effect of $atndrte$, add its square to the equation from part e. What do you conclude? 
 \\ Answer:\\
