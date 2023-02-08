@@ -1,5 +1,31 @@
-. quietly reg lcrmrte lprbarr lprbconv lprbpris lavgsen lcrmrte1 lwcon-lwloc if d87, 
-> robust
+. reg lcrmrte lprbarr lprbconv lprbpris lavgsen lcrmrte1 lwcon-lwloc if d87, robust
+{\smallskip}
+Linear regression                               Number of obs     =         90
+                                                F(14, 75)         =     110.75
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.8911
+                                                Root MSE          =     .19731
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+             {\VBAR}               Robust
+     lcrmrte {\VBAR} Coefficient  std. err.      t    P>|t|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+     lprbarr {\VBAR}  -.1725122   .0831236    -2.08   0.041    -.3381028   -.0069215
+    lprbconv {\VBAR}  -.0683639   .0874696    -0.78   0.437    -.2426123    .1058844
+    lprbpris {\VBAR}  -.2155553   .0895319    -2.41   0.019    -.3939121   -.0371986
+     lavgsen {\VBAR}  -.1960546   .0976231    -2.01   0.048    -.3905298   -.0015794
+    lcrmrte1 {\VBAR}   .7453414   .1594535     4.67   0.000     .4276937    1.062989
+       lwcon {\VBAR}  -.2850008   .1276141    -2.23   0.029    -.5392212   -.0307805
+       lwtuc {\VBAR}   .0641312   .1108165     0.58   0.565    -.1566265     .284889
+       lwtrd {\VBAR}    .253707   .1712913     1.48   0.143    -.0875227    .5949368
+       lwfir {\VBAR}  -.0835258   .1477461    -0.57   0.574     -.377851    .2107995
+       lwser {\VBAR}   .1127542   .0715635     1.58   0.119    -.0298077     .255316
+       lwmfg {\VBAR}   .0987371   .1083497     0.91   0.365    -.1171065    .3145807
+       lwfed {\VBAR}   .3361278   .4416827     0.76   0.449    -.5437491    1.216005
+       lwsta {\VBAR}   .0395089   .1829791     0.22   0.830    -.3250042     .404022
+       lwloc {\VBAR}  -.0369855   .2825442    -0.13   0.896    -.5998425    .5258714
+       _cons {\VBAR}  -3.792525   3.383901    -1.12   0.266     -10.5336    2.948552
+\HLI{13}{\BOTT}\HLI{64}
 {\smallskip}
 . testparm lwcon-lwloc
 {\smallskip}

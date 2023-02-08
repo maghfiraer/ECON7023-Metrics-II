@@ -1,4 +1,31 @@
-. quietly reg lcrmrte lprbarr lprbconv lprbpris lavgsen lcrmrte1 lwcon-lwloc if d87
+. reg lcrmrte lprbarr lprbconv lprbpris lavgsen lcrmrte1 lwcon-lwloc if d87
+{\smallskip}
+      Source {\VBAR}       SS           df       MS      Number of obs   =        90
+\HLI{13}{\PLUS}\HLI{34}   F(14, 75)       =     43.81
+       Model {\VBAR}  23.8798774        14  1.70570553   Prob > F        =    0.0000
+    Residual {\VBAR}  2.91982063        75  .038930942   R-squared       =    0.8911
+\HLI{13}{\PLUS}\HLI{34}   Adj R-squared   =    0.8707
+       Total {\VBAR}   26.799698        89  .301120202   Root MSE        =    .19731
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+     lcrmrte {\VBAR} Coefficient  Std. err.      t    P>|t|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+     lprbarr {\VBAR}  -.1725122   .0659533    -2.62   0.011    -.3038978   -.0411265
+    lprbconv {\VBAR}  -.0683639    .049728    -1.37   0.173    -.1674273    .0306994
+    lprbpris {\VBAR}  -.2155553   .1024014    -2.11   0.039    -.4195493   -.0115614
+     lavgsen {\VBAR}  -.1960546   .0844647    -2.32   0.023     -.364317   -.0277923
+    lcrmrte1 {\VBAR}   .7453414   .0530331    14.05   0.000     .6396942    .8509887
+       lwcon {\VBAR}  -.2850008   .1775178    -1.61   0.113    -.6386344    .0686327
+       lwtuc {\VBAR}   .0641312    .134327     0.48   0.634    -.2034619    .3317244
+       lwtrd {\VBAR}    .253707   .2317449     1.09   0.277    -.2079525    .7153665
+       lwfir {\VBAR}  -.0835258   .1964974    -0.43   0.672    -.4749687    .3079171
+       lwser {\VBAR}   .1127542   .0847427     1.33   0.187    -.0560619    .2815703
+       lwmfg {\VBAR}   .0987371   .1186099     0.83   0.408    -.1375459    .3350201
+       lwfed {\VBAR}   .3361278   .2453134     1.37   0.175    -.1525615    .8248172
+       lwsta {\VBAR}   .0395089   .2072112     0.19   0.849    -.3732769    .4522947
+       lwloc {\VBAR}  -.0369855   .3291546    -0.11   0.911    -.6926951    .6187241
+       _cons {\VBAR}  -3.792525   1.957472    -1.94   0.056    -7.692009    .1069593
+\HLI{13}{\BOTT}\HLI{64}
 {\smallskip}
 . testparm lwcon-lwloc
 {\smallskip}

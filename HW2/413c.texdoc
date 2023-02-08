@@ -1,6 +1,6 @@
 texdoc init ".\HW2\413c.tex", replace
 
 texdoc stlog
-quietly reg lcrmrte lprbarr lprbconv lprbpris lavgsen lcrmrte1 lwcon-lwloc if d87
+reg lcrmrte lprbarr lprbconv lprbpris lavgsen lcrmrte1 lwcon-lwloc if d87
 testparm lwcon-lwloc
 texdoc stlog close
