@@ -85,6 +85,14 @@ esttab using ".\HW2\reg414acef.tex", replace ///
  addnotes("Data: ATTEND.DTA" "Wooldridge (2011)")
 
 texdoc do ".\HW2\414e.texdoc"
+
+est clear
+estpost correlate atndrte atndrtesq, matrix listwise
+esttab using ".\HW2\414f.tex", replace ///
+ unstack not noobs compress b(2) label ///
+ booktabs ///
+ title("Regression result for Problem 4.14.a., 4.14.c, 4.14.e, and 4.14.f")   ///
+ addnotes("Data: ATTEND.DTA" "Wooldridge (2011)")
 clear
 
 *Problem 5.3
