@@ -1,0 +1,6 @@
+texdoc init ".\HW2\414e.tex", replace
+
+texdoc stlog
+quietly reg stndfnl atndrte frosh soph priGPA ACT priGPAsq ACTsq
+test priGPAsq ACTsq
+texdoc stlog close
