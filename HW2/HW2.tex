@@ -43,7 +43,7 @@ Table 1 show the estimates for return to education with and without proxies for 
 \input{HW2/reg411a.tex}\\
 The following code is used to run the regression.
 \input{HW2/411a.tex}
-The regression 
+The regression estimates by using $KWW$ and $IQ$ as proxies is shown in (1) with the estimated return to education of about 5\%. From (2), When only $IQ$ is used as proxy the estimated return is approximately 5.4\%. The case when no proxy is used the return to education estimates is about 6.5\% as shown in (3). OVerall, we have lower estimates when more proxy is used and the inference is still statistically significant.
 
 \item[b.] Test \textit{KWW} and \textit{IQ} for joint significance in the estimated equation from part a.
 \\ Answer:\\
@@ -53,22 +53,23 @@ We can use the $F$-test for joint significance of both variable with the followi
     &\text{H}_1:\ \text{at least one of }\beta_{KWW}\text{ or }\beta_{IQ} \text{ is not zero}
 \end{align*}
 Below are the output for testing joint significance of $KWW$ and $IQ$, the $P$-value is smaller than either $0.1, 0.05$ or $0.01$. Thus we can reject the null hypothesis. And we can conclude that there is enough certainty to say that \textit{KWW} and \textit{IQ} are jointly significant.
-\\
 \input{HW2/411b.tex}
 
 \item[c.] When \textit{KWW} and \textit{IQ} are used as proxies for \textit{abil}, does the wage differential between nonblacks and blacks dissapear? What is the estimated differential?
 \\ Answer:\\
+From estimates (1) in part a, the wage differential between nonblacks and blacks is still significant. Blacks are estimated to have about 13\% lower wage than non blacks holding other factors constant.
 
 \item[d.] Add the interaction $educ(IQ-100)$ and $educ(KWW-\overline{KWW})$ to the regression from part a, where $\overline{KWW}$ is the average score in the sample. Are these terms jointly significant using a standard \textit{F} test? Does adding them affect any important conclusions?
 \\ Answer:\\
-\input{HW2/reg411d.tex}
-\input{HW2/411d.tex}
 We can use the $F$-test for joint significance of the interaction variables with the following hypothesis,
 \begin{align*}
     &\text{H}_0:\ \beta_{educ(KWW-\overline{KWW})}=\beta_{educ(IQ-100)}=0\\
     &\text{H}_1:\ \text{at least one of }\beta_{educ(KWW-\overline{KWW})}\text{ or }\beta_{educ(IQ-100)} \text{ is not zero}
 \end{align*}
-From the $F$-test, the $P$-value is smaller than $0.1$ and $0.05$. Thus we can reject the null hypothesis. And we can conclude that there is enough certainty to say that $educ(IQ-100)$ and $educ(KWW-\overline{KWW})$ are jointly significant.
+\input{HW2/411d.tex}
+From the $F$-test, the $P$-value is around $0.015$, which indicates significant level of 1.5\%. Thus we can reject the null hypothesis. And we can conclude that there is enough certainty to say that $educ(IQ-100)$ and $educ(KWW-\overline{KWW})$ are jointly significant.\\
+Table 2 show the estimates for return to education by adding interaction terms interaction $educ(IQ-100)$ and $educ(KWW-\overline{KWW})$. The return to education is even smaller know compared to estimates in Table 1 from part a, about 4.5\%. Regarding the effect of $KWW$, as it increases above its mean, the return of education will be larger. If the $KWW$ is one point above the mean, the return to education will be 4.5\%+0.02\% or about 4.52\%. This evidence show that the effect of knowledge of world work score to the return of education is positive, consistent with common intuition or at least my instuition.
+\input{HW2/reg411d.tex}
 \end{enumerate}
 
 
@@ -77,19 +78,33 @@ Use the data in CORNWELL.RAW (from Cornwell and Trumball, 1994) to estimate a mo
 \begin{enumerate}
 \item[a.] Using logarithms of all variables, estimate a model relating the crime rate to the deterrent variables $prbarr, prbconv, prbpris$, and $avgsen.$
 \\ Answer:\\
-\input{HW2/reg413ab.tex}
+Table 3 show the estimate a constant elasticities model (log-log model) of crime rate. 
+\input{HW2/reg413ab.tex}\\
+We might expect that crime rate will decrease as the probability of arrest and probability of conviction increase. As shown in (1) the elasticities of crime or coefficient on probability of arrest and probability of conviction have negative sign as expected and are statistically significant. The elasticities of crime on probability of serving prison term and average sentence length showing positive sign but statistically not significant.
 
 \item[b.] Add $\log(crmrte)$ for 1986 as an additional explanatory variable, and comment on how the estimated elasticities differ from part a.
 \\ Answer:\\
-
+As shown in estimate in (2) in Table 3, by adding $\log(crmrte)$ for 1986 as an additional explanatory variable there are some change in the elasticities. First, the elasticity of crime rate on probability of arrest decrease significantly and still statistically significant. Second, the elasticity of crime rate with respect to probability of conviction also decrease significantly and become statistically insignificant. The elasticities on probability of serving prison term and on average sentence length remain insignificant and both change sign, with the latter become statistically significant at 10\% level. The elasticities on the lagged crime rate is comparably large and statistically significant.
 
 \item[c.] Compute the $F$ statistic for joint significance of all of the wage variables (again in logs), using the restricted model from part b.
 \\ Answer:\\
+We can use the $F$-test for joint significance of all of the wage variables with the following hypothesis, in this case we use assume homoskedasticity.
+\begin{align*}
+    &\text{H}_0:\ \beta_{lwcon}=\ldots=\beta_{lwloc}=0\\
+    &\text{H}_1:\ \text{at least one of }\beta_{lwcon}\text{ or }\ldots\text{ or }\beta_{lwloc} \text{ is not zero}
+\end{align*}
 \input{HW2/413c.tex}
+From the $F$-test we have that all of the wage variables are jointly insignificant since the $P$-value is more than 0.1. We might also interested in looking at individual elasticity and find out that the sign of the elasticity are not consistent. 
 
 \item[d.] Redo part c, but make the test robust to heteroskedasticity of unknown form.
 \\ Answer:\\
+Analogous to c, we use the $F$-test for joint significance of all of the wage variables with the following hypothesis, now we use assume heteroskedasticity and use robust standard error.
+\begin{align*}
+    &\text{H}_0:\ \beta_{lwcon}=\ldots=\beta_{lwloc}=0\\
+    &\text{H}_1:\ \text{at least one of }\beta_{lwcon}\text{ or }\ldots\text{ or }\beta_{lwloc} \text{ is not zero}
+\end{align*}
 \input{HW2/413d.tex}
+Since the $P$-value is less than 0.1 we reject the null hypothesis. Now the $F$-test show that we have all of the wage variables jointly significant.
 \end{enumerate}
 
 \subsection*{Problem 4.14}
