@@ -128,15 +128,18 @@ The significance of the dummy variable changes after controlling for $priGPA$ (p
 
 \item[e.] Add the squares of $priGPA$ and $ACT$ to the equation. What happens to the coefficient $atndrte$? Are the quadratics jointly significant?
 \\ Answer:\\
-Model (3) in Table 4 show the estimate after adding the squares of $priGPA$ and $ACT$. The coefficient on the square of $priGPA$ is very significant, while the coefficient on the square of $ACT$ is significant only at 10\% level. The effect on the attendance rate after adding the two variables now increases compared to model (2) and become more statistically significant. However, note that the effect on $ACT$ now become insignificant and changes sign compared to model (2). 
+Model (3) in Table 4 show the estimate after adding the squares of $priGPA$ and $ACT$. The coefficient on the square of $priGPA$ is very significant, while the coefficient on the square of $ACT$ is significant only at 10\% level. The effect on the attendance rate after adding the two variables now increases compared to model (2) and become more statistically significant. However, note that the effect on $ACT$ now become insignificant and changes sign compared to model (2).\\
 We can also test using $F$-test by using the following hypothesis.
 \begin{align*}
     &\text{H}_0:\ \beta_{priGPAsq}=\beta_{ACT}=0\\
     &\text{H}_1:\ \text{at least one of }\beta_{priGPAsq}\text{ or }\beta_{ACT} \text{ is not zero}
 \end{align*}
+\input{HW2/414e.tex}
+The $F$-test yield a near-zero $P$-value, so we will reject the null hypothesis. The result indicates that both variable are jointly significant.
 
 \item[f.] To test for a nonlinear effect of $atndrte$, add its square to the equation from part e. What do you conclude? 
 \\ Answer:\\
+Model (4) in Table 4 show that the coefficient on the square of the attendance rate is very insignificant. Also, note that the standard error of the coefficient of the attendance rate increase by over five fold become statistically not significant. This evidence suggest the attendance rate and its square might be highly correlated. Below is
 \end{enumerate}
 
 \subsection*{Problem 4.15}
