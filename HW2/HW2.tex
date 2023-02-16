@@ -20,6 +20,7 @@
 \newcommand{\cov}{\text{Cov}}
 \newcommand{\norm}{\text{Normal}}
 \newcommand{\indep}{\perp \!\!\! \perp}
+\newcommand{\plim}{\text{plim}}
 
  
 \newenvironment{problem}[2][Problem]{\begin{trivlist}
@@ -38,7 +39,7 @@ February 9, 2022}
 \subsection*{Problem 4.11}
 \begin{enumerate}
 \item[a.] In Example 4.3, use \textit{KWW} and \textit{IQ} simultaneously as proxies for ability in equation (4.29). Compare the estimated return to education without a proxy for ability and with \textit{IQ} as the only proxy for ability.
-\\ Answer: \\
+\\ \textbf{Answer}: \\
 Table 1 show the estimates for return to education with and without proxies for ability.
 \input{HW2/reg411a.tex}\\
 The following code is used to run the regression.
@@ -46,7 +47,7 @@ The following code is used to run the regression.
 The regression estimates by using $KWW$ and $IQ$ as proxies is shown in model (1) with the estimated return to education of about 5\%. From model (2), When only $IQ$ is used as proxy the estimated return is approximately 5.4\%. The case when no proxy is used the return to education estimates is about 6.5\% as shown in model (3). OVerall, we have lower estimates when more proxy is used and the inference is still statistically significant.
 
 \item[b.] Test \textit{KWW} and \textit{IQ} for joint significance in the estimated equation from part a.
-\\ Answer:\\
+\\ \textbf{Answer}:\\
 We can use the $F$-test for joint significance of both variable with the following hypothesis,
 \begin{align*}
     &\text{H}_0:\ \beta_{KWW}=\beta_{IQ}=0\\
@@ -56,19 +57,18 @@ Below are the output for testing joint significance of $KWW$ and $IQ$, the $P$-v
 \input{HW2/411b.tex}
 
 \item[c.] When \textit{KWW} and \textit{IQ} are used as proxies for \textit{abil}, does the wage differential between nonblacks and blacks dissapear? What is the estimated differential?
-\\ Answer:\\
+\\ \textbf{Answer}:\\
 From estimates (1) in part a, the wage differential between nonblacks and blacks is still significant. Blacks are estimated to have about 13\% lower wage than non blacks holding other factors constant.
 
 \item[d.] Add the interaction $educ(IQ-100)$ and $educ(KWW-\overline{KWW})$ to the regression from part a, where $\overline{KWW}$ is the average score in the sample. Are these terms jointly significant using a standard \textit{F} test? Does adding them affect any important conclusions?
-\\ Answer:\\
+\\ \textbf{Answer}:\\
 We can use the $F$-test for joint significance of the interaction variables with the following hypothesis,
 \begin{align*}
     &\text{H}_0:\ \beta_{educ(KWW-\overline{KWW})}=\beta_{educ(IQ-100)}=0\\
     &\text{H}_1:\ \text{at least one of }\beta_{educ(KWW-\overline{KWW})}\text{ or }\beta_{educ(IQ-100)} \text{ is not zero}
 \end{align*}
-\input{HW2/411d.tex}
-From the $F$-test, the $P$-value is around $0.015$, which indicates significant level of 1.5\%. Thus we can reject the null hypothesis. And we can conclude that there is enough certainty to say that $educ(IQ-100)$ and $educ(KWW-\overline{KWW})$ are jointly significant.\\
-Model (1) in Table 2 show the estimates for return to education by adding interaction terms interaction $educ(IQ-100)$ and $educ(KWW-\overline{KWW})$. The return to education is even smaller know compared to estimates in Table 1 from part a, about 4.5\%. Regarding the effect of $KWW$, as it increases above its mean, the return of education will be larger. If the $KWW$ is one point above the mean, the return to education will be 4.5\%+0.02\% or about 4.52\%. This evidence show that the effect of knowledge of world work score to the return of education is positive, consistent with common intuition or at least my instuition.
+From the $F$-test, the $P$-value is $0.015$, which indicates a significant level of 1.5\%. Thus we can reject the null hypothesis, and conclude with some certainty that $educ(IQ-100)$ and $educ(KWW-\overline{KWW})$ are jointly significant.\input{HW2/411d.tex}\\
+Model (1) in Table 2 show the estimates for return to education by adding interaction terms interaction $educ(IQ-100)$ and $educ(KWW-\overline{KWW})$. The return to education is even smaller know compared to estimates in Table 1 from part a, about 4.5\%. Regarding the effect of $KWW$, as it increases above its mean, the return of education will be larger. If the $KWW$ is one point above the mean, the return to education will be 4.5\%+0.02\% or about 4.52\%. This evidence show that the effect of knowledge of world work score to the return of education is positive, consistent with common intuition or at least my intuition.
 \input{HW2/reg411d.tex}
 \end{enumerate}
 
@@ -77,17 +77,17 @@ Model (1) in Table 2 show the estimates for return to education by adding intera
 Use the data in CORNWELL.RAW (from Cornwell and Trumball, 1994) to estimate a model of county-level crime rates, using the year 1987 only.
 \begin{enumerate}
 \item[a.] Using logarithms of all variables, estimate a model relating the crime rate to the deterrent variables $prbarr, prbconv, prbpris$, and $avgsen.$
-\\ Answer:\\
-Table 3 show the estimate a constant elasticities model (log-log model) of crime rate. 
+\\ \textbf{Answer}:\\
+Table 3 shows the estimates of the constant elasticity model (log-log model) of crime rate. 
 \input{HW2/reg413ab.tex}\\
 We might expect that crime rate will decrease as the probability of arrest and probability of conviction increase. As shown in model (1), the elasticities of crime or coefficient on probability of arrest and probability of conviction have negative sign as expected and are statistically significant. The elasticities of crime on probability of serving prison term and average sentence length showing positive sign but statistically not significant.
 
 \item[b.] Add $\log(crmrte)$ for 1986 as an additional explanatory variable, and comment on how the estimated elasticities differ from part a.
-\\ Answer:\\
+\\ \textbf{Answer}:\\
 As shown in estimate of model (2) in Table 3, by adding $\log(crmrte)$ for 1986 as an additional explanatory variable there are some change in the elasticities. First, the elasticity of crime rate on probability of arrest decrease significantly and still statistically significant. Second, the elasticity of crime rate with respect to probability of conviction also decrease significantly and become statistically insignificant. The elasticities on probability of serving prison term and on average sentence length remain insignificant and both change sign, with the latter become statistically significant at 10\% level. The elasticities on the lagged crime rate is comparably large and statistically significant.
 
 \item[c.] Compute the $F$ statistic for joint significance of all of the wage variables (again in logs), using the restricted model from part b.
-\\ Answer:\\
+\\ \textbf{Answer}:\\
 We can use the $F$-test for joint significance of all of the wage variables with the following hypothesis, in this case we use assume homoskedasticity.
 \begin{align*}
     &\text{H}_0:\ \beta_{lwcon}=\ldots=\beta_{lwloc}=0\\
@@ -97,7 +97,7 @@ We can use the $F$-test for joint significance of all of the wage variables with
 From the $F$-test we have that all of the wage variables are jointly insignificant since the $P$-value is more than 0.1. We might also interested in looking at individual elasticity and find out that the sign of the elasticity are not consistent. 
 
 \item[d.] Redo part c, but make the test robust to heteroskedasticity of unknown form.
-\\ Answer:\\
+\\ \textbf{Answer}:\\
 Analogous to c, we use the $F$-test for joint significance of all of the wage variables with the following hypothesis, now we use assume heteroskedasticity and use robust standard error.
 \begin{align*}
     &\text{H}_0:\ \beta_{lwcon}=\ldots=\beta_{lwloc}=0\\
@@ -111,24 +111,24 @@ Since the $P$-value is less than 0.1, we will reject the null hypothesis. Now th
 Use the data in ATTEND.RAW to answer this question
 \begin{enumerate}
 \item[a.] To determine the effects of attending lecture on final exam performance, estimate a model relating $stndfnl$ (the standardized final exam score) to $atndrte$ (the percent of lectures attended). Include the binary variables $frosh$ and $soph$ as explanatory variables. Interpret the coefficient on $atndrte$, and discuss its significance.
-\\ Answer:\\
+\\ \textbf{Answer}:\\
 Model (1) in Table 4 shows estimate of a model relating standardized final exam score to the percent of lectures attended and include the binary variables $frosh$ and $soph$. The coefficient of the percent of lectures attended is significant at 5\% level. Note that final exam score is standardized so, the interpretation is if the attendance rate increase by 10\% the standardized test score will increase by around $10\times0.008$ or 0.08 standard deviation.
 \item[b.] How confident are you that the OLS estimates from part a are estimating the causal effect of attendance? Explain.
-\\ Answer:\\
+\\ \textbf{Answer}:\\
 It looks like the data is not from a random experiment, which indicate that there is likely to be a selection bias. It may also be possible that the student with higher exam grade or better students is the one who attend the class regularly, not because they attend the class regularly so that they get a good grade. There is also other variable that may be omitted but affect attendance rate for example the distance of the class room from the place where student lives on campus. Thus, controlling for only year in college by adding $frosh$ and $soph$ dummy may not solve the endogeneity problem. 
 
 \item[c.] As proxy variables for student ability, add to the regression $priGPA$ (prior cumulative GPA) and $ACT$ (achievement test score). Now what is the effect of $atndrte$? Discuss how the effect differs from that in part a.
-\\ Answer:\\
+\\ \textbf{Answer}:\\
 Model (2) in Table 4 shows the estimate. Now the effect of attendance rate decrease compared to the result from part a. The effect is still statistically significant but at 5\% level which is weaker than the 1\% level in part a. The effect of $priGPA$ (prior cumulative GPA) and $ACT$ (achievement test score) is positive on the standardized exam score and both very significant.
 \input{HW2/reg414acef.tex}
 
 \item[d.] What happens to the significance of the dummy variables in part c as compared with part a? Explain.
-\\ Answer:\\
+\\ \textbf{Answer}:\\
 The significance of the dummy variable changes after controlling for $priGPA$ (prior cumulative GPA) and $ACT$ (achievement test score). The coefficient of $soph$, which indicate the effect of being in sophomore relative to being in year three or above, still have same sign with decreased magnitude, and become statistically significant at 10\% level. The coefficient of $frosh$, which indicate the effect of being in freshmen relative to being in year three or above, still have same sign with significantly lower magnitude, and become statistically insignificant. We can say that adding the two new dummy eliminate the effect of being a freshman.
 
 \item[e.] Add the squares of $priGPA$ and $ACT$ to the equation. What happens to the coefficient $atndrte$? Are the quadratics jointly significant?
-\\ Answer:\\
-Model (3) in Table 4 show the estimate after adding the squares of $priGPA$ and $ACT$. The coefficient on the square of $priGPA$ is very significant, while the coefficient on the square of $ACT$ is significant only at 10\% level. The effect on the attendance rate after adding the two variables now increases compared to model (2) and become more statistically significant. However, note that the effect on $ACT$ now become insignificant and changes sign compared to model (2).\\
+\\ \textbf{Answer}:\\
+Model (3) in Table 4 shows the estimate after adding the squares of $priGPA$ and $ACT$. The coefficient on the square of $priGPA$ is very significant, while the coefficient on the square of $ACT$ is significant only at 10\% level. The effect on the attendance rate after adding the two variables now increases compared to model (2) and become more statistically significant. However, note that the effect on $ACT$ now become insignificant and changes sign compared to model (2).\\
 We can also test using $F$-test by using the following hypothesis.
 \begin{align*}
     &\text{H}_0:\ \beta_{priGPAsq}=\beta_{ACT}=0\\
@@ -138,8 +138,8 @@ We can also test using $F$-test by using the following hypothesis.
 The $F$-test yield a near-zero $P$-value, so we will reject the null hypothesis. The result indicates that both variable are jointly significant.
 
 \item[f.] To test for a nonlinear effect of $atndrte$, add its square to the equation from part e. What do you conclude? 
-\\ Answer:\\
-Model (4) in Table 4 show that the coefficient on the square of the attendance rate is very insignificant. Also, note that the standard error of the coefficient of the attendance rate increase by over five fold become statistically not significant. This evidence suggest the attendance rate and its square might be highly correlated. Below is the cor
+\\ \textbf{Answer}:\\
+Model (4) in Table 4 shows that the coefficient on the square of the attendance rate is very insignificant. Also, note that the standard error of the coefficient of the attendance rate increase by over five fold become statistically not significant. This evidence suggests the attendance rate and its square might be highly collinear. Table 5 shows that the two variable is highly correlated.
 \input{HW2/414f.tex}
 \end{enumerate}
 
@@ -151,16 +151,43 @@ Assume that $y$ and $x_j$ have finite second moments, and write the linear proje
 \end{align*}
 \begin{enumerate}
 \item[a.] Show that $\sigma_y^2=\V(\textbf{x}\pmb{\beta})+\sigma_u^2.$ 
-\\ Answer:\\
+\\ \textbf{Answer}:\\
+We know that $y$ and $x_j$ have finite second moments, let $\V(y)=\sigma_y^2$ and $\V(x_j)=\sigma_{x_j}^2.$ Also we can take $\beta_0$ as constant and $\pmb{\beta}$ as a vector of constant since this is a linear projection model. Recall that $y=\beta_0 + \textbf{x}\pmb{\beta}+u$, so we have 
+\begin{align*}
+    &\V(y)=\V(\beta_0 + \textbf{x}\pmb{\beta}+u) \\
+    &\Leftrightarrow\V(y)=\V(\textbf{x}\pmb{\beta}+u)& &[\text{ because }\beta_0\text{ is constant}]\\
+    &\Leftrightarrow\sigma_y^2=\V(\textbf{x}\pmb{\beta})+\V(u)+\sum_{i=1}^K \cov(x_i\beta_i,u)& &\\
+    &\Leftrightarrow\sigma_y^2=\V(\textbf{x}\pmb{\beta})+\sigma_u^2+\sum_{i=1}^K \beta_i \cov(x_i,u)& &\\
+     &\Leftrightarrow\sigma_y^2=\V(\textbf{x}\pmb{\beta})+\sigma_u^2.& &[\text{ because }E(x_i u)=\cov(x_i,u)=0]
+\end{align*}\qed
 
 \item[b.] For a random draw $i$ from the population, write $y_i=\beta_0+\textbf{x}_i\pmb{\beta}+u_i.$ Evaluate the following assumption, which has been known to appear in econometrics textbooks: $``\V(u_i)=\sigma^2=\V(y_i) \text{ for all }i."$
-\\ Answer:\\
-
+\\ \textbf{Answer}:\\
+It looks like we are drawing finite sample $\textbf{x}_i,y_i$ from the population. Write the variance of $y_i$ as follow
+\begin{align}
+    \V(y_i)&=\V(\beta_0+\textbf{x}_i\pmb{\beta}+u_i) \notag\\
+    &=\V(\beta_0)+\V(\textbf{x}_i\pmb{\beta})+\V(u_i)+\cov(\textbf{x}_i\pmb{\beta},u_i)+\cov(\beta_0,u_i)+\cov(\textbf{x}_i\pmb{\beta},\beta_0) \label{h2.1}
+\end{align}
+The condition for the given statement $``\V(u_i)=\sigma^2=\V(y_i) \text{ for all }i."$ to be true is when all of the terms in \eqref{h2.1} except $\V(u_i)$ are zero. We are given that $E(u)=0$ and $E(x_j u)=0$ which lead us to say that the covariance terms are zero from the result in part a. Now we are left with $\V(\textbf{x}_i\pmb{\beta})$. For it to be zero we need to make assumption which may not make sense for example for $\textbf{x}_i$ to be non random which is a contradiction to the random draw that we generate, or that the $\pmb{\beta}$ is zero, which is strange. It also depends on the sample size that we draw, we may find out that some of the variance changes depends on the size of the sample. If we use OLS to estimate the $\hat{\pmb{\beta}}$ we need large enough sample to converge to the actual $\pmb{\beta}$, thus in this case we may also treat $\hat{\pmb{\beta}}$ as random.
 \item[c.] Define the population \textit{R}-squared by $\rho^2 \equiv 1-\sigma_u^2 / \sigma_y^2=\V(\textbf{x}\pmb{\beta})/\sigma_y^2.$ Show that the \textit{R}-squared, $R^2=1-SSR/SST,$ is a consistent estimator of $\rho^2,$ where SSR is the OLS sum of squared residuals and SST$=\sum_{i=1}^N (y_i-\bar{y})^2$ is the total sum of squares.
-\\ Answer:\\
-
+\\ \textbf{Answer}:\\
+We need to show that $\plim(R^2)=\rho^2.$ Recall that 
+\[R^2=1-\frac{SSR}{SST}=1-\frac{\sum_{i=1}^N\hat{u}_i^2}{\sum_{i=1}^N(y_i-\bar{y})^2}.\]
+Also, recall that 
+\begin{align*}
+    &\plim(\frac{1}{N}\sum_{i=1}^N\hat{u}_i^2)=\E(u_i^2)=\sigma_u^2,\\
+    &\plim(\frac{1}{N}\sum_{i=1}^N(y_i-\bar{y})^2)=\E((y_i-\E(y_i))^2)=\sigma_y^2.
+\end{align*}
+Now take $\plim$ of $R^2$, we have
+\begin{align*}
+    \plim(R^2)&=\plim\left(1-\frac{\sum_{i=1}^N\hat{u}_i^2}{\sum_{i=1}^N(y_i-\bar{y})^2}\right)& &\\
+    &=\plim\left(1-\frac{\frac{1}{N}\sum_{i=1}^N\hat{u}_i^2}{\frac{1}{N}\sum_{i=1}^N(y_i-\bar{y})^2}\right)& &\\
+    &=1-\frac{\plim(\frac{1}{N}\sum_{i=1}^N\hat{u}_i^2)}{\plim(\frac{1}{N}\sum_{i=1}^N(y_i-\bar{y})^2)}& \ \ \ &[\text{by Slutsky's theorem}]\\
+    &=1-\sigma_u^2 / \sigma_y^2.
+\end{align*}\qed
 \item[d.] Evaluate the following statement: ``In the presence of heteroskedasticity, the \textit{R}-squared from an OLS regression is meaningless" (This kind of statement also tends to appear in econometrics texts.)
-\\ Answer:\\
+\\ \textbf{Answer}:\\
+From part c we know that $R^2$ is a consistent estimator for $\rho^2.$ The value of $R^2$ really depends on the value of the variance of $u$ and $y$. Note that this is not a conditional variance, $\V(u|x)$, so even if we impose heteroskedasticity condition it have no effect on $\V(u)$, the consistency of $R^2$ will hold. Thus, the statement in the problem is not correct.
 \end{enumerate}
 
 \section*{Chapter 5}
@@ -173,10 +200,17 @@ In this problem you are to establish the algebraic equivalence between 2SLS and 
 For notational clarity, we use $y_2$ as the suspected endogenous variable and \textbf{z} as the vector of all exogenous variables. The second equation is the reduced form for $y_2.$ Assume that \textbf{z} has at least one more element than $\textbf{z}_1.$
 We know that one estimator of $(\pmb{\delta}_1,\alpha_1)$ is the 2SLS estimator using instruments \textbf{x}. Consider an alternative estimator of $(\pmb{\delta}_1,\alpha_1):$ (a) estimate the reduced form by OLS, save the residuals $\hat{v}_2$; (b) estimate the following equation by OLS:
 \begin{align}
-    y_1=\textbf{z}_1\pmb{\delta}_1+alpha_1+y_2+\rho_1+\hat{v}_2+error. \tag{5.52} \label{5.52}
+    y_1=\textbf{z}_1\pmb{\delta}_1+\alpha_1y_2+\rho_1\hat{v}_2+error. \tag{5.52} \label{5.52}
 \end{align}
-Show that the OLS estimates of $\pmb{\delta}_1$ and $alpha_1$ from this regression are identical to the 2SLS estimators. (Hint: Use the partitioned regression algebra of OLS. In particular, if $\hat{y}=\textbf{x}_1\hat{\pmb{\beta}}_1+\textbf{x}_2\hat{\pmb{\beta}}_2$ is an OLS regression, $\hat{\pmb{\beta}}_1$ can be obtained by first regressing $\textbf{x}_1$ on $\textbf{x}_2$, getting the residuals, say $\ddot{\textbf{x}}_1$, and then regressing $y$ on $\ddot{\textbf{x}}_1$; see, for example, Davidson and MacKinnon (1993, Section 1.4). You must also use the fact that $\textbf{z}_1$ and $\hat{v}_2$ are orthogonal in the sample.)\\ 
-Answer: \\
+Show that the OLS estimates of $\pmb{\delta}_1$ and $\alpha_1$ from this regression are identical to the 2SLS estimators. (Hint: Use the partitioned regression algebra of OLS. In particular, if $\hat{y}=\textbf{x}_1\hat{\pmb{\beta}}_1+\textbf{x}_2\hat{\pmb{\beta}}_2$ is an OLS regression, $\hat{\pmb{\beta}}_1$ can be obtained by first regressing $\textbf{x}_1$ on $\textbf{x}_2$, getting the residuals, say $\ddot{\textbf{x}}_1$, and then regressing $y$ on $\ddot{\textbf{x}}_1$; see, for example, Davidson and MacKinnon (1993, Section 1.4). You must also use the fact that $\textbf{z}_1$ and $\hat{v}_2$ are orthogonal in the sample.)\\ 
+\textbf{Answer}: \\
+Based on the hint, denote $\textbf{x}_1=(\textbf{z}_1,y_2)$, $\hat{\pmb{\beta}}_1=(\hat{\pmb{\delta}}_1,\hat{\alpha}_1)'$, $\textbf{x}_2=\hat{v}_2$, and $\hat{\beta_2}=\hat{\rho}_1$. By partitioning out the regression following the hint. We can do the following steps
+\begin{enumerate}
+    \item Regress $\textbf{x}_1$ on $\textbf{x}_2=\hat{v}_2$ and save the residual $\ddot{\textbf{x}}_1$.\\
+    By construction $\textbf{x}_1$ consists of $\textbf{z}_1$ and $y_2$. Now we need to investigate the residuals that we will get. Note that the suspected endogenous variable is $y_2$, and $\textbf{z}_1$ is exogenous that is $\E(\textbf{z}_1'\hat{u}_1)=\E(\textbf{z}_1'\hat{v}_2)=0$. Thus from regressing $\textbf{z}_1$ on $\hat{v}_2$, the residuals is $\textbf{z}_1$ itself. Also from the first stage regression we will have $y_2=\hat{y}_2+\hat{v}_2$. Thus from regressing $y_2$ on $\hat{v}_2$ the residuals is $\hat{y}_2$. Thus we get the residuals $\ddot{\textbf{x}}_1=(\textbf{z}_1,\hat{y}_2)$.
+    \item Regress $y_1$ on $\ddot{\textbf{x}}_1$.\\
+    Now the second step, we will regress $y_1$ on $\ddot{\textbf{x}}_1=(\textbf{z}_1,\hat{y}_2)$. It turns out the regression that we will perform is the same as our second stage regression in 2SLS. Thus the $\hat{\pmb{\beta}}_1$ that we will get by partialling out is the same as if we do it by 2SLS.\\ \qed
+\end{enumerate}
 
 \subsection*{Problem 5.3}
 Consider the following model to estimate the effects of several variables, including cigarette smoking, on the weight of newborns:
@@ -186,17 +220,21 @@ Consider the following model to estimate the effects of several variables, inclu
 where $male$ is a binary indicator equal to one if the child is male, $parity$ is the birth order of this child, $faminc$ is family income, and $packs$ is the average number of packs of cigarettes smoked per day during pregnancy.
 \begin{enumerate}
 \item[a.] Why might you expect $packs$ to be correlated with $u$?
-\\ Answer:\\
+\\ \textbf{Answer}:\\
+There may be other factor that affect the weight of new born that correlates with the average number of packs of cigarettes smoked per day that is omitted and thus contained in $u$. For example, women who smoke cigarettes while pregnant is more likely to regularly check their baby's health to doctor during pregnancy, or if we assume people who smoke on average also drink coffee, then the intake of caffeine might be correlated with the average packs of cigarettes smoked per day. Other example is the level of states attention to smoking behaviour, if the states care about the bad effect of smoking they tend to implement regulation to reduce smoking behaviour for general population, such as introduce high taxes for cigarettes. So states may also be correlated with packs and thus contained in $u$.
 
 \item[b.] Suppose that you have data on average cigarette price in each woman's state of residence. Discuss whether this information is likely to satisfy the properties of a good instrumental variable for packs.
-\\ Answer:\\
+\\ \textbf{Answer}:\\
+It is tempting to say that it might be a good IV, since the average cigarette price should have negative correlation with average cigarette consumption by the law of demand. This satisfy the relevance condition for good IV. However, the cigarette price is also affected by the state policy such as tax and other instrument as mentioned in part a, that may be contained in $u$. Thus, it may fail the exogeneity condition for good IV.
 
-\item[c.] Use the data in BWGHT.RAW to estimate equation \eqref{5.54}. First, use OLS. Then, use 2SLS, where $cigprice$ is an instrument for packs. Discuss any important differences in the OLS and 2SLS estimates.
-\\ Answer:\\
+\item[c.] Use the data in BWGHT.RAW to estimate equation \eqref{5.54}. First, use OLS. Then, use 2SLS, where $cigprice$ is an instrument for $packs$. Discuss any important differences in the OLS and 2SLS estimates.
+\\ \textbf{Answer}:\\
 \input{HW2/53c.tex}
+The estimated effect of $packs$ from the OLS and 2SLS are very different. The OLS estimate suggests that smoking one more pack of cigarettes decrease birthweight by 8.37\% and is statistically very significant. On the other hand, the 2SLS estimate suggests that additional pack of cigarettes smoked increase birthweight 79.7\% and is not significant, which does not make sense at all. Again, as stated in part b, it may be because $cigprice$ is not a good IV.
 \item[d.] Estimate the reduced form for $packs$. What do you conclude about identification of equation \eqref{5.54} using $cigprice$ as an instrument for $packs$? What bearing does this conclusion have on your answer from part c?
-\\ Answer:\\
+\\ \textbf{Answer}:\\
 \input{HW2/53d.tex}
+From the reduced form, we can finally see that the effect of $cigprice$ on $packs$ is not statistically significant and also the sign is positive which is against my expected sign explained in part b. In fact, now the $cigprice$ also fails the relevance condition for a good IV. 
 \end{enumerate}
 
 \subsection*{Problem 5.5}
@@ -210,10 +248,48 @@ To ``test" whether $\textbf{z}_2$ is in fact uncorrelated with $q$, it has been 
     y=\textbf{z}_1\pmb{\delta}_1+\alpha_1y_2+\textbf{z}_2\pmb{\psi}_1+u_1, \tag{5.55}\label{5.55}
 \end{align}
 where $u_1=\gamma q+a_1,$ and test $\text{H}_0:\pmb{\psi}_1=0.$ Why does this method not work?
-\\ Answer:\\
+\\ \textbf{Answer}:\\
+We want to test the hypothesis that $\textbf{z}_2$ is uncorrelated with $q$. Suppose $\textbf{z}_2$ is uncorrelated with $q$ then $\textbf{z}_2$ is exogenous in \eqref{5.55}. The endogeneity problem is still exist in \eqref{5.55} since $y_2$ is correlated with $q$. It means if we perform a regression for \eqref{5.55}, i.e., $y$ on  $(\textbf{z}_2,y_2,\textbf{z}_1)$ the OLS estimator will not be consistent. In other words, the coefficient that we get from OLS, that is $(\hat{\pmb{\delta}}_1,\hat{\alpha}_1,\hat{\pmb{\psi}}_1)$, will not be consistent. Taking the inconsistent estimator for testing a hypothesis will risk us having an invalid conclusion, thus this method will not work.
 
 \section*{Non-textbook Problem}
 Show that IV estimation can be implemented as the 2SLS procedure.
-\\ Answer:\\
-
+\\ \textbf{Answer}:\\
+Suppose we have the following model
+\begin{align*}
+    y=\textbf{x}\pmb{\beta}+u,
+\end{align*}
+with $\textbf{x}=(1,x_1,\ldots,x_K)$, with $x_K$ as the endogenous variable. Now assume we use $m$ instrumental variables $(z_1,\ldots,z_m)$ for $x_K$. Denote $\textbf{z}=(1,x_1,\ldots,x_{K-1},z_1,\ldots,z_m)$ as the regressor for the reduced form. From the first stage we will get the fitted value, $\hat{x}_K$. The first stage will yield the following estimates
+\begin{align*}
+    x_K=\underbrace{\hat{\delta}_0+\hat{\delta}_1 x_1+\ldots+\hat{\delta}_{K-1}x_{K-1}+\hat{\theta}_1 z_1+\ldots+\hat{\theta}_m z_m}_{\displaystyle \hat{x}_K=\textbf{z}\hat{\pmb{\delta}}}+\hat{r}_K
+\end{align*}
+Now denote $\hat{\textbf{x}}=(1,x_1,\ldots,x_{K-1},\hat{x}_K)$ as the regressor for the second stage regression. The second stage regression will yield the following estimates
+\begin{align*}
+    y=\hat{\textbf{x}}\hat{\pmb{\beta}}+error.
+\end{align*}
+The estimates from the 2SLS will be the OLS estimator from the second stage, that is
+\begin{align*}
+    \hat{\beta}_{2SLS}=(\hat{\textbf{x}}'\hat{\textbf{x}})^{-1}(\hat{\textbf{x}}'y).
+\end{align*}
+Recall the IV estimator
+\begin{align*}
+    \hat{\beta}_{IV}=(\hat{\textbf{x}}'\textbf{x})^{-1}(\hat{\textbf{x}}'y).
+\end{align*}
+We need to show that the IV estimator is the same as the 2SLS estimator. From the first stage we have $\hat{x}_K=\textbf{z}\hat{\pmb{\delta}}$. We know that the OLS estimator for the first stage is $\hat{\pmb{\delta}}=(\textbf{z}'\textbf{z})^{-1}(\textbf{z}'x_K).$ Thus we have
+\begin{align*}
+    \hat{x}_K=\textbf{z}\hat{\pmb{\delta}}=\textbf{z}(\textbf{z}'\textbf{z})^{-1}(\textbf{z}'x_K).
+\end{align*}
+Since $x_1,\ldots,x_{K-1}$ is in $\textbf{z}.$ We will have
+\begin{align*}
+    \hat{\textbf{x}}=\textbf{z}(\textbf{z}'\textbf{z})^{-1}(\textbf{z}'\textbf{x}).
+\end{align*}
+Now, we only need to show that $\hat{\textbf{x}}'\hat{\textbf{x}}=\hat{\textbf{x}}'\textbf{x}$ to prove that $\hat{\beta}_{2SLS}=\hat{\beta}_{IV}.$ Denote $p_z=\textbf{z}(\textbf{z}'\textbf{z})^{-1}\textbf{z}'$ and we have that $\hat{\textbf{x}}=p_z\textbf{x}$. Note that $p_z$ is symmetric and is an idempotent matrix with the property $p_zp_z=p_z$. Now we have
+\begin{align*}
+    \hat{\beta}_{2SLS}&=(\hat{\textbf{x}}'\hat{\textbf{x}})^{-1}(\hat{\textbf{x}}'y)\\
+    &=(p_z \textbf{x})'(p_z \textbf{x})(\hat{\textbf{x}}'y)\\
+    &=(\textbf{x}'p_z)(p_z \textbf{x})(\hat{\textbf{x}}'y)\\
+    &=(\textbf{x}'p_z \textbf{x})(\hat{\textbf{x}}'y)\\
+    &=((p_z\textbf{x})' \textbf{x})(\hat{\textbf{x}}'y)\\
+    &=(\hat{\textbf{x}}' \textbf{x})(\hat{\textbf{x}}'y)\\
+    &=\hat{\beta}_{IV}.
+\end{align*}\qed
 \end{document}
