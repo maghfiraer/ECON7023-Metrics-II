@@ -31,6 +31,8 @@ esttab using ".\HW3\reg54b.tex", replace ///
 
  
 *5.4c
+texdoc do ".\HW3\54c.texdoc"
+
 est clear
 eststo: ivreg lwage exper expersq black south smsa reg661-reg668 smsa66 (educ = nearc4)
 esttab using ".\HW3\reg54c.tex", replace ///

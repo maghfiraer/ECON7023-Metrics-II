@@ -1,0 +1,8 @@
+texdoc init ".\HW3\54c.tex", replace
+
+/***
+2SLS Regression using $nearc4$ as instrument for $educ$
+***/
+texdoc stlog
+ivreg lwage exper expersq black south smsa reg661-reg668 smsa66 (educ = nearc4)
+texdoc stlog close

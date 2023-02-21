@@ -1,0 +1,35 @@
+. ivreg lwage exper expersq black south smsa reg661-reg668 smsa66 (educ = nearc4)
+{\smallskip}
+Instrumental variables 2SLS regression
+{\smallskip}
+      Source {\VBAR}       SS           df       MS      Number of obs   =     3,010
+\HLI{13}{\PLUS}\HLI{34}   F(15, 2994)     =     51.01
+       Model {\VBAR}  141.146813        15  9.40978752   Prob > F        =    0.0000
+    Residual {\VBAR}  451.494832     2,994  .150799877   R-squared       =    0.2382
+\HLI{13}{\PLUS}\HLI{34}   Adj R-squared   =    0.2343
+       Total {\VBAR}  592.641645     3,009  .196956346   Root MSE        =    .38833
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+       lwage {\VBAR} Coefficient  Std. err.      t    P>|t|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+        educ {\VBAR}   .1315038   .0549637     2.39   0.017     .0237335    .2392742
+       exper {\VBAR}   .1082711   .0236586     4.58   0.000     .0618824    .1546598
+     expersq {\VBAR}  -.0023349   .0003335    -7.00   0.000    -.0029888    -.001681
+       black {\VBAR}  -.1467757   .0538999    -2.72   0.007    -.2524603   -.0410912
+       south {\VBAR}  -.1446715   .0272846    -5.30   0.000      -.19817    -.091173
+        smsa {\VBAR}   .1118083    .031662     3.53   0.000     .0497269    .1738898
+      reg661 {\VBAR}  -.1078142   .0418137    -2.58   0.010    -.1898007   -.0258278
+      reg662 {\VBAR}  -.0070465   .0329073    -0.21   0.830    -.0715696    .0574767
+      reg663 {\VBAR}   .0404445   .0317806     1.27   0.203    -.0218694    .1027585
+      reg664 {\VBAR}  -.0579172   .0376059    -1.54   0.124    -.1316532    .0158189
+      reg665 {\VBAR}   .0384577   .0469387     0.82   0.413    -.0535777     .130493
+      reg666 {\VBAR}   .0550887   .0526597     1.05   0.296    -.0481642    .1583416
+      reg667 {\VBAR}    .026758   .0488287     0.55   0.584    -.0689832    .1224992
+      reg668 {\VBAR}  -.1908912   .0507113    -3.76   0.000    -.2903238   -.0914586
+      smsa66 {\VBAR}   .0185311   .0216086     0.86   0.391    -.0238381    .0609003
+       _cons {\VBAR}   3.773965    .934947     4.04   0.000     1.940762    5.607169
+\HLI{13}{\BOTT}\HLI{64}
+Instrumented: educ
+ Instruments: exper expersq black south smsa reg661 reg662 reg663 reg664
+              reg665 reg666 reg667 reg668 smsa66 nearc4
+{\smallskip}
