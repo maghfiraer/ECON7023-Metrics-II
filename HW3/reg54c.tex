@@ -1,63 +1,63 @@
 \begin{table}[htbp]\centering
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
 \caption{Regression result for Problem 5.4.c.}
-\begin{tabular}{l*{1}{c}}
+\begin{tabular}{l*{2}{c}}
 \toprule
-                    &\multicolumn{1}{c}{(1)}         \\
+                    &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         \\
 \midrule
-years of schooling, 1976&       0.132\sym{**} \\
-                    &     (0.055)         \\
+years of schooling, 1976&       0.132\sym{**} &       0.157\sym{***}\\
+                    &     (0.055)         &     (0.053)         \\
 \addlinespace
-age - educ - 6      &       0.108\sym{***}\\
-                    &     (0.024)         \\
+age - educ - 6      &       0.108\sym{***}&       0.119\sym{***}\\
+                    &     (0.024)         &     (0.023)         \\
 \addlinespace
-exper^2             &      -0.002\sym{***}\\
-                    &     (0.000)         \\
+exper^2             &      -0.002\sym{***}&      -0.002\sym{***}\\
+                    &     (0.000)         &     (0.000)         \\
 \addlinespace
-=1 if black         &      -0.147\sym{***}\\
-                    &     (0.054)         \\
+=1 if black         &      -0.147\sym{***}&      -0.123\sym{**} \\
+                    &     (0.054)         &     (0.052)         \\
 \addlinespace
-=1 if in south, 1976&      -0.145\sym{***}\\
-                    &     (0.027)         \\
+=1 if in south, 1976&      -0.145\sym{***}&      -0.143\sym{***}\\
+                    &     (0.027)         &     (0.028)         \\
 \addlinespace
-=1 in in SMSA, 1976 &       0.112\sym{***}\\
-                    &     (0.032)         \\
+=1 in in SMSA, 1976 &       0.112\sym{***}&       0.101\sym{***}\\
+                    &     (0.032)         &     (0.032)         \\
 \addlinespace
-regional dummy, 1966&      -0.108\sym{***}\\
-                    &     (0.042)         \\
+regional dummy, 1966&      -0.108\sym{***}&      -0.103\sym{**} \\
+                    &     (0.042)         &     (0.043)         \\
 \addlinespace
-reg662              &      -0.007         \\
-                    &     (0.033)         \\
+reg662              &      -0.007         &      -0.000         \\
+                    &     (0.033)         &     (0.034)         \\
 \addlinespace
-reg663              &       0.040         \\
-                    &     (0.032)         \\
+reg663              &       0.040         &       0.047         \\
+                    &     (0.032)         &     (0.033)         \\
 \addlinespace
-reg664              &      -0.058         \\
-                    &     (0.038)         \\
+reg664              &      -0.058         &      -0.055         \\
+                    &     (0.038)         &     (0.039)         \\
 \addlinespace
-reg665              &       0.038         \\
-                    &     (0.047)         \\
+reg665              &       0.038         &       0.052         \\
+                    &     (0.047)         &     (0.048)         \\
 \addlinespace
-reg666              &       0.055         \\
-                    &     (0.053)         \\
+reg666              &       0.055         &       0.070         \\
+                    &     (0.053)         &     (0.053)         \\
 \addlinespace
-reg667              &       0.027         \\
-                    &     (0.049)         \\
+reg667              &       0.027         &       0.039         \\
+                    &     (0.049)         &     (0.050)         \\
 \addlinespace
-reg668              &      -0.191\sym{***}\\
-                    &     (0.051)         \\
+reg668              &      -0.191\sym{***}&      -0.198\sym{***}\\
+                    &     (0.051)         &     (0.053)         \\
 \addlinespace
-=1 if in SMSA, 1966 &       0.019         \\
-                    &     (0.022)         \\
+=1 if in SMSA, 1966 &       0.019         &       0.015         \\
+                    &     (0.022)         &     (0.022)         \\
 \addlinespace
-Constant            &       3.774\sym{***}\\
-                    &     (0.935)         \\
+Constant            &       3.774\sym{***}&       3.340\sym{***}\\
+                    &     (0.935)         &     (0.895)         \\
 \midrule
-Observations        &        3010         \\
+Observations        &        3010         &        3010         \\
 \bottomrule
-\multicolumn{2}{l}{\footnotesize Standard errors in parentheses}\\
-\multicolumn{2}{l}{\footnotesize Data: CARD.DTA}\\
-\multicolumn{2}{l}{\footnotesize Wooldridge (2011)}\\
-\multicolumn{2}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\multicolumn{3}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{3}{l}{\footnotesize Data: CARD.DTA}\\
+\multicolumn{3}{l}{\footnotesize Wooldridge (2011)}\\
+\multicolumn{3}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
 \end{tabular}
 \end{table}
