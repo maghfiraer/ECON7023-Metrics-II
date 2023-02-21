@@ -1,0 +1,8 @@
+texdoc init ".\HW3\54a.tex", replace
+
+/***
+OLS Regression
+***/
+texdoc stlog
+reg lwage educ exper expersq black south smsa reg661-reg668 smsa66
+texdoc stlog close

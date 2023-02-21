@@ -11,7 +11,9 @@ clear
 cd "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II"
 use ".\data\card.dta"
 
-*5.4a,b,c
+*5.4a
+texdoc do ".\HW3\54a.texdoc"
+
 est clear
 eststo: reg lwage educ exper expersq black south smsa reg661-reg668 smsa66
 esttab using ".\HW3\reg54a.tex", replace ///
