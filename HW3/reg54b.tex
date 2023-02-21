@@ -1,63 +1,66 @@
 \begin{table}[htbp]\centering
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-\caption{Regression result for Problem 5.4.b.}
-\begin{tabular}{l*{1}{c}}
+\caption{Regression results for (1) Problem 5.4.b. and (2) Problem 5.4.d}
+\begin{tabular}{l*{2}{c}}
 \toprule
-                    &\multicolumn{1}{c}{(1)}         \\
+                    &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         \\
 \midrule
-age - educ - 6      &      -0.413\sym{***}\\
-                    &     (0.034)         \\
+age - educ - 6      &      -0.413\sym{***}&      -0.412\sym{***}\\
+                    &     (0.034)         &     (0.034)         \\
 \addlinespace
-exper^2             &       0.001         \\
-                    &     (0.002)         \\
+exper^2             &       0.001         &       0.001         \\
+                    &     (0.002)         &     (0.002)         \\
 \addlinespace
-=1 if black         &      -0.936\sym{***}\\
-                    &     (0.094)         \\
+=1 if black         &      -0.936\sym{***}&      -0.945\sym{***}\\
+                    &     (0.094)         &     (0.094)         \\
 \addlinespace
-=1 if in south, 1976&      -0.052         \\
-                    &     (0.135)         \\
+=1 if in south, 1976&      -0.052         &      -0.042         \\
+                    &     (0.135)         &     (0.136)         \\
 \addlinespace
-=1 in in SMSA, 1976 &       0.402\sym{***}\\
-                    &     (0.105)         \\
+=1 in in SMSA, 1976 &       0.402\sym{***}&       0.401\sym{***}\\
+                    &     (0.105)         &     (0.105)         \\
 \addlinespace
-regional dummy, 1966&      -0.210         \\
-                    &     (0.202)         \\
+regional dummy, 1966&      -0.210         &      -0.169         \\
+                    &     (0.202)         &     (0.204)         \\
 \addlinespace
-reg662              &      -0.289\sym{**} \\
-                    &     (0.147)         \\
+reg662              &      -0.289\sym{**} &      -0.269\sym{*}  \\
+                    &     (0.147)         &     (0.148)         \\
 \addlinespace
-reg663              &      -0.238\sym{*}  \\
-                    &     (0.143)         \\
+reg663              &      -0.238\sym{*}  &      -0.190         \\
+                    &     (0.143)         &     (0.146)         \\
 \addlinespace
-reg664              &      -0.093         \\
-                    &     (0.186)         \\
+reg664              &      -0.093         &      -0.038         \\
+                    &     (0.186)         &     (0.189)         \\
 \addlinespace
-reg665              &      -0.483\sym{**} \\
-                    &     (0.188)         \\
+reg665              &      -0.483\sym{**} &      -0.437\sym{**} \\
+                    &     (0.188)         &     (0.190)         \\
 \addlinespace
-reg666              &      -0.513\sym{**} \\
-                    &     (0.210)         \\
+reg666              &      -0.513\sym{**} &      -0.502\sym{**} \\
+                    &     (0.210)         &     (0.210)         \\
 \addlinespace
-reg667              &      -0.427\sym{**} \\
-                    &     (0.206)         \\
+reg667              &      -0.427\sym{**} &      -0.378\sym{*}  \\
+                    &     (0.206)         &     (0.208)         \\
 \addlinespace
-reg668              &       0.314         \\
-                    &     (0.242)         \\
+reg668              &       0.314         &       0.382         \\
+                    &     (0.242)         &     (0.245)         \\
 \addlinespace
-=1 if in SMSA, 1966 &       0.025         \\
-                    &     (0.106)         \\
+=1 if in SMSA, 1966 &       0.025         &       0.000         \\
+                    &     (0.106)         &     (0.107)         \\
 \addlinespace
-=1 if near 4 yr college, 1966&       0.320\sym{***}\\
-                    &     (0.088)         \\
+=1 if near 4 yr college, 1966&       0.320\sym{***}&       0.321\sym{***}\\
+                    &     (0.088)         &     (0.088)         \\
 \addlinespace
-Constant            &      16.849\sym{***}\\
-                    &     (0.211)         \\
+=1 if near 2 yr college, 1966&                     &       0.123         \\
+                    &                     &     (0.077)         \\
+\addlinespace
+Constant            &      16.849\sym{***}&      16.773\sym{***}\\
+                    &     (0.211)         &     (0.216)         \\
 \midrule
-Observations        &        3010         \\
+Observations        &        3010         &        3010         \\
 \bottomrule
-\multicolumn{2}{l}{\footnotesize Standard errors in parentheses}\\
-\multicolumn{2}{l}{\footnotesize Data: CARD.DTA}\\
-\multicolumn{2}{l}{\footnotesize Wooldridge (2011)}\\
-\multicolumn{2}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\multicolumn{3}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{3}{l}{\footnotesize Data: CARD.DTA}\\
+\multicolumn{3}{l}{\footnotesize Wooldridge (2011)}\\
+\multicolumn{3}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
 \end{tabular}
 \end{table}
