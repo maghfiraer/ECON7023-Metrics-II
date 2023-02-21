@@ -40,12 +40,15 @@ Use the data in CARD.RAW for this problem
 \begin{enumerate}
 \item[a.] Estimate a $\log(wage)$ equation by OLS with $educ, exper, exper^2, black, south, smsa, reg661$ through $reg668$, and $smsa66$ as explanatory variables. Compare your results with Table 2, Column (2) in Card (1995).
 \\ Answer: \\
+\input{HW3/reg54a}
 
 \item[b.] Estimate a reduced form equation for $educ$ containing all explanatory variables from part a and the dummy variable $nearc4.$ Do $educ$ and $nearc4$ have a practically and statistically significant partial correlation? (See also Table 3, Column (1) in Card (1995).)
 \\ Answer:\\
+\input{HW3/reg54b}
 
 \item[c.] Estimate the $\log(wage)$ equation by IV, using $nearc4$ as an instrument for $educ.$ Compare the 95 percent confidence interval for the return to education with that obtained from part a. (See also Table 3, Column (5) in Card (1995).)
 \\ Answer:\\
+\input{HW3/reg54c}
 
 
 \item[d.] Now use $nearc2$ along with $nearc4$ as instruments for $educ$. First estimate the reduced form for $educ$, and comment on whether $nearc4$ is more strongly related to $educ$. How do the 2SLS estimates compare with the earlier estimates?
@@ -127,11 +130,13 @@ For this problem use the data in HPRICE.RAW, which is a subset of the data used 
 \begin{enumerate}
 \item[a.] Using the 1981 cross section, estimate a bivariate, constant elasticity model relating housing price to distance from the incinerator. Is this regression appropriate for determining the causal effects of incinerator on housing prices? Explain.
 \\ Answer:\\
+\input{HW3/reg67a}
 
 \item[b.] Pooling the two years of data, consider the model
 \[\log(price)=\delta_0+\delta_1y81_\delta_2\log(dist)+\delta_3y81\cdot \log(dist)+u.\]
 If the incinerator has a negative effect on housing prices for homes closer to the incinerator, what sign is $\delta_3$? Estimate this model and test the null hypothesis that the incinerator had no effect on housing prices. 
 \\ Answer:\\
+\input{HW3/reg67b}
 
 \item[c.] Add the variables $\log(intst),[\log(intst)]^2,\log(area),\log(land),age,age^2,rooms,baths$ to the model in part b, and test for an incinerator effect. What do you conclude?
 \\ Answer:\\
