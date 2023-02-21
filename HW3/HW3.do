@@ -14,14 +14,31 @@ use ".\data\card.dta"
 *5.4a,b,c
 est clear
 eststo: reg lwage educ exper expersq black south smsa reg661-reg668 smsa66
-eststo: reg educ exper expersq black south smsa reg661-reg668 smsa66 nearc4
-eststo: ivreg lwage educ exper expersq black south smsa reg661-reg668 smsa66 (educ = nearc4)
-esttab using ".\HW3\reg54abc.tex", replace ///
+esttab using ".\HW3\reg54a.tex", replace ///
  b(3) se(3) nomtitle label star(* 0.10 ** 0.05 *** 0.01) ///
  booktabs ///
- title("Regression results: (1) Problem 5.4.a., (2) Problem 5.4.b, and (3) Problem 5.4.c")   ///
+ title("Regression result for Problem 5.4.a.")   ///
  addnotes("Data: CARD.DTA" "Wooldridge (2011)")
 
+*5.4b
+est clear
+eststo: reg educ exper expersq black south smsa reg661-reg668 smsa66 nearc4
+esttab using ".\HW3\reg54b.tex", replace ///
+ b(3) se(3) nomtitle label star(* 0.10 ** 0.05 *** 0.01) ///
+ booktabs ///
+ title("Regression result for Problem 5.4.b.")   ///
+ addnotes("Data: CARD.DTA" "Wooldridge (2011)")
+
+ 
+*5.4c
+est clear
+eststo: ivreg lwage educ exper expersq black south smsa reg661-reg668 smsa66 (educ = nearc4)
+esttab using ".\HW3\reg54c.tex", replace ///
+ b(3) se(3) nomtitle label star(* 0.10 ** 0.05 *** 0.01) ///
+ booktabs ///
+ title("Regression result for Problem 5.4.c.")   ///
+ addnotes("Data: CARD.DTA" "Wooldridge (2011)")
+ 
 clear
  
 *Problem 6.7
