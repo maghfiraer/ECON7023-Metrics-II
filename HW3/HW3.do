@@ -32,7 +32,7 @@ esttab using ".\HW3\reg54b.tex", replace ///
  
 *5.4c
 est clear
-eststo: ivreg lwage educ exper expersq black south smsa reg661-reg668 smsa66 (educ = nearc4)
+eststo: ivreg lwage exper expersq black south smsa reg661-reg668 smsa66 (educ = nearc4)
 esttab using ".\HW3\reg54c.tex", replace ///
  b(3) se(3) nomtitle label star(* 0.10 ** 0.05 *** 0.01) ///
  booktabs ///
