@@ -1,0 +1,51 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Regression results: (1) Problem 6.7.b. and (2) 6.7.c}
+\begin{tabular}{l*{2}{c}}
+\toprule
+                    &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         \\
+\midrule
+y81                 &      -0.011         &      -0.230         \\
+                    &     (0.805)         &     (0.488)         \\
+\addlinespace
+log(dist)           &       0.317\sym{***}&       0.087\sym{*}  \\
+                    &     (0.052)         &     (0.052)         \\
+\addlinespace
+y81 x log(dist)     &       0.048         &       0.062         \\
+                    &     (0.082)         &     (0.050)         \\
+\addlinespace
+log(intst)          &                     &       0.963\sym{***}\\
+                    &                     &     (0.326)         \\
+\addlinespace
+lintst^2            &                     &      -0.059\sym{***}\\
+                    &                     &     (0.019)         \\
+\addlinespace
+log(area)           &                     &       0.355\sym{***}\\
+                    &                     &     (0.051)         \\
+\addlinespace
+log(land)           &                     &       0.110\sym{***}\\
+                    &                     &     (0.025)         \\
+\addlinespace
+age of house        &                     &      -0.007\sym{***}\\
+                    &                     &     (0.001)         \\
+\addlinespace
+age^2               &                     &       0.000\sym{***}\\
+                    &                     &     (0.000)         \\
+\addlinespace
+# rooms in house    &                     &       0.047\sym{***}\\
+                    &                     &     (0.017)         \\
+\addlinespace
+# bathrooms         &                     &       0.096\sym{***}\\
+                    &                     &     (0.027)         \\
+\addlinespace
+Constant            &       8.058\sym{***}&       2.306         \\
+                    &     (0.508)         &     (1.774)         \\
+\midrule
+Observations        &         321         &         321         \\
+\bottomrule
+\multicolumn{3}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{3}{l}{\footnotesize Data: HPRICE.DTA}\\
+\multicolumn{3}{l}{\footnotesize Wooldridge (2011)}\\
+\multicolumn{3}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{tabular}
+\end{table}
