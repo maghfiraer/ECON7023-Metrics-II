@@ -5,6 +5,9 @@
 \usepackage{mathtools}
 \usepackage{booktabs}
 \usepackage{stata/stata}
+\usepackage{wrapfig}
+
+\graphicspath{ {images/} }
 
 \newcommand\iid{\stackrel{\mathclap{iid}}{\sim}}
 \newcommand\asym{\stackrel{\mathclap{a}}{\sim}}
@@ -39,15 +42,30 @@ February 21, 2022}
 Use the data in CARD.RAW for this problem
 \begin{enumerate}
 \item[a.] Estimate a $\log(wage)$ equation by OLS with $educ, exper, exper^2, black, south, smsa, reg661$ through $reg668$, and $smsa66$ as explanatory variables. Compare your results with Table 2, Column (2) in Card (1995).
-\\ Answer: \\
+\\ Answer:
+\begin{figure}[h]
+    \caption{Result from Card (1995)} \label{Fig3.1}
+    \centering
+    \includegraphics[scale=0.23]{table2.png}
+\end{figure}
+\\
+From Figure \ref{Fig3.1}, we know that the result in Column (2) the return to education is 7.5\% with standard error of 0.03\% and is statistically significant. Comparing to the result that we have in Table 1 from estimating $\log(wage)$ by OLS with $educ, exper, exper^2, black, south, smsa, reg661$ through $reg668$, and $smsa66$ as explanatory variables, we also get 7.5\% return of education with standard error of 0.03\% and is statistically significant. Surprisingly, we get the same coefficient and standard error with those in Card (1995) even though the model specifications are different.
 \input{HW3/reg54a}
 
 \item[b.] Estimate a reduced form equation for $educ$ containing all explanatory variables from part a and the dummy variable $nearc4.$ Do $educ$ and $nearc4$ have a practically and statistically significant partial correlation? (See also Table 3, Column (1) in Card (1995).)
-\\ Answer:\\
+\\ Answer:
+\begin{figure}[h]
+    \caption{Result from Card (1995)} \label{Fig3.2}
+    \centering
+    \includegraphics[scale=0.23]{table3.png}
+\end{figure}\\
+Table 2 shows the reduced from estimates for $educ$ containing all explanatory variables from part a and the dummy variable $nearc4.$ Our coefficient of interest is on $nearc4$ which is a dummy variable for someone living near a 4-year college. The estimates show that $educ$ and $nearc4$ are correlated with coefficient of 0.320 with a standard error of 0.0088. The result is statistically very significant. Thus the variable $nearc4$ satisfy the relevance condition for a good IV. Comparing with the result in Card (1995) as shown in Figure \ref{Fig3.2}, the result that we get is the same as in Column (1).
+\\
 \input{HW3/reg54b}
 
 \item[c.] Estimate the $\log(wage)$ equation by IV, using $nearc4$ as an instrument for $educ.$ Compare the 95 percent confidence interval for the return to education with that obtained from part a. (See also Table 3, Column (5) in Card (1995).)
 \\ Answer:\\
+Using IV
 \input{HW3/reg54c}
 
 
