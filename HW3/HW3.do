@@ -33,7 +33,7 @@ esttab using ".\HW3\reg54b.tex", replace ///
  addnotes("Data: CARD.DTA" "Wooldridge (2011)")
 
  
-*5.4c
+*5.4cd
 texdoc do ".\HW3\54c.texdoc"
 
 est clear
@@ -44,7 +44,16 @@ esttab using ".\HW3\reg54c.tex", replace ///
  booktabs ///
  title("Regression results for (1) Problem 5.4.c. and (2) Problem 5.4.d.")   ///
  addnotes("Data: CARD.DTA" "Wooldridge (2011)")
- 
+
+*5.4e
+est clear
+eststo: reg iq nearc4
+eststo: reg iq nearc4 smsa66 reg661 reg662 reg669
+esttab using ".\HW3\reg54e.tex", replace ///
+ b(3) se(3) nomtitle label star(* 0.10 ** 0.05 *** 0.01) ///
+ booktabs ///
+ title("Regression results for (1) Problem 5.4.e. and (2) Problem 5.4.f.")   ///
+ addnotes("Data: CARD.DTA" "Wooldridge (2011)")
 clear
  
 *Problem 6.7

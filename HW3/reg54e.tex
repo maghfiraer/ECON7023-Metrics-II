@@ -1,0 +1,33 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Regression results for (1) Problem 5.4.e. and (2) Problem 5.4.f.}
+\begin{tabular}{l*{2}{c}}
+\toprule
+                    &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         \\
+\midrule
+=1 if near 4 yr college, 1966&       2.596\sym{***}&       0.868         \\
+                    &     (0.745)         &     (0.822)         \\
+\addlinespace
+=1 if in SMSA, 1966 &                     &       1.355\sym{*}  \\
+                    &                     &     (0.803)         \\
+\addlinespace
+regional dummy, 1966&                     &       4.768\sym{***}\\
+                    &                     &     (1.547)         \\
+\addlinespace
+reg662              &                     &       5.808\sym{***}\\
+                    &                     &     (0.902)         \\
+\addlinespace
+reg669              &                     &       1.845         \\
+                    &                     &     (1.152)         \\
+\addlinespace
+Constant            &     100.611\sym{***}&      99.385\sym{***}\\
+                    &     (0.627)         &     (0.702)         \\
+\midrule
+Observations        &        2061         &        2061         \\
+\bottomrule
+\multicolumn{3}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{3}{l}{\footnotesize Data: CARD.DTA}\\
+\multicolumn{3}{l}{\footnotesize Wooldridge (2011)}\\
+\multicolumn{3}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{tabular}
+\end{table}
