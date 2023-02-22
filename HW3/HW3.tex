@@ -96,8 +96,7 @@ You have a single indicator of $q$, written as $q_1=\delta_1q+a_1,\delta_1\neq 0
 \begin{enumerate}
 \item[a.] Suggest an IV method for consistently estimating the $\beta_j.$ Be sure to discuss what is needed for identification.
 \\ Answer:\\
-Recall equation (5.45)
-\[y=\beta_0+\beta_1x_1+\cdots+\beta_Kx_K+\gamma q+v.\]
+Recall equation (5.45): $y=\beta_0+\beta_1x_1+\cdots+\beta_Kx_K+\gamma q+v.$
 It is given that $q_1=\delta_1q+a_1 \Leftrightarrow q=\frac{1}{\delta_1}q_1-\frac{1}{\delta_1}a_1$. Substitute it to (5.45) we will have
 \begin{align}
     y&=\beta_0+\beta_1x_1+\cdots+\beta_Kx_K+\gamma \left(\frac{1}{\delta_1}q_1-\frac{1}{\delta_1}a_1\right)+v \notag \\
@@ -111,8 +110,9 @@ Suppose $y$ is $\log(wage)$, $z_1,\ldots,z_M$ are family of variables, such as p
 
 \item[c.] Carry out this procedure using the data in NLS80.RAW. Include among the explanatory variables $exper, tenure,educ,married,south,urban,$ and $black$. First use $IQ$ as $q_1$ and then $KWW$. Include in the $z_h$ the variables $meduc,feduc,$ and $sibs.$ Discuss the results.
 \\ Answer:\\
-\input{HW3/57c}.   
+\input{HW3/57c}
 \input{HW3/reg57c}
+The regression results are shown in Table (5) in Column (1) we use $IQ$ and in Column (2) we use $KWW$ as indicator. The return to education in both estimates is statistically not significant. We may suspect that the family background in this case not satisfy the redundancy conditions mentioned in part b, or they may be correlated with $a_1$.
 \end{enumerate}
 
 \subsection*{Problem 5.11}
@@ -196,8 +196,9 @@ For this problem use the data in HPRICE.RAW, which is a subset of the data used 
 \begin{enumerate}
 \item[a.] Using the 1981 cross section, estimate a bivariate, constant elasticity model relating housing price to distance from the incinerator. Is this regression appropriate for determining the causal effects of incinerator on housing prices? Explain.
 \\ Answer: \\
-Table 4 shows the estimates for a bivariate constant elasticity model. The regression result is statistically significant and convincing with an elasticity of 0.365. However, we must suspect that the model may have endogeneity problem that will cause our OLS estimator to be inconsistent. Thus, the inference result may not be meaningful. In this case the endogeneity problem may arise from simultaneity, it may be that the incinerator site is determined to be in area where the housing price is already low.
+Table 6 shows the estimates for a bivariate constant elasticity model. The regression result is statistically significant and convincing with an elasticity of 0.365. However, we must suspect that the model may have endogeneity problem that will cause our OLS estimator to be inconsistent. Thus, the inference result may not be meaningful. In this case the endogeneity problem may arise from simultaneity, it may be that the incinerator site is determined to be in area where the housing price is already low.
 \input{HW3/reg67a}
+\input{HW3/reg67b}
 
 \item[b.] Pooling the two years of data, consider the model
 \[\log(price)=\delta_0+\delta_1y81+\delta_2\log(dist)+\delta_3y81\cdot \log(dist)+u.\]
@@ -207,12 +208,11 @@ If the incinerator has a negative effect on housing prices for homes closer to t
 \begin{align*}
     H_0: \delta_3=0, \ \ \ \ H_1: \delta_3>0
 \end{align*}
-Table 5 Column (1) shows the estimates for the model in part b. The sign of the estimates on the interaction terms is positive as expected, but it is not large and not significant (P-value of 0.556). Therefore, we can not reject the null hypothesis that construction of the incinerator have no effect on housing price.
-\input{HW3/reg67b}
+Table 7 Column (1) shows the estimates for the model in part b. The sign of the estimates on the interaction terms is positive as expected, but it is not large and not significant (P-value of 0.556). Therefore, we can not reject the null hypothesis that construction of the incinerator have no effect on housing price.
 
 \item[c.] Add the variables $\log(intst),[\log(intst)]^2,\log(area),\log(land),age,age^2,rooms,baths$ to the model in part b, and test for an incinerator effect. What do you conclude?
 \\ Answer:\\
-Table 5 Column (2) shows the estimates for the model in part b and adding the following variables: $\log(intst),[\log(intst)]^2,$ $\log(area),\log(land),age,age^2,rooms,baths$ to the model. The coefficient on the interaction term in now larger, with elasticity of 0.062 with an improved statistical significance. The P-value is 0.214 for two-sided or equivalent with 0.107 for one-sided hypothesis. This is almost significant at 10\% but still the evidence of detrimental effect of incinerator being built to house prices is weak.
+Table 7 Column (2) shows the estimates for the model in part b and adding the following variables: $\log(intst),[\log(intst)]^2,$ $\log(area),\log(land),age,age^2,rooms,baths$ to the model. The coefficient on the interaction term in now larger, with elasticity of 0.062 with an improved statistical significance. The P-value is 0.214 for two-sided or equivalent with 0.107 for one-sided hypothesis. This is almost significant at 10\% but still the evidence of detrimental effect of incinerator being built to house prices is weak.
 
 \end{enumerate}
 
@@ -227,23 +227,22 @@ Suppose we have the following model $y=\textbf{x}\pmb{\beta}+u$, that have some 
 \end{align*}
 Substitute $y_i=\textbf{x}_i\pmb{\beta}+u_i,$ we obtain
 \begin{align*}
-    &\hat{\pmb{\beta}}_{IV}=\hat{\pmb{\beta}}+\left[\left(N^{-1}\sum_{i=1}^N\textbf{x}_i'\textbf{z}_i\right)\left(N^{-1}\sum_{i=1}^N\textbf{z}_i'\textbf{z}_i\right)^{-1}\left(N^{-1}\sum_{i=1}^N\textbf{z}_i'\textbf{x}_i\right)\right]^{-1}\\
+    &\hat{\pmb{\beta}}_{IV}=\pmb{\beta}+\left[\left(N^{-1}\sum_{i=1}^N\textbf{x}_i'\textbf{z}_i\right)\left(N^{-1}\sum_{i=1}^N\textbf{z}_i'\textbf{z}_i\right)^{-1}\left(N^{-1}\sum_{i=1}^N\textbf{z}_i'\textbf{x}_i\right)\right]^{-1}\\
     & \hspace{50pt}  \left[\underbrace{\left(N^{-1}\sum_{i=1}^N\textbf{x}_i'\textbf{z}_i\right)}_{\displaystyle C'}{\underbrace{\left(N^{-1}\sum_{i=1}^N\textbf{z}_i'\textbf{z}_i\right)}_{\displaystyle D^{-1}}}^{-1}\left(N^{-1}\sum_{i=1}^N\textbf{z}_i'u_i\right)\right]\\
-    &\Leftrightarrow\hat{\pmb{\beta}}_{IV}=\hat{\pmb{\beta}}+[C'D^{-1}C]^{-1}C'D^{-1}\left(N^{-1}\sum_{i=1}^N\textbf{z}_i'u_i\right) \\
-    &\Leftrightarrow\hat{\pmb{\beta}}_{IV}-\hat{\pmb{\beta}}=[C'D^{-1}C]^{-1}C'D^{-1}\left(N^{-1}\sum_{i=1}^N\textbf{z}_i'u_i\right)\\
-    &\Leftrightarrow\sqrt{N}(\hat{\pmb{\beta}}_{IV}-\hat{\pmb{\beta}})=[C'D^{-1}C]^{-1}C'D^{-1}\left(N^{-\frac{1}{2}}\sum_{i=1}^N\textbf{z}_i'u_i\right).
+    &\Leftrightarrow\hat{\pmb{\beta}}_{IV}-\pmb{\beta}=[C'D^{-1}C]^{-1}C'D^{-1}\left(N^{-1}\sum_{i=1}^N\textbf{z}_i'u_i\right)\\
+    &\Leftrightarrow\sqrt{N}(\hat{\pmb{\beta}}_{IV}-\pmb{\beta})=[C'D^{-1}C]^{-1}C'D^{-1}\left(N^{-\frac{1}{2}}\sum_{i=1}^N\textbf{z}_i'u_i\right).
 \end{align*}
 Note that We take the consistency of IV for granted and focus on deriving the variance. We have that $[C'D^{-1}C]^{-1}C'D^{-1}=o_p(1)$, and by Central Limit Theorem, we have $N^{-\frac{1}{2}}\sum_{i=1}^N\textbf{z}_i'u_i=O_p(1).$ Applying Central Limit Theorem we have
 \begin{align*}
     \left(N^{-\frac{1}{2}}\sum_{i=1}^N\textbf{z}_i'u_i\right)&\xrightarrow{d}\N(0,\E(u^2\textbf{z}'\textbf{z}))\\
-    [C'D^{-1}C]^{-1}C'D^{-1}\left(N^{-\frac{1}{2}}\sum_{i=1}^N\textbf{z}_i'u_i\right)&\xrightarrow{d}\N(0,[C'D^{-1}C]^{-1}[C'D^{-1}\E(u^2\textbf{z}'\textbf{z})D^{-1}C][C'D^{-1}C]^{-1}).
+    \Leftrightarrow\sqrt{N}(\hat{\pmb{\beta}}_{IV}-\pmb{\beta})=[C'D^{-1}C]^{-1}C'D^{-1}\left(N^{-\frac{1}{2}}\sum_{i=1}^N\textbf{z}_i'u_i\right)&\xrightarrow{d}\N(0,[C'D^{-1}C]^{-1}[C'D^{-1}\E(u^2\textbf{z}'\textbf{z})D^{-1}C][C'D^{-1}C]^{-1}).
 \end{align*}
 Finally we have the asymptotic distribution is
 \begin{align*}
-    \sqrt{N}(\hat{\pmb{\beta}}_{IV}-\hat{\pmb{\beta}})&\xrightarrow{d}\N(0,[C'D^{-1}C]^{-1}[C'D^{-1}\E(u^2\textbf{z}'\textbf{z})D^{-1}C][C'D^{-1}C]^{-1}),
+    \sqrt{N}(\hat{\pmb{\beta}}_{IV}-\pmb{\beta})&\xrightarrow{d}\N(0,[C'D^{-1}C]^{-1}[C'D^{-1}\E(u^2\textbf{z}'\textbf{z})D^{-1}C][C'D^{-1}C]^{-1}),
 \end{align*}
 written differently, the variance of IV estimator under heteroskedasticity is
 \begin{align*}
-    \V(\hat{\pmb{\beta}}_{IV})=[C'D^{-1}C]^{-1}[C'D^{-1}\E(u^2\textbf{z}'\textbf{z})D^{-1}C][C'D^{-1}C]^{-1}.
+    \V(\hat{\pmb{\beta}}_{IV})=[C'D^{-1}C]^{-1}\left[C'D^{-1}\left(N^{-1}\sum_{i=1}^N u_i^2\textbf{z}_i'\textbf{z}_i\right)D^{-1}C\right][C'D^{-1}C]^{-1}.
 \end{align*}\qed
 \end{document}
