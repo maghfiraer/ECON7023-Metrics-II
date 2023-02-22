@@ -1,7 +1,7 @@
 \documentclass[10pt]{article}
  
 \usepackage[margin=1in]{geometry} 
-\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+\usepackage{amsmath,amsthm,amssymb,amsfonts, graphicx, multicol, array}
 \usepackage{mathtools}
 \usepackage{booktabs}
 \usepackage{stata/stata}
@@ -23,6 +23,7 @@
 \newcommand{\cov}{\text{Cov}}
 \newcommand{\norm}{\text{Normal}}
 \newcommand{\indep}{\perp \!\!\! \perp}
+\newcommand{\H}{\text{H}}
 
  
 \newenvironment{problem}[2][Problem]{\begin{trivlist}
@@ -65,7 +66,7 @@ Table 2 Column (1) shows the reduced from estimates for $educ$ containing all ex
 
 \item[c.] Estimate the $\log(wage)$ equation by IV, using $nearc4$ as an instrument for $educ.$ Compare the 95 percent confidence interval for the return to education with that obtained from part a. (See also Table 3, Column (5) in Card (1995).)
 \\ Answer:\\
-Table 3 Column (1) shows the $\log(wage)$ equation by IV, using $nearc4$ as an instrument for $educ.$ The estimated return to education that we get is 13.2\% with standard error of 5.5\%. The 95 percent confidence in the IV estimation is 2.37\% to 23.93\% while in the OLS estimation it is 6.78\% to 8.15\%. In this case, in the OLS since there is indication of endogeneity problem, the estimator may be inconsistent even though the confidence interval is smaller but we still can not believe it directly. 
+Table 3 Column (1) shows the $\log(wage)$ equation by IV, using $nearc4$ as an instrument for $educ.$ The estimated return to education that we get is 13.2\% with standard error of 5.5\%. The 95 percent confidence in the 2SLS estimation is 2.37\% to 23.93\% while in the OLS estimation it is 6.78\% to 8.15\%. In this case, in the OLS since there is indication of endogeneity problem, the estimator may be inconsistent even though the confidence interval is smaller but we still can not believe it directly. 
 \\ \\
 \input{HW3/54a}
 \input{HW3/54c}
@@ -74,9 +75,7 @@ Table 3 Column (1) shows the $\log(wage)$ equation by IV, using $nearc4$ as an i
 
 \item[d.] Now use $nearc2$ along with $nearc4$ as instruments for $educ$. First estimate the reduced form for $educ$, and comment on whether $nearc4$ is more strongly related to $educ$. How do the 2SLS estimates compare with the earlier estimates?
 \\ Answer:\\
-Table 2 Column (2) shows the reduced form estimates when adding $nearc2$ and $nearc4$ together. The coefficient for $nearc2$ is 0.123 with standard error of 0.077 which is not statistically significant. Compared to previous result, the coefficient for $nearc4$ is now 
-\\
-Table 3 Column (2) 
+Table 2 Column (2) shows the reduced form estimates when adding $nearc2$ and $nearc4$ together. The coefficient for $nearc2$ is 0.123 with standard error of 0.077 which is not statistically significant. Compared to previous result, the coefficient for $nearc4$ is now increased to 0.321 with relatively similar standard error. Table 3 Column (2) shows the 2SLS estimates with $nearc2$ and $nearc4$ as instruments. The return to education increase to about 15.7\% with increased significance level compared to previous result when using only $nearc4$.
 
 
 
@@ -95,9 +94,18 @@ You have a single indicator of $q$, written as $q_1=\delta_1q+a_1,\delta_1\neq 0
 \begin{enumerate}
 \item[a.] Suggest an IV method for consistently estimating the $\beta_j.$ Be sure to discuss what is needed for identification.
 \\ Answer:\\
+Recall equation (5.45)
+\[y=\beta_0+\beta_1x_1+\cdots+\beta_Kx_K+\gamma q+v.\]
+It is given that $q_1=\delta_1q+a_1 \Leftrightarrow q=\frac{1}{\delta_1}q_1-\frac{1}{\delta_1}a_1$. Substitute it to (5.45) we will have
+\begin{align}
+    y&=\beta_0+\beta_1x_1+\cdots+\beta_Kx_K+\gamma \left(\frac{1}{\delta_1}q_1-\frac{1}{\delta_1}a_1\right)+v \notag \\
+    y&=\beta_0+\beta_1x_1+\cdots+\beta_Kx_K+\frac{\gamma}{\delta_1}q_1+v-\frac{\gamma}{\delta_1}a_1 \label{h3.1}
+\end{align}
+We also have $z_1,z_2,\ldots,z_M$ is a set of variables that are redundant in the structural equation (5.45) and uncorrelated with $a_1.$ Thus, we have $z_1,z_2,\ldots,z_M$ are uncorrelated with the error, $v$. Also, $a_1$ is uncorrelated with each of $x_j,q$ and $v$. Thus, we have $x_j$ uncorrelated with $v-\frac{\gamma}{\delta_1}a_1.$ These conditions satisfy the exlclusion conditions for IV. Therefore we can now estimate equation \eqref{h3.1} to get consistent estimation for $\beta_j$ and $\frac{\gamma}{\delta_1}$ by 2SLS estimation using instruments $x_1,\ldots,x_K,z_1,\ldots,z_M.$ Another identification that we need to show is that at least one of the instruments in $z_1,\ldots,z_M$ appears in $q_1$ to satisfy the rank condition.
 
 \item[b.] If equation (5.45) is a $\log(wage)$ equation, $q$ is ability, $q_1$ is IQ or some other test score, and $z_1,\ldots,z_M$ are family of variables, such as parents' education and number of siblings, describe the economic assumption needed for consistency of the IV procedure in part a.
 \\ Answer:\\
+Suppose $y$ is $\log(wage)$, $z_1,\ldots,z_M$ are family of variables, such as parents' education and number of siblings. The first condition is for family background to be exogenous in equation (5.45), or that the family backgrounds variables are redundant in (5.45) after we control for ability using the indicator $q_1$. The second condition, the rank condition, we need the family backgrounds variable to be correlated with the indicator $q_1$ or $IQ$. It is common to say that family background will be partially correlated with ability.
 
 \item[c.] Carry out this procedure using the data in NLS80.RAW. Include among the explanatory variables $exper, tenure,educ,married,south,urban,$ and $black$. First use $IQ$ as $q_1$ and then $KWW$. Include in the $z_h$ the variables $meduc,feduc,$ and $sibs.$ Discuss the results.
 \\ Answer:\\
@@ -108,15 +116,20 @@ A model with a single endogenous explanatory variable can be written as
 \[y_1=\textbf{z}_1\pmb{\delta}_1+\alpha_1y_2+u_1, \ \ \ \E(\textbf{z}'u_1)=0,\]
 where $\textbf{z}=(\textbf{z}_1,\textbf{z}_2)$. Consider the following two-step method, intended to mimic 2SLS:
 \begin{enumerate}
-    \item[a.] Regress $y_2$ on $\textbf{z}_2$, and obtain the fitted values, $\Tilde{y}_2$. (That is. $\textbf{z}_1$ is omitted from the first-stage regression.)
-    \item[b.] Regress $y_1$ on $\textbf{Z}_1, \Tilde{y}_2$ to obtain $\Tilde{\pmb{\delta}}_1$ and $\Tilde{\alpha}_1$. 
+    \item[a.] Regress $y_2$ on $\textbf{z}_2$, and obtain the fitted values, $\Tilde{y}_2$. (That is, $\textbf{z}_1$ is omitted from the first-stage regression.)
+    \item[b.] Regress $y_1$ on $\textbf{z}_1, \Tilde{y}_2$ to obtain $\Tilde{\pmb{\delta}}_1$ and $\Tilde{\alpha}_1$. 
 \end{enumerate}
-Show that $\Tilde{\pmb{\delta}}_1$ and $\Tilde{\alpha}_1$ are generally inconsistent. When would $\Tilde{\pmb{\delta}}_1$ and $\Tilde{\alpha}_1$ be consistent? (Hint: Let $y_2^0$ be the population linear projection of $y_2$ on $\textbf{z}_2$, and let $a_2$ be the projection error: $y_2^0=\textbf{z}_2\pmb{\lambda}_2+a_2, \E(\textbf{z}_2'a_2)=\textbf{0}$. For simplicity, pretend that $\pmb{\lambda}_2$ is known rather than estimted; that is, assume that $\Tilde{y}_2$ is actually $y_2^0.$ Then, write:
+Show that $\Tilde{\pmb{\delta}}_1$ and $\Tilde{\alpha}_1$ are generally inconsistent. When would $\Tilde{\pmb{\delta}}_1$ and $\Tilde{\alpha}_1$ be consistent? (Hint: Let $y_2^0$ be the population linear projection of $y_2$ on $\textbf{z}_2$, and let $a_2$ be the projection error: $y_2^0=\textbf{z}_2\pmb{\lambda}_2+a_2, \E(\textbf{z}_2'a_2)=\textbf{0}$. For simplicity, pretend that $\pmb{\lambda}_2$ is known rather than estimated; that is, assume that $\Tilde{y}_2$ is actually $y_2^0.$ Then, write:
 \[y_1=\textbf{z}_1\pmb{\delta}_1+\alpha_1y_2^0+\alpha_1a_2+u_1\]
 and check whether the composite error $\alpha_1a_2+u_1$ is uncorrelated with the explanatory variables.)
 \\ Answer:\\
-
-
+Following the hint, let $y_2^0$ be the population linear projection of $y_2$ on $\textbf{z}_2$, and let $a_2$ be the projection error: $y_2^0=\textbf{z}_2\pmb{\lambda}_2+a_2, \E(\textbf{z}_2'a_2)=\textbf{0}$. Assume that $\pmb{\lambda}_2$ is known. Write $y_2=y_2^0+a_2$ and substitute it into the original equation, we have
+\begin{align*}
+    &y_1=\textbf{z}_1\pmb{\delta}_1+\alpha_1y_2+u_1 \\
+    &\Leftrightarrow y_1=\textbf{z}_1\pmb{\delta}_1+\alpha_1(y_2^0+a_2)+u_1 \\
+    &\Leftrightarrow y_1=\textbf{z}_1\pmb{\delta}_1+\alpha_1y_2^0+\underbrace{\alpha_1 a_2+u_1}_{\displaystyle \text{composite error}}.
+\end{align*}
+The conditions for consistent estimation is that $\alpha_1 a_2+u_1$ be orthogonal to $\textbf{z}_1$ and $y_2^0$. It is given that $E(\textbf{z}'u_1)=0$ which also means $E(\textbf{z}'_1u_1)=0,E(\textbf{z}'_2u_1)=0$. From the linear projection by construction we have $E(\textbf{z}'_2a_2)=0$. However, since $\textbf{z}_1$ is omitted in step a, we will have $E(\textbf{z}'_2a_2)\neq0$. Thus our OLS regression in step b will produce inconsistent estimation. This problem happens because we did not include all exogenous variable in the first stage regression.
 
 \subsection*{Problem 5.13}
 Consider the simple regression model
@@ -125,29 +138,52 @@ and let $z$ be a \textit{binary} instrumental variable for $x.$
 \begin{enumerate}
 \item[a.] Show that the IV estimator $\hat{\beta}_1$ can be written as
 \[\hat{\beta}_1=(\bar{y}_1-\bar{y}_0)/(\bar{x}_1-\bar{x}_0),\]
-where $\bar(y)_0$ and $\bar(x)_0$ are the sample averages of $y_i$ and $x_i$ over the part of the sample with $z_i=0$, $\bar(y)_1$ and $\bar(x)_1$ are the sample averages of $y_i$ and $x_i$ over the part of the sample with $z_i=1.$ This estimator, knows as a \textbf{grouping estimator}, was first suggested by Wald (1940).
+where $\bar{y}_0$ and $\bar{x}_0$ are the sample averages of $y_i$ and $x_i$ over the part of the sample with $z_i=0$, $\bar{y}_1$ and $\bar{x}_1$ are the sample averages of $y_i$ and $x_i$ over the part of the sample with $z_i=1.$ This estimator, knows as a \textbf{grouping estimator}, was first suggested by Wald (1940).
 \\ Answer:\\
-
+Recall our IV estimator
+\[\hat{\beta}_{IV}=\left(N^{-1}\sum_{i=1}^N\textbf{z}_i'\textbf{x}_i\right)^{-1}\left(N^{-1}\sum_{i=1}^N\textbf{z}_i'y_i\right).\]
+In the case of simple regression model with single IV, our estimator can be written as
+\begin{align*}
+    \hat{\beta}_{1}&=\cov(z,x)^{-1}\cov(z,y) &\\
+    &=\left(N^{-1}\sum_{i=1}^N(z_i-\bar{z})(x_i-\bar{x})\right)^{-1}\left(N^{-1}\sum_{i=1}^N(z_i-\bar{z})(y_i-\bar{y})\right) &\\
+    &=\left(\sum_{i=1}^N(z_i-\bar{z})(x_i-\bar{x})\right)^{-1}\left(\sum_{i=1}^N(z_i-\bar{z})(y_i-\bar{y})\right) &\\
+    &=\left(\sum_{i=1}^Nz_i(x_i-\bar{x})\right)^{-1}\left(\sum_{i=1}^N z_i(y_i-\bar{y})\right) &\\
+    &=\left(\sum_{i=1}^Nz_ix_i-\bar{x}\sum_{i=1}^Nz_i)\right)^{-1}\left(\sum_{i=1}^N z_iy_i-\bar{y}\sum_{i=1}^Nz_i\right) &[\text{Let } N_1=\sum_{i=1}^N \mathds{1}(z_i=1), N_0=\sum_{i=1}^N \mathds{1}(z_i=0) ]\\
+    &=\left(N_1\bar{x}_1-\bar{x}N_1\right)^{-1}\left(N_1\bar{y}_1-\bar{y}N_1\right) &[\text{Note }N\bar{y}=N_0\bar{y}_0+N_1\bar{y}_1, \text{the same for } x]\\
+    &=\left(\bar{x}_1-\bar{x}\right)^{-1}\left(\bar{y}_1-\bar{y}\right) &\\
+    &=\frac{\left(\bar{y}_1-((N_0/N)\bar{y}_0+(N_1/N)\bar{y}_1)\right)}{\left(\bar{x}_1-((N_0/N)\bar{x}_0+(N_1/N)\bar{x}_1)\right)} &\\
+    &=\frac{\left(((N-N_1)/N)\bar{y}_1-(N_0/N)\bar{y}_0\right)}{\left(((N-N_1)/N)\bar{x}_1-(N_0/N)\bar{x}_0\right)} &[\text{Note }N-N_1=N_0]\\
+    &=(\bar{y}_1-\bar{y}_0)/(\bar{x}_1-\bar{x}_0). &
+\end{align*}\qed
 \item[b.] What is the interpretation of $\hat{\beta}_1$ if $x$ is also binary, for example, representing participation in a social program?
 \\ Answer:\\
+When $x$ is also binary, $\bar{x}_1$ represents the fraction of observations receiving treatment when $z_i=1$ and $\bar{x}_0$ represents the fraction of observations receiving treatment when $z_i=0$. We can see $z_1=1$ as eligibility to receive a treatment. Suppose one of the observations have $z_i=1,x_i=1$ it means they are eligible and receive treatment. Thus $\bar{x}_1$ represent the fraction of eligible people participating in the treatment, and $\bar{x}_0$ represent the fraction of non-eligible people participating in the treatment. We can see $z_i=1$ as being offered scholarship and $x_i=1$ as taking the scholarship offer. We can interpret $\hat{\beta}_1$ as the difference in mean outcome between $z=1$ and $z=0$ divided by the difference in participation rate between those groups, it is also known as average treatment effect.
 \end{enumerate}
 
 \section*{Chapter 6}
 \subsection*{Problem 6.3}
 Consider a model for individual data to test whether nutrition affects productivity (in a developing country):
 \begin{align}
-    \log(produc)=\delta_0+\delta_1exper+\delta_2exper^2+\delta_3educ+\alpha_1calories+\alpha_2protein+u_1, \tag{(6.57)} \label{(6.57)}
+    \log(produc)=\delta_0+\delta_1exper+\delta_2exper^2+\delta_3educ+\alpha_1calories+\alpha_2protein+u_1, \tag{6.57} \label{(6.57)}
 \end{align}
 where $produc$ is some measure of worker productivity, $calories$ is calorie intake per day, and $protein$ is a measure of protein intake per day. Assume here that $exper,exper^2,$ and $educ$ are all exogenous. The variables $calories$ and $protein$ are possibly correlated with $u_1$ (See Strauss and Thomas (1995) for discussion). Possible instrumental variables for $calories$ and $protein$ are regional prices of various goods, such as grains, meats, breads, dairy products, and so on.
 \begin{enumerate}
 \item[a.] Under what circumstances do prices make good IVs for $calories$ and $protein$? What if prices reflect quality of food?
 \\ Answer: \\
+Recall two conditions for a good IV, first is that prices must be partially correlated with $calories$ and $protein$ (the rank condition), and the second, prices is not correlated with the error term $u_1$ (or exogenous in equation \eqref{(6.57)}). We can check the first condition by running reduced form. For the second condition, we must show that prices are not systematically related with individual productivity. If prices reflect quality of food, then it may cause prices to be correlated with the error term, since in equation \eqref{(6.57)} quality of food are omitted and appear in the error $u_1$.
 
 \item[b.] How many prices are needed to identify equation \eqref{(6.57)}?
 \\ Answer: \\
+Since we suspect $calories$ and $protein$ to be endogenous then we must have two instruments minimum. 
 
 \item[c.] Suppose we have $M$ prices, $p_1,\ldots,p_M.$ Explain how to test the null hypothesis that $calories$ and $protein$ are exogenous in equation \eqref{(6.57)}?
 \\ Answer: \\
+We can do the following steps:
+\begin{enumerate}
+    \item Estimate two reduced forms: (1) Regress $calories$ on $exper,exper^2, educ$ and instruments $p_1,\ldots,p_M$ and obtain the residual $\hat{v}_1$, (2) (1) Regress $protein$ on $exper,exper^2, educ$ and instruments $p_1,\ldots,p_M$ and obtain the residual $\hat{v}_2$
+    \item Run OLS regression: Regress $\log(produc)$ on $exper,exper^2,educ,\hat{v}_1,\hat{v}_2.$
+    \item Test the joint significance on $\hat{v}_1,\hat{v}_2$ using F-test.
+\end{enumerate}
 \end{enumerate}\\ 
 
 
@@ -155,22 +191,55 @@ where $produc$ is some measure of worker productivity, $calories$ is calorie int
 For this problem use the data in HPRICE.RAW, which is a subset of the data used by Kiel and McClain (1995). The file contains housing prices and characteristics for two years, 1978 and 1981, for homes sold in North Andover, Massachusetts. In 1981, construction on a garbage incinerator began. Rumors about the incinerator being built were circulating in 1979, and it is for this reason that 1978 is used as the base year. By 1981 it was very clear that the incinerator would be operating soon.
 \begin{enumerate}
 \item[a.] Using the 1981 cross section, estimate a bivariate, constant elasticity model relating housing price to distance from the incinerator. Is this regression appropriate for determining the causal effects of incinerator on housing prices? Explain.
-\\ Answer:\\
+\\ Answer: \\
+Table 4 shows the estimates for a bivariate constant elasticity model. The regression result is statistically significant and convincing with an elasticity of 0.365. However, we must suspect that the model may have endogeneity problem that will cause our OLS estimator to be inconsistent. Thus, the inference result may not be meaningful. In this case the endogeneity problem may arise from simultaneity, it may be that the incinerator site is determined to be in area where the housing price is already low.
 \input{HW3/reg67a}
 
 \item[b.] Pooling the two years of data, consider the model
-\[\log(price)=\delta_0+\delta_1y81_\delta_2\log(dist)+\delta_3y81\cdot \log(dist)+u.\]
+\[\log(price)=\delta_0+\delta_1y81+\delta_2\log(dist)+\delta_3y81\cdot \log(dist)+u.\]
 If the incinerator has a negative effect on housing prices for homes closer to the incinerator, what sign is $\delta_3$? Estimate this model and test the null hypothesis that the incinerator had no effect on housing prices. 
 \\ Answer:\\
+If the incinerator has a negative effect on housing prices for homes closer to the incinerator, then $\delta_3$ should be positive. The expected sign means the house built farther from the incinerator will have higher prices in the year that the incinerator will be operating (1981). Our hypothesis will be
+\begin{align*}
+    H_0: \delta_3=0, \ \ \ \ H_1: \delta_3>0
+\end{align*}
+Table 5 Column (1) shows the estimates for the model in part b. The sign of the estimates on the interaction terms is positive as expected, but it is not large and not significant (P-value of 0.556). Therefore, we can not reject the null hypothesis that construction of the incinerator have no effect on housing price.
 \input{HW3/reg67b}
 
 \item[c.] Add the variables $\log(intst),[\log(intst)]^2,\log(area),\log(land),age,age^2,rooms,baths$ to the model in part b, and test for an incinerator effect. What do you conclude?
 \\ Answer:\\
+Table 5 Column (2) shows the estimates for the model in part b and adding the following variables: $\log(intst),[\log(intst)]^2,$ $\log(area),\log(land),age,age^2,rooms,baths$ to the model. The coefficient on the interaction term in now larger, with elasticity of 0.062 with an improved statistical significance. The P-value is 0.214 for two-sided or equivalent with 0.107 for one-sided hypothesis. This is almost significant at 10\% but still the evidence of detrimental effect of incinerator being built to house prices is weak.
 
 \end{enumerate}
 
 \section*{Non-textbook Problem}
 Derive the variance of the IV estimator for the case of heteroskedasticity.
 \\ Answer:\\
-
+Suppose we have the following model $y=\textbf{x}\pmb{\beta}+u$, that have some endogenous regressors that we will be estimating by IV estimation using instruments $z$. Recall the IV estimator
+\begin{align*}
+    \hat{\pmb{\beta}}_{IV}&=[(\textbf{x}'\textbf{z})(\textbf{z}'\textbf{z})^{-1}(\textbf{z}'\textbf{x})]^{-1}[(\textbf{x}'\textbf{z})(\textbf{z}'\textbf{z})^{-1}(\textbf{z}'\textbf{y})]\\
+    &=\left[\left(N^{-1}\sum_{i=1}^N\textbf{x}_i'\textbf{z}_i\right)\left(N^{-1}\sum_{i=1}^N\textbf{z}_i'\textbf{z}_i\right)^{-1}\left(N^{-1}\sum_{i=1}^N\textbf{z}_i'\textbf{x}_i\right)\right]^{-1}\\
+    &\hspace{12pt}  \left[\left(N^{-1}\sum_{i=1}^N\textbf{x}_i'\textbf{z}_i\right)\left(N^{-1}\sum_{i=1}^N\textbf{z}_i'\textbf{z}_i\right)^{-1}\left(N^{-1}\sum_{i=1}^N\textbf{z}_i'y_i\right)\right].
+\end{align*}
+Substitute $y_i=\textbf{x}_i\pmb{\beta}+u_i,$ we obtain
+\begin{align*}
+    &\hat{\pmb{\beta}}_{IV}=\hat{\pmb{\beta}}+\left[\left(N^{-1}\sum_{i=1}^N\textbf{x}_i'\textbf{z}_i\right)\left(N^{-1}\sum_{i=1}^N\textbf{z}_i'\textbf{z}_i\right)^{-1}\left(N^{-1}\sum_{i=1}^N\textbf{z}_i'\textbf{x}_i\right)\right]^{-1}\\
+    & \hspace{50pt}  \left[\underbrace{\left(N^{-1}\sum_{i=1}^N\textbf{x}_i'\textbf{z}_i\right)}_{\displaystyle C'}{\underbrace{\left(N^{-1}\sum_{i=1}^N\textbf{z}_i'\textbf{z}_i\right)}_{\displaystyle D^{-1}}}^{-1}\left(N^{-1}\sum_{i=1}^N\textbf{z}_i'u_i\right)\right]\\
+    &\Leftrightarrow\hat{\pmb{\beta}}_{IV}=\hat{\pmb{\beta}}+[C'D^{-1}C]^{-1}C'D^{-1}\left(N^{-1}\sum_{i=1}^N\textbf{z}_i'u_i\right) \\
+    &\Leftrightarrow\hat{\pmb{\beta}}_{IV}-\hat{\pmb{\beta}}=[C'D^{-1}C]^{-1}C'D^{-1}\left(N^{-1}\sum_{i=1}^N\textbf{z}_i'u_i\right)\\
+    &\Leftrightarrow\sqrt{N}(\hat{\pmb{\beta}}_{IV}-\hat{\pmb{\beta}})=[C'D^{-1}C]^{-1}C'D^{-1}\left(N^{-\frac{1}{2}}\sum_{i=1}^N\textbf{z}_i'u_i\right).
+\end{align*}
+Note that We take the consistency of IV for granted and focus on deriving the variance. We have that $[C'D^{-1}C]^{-1}C'D^{-1}=o_p(1)$, and by Central Limit Theorem, we have $N^{-\frac{1}{2}}\sum_{i=1}^N\textbf{z}_i'u_i=O_p(1).$ Applying Central Limit Theorem we have
+\begin{align*}
+    \left(N^{-\frac{1}{2}}\sum_{i=1}^N\textbf{z}_i'u_i\right)&\xrightarrow{d}\N(0,\E(u^2\textbf{z}'\textbf{z}))\\
+    [C'D^{-1}C]^{-1}C'D^{-1}\left(N^{-\frac{1}{2}}\sum_{i=1}^N\textbf{z}_i'u_i\right)&\xrightarrow{d}\N(0,[C'D^{-1}C]^{-1}[C'D^{-1}\E(u^2\textbf{z}'\textbf{z})D^{-1}C][C'D^{-1}C]^{-1}).
+\end{align*}
+Finally we have the asymptotic distribution is
+\begin{align*}
+    \sqrt{N}(\hat{\pmb{\beta}}_{IV}-\hat{\pmb{\beta}})&\xrightarrow{d}\N(0,[C'D^{-1}C]^{-1}[C'D^{-1}\E(u^2\textbf{z}'\textbf{z})D^{-1}C][C'D^{-1}C]^{-1}),
+\end{align*}
+written differently, the variance of IV estimator under heteroskedasticity is
+\begin{align*}
+    \V(\hat{\pmb{\beta}}_{IV})=[C'D^{-1}C]^{-1}[C'D^{-1}\E(u^2\textbf{z}'\textbf{z})D^{-1}C][C'D^{-1}C]^{-1}.
+\end{align*}\qed
 \end{document}
