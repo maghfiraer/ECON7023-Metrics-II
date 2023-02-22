@@ -184,7 +184,7 @@ Since we suspect $calories$ and $protein$ to be endogenous then we must have two
 \\ Answer: \\
 We can do the following steps:
 \begin{enumerate}
-    \item Estimate two reduced forms: (1) Regress $calories$ on $exper,exper^2, educ$ and instruments $p_1,\ldots,p_M$ and obtain the residual $\hat{v}_1$, (2) (1) Regress $protein$ on $exper,exper^2, educ$ and instruments $p_1,\ldots,p_M$ and obtain the residual $\hat{v}_2$
+    \item Estimate two reduced forms: (1) Regress $calories$ on $exper,exper^2, educ$ and instruments $p_1,\ldots,p_M$ and obtain the residual $\hat{v}_1$, (2) Regress $protein$ on $exper,exper^2, educ$ and instruments $p_1,\ldots,p_M$ and obtain the residual $\hat{v}_2$
     \item Run OLS regression: Regress $\log(produc)$ on $exper,exper^2,educ,\hat{v}_1,\hat{v}_2.$
     \item Test the joint significance on $\hat{v}_1,\hat{v}_2$ using F-test.
 \end{enumerate}
@@ -243,6 +243,6 @@ Finally we have the asymptotic distribution is
 \end{align*}
 written differently, the variance of IV estimator under heteroskedasticity is
 \begin{align*}
-    \V(\hat{\pmb{\beta}}_{IV})=[C'D^{-1}C]^{-1}\left[C'D^{-1}\left(N^{-1}\sum_{i=1}^N u_i^2\textbf{z}_i'\textbf{z}_i\right)D^{-1}C\right][C'D^{-1}C]^{-1}.
+    \V(\hat{\pmb{\beta}}_{IV})=[C'D^{-1}C]^{-1}\left[C'D^{-1}\left(N^{-1}\sum_{i=1}^N \hat{u}_i^2\textbf{z}_i'\textbf{z}_i\right)D^{-1}C\right][C'D^{-1}C]^{-1}.
 \end{align*}\qed
 \end{document}
