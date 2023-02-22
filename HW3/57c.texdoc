@@ -4,11 +4,11 @@ texdoc init ".\HW3\57c.tex", replace
 2SLS Regression using $meduc, feduc, sibs$ as instrument for $iq$
 ***/
 texdoc stlog
-ivreg lwage tenure educ married south urban black (iq = meduc feduc sibs)
+ivreg lwage exper tenure educ married south urban black (iq = meduc feduc sibs)
 texdoc stlog close
 /***
 2SLS Regression using $meduc, feduc, sibs$ as instrument for $kww$
 ***/
 texdoc stlog
-ivreg lwage tenure educ married south urban black (kww = meduc feduc sibs)
+ivreg lwage exper tenure educ married south urban black (kww = meduc feduc sibs)
 texdoc stlog close

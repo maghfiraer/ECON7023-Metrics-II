@@ -1,26 +1,27 @@
-. ivreg lwage tenure educ married south urban black (kww = meduc feduc sibs)
+. ivreg lwage exper tenure educ married south urban black (kww = meduc feduc sibs)
 {\smallskip}
 Instrumental variables 2SLS regression
 {\smallskip}
       Source {\VBAR}       SS           df       MS      Number of obs   =       722
-\HLI{13}{\PLUS}\HLI{34}   F(7, 714)       =     27.70
-       Model {\VBAR}  22.0383042         7  3.14832917   Prob > F        =    0.0000
-    Residual {\VBAR}  104.773612       714  .146741753   R-squared       =    0.1738
-\HLI{13}{\PLUS}\HLI{34}   Adj R-squared   =    0.1657
-       Total {\VBAR}  126.811916       721  .175883378   Root MSE        =    .38307
+\HLI{13}{\PLUS}\HLI{34}   F(8, 713)       =     25.70
+       Model {\VBAR}   19.820304         8    2.477538   Prob > F        =    0.0000
+    Residual {\VBAR}  106.991612       713  .150058361   R-squared       =    0.1563
+\HLI{13}{\PLUS}\HLI{34}   Adj R-squared   =    0.1468
+       Total {\VBAR}  126.811916       721  .175883378   Root MSE        =    .38737
 {\smallskip}
 \HLI{13}{\TOPT}\HLI{64}
        lwage {\VBAR} Coefficient  Std. err.      t    P>|t|     [95\% conf. interval]
 \HLI{13}{\PLUS}\HLI{64}
-         kww {\VBAR}    .022462    .014171     1.59   0.113    -.0053598    .0502838
-      tenure {\VBAR}   .0072688   .0043559     1.67   0.096     -.001283    .0158207
-        educ {\VBAR}   .0237309   .0198777     1.19   0.233    -.0152949    .0627567
-     married {\VBAR}   .1722297   .0541382     3.18   0.002     .0659407    .2785187
-       south {\VBAR}  -.0934557   .0316378    -2.95   0.003      -.15557   -.0313414
-       urban {\VBAR}   .1533135   .0403009     3.80   0.000      .074191     .232436
-       black {\VBAR}  -.0561141   .0864972    -0.65   0.517    -.2259333    .1137051
-       _cons {\VBAR}   5.389126   .2175243    24.77   0.000     4.962062    5.816189
+         kww {\VBAR}   .0249441   .0150576     1.66   0.098    -.0046184    .0545067
+       exper {\VBAR}   .0068682   .0067471     1.02   0.309    -.0063783    .0201147
+      tenure {\VBAR}   .0051145   .0037739     1.36   0.176    -.0022947    .0125238
+        educ {\VBAR}   .0260808   .0255051     1.02   0.307    -.0239933    .0761549
+     married {\VBAR}   .1605273   .0529759     3.03   0.003     .0565198    .2645347
+       south {\VBAR}   -.091887   .0322147    -2.85   0.004    -.1551341   -.0286399
+       urban {\VBAR}   .1484003   .0411598     3.61   0.000     .0675914    .2292093
+       black {\VBAR}  -.0424452   .0893695    -0.47   0.635    -.2179041    .1330137
+       _cons {\VBAR}   5.217818   .1627592    32.06   0.000     4.898273    5.537362
 \HLI{13}{\BOTT}\HLI{64}
 Instrumented: kww
- Instruments: tenure educ married south urban black meduc feduc sibs
+ Instruments: exper tenure educ married south urban black meduc feduc sibs
 {\smallskip}
