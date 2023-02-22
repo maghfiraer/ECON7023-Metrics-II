@@ -1,0 +1,26 @@
+. ivreg lwage tenure educ married south urban black (kww = meduc feduc sibs)
+{\smallskip}
+Instrumental variables 2SLS regression
+{\smallskip}
+      Source {\VBAR}       SS           df       MS      Number of obs   =       722
+\HLI{13}{\PLUS}\HLI{34}   F(7, 714)       =     27.70
+       Model {\VBAR}  22.0383042         7  3.14832917   Prob > F        =    0.0000
+    Residual {\VBAR}  104.773612       714  .146741753   R-squared       =    0.1738
+\HLI{13}{\PLUS}\HLI{34}   Adj R-squared   =    0.1657
+       Total {\VBAR}  126.811916       721  .175883378   Root MSE        =    .38307
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+       lwage {\VBAR} Coefficient  Std. err.      t    P>|t|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+         kww {\VBAR}    .022462    .014171     1.59   0.113    -.0053598    .0502838
+      tenure {\VBAR}   .0072688   .0043559     1.67   0.096     -.001283    .0158207
+        educ {\VBAR}   .0237309   .0198777     1.19   0.233    -.0152949    .0627567
+     married {\VBAR}   .1722297   .0541382     3.18   0.002     .0659407    .2785187
+       south {\VBAR}  -.0934557   .0316378    -2.95   0.003      -.15557   -.0313414
+       urban {\VBAR}   .1533135   .0403009     3.80   0.000      .074191     .232436
+       black {\VBAR}  -.0561141   .0864972    -0.65   0.517    -.2259333    .1137051
+       _cons {\VBAR}   5.389126   .2175243    24.77   0.000     4.962062    5.816189
+\HLI{13}{\BOTT}\HLI{64}
+Instrumented: kww
+ Instruments: tenure educ married south urban black meduc feduc sibs
+{\smallskip}

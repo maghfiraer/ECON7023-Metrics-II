@@ -54,8 +54,24 @@ esttab using ".\HW3\reg54e.tex", replace ///
  booktabs ///
  title("Regression results for (1) Problem 5.4.e. and (2) Problem 5.4.f.")   ///
  addnotes("Data: CARD.DTA" "Wooldridge (2011)")
+
 clear
- 
+
+*5.7c
+use ".\data\nls80.dta"
+texdoc do ".\HW3\57c.texdoc"
+
+est clear
+eststo: ivreg lwage tenure educ married south urban black (iq = meduc feduc sibs)
+eststo: ivreg lwage tenure educ married south urban black (kww = meduc feduc sibs)
+esttab using ".\HW3\reg57c.tex", replace ///
+ b(3) se(3) nomtitle label star(* 0.10 ** 0.05 *** 0.01) ///
+ booktabs ///
+ title("Regression results for Problem 5.7.c.")   ///
+ addnotes("Data: NLS80.DTA" "Wooldridge (2011)")
+
+clear
+
 *Problem 6.7
 use ".\data\hprice.dta"
  
