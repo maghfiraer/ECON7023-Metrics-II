@@ -92,7 +92,18 @@
 \setbeamertemplate{subsection in toc}{\leavevmode\leftskip=4.2em\rlap{\hskip-2em \small \inserttocsectionnumber.\inserttocsubsectionnumber}\hspace{0.2cm}\small\inserttocsubsection\par \vspace{0.3em}}
 
 \setbeamertemplate{subsubsection in toc}{\leavevmode\leftskip=8.2em\rlap{\hskip-2em \small \inserttocsectionnumber.\inserttocsubsectionnumber.\inserttocsubsubsectionnumber}\hspace{0.4cm}\small\inserttocsubsubsection\par \vspace{0.3em}}
-
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Continuation
+\makeatletter
+\defbeamertemplate*{frametitle continuation}{only if multiple}{%
+    \ifnum \numexpr\beamer@endpageofframe+1-\beamer@startpageofframe\relax > 1
+        \textmd{(%
+            \insertcontinuationcount/%
+            \the\numexpr\beamer@endpageofframe+1-\beamer@startpageofframe%
+        )}%
+    \fi%
+}
+\makeatother
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 % Figures
 \setbeamertemplate{caption label separator}[period]
@@ -103,5 +114,6 @@
 \setbeamerfont{itemize/enumerate subbody}{size=\normalfont}
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 % Bibliography
+\setbeamertemplate{bibliography item}{}
 
 \mode<all>

@@ -11,7 +11,7 @@
 
 
 \documentclass[
-11pt,notheorems,hyperref={pdfauthor=whatever}
+11pt,notheorems,hyperref={pdfauthor=Maghfira Ramadhani}
 ]{beamer}
 
 \input{loadslides.tex} % Loads packages and some defined commands
@@ -24,13 +24,16 @@
 \def\then{$\rightsquigarrow\,$}
 \def\so{{$\Rightarrow\,$}}
 \def\tb{\textbar{}\,}
-
+\newcommand{\al}[1]{\textbf{\alert{#1}}}
+\newcommand{\alb}[1]{\textbf{\textcolor{blue}{#1}}}
+\newcommand{\alg}[1]{\textbf{\textcolor{green}{#1}}}
+\newcommand{\alr}[1]{\textbf{\textcolor{red}{#1}}}
 
 \title[
 % Text entered here will appear in the bottom middle
 ]{Measuring Village Infrastructure Development in Indonesia}
 
-\subtitle{ECON 7023 Econometrics II: Final Project Proposal}
+\subtitle{ECON 7023 Econometrics II: Final Project}
 
 \author[
 % Text entered here will appear in the bottom left corner
@@ -55,21 +58,20 @@
 \addtocounter{framenumber}{-1}
 
 % You can declare different parts as a parentof sections
-\begin{frame}{Part I: Proposal}
-    \tableofcontents[part=1]
+\begin{frame}{Table of Contents}
+    \tableofcontents%[part=1]
 \end{frame}
 
-\makepart{Proposal}
+%\makepart{Proposal}
 
 \section{Introduction}
 \begin{frame}
 \begin{itemize}
     \item infrastructure \up \so cost \up \citeauthor{hartojo_2022}
     \item I created Elegant Slides because I wasn't satisfied with any of the existing Beamer templates, which look slightly different than Elegant Slides.
-    \item My goal was to create a layout that is \alert{\textbf{simplistic but beautiful}} and focuses on the content, rather than crowding each slide with lots of different coloured boxes.
-    \item I designed Elegant Slides for \alert{\textbf{lecture notes and technical presentations}} but it can be used for any kind of talk. 
+    \item My goal was to create a layout that is \al{simplistic but beautiful} and focuses on the content, rather than crowding each slide with lots of different coloured boxes.
+    \item I designed Elegant Slides for \al{lecture notes and technical presentations} but it can be used for any kind of talk. 
 \end{itemize}
-     
 \end{frame}
 
 \subsection{Background}
@@ -80,7 +82,7 @@
 \subsection{Literature Review}
 \begin{frame}{Literature Review}{Overview of Rural Development}
 \begin{itemize}
-    \item Developing countries have been focusing on decentralization and local government reform with the believe that they are more efficient in bringing local development (\cite{vazquez_2017}) 
+    \item Developing countries have been focusing on decentralization and local government reform with the believe that they are \alert{\textbf{more efficient}} in bringing local development (\cite{vazquez_2017}) 
     \item 
     \item 
 \end{itemize}
@@ -88,6 +90,52 @@
 
 \begin{frame}{Literature Review}{Development Agenda in Indonesia}
     This frame has a custom title and a custom subtitle.\footnote{This is a footnote. See also \textcite{hartojo_2022}. }
+\end{frame}
+
+\section{Empirical Strategy}
+\subsection{Data Overview}
+\begin{frame}
+    \begin{itemize}
+        \item This study used village in Indonesia as the unit of analysis. 
+        \item I obtained the \al{Village Potential Statistics} data for the year 2011, 2014 and 2018 from Indonesia's Central Bureau of Statistics consisting of consecutively 77,961, 82,190, and 83,931 observations.
+        \item The survey covers the following module:
+        \begin{multicols}{2}
+        \begin{itemize}
+            \item general information of village,
+            \item population and employment, 
+            \item housing and environment, 
+            \item natural disaster, 
+            \item education and health, 
+            \item sport and leisure, 
+            \item transportation and communication,
+            \item land use,
+            \item economic activity, 
+            \item security, 
+            \item \alg{local government}, 
+            \item community empowerment, and \item agriculture.
+        \end{itemize}
+        \end{multicols}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+
+   \centering
+	\begin{minipage}[b]{0.5\textwidth}
+
+	  \begin{block}{Default}
+        Block content.
+      \end{block}
+
+      \begin{alertblock}{Alert}
+        Block content.
+      \end{alertblock}
+
+      \begin{exampleblock}{Example}
+        Block content.
+      \end{exampleblock}      
+      
+	\end{minipage}	
 \end{frame}
 
 \subsection{Typographics}
@@ -186,83 +234,18 @@
 
 \end{frame}
 
-\subsection{Blocks}
-\begin{frame}
-
-   \centering
-	\begin{minipage}[b]{0.5\textwidth}
-
-	  \begin{block}{Default}
-        Block content.
-      \end{block}
-
-      \begin{alertblock}{Alert}
-        Block content.
-      \end{alertblock}
-
-      \begin{exampleblock}{Example}
-        Block content.
-      \end{exampleblock}      
-      
-	\end{minipage}	
-\end{frame}
-
-\section{Empirical Strategy}
-\subsection{Data Overview}
-\begin{frame}
-    \begin{itemize}
-        \item This study used village in Indonesia as the unit of analysis. 
-        \item I obtained the Village Potential Statistics data for the year 2011, 2014 and 2018 from Indonesia's Central Bureau of Statistics consisting of .
-        \item A numbered equation:
-        \begin{equation}
-            y_t = \beta x_t + \varepsilon_t
-        \end{equation}
-         \item Another equation:
-        \begin{equation*}
-            \mathbf{Y} = \boldsymbol{\beta} \mathbf{X} + \boldsymbol{\varepsilon}_t
-        \end{equation*}
-    \end{itemize}
-\end{frame}
-
 \subsection{Method}
 \begin{frame}
     \begin{itemize}
         \item Theorems are numbered consecutively.
     \end{itemize}
-    \begin{theorem}[Example Theorem]
-         Given a discrete random variable X, which takes values in the alphabet $\mathcal{X}$ and is distributed according to  $p:{\mathcal {X}}\to [0,1]$:
-            \begin{equation}
-                \mathrm {H} (X):=-\sum _{x\in {\mathcal {X}}}p(x)\log p(x)=\mathbb {E} [-\log p(X)]
-            \end{equation}
-    \end{theorem}
+    \begin{equation}
+        y_{it}=\textbf{X}_{it}\pmb{\beta}+\varepsilon_{it}
+    \end{equation}
 \end{frame}
 
-\begin{frame}{}{Definitions}
-    \begin{itemize}
-        \item Definition numbers are prefixed by the section number in the respective part.
-    \end{itemize}
-     \begin{definition}[Example Definition]
-         Given a discrete random variable X, which takes values in the alphabet $\mathcal{X}$ and is distributed according to  $p:{\mathcal {X}}\to [0,1]$:
-            \begin{equation}
-                \mathrm {H} (X):=-\sum _{x\in {\mathcal {X}}}p(x)\log p(x)=\mathbb {E} [-\log p(X)]
-            \end{equation}
-    \end{definition}
-\end{frame}
-
-\begin{frame}{}{Examples}
-    \begin{itemize}
-        \item Examples are numbered as definitions.
-    \end{itemize}
-    \begin{examp}[Example Theorem]
-         Given a discrete random variable X, which takes values in the alphabet $\mathcal{X}$ and is distributed according to  $p:{\mathcal {X}}\to [0,1]$:
-            \begin{equation}
-                \mathrm {H} (X):=-\sum _{x\in {\mathcal {X}}}p(x)\log p(x)=\mathbb {E} [-\log p(X)]
-            \end{equation}
-    \end{examp}
-\end{frame}
-
-
-\begin{frame}[allowframebreaks]{References}
+\section{References}
+\begin{frame}[allowframebreaks]
     \printbibliography
 \end{frame}
 \end{document}
