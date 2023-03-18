@@ -51,12 +51,13 @@ The OLS estimate shows that women with eight more years of education on average 
 \\ Answer: \\
 From the reduced form regression result, we can see that $educ$ is very significantly partially correlated with $feduc$ and $meduc$. Also, the F-test result indicates the same thing with a p-value of zero.\\ \\
 \input{HW4/68b}
-Then using a residual-based test of $educ$ against the null that $educ$ is exogenous, the p-value of the residual from the reduced form in the original regression model is around one-half, showing little evidence that $educ$ is endogenous in the equation. From the 2SLS estimate, the coefficient on $educ$ is larger than the one from OLS, but since we find that there is not enough evidence of endogeneity the difference can be due to sampling problem.  
+Then using a residual-based test of $educ$ against the null that $educ$ is exogenous, the p-value of the residual from the reduced form in the original regression model is around one-half, showing little evidence that $educ$ is endogenous in the equation. From the 2SLS estimate, the coefficient on $educ$ is larger than the one from OLS, but since we find that there is not enough evidence of endogeneity the difference can be due to the sampling problem.  
 
 \item[c.] Now allow the effect of education to change over time by including interaction terms such as $y74\cdot educ$, $y76\cdot educ$, and so on in the model. Use interactions of time dummies and parents’ education as instruments for the interaction terms. Test that there has been no change in the relationship between fertility and education over time.
 \\ Answer: \\
+Since there is no strong evidence of endogeneity of $educ$, I run the full model using OLS, and test the joint significance for all $time$ and $educ$ interaction terms. Also, I performed regression for the full model using 2SLS to compare.\\
 \input{HW4/68c}
-
+From the OLS model, the individual significance of the interaction terms is significant in the last two years that is 1984 and 1982 with negative coefficients. A similar result is obtained from the 2SLS estimate, with relatively close values to those from the OLS. From the joint significance of all interaction terms, there is enough evidence that there have been changes in the relationship between fertility and education over time.
 \end{enumerate}
 
 \subsection*{Problem 6.9}
@@ -65,13 +66,16 @@ Use the data in INJURY.RAW for this question.
 \item[a.] Using the data for Kentucky, reestimate equation (6.54) adding as explanatory variables $male$, $married$, and a full set of industry- and injury-type dummy variables. How does the estimate on $afchnge\cdot highearn$ change when these other factors are controlled for? Is the estimate still statistically significant? 
 \\ Answer: \\
 \input{HW4/69a}
+Compared to without adding the new variables, the estimated coefficient on the interaction terms is now higher at 0.23 than at .19 from the previous result. It is also statistically more significant with a p-value of 0.001. Adding the new variables only slightly affects the standard error on the interaction terms. 
 
 \item[b.] What do you make of the small R-squared from part a? Does this mean the equation is useless? 
 \\ Answer: \\
+Comparing the R-squared that is quite small at 4.1\% and adjusted R-square of 3.9\%. It means that our model does not explain much of the variation. It means that we can not really use our model for making good predictions considering the variable that we have included so far. However, we can still get a good causal inference if the coefficient is statistically significant.
 
 \item[c.] Estimate equation (6.54) using the data for Michigan. Compare the estimate on the interaction term for Michigan and Kentucky, as well as their statistical significance.
 \\ Answer: \\
 \input{HW4/69c}
+Comparing the estimate for Michigan and Kentucky we have similar estimates on the interaction terms.
 
 \end{enumerate}
 
