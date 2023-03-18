@@ -10,7 +10,7 @@ texdoc stlog close
 Generate Fitted Value for educ from First Stage Regression
 ***/
 texdoc stlog
-reg educ exper expersq black south smsa reg661-reg668 smsa66 blackeduc nearc4 nearc4black, robust
+reg educ exper expersq black south smsa reg661-reg668 smsa66 nearc4, robust
 predict double educhat
 gen blackeduchat=black*educhat
 texdoc stlog close
