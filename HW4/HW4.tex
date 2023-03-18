@@ -78,7 +78,7 @@ where the explanatory variables are standard. The variable $union$ is a dummy va
 \begin{enumerate}
 \item[a.] Estimate this equation and test whether the return to education has changed over the seven-year period.
 \\ Answer: \\
-
+Table show the estimates of the regression model. The return to education increased by 1.85 percent between the year 1978 and 1985 interpreted from the coefficient on $y85\cdot educ$, which is statistically significant at 5\% level (two-sided). 
 \item[b.] What has happened to the gender gap over the period? 
 \\ Answer: \\
 
@@ -95,22 +95,67 @@ where the explanatory variables are standard. The variable $union$ is a dummy va
 
 \section*{Chapter 7}
 \subsection*{Problem 7.2}
-In model (7.11), maintain Assumptions SOLS.1 and SOLS.2, and assume $\E(\textbf{X}_i'\textbf{u}_i\textbf{u}_i'\textbf{X}_i)=\E(\textbf{X}_i'\pmb{\Omega}\textbf{X}_i)$, where $\pmb{\Omega}\equiv \E(\textbf{u}_i\textbf{u}_i').$ (The last assumption is a different way of stating the homoskedasticity assumption for systems of equations; it always holds if assumption (7.53) holds.) Let $\hat{\pmb{\beta}}_{SOLS}$ denote the system OLS estimator.
+In model (7.11), maintain Assumptions SOLS.1 and SOLS.2, and assume $\textbf{}B=\E(\textbf{X}_i'\textbf{u}_i\textbf{u}_i'\textbf{X}_i)=\E(\textbf{X}_i'\pmb{\Omega}\textbf{X}_i)$, where $\pmb{\Omega}\equiv \E(\textbf{u}_i\textbf{u}_i').$ (The last assumption is a different way of stating the homoskedasticity assumption for systems of equations; it always holds if assumption (7.53) holds.) Let $\hat{\pmb{\beta}}_{SOLS}$ denote the system OLS estimator.
 \begin{enumerate}
-\item[a.] Show that $\Av(\hat{\pmb{beta}}_{SOLS})=[\E(\textbf{X}_i'\textbf{X}_i)]^{-1}[\E(\textbf{X}_i'\pmb{\Omega}\textbf{X}_i)][\E(\textbf{X}_i'\textbf{X}_i)]^{-1}/N.$
+\item[a.] Show that $\Av(\hat{\pmb{\beta}}_{SOLS})=[\E(\textbf{X}_i'\textbf{X}_i)]^{-1}[\E(\textbf{X}_i'\pmb{\Omega}\textbf{X}_i)][\E(\textbf{X}_i'\textbf{X}_i)]^{-1}/N.$
 \\ Answer:\\
+Recall model (7.11),
+\[\textbf{y}_i=\textbf{X}_i\pmb{\beta}+\textbf{u}_i,\]
+where $\pmb{\beta}$ is a $K\times 1$ vector, $\textbf{X}_i$ is a $G\times K$ data matrix and $\textbf{u}_i$ is a $G\times 1$ vector of error. Also, recall Assumptions SOLS.1: $\E(\textbf{X}_i'\textbf{u}_i)=0,$ and SOLS.2: $\textbf{A}=\E(\textbf{X}_i'\textbf{X}_i)$ is nonsingular (has rank $K$). Under these two assumption we can write $\pmb{\beta}$ as the following
+\begin{align*}
+    \textbf{y}_i=\textbf{X}_i\pmb{\beta}+\textbf{u}_i &\Leftrightarrow \textbf{X}_i'\textbf{y}_i=\textbf{X}_i'\textbf{X}_i\pmb{\beta}+\textbf{X}_i'\textbf{u}_i \\
+    &\Leftrightarrow \E( \textbf{X}_i'\textbf{y}_i)=\E(\textbf{X}_i'\textbf{X}_i)\pmb{\beta}+\E(\textbf{X}_i'\textbf{u}_i) \\
+    &\Leftrightarrow \pmb{\beta}=\E(\textbf{X}_i'\textbf{X}_i)^{-1}\E( \textbf{X}_i'\textbf{y}_i)
+\end{align*}
+Now from the analogy principle we know that $\hat{\pmb{\beta}}=(N^{-1}\sum_{i=1}^N \textbf{X}_i'\textbf{X}_i)^{-1}(N^{-1}\sum_{i=1}^N \textbf{X}_i'\textbf{y}_i)$. Substitute the population model and with some algebraic manipulation, we can then write $\sqrt{N}(\hat{\pmb{\beta}}-\pmb{\beta})$ as the following
+\begin{align*}
+    \sqrt{N}(\hat{\pmb{\beta}}-\pmb{\beta})=(N^{-1}\sum_{i=1}^N \textbf{X}_i'\textbf{X}_i)^{-1}(N^{-1/2}\sum_{i=1}^N \textbf{X}_i'\textbf{u}_i).
+\end{align*}
+Since $\E(\textbf{X}_i'\textbf{u}_i)=0$ from CLT we have $N^{-1/2}\sum_{i=1}^N \textbf{X}_i'\textbf{u}_i\asym \N(\textbf{0},\textbf{B})$. Further, we can then write $N^{-1/2}\sum_{i=1}^N \textbf{X}_i'\textbf{u}_i=O_p(1)$, and by LLN and Slutsky's theorem we also have $(\textbf{X}\textbf{X}/N)^{-1}=\textbf{A}^{-1}+o_p(1).$ Then we can rewrite,
+\begin{align*}
+    \sqrt{N}(\hat{\pmb{\beta}}-\pmb{\beta})&=\textbf{A}^{-1}(N^{-1/2}\sum_{i=1}^N \textbf{X}_i'\textbf{u}_i)+[(\textbf{X}'\textbf{X}/N)^{-1}-\textbf{A}^{-1}](N^{-1/2}\sum_{i=1}^N \textbf{X}_i'\textbf{u}_i)\\
+    &=\textbf{A}^{-1}(N^{-1/2}\sum_{i=1}^N \textbf{X}_i'\textbf{u}_i)+o_p(1)\cdot O_p(1)=\textbf{A}^{-1}(N^{-1/2}\sum_{i=1}^N \textbf{X}_i'\textbf{u}_i)+o_p(1).
+\end{align*}
+Thus we can derive now by CLT, that $\sqrt{N}(\hat{\pmb{\beta}}-\pmb{\beta})\asym \N(\textbf{0},\textbf{A}^{-1}\textbf{B}\textbf{A}^{-1})=\N(\textbf{0},\textbf{A}^{-1}\E(\textbf{X}_i'\pmb{\Omega}\textbf{X}_i)\textbf{A}^{-1}).$ We can write it similarly as $\Av(\hat{\pmb{\beta}}_{SOLS})=[\E(\textbf{X}_i'\textbf{X}_i)]^{-1}[\E(\textbf{X}_i'\pmb{\Omega}\textbf{X}_i)][\E(\textbf{X}_i'\textbf{X}_i)]^{-1}/N.$ 
 
-\item[b.] How would you estimate the asymptotic variance in part a?
+\item[b.] How would you estimate the asymptotic variance in part a? 
 \\ Answer:\\
+To estimate $\Av(\hat{\pmb{\beta}}_{SOLS})=[\E(\textbf{X}_i'\textbf{X}_i)]^{-1}[\E(\textbf{X}_i'\pmb{\Omega}\textbf{X}_i)][\E(\textbf{X}_i'\textbf{X}_i)]^{-1}/N$, we can use analogy principle. From LLN we know that, $\hat{\textbf{A}}=\textbf{X}'\textbf{X}/N=N^{-1}\sum_{i=1}^N \textbf{X}_i'\textbf{X}_i\convprob \E(\textbf{X}_i'\textbf{X}_i)$. Then to estimate the $\textbf{u}_i$ we use the SOLS residuals $\hat{\textbf{u}}_i=\textbf{y}_i-\textbf{X}_i\hat{\pmb{\beta}}$ which is a $G\times 1$ vector of residuals. Then we have $\hat{\pmb{\Omega}}=N^{-1}\sum_{i=1}^N\hat{\textbf{u}}_i\hat{\textbf{u}}_i' \convprob \pmb{\Omega}$. Then we can estimate $\Av(\hat{\pmb{\beta}}_{SOLS})$ by
+\[\hat{\textbf{V}}=\hat{\textbf{A}}^{-1}\left(\sum_{i=1}^N\textbf{X}_i'\hat{\pmb{\Omega}}\textbf{X}_i\right)\hat{\textbf{A}}^{-1}=\left(\sum_{i=1}^N \textbf{X}_i'\textbf{X}_i\right)^{-1}\left(\sum_{i=1}^N\textbf{X}_i'\hat{\pmb{\Omega}}\textbf{X}_i\right)\left(\sum_{i=1}^N \textbf{X}_i'\textbf{X}_i\right)^{-1}.\]
 
 \item[c.] Now add Assumptions SGLS.1-SGLS.3. Show that $\Av(\hat{\pmb{\beta}}_{SOLS})-\Av(\hat{\pmb{\beta}}_{FGLS})$ is positive semidefinite. (Hint: Show that $[\Av(\hat{\pmb{\beta}}_{FGLS})]^{-1}-[\Av(\hat{\pmb{\beta}}_{SOLS})]^{-1}$ is p.s.d.)
 \\ Answer:\\
+Recall Assumptions SGLS.1: $\E(\textbf{X}_i \otimes \textbf{u}_i)=\textbf{0},$ SGLS.2: $\pmb{\Omega}$ is p.s.d. and $\E(\textbf{X}_i'\pmb{\Omega}^{-1}\textbf{X}_i)$ is nonsingular, and SGLS.3: $\E(\textbf{X}_i'\pmb{\Omega}^{-1}\textbf{u}_i\textbf{u}_i'\pmb{\Omega}^{-1}\textbf{X}_i)=\E(\textbf{X}_i'\pmb{\Omega}^{-1}\textbf{X}_i)$, where $\pmb{\Omega}\equiv \E(\textbf{u}_i\textbf{u}_i').$\\
+We need to show that $\Av(\hat{\pmb{\beta}}_{SOLS})-\Av(\hat{\pmb{\beta}}_{FGLS})$ is p.s.d which is equivalent to showing that $[\Av(\hat{\pmb{\beta}}_{FGLS})]^{-1}-[\Av(\hat{\pmb{\beta}}_{SOLS})]^{-1}$ is p.s.d. Recall that under Assumptions SGLS.1-SGLS.3 from Theorem 7.4 in textbook we have $\Av(\hat{\pmb{\beta}}_{FGLS})=\E(\textbf{X}_i'\pmb{\Omega}\textbf{X}_i)^{-1}/N.$ Disregard the $N$ and we have
+\begin{align*}=
+    \Av(\hat{\pmb{\beta}}_{FGLS})]^{-1}-[\Av(\hat{\pmb{\beta}}_{SOLS})]^{-1}=E(\textbf{X}_i'\pmb{\Omega}\textbf{X}_i)-\E(\textbf{X}_i'\textbf{X}_i)[\E(\textbf{X}_i'\pmb{\Omega}\textbf{X}_i)]^{-1}\E(\textbf{X}_i'\textbf{X}_i)
+\end{align*}
+need to be p.s.d. Now, we need some algebraic manipulation to help, make $E(\textbf{X}_i'\pmb{\Omega}\textbf{X}_i)=E(\textbf{Z}_i'\textbf{Z}_i)$, by construction we have $\textbf{Z}_i=\pmb{\Omega}^{-1/2}\textbf{X}_i$. Similarly, make $\E(\textbf{X}_i'\pmb{\Omega}\textbf{X}_i)=\E(\textbf{W}_i'\textbf{W}_i)$, by construction we have $\textbf{W}_i=\pmb{\Omega}^{1/2}\textbf{X}_i$. Now, we are left to show that 
+\begin{align*}
+    \E(\textbf{X}_i'\pmb{\Omega}\textbf{X}_i)-\E(\textbf{X}_i'\textbf{X}_i)[\E(\textbf{X}_i'\pmb{\Omega}\textbf{X}_i)]^{-1}\E(\textbf{X}_i'\textbf{X}_i)=\E(\textbf{Z}_i'\textbf{Z}_i)-\E(\textbf{Z}_i'\textbf{W}_i)\E(\textbf{W}_i'\textbf{W}_i)\E(\textbf{W}_i'\textbf{Z}_i)
+\end{align*}
+The latter form look familiar with the matrix form when we show efficiency of 2SLS. Now define linear projection of $\textbf{Z}_i$ on $\textbf{W}_i$: $\textbf{Z}_i=\textbf{W}_i\pmb{\Pi}+\textbf{R}_i,$ with $\pmb{\Pi}=\E(\textbf{W}_i'\textbf{W}_i)^{-1}\E(\textbf{W}_i'\textbf{Z}_i),$ and $\textbf{R}_i$ is $G\times K$ matrix of population residual from the projection. By algebraic manipulation we can show that
+\[\E(\textbf{R}_i'\textbf{R}_i)=\E(\textbf{Z}_i'\textbf{Z}_i)-\E(\textbf{Z}_i'\textbf{W}_i)\E(\textbf{W}_i'\textbf{W}_i)\E(\textbf{W}_i'\textbf{Z}_i),\]
+which is a positive semi-definite since it is a quadratic form of a matrix, with identity as the meat in the sandwich form. Thus we show that under these assumptions and the rank condition satisfied FGLS is more efficient than OLS.\qed
 
 \item[d.] If, in addition to the previous assumptions, $\pmb{\Omega}=\sigma^2 \textbf{I}_G$, show that SOLS and FGLS have the same asymptotic variance.
 \\ Answer:\\
+Recall that
+\begin{align*}
+    &\Av(\hat{\pmb{\beta}}_{FGLS})=\E(\textbf{X}_i'\pmb{\Omega}\textbf{X}_i)^{-1}/N, \\
+    &\Av(\hat{\pmb{\beta}}_{SOLS})=[\E(\textbf{X}_i'\textbf{X}_i)]^{-1}[\E(\textbf{X}_i'\pmb{\Omega}\textbf{X}_i)][\E(\textbf{X}_i'\textbf{X}_i)]^{-1}/N,
+\end{align*}and substitute the given assumption. We have
+\begin{align*}
+    \Av(\hat{\pmb{\beta}}_{FGLS})&=\E(\textbf{X}_i'\pmb{\Omega}\textbf{X}_i)^{-1}/N=\E(\textbf{X}_i'\sigma^2 \textbf{I}_G\textbf{X}_i)^{-1}/N=\sigma^2\E(\textbf{X}_i'\textbf{X}_i)^{-1}/N, \\
+    \Av(\hat{\pmb{\beta}}_{SOLS})&=[\E(\textbf{X}_i'\textbf{X}_i)]^{-1}[\E(\textbf{X}_i'\pmb{\Omega}\textbf{X}_i)][\E(\textbf{X}_i'\textbf{X}_i)]^{-1}/N\\
+    &=[\E(\textbf{X}_i'\textbf{X}_i)]^{-1}[\E(\textbf{X}_i'\sigma^2 \textbf{I}_G\textbf{X}_i)][\E(\textbf{X}_i'\textbf{X}_i)]^{-1}/N\\
+    &=\sigma^2\E(\textbf{X}_i'\textbf{X}_i)^{-1}/N.
+\end{align*}
+We showed that they are the same.\qed
 
 \item[e.] Evaluate the following statement: ``Under the assumption of part c, FGLS is never asymptotically worse that SOLS, even if $\pmb{\Omega}=\sigma^2 \textbf{I}_G$."
 \\ Answer:\\
+The statement is true provided of what we showed in part c and part d, and provided that any other condition such as rank conditions holds.
 
 \end{enumerate}
 
@@ -125,25 +170,73 @@ Consider the panel data model
 \begin{enumerate}
 \item[a.] Show that $\pmb{\Omega}= \E(\textbf{u}_i\textbf{u}_i')$ is a diagonal matrix.
 \\ Answer: \\
+From the last given condition $\E(u_{it}^2)=\sigma_t^2$. Now take the element with different $t$, $\E(u_{it}u_{is})$ with $s\neq t$. From the second given condition $\E(u_{it}|\textbf{x}_{it},u_{i,t-1},\textbf{x}_{i,t-1},\ldots,)=0,$ then we have $\E(u_{it}|u_{is})=0.$ By LIE we have $\E(u_{it}u_{is})=\E(u_{it}u_{is}|u_{is})=\E(u_{is}\E(u_{it}|u_{is}))=0$ with $s\neq t$. Thus, $\pmb{\Omega}= \E(\textbf{u}_i\textbf{u}_i')$ is a diagonal matrix.\qed
 
-\item[b.] Write down the GLS estimator assuming that $\pmb{\Omega}$ is know.
+\item[b.] Write down the GLS estimator assuming that $\pmb{\Omega}$ is known.
 \\ Answer: \\
-
+Recall the GLS estimator from equation (7.45) in textbook but we don't need to estimate $\hat{\pmb{\Omega}}$ because $\pmb{\Omega}$ is know is known. We have
+\begin{align*}
+    \hat{\pmb{\beta}}&=\left(\sum_{i=1}^N\textbf{X}_i'\pmb{\Omega}^{-1}\textbf{X}_i\right)^{-1}\left(\sum_{i=1}^N\textbf{X}_i'{\pmb{\Omega}}^{-1}\textbf{y}_i\right)\\
+    &=\left(\sum_{i=1}^N\textbf{X}_i'{\E(\textbf{u}_i\textbf{u}_i')}^{-1}\textbf{X}_i\right)^{-1}\left(\sum_{i=1}^N\textbf{X}_i'{\E(\textbf{u}_i\textbf{u}_i')}^{-1}\textbf{y}_i\right)\\
+    &=\left(\sum_{i=1}^N\sum_{t=1}^T{(\sigma_t^2)}^{-1}\textbf{x}_{it}'\textbf{x}_{it}\right)^{-1}\left(\sum_{i=1}^N\sum_{t=1}^N{(\sigma_t^2)}^{-1}\textbf{x}_{it}'\textbf{y}_{it}\right)\\
+    &=\left(\sum_{i=1}^N\sum_{t=1}^T{\sigma_t^}^{-2}\textbf{x}_{it}'\textbf{x}_{it}\right)^{-1}\left(\sum_{i=1}^N\sum_{t=1}^N{\sigma_t}^{-2}\textbf{x}_{it}'\textbf{y}_{it}\right).
+\end{align*}
+The $\sigma_t^{-2},$ the inverse of variance (taken from the diagonal element of $\pmb{\Omega}$).\qed
 \item[c.] Argue that Assumption SGLS.1 does not necessarily hold under the assumptions made. (Setting $\textbf{x}_{it}=y_{i,t-1}$ might help in answering this part.) Nevertheless, show that the GLS estimator from part b $is$ consistent for $\pmb{\beta}$ by showing that $\E(\textbf{X}_i'\pmb{\Omega}^{-1}\textbf{u}_i)=0.$ (This proof shows that Assumption SGLS.1 is sufficient, but not necessary, for consistency. Sometimes $\E(\textbf{X}_i'\pmb{\Omega}^{-1}\textbf{u}_i)=0$ even though Assumption SGLS.1 does not hold.)
 \\ Answer: \\
+From the hint, if $\textbf{x}_{it}=y_{i,t-1}$ then we have $y_{it}=f(y_{i,t-1})$ or written differently, $y_{it}=\delta_0+\delta_1 y_{i,t-1}+u_{it},$ or said differently we will have $x_{i,t+1}=y_{it}$ is correlated with $u_{it}$. If this correlation exist, then SGLS.1 does not hold. However, the sufficient condition for consistency of the GLS estimator is $\E(\textbf{X}_i'\pmb{\Omega}^{-1}\textbf{u}_i)=0.$ Since $\pmb{\Omega}$ is known and a diagonal matrix then we have 
+\begin{align*}
+    \textbf{X}_i'\pmb{\Omega}^{-1}\textbf{u}_i=\sum_{t=1}^T\textbf{x}_{it}'{\sigma_t}^{-2}u_it \Leftrightarrow \E(\textbf{X}_i'\pmb{\Omega}^{-1}\textbf{u}_i)-\sum_{t=1}^T{\sigma_t}^{-2}\E(\textbf{x}_{it}'u_{it})=\textbf{0}.
+\end{align*}
+It follows from the second given assumption, $\E(u_{it}|\textbf{x}_{it},u_{i,t-1},\textbf{x}_{i,t-1},\ldots,)=0$, by LIE that, $\E(\textbf{x}_{it}'u_{it})=0.$ Thus the GLS estimator is consistent in this case without necessarily having SGLS.1 hold.
 
 \item[d.] Show that Assumptions SGLS.3 holds under the given assumptions.
 \\ Answer: \\
+Recall SGLS.3: $\E(\textbf{X}_i'\pmb{\Omega}^{-1}\textbf{u}_i\textbf{u}_i'\pmb{\Omega}^{-1}\textbf{X}_i)=\E(\textbf{X}_i'\pmb{\Omega}^{-1}\textbf{X}_i)$, where $\pmb{\Omega}\equiv \E(\textbf{u}_i\textbf{u}_i').$
+Since $\pmb{\Omega}^{-1}$ is diagonal and known, we have that $\textbf{X}_i'\pmb{\Omega}^{-1}=(\sigma_1^{-2}\textbf{x}_{i1}',\ldots,\sigma_T^{-2}\textbf{x}_{iT}')'.$ Thus, we can write the following
+\begin{align*}
+    \E(\textbf{X}_i'\pmb{\Omega}^{-1}\textbf{u}_i\textbf{u}_i'\pmb{\Omega}^{-1}\textbf{X}_i)&=\E((\sigma_1^{-2}\textbf{x}_{i1}',\ldots,\sigma_T^{-2}\textbf{x}_{iT}')'\textbf{u}_i\textbf{u}_i'(\sigma_1^{-2}\textbf{x}_{i1}',\ldots,\sigma_T^{-2}\textbf{x}_{iT}'))\\
+    &=\sum_{t=1}^T\sum_{s=1}^T \sigma_s^{-2}\sigma_t^{-2}\E(u_{is}u_{it}\textbf{x}_{is}'\textbf{x}_{it}).
+\end{align*}
+From the second given assumption, $\E(u_{it}|\textbf{x}_{it},u_{i,t-1},\textbf{x}_{i,t-1},\ldots,)=0$, when $s\neq t$, by LIE we have $\E(u_{is}u_{it}\textbf{x}_{is}'\textbf{x}_{it})=\E(u_{it}\E(u_{is}\textbf{x}_{is}'\textbf{x}_{it}|\textbf{x}_{it},\textbf{x}_{is},u_{is}))=0$. And then for $s=t$, for each $t$, also by LIE, we have
+\begin{align*}
+    \E(u_{it}^2\textbf{x}_{it}'\textbf{x}_{it})=\E(\textbf{x}_{it}'\textbf{x}_{it}\E(u_{it}^2|\textbf{x}_{it}))=\sigma_t^2\E(\textbf{x}_{it}'\textbf{x}_{it}).
+\end{align*}
+Finally, we can show that $\E(\textbf{X}_i'\pmb{\Omega}^{-1}\textbf{u}_i\textbf{u}_i'\pmb{\Omega}^{-1}\textbf{X}_i)=\sum_{t=1}^T\sigma_t^2\E(\textbf{x}_{it}'\textbf{x}_{it})=\E(\textbf{X}_i'\pmb{\Omega}^{-1}\textbf{X}_i),$ thus SGLS.3 holds.\qed
 
 \item[e.] Explain how to consistently estimate each $\sigma_t^2$ (as $N\to \infty$).
 \\ Answer: \\
+To estimate each $\sigma_t^2$ we can run pooled OLS across all $i$ and $t$ and save each residual $\hat{u}_it$. Then, we compute the sample variance across $t$ using $\hat{\sigma}_t^2=(N-K)^{-1}\sum_{i=1}^N\hat{u}_it^2$. In this case, we might not need to adjust for degree of freedom as $N\to \infty$. We can implement these using the foreach iteration in Stata and save the value in a new variable.
 
 \item[f.] Argue that, under the assumptions made, valid inference is obtained by weighting each observation $(y_{it},\textbf{x}_{it})$ by $1/\hat{\sigma}_t$ and then running pooled OLS.
 \\ Answer: \\
+Recall
+\begin{align*}
+    &\hat{\pmb{\beta}}=\left(\sum_{i=1}^N\sum_{t=1}^T{\sigma_t^}^{-2}\textbf{x}_{it}'\textbf{x}_{it}\right)^{-1}\left(\sum_{i=1}^N\sum_{t=1}^N{\sigma_t}^{-2}\textbf{x}_{it}'\textbf{y}_{it}\right)\\
+    &\Rightarrow \sqrt{N}(\hat{\pmb{\beta}}-\pmb{\beta})=\left(N^{-1}\sum_{i=1}^N\sum_{t=1}^T{\sigma_t^}^{-2}\textbf{x}_{it}'\textbf{x}_{it}\right)^{-1}\left(N^{-1/2}\sum_{i=1}^N\sum_{t=1}^N{\sigma_t}^{-2}\textbf{x}_{it}'u_{it}\right)+o_p(1).
+\end{align*}
+To have the same inference, we need to show that if $\hat{\sigma}_t^2\convprob\sigma_t^2$, thus transforming the data by weighting it by $1/\hat{\sigma}_t$ will not change the asymptotic variance of the GLS. For the first term, we can use the consistency of sample variance estimation for each $t$, we have
+\begin{align*}
+    \hat{\sigma}_t^2\convprob\sigma_t^2,\ \forall t&\Leftrightarrow \sum_{i=1}^N\sum_{t=1}^T\hat{\sigma}_t^{-2}\textbf{x}_{it}'\textbf{x}_{it}\convprob \sum_{i=1}^N\sum_{t=1}^T\sigma_t^{-2}\textbf{x}_{it}'\textbf{x}_{it}\\
+    &\Leftrightarrow \sum_{i=1}^N\sum_{t=1}^T\hat{\sigma}_t^{-2}\textbf{x}_{it}'\textbf{x}_{it}= \sum_{i=1}^N\sum_{t=1}^T\sigma_t^{-2}\textbf{x}_{it}'\textbf{x}_{it}+o_p
+    (1).
+\end{align*}
+Now consider the second term in the distribution, from Slutsky's theorem, we have $\hat{\sigma}_t^{-2}\convprob\sigma_t^{-2}$. Also from CLT, we have $N^{-1/2}\sum_{i=1}^N\textbf{x}_{it}'u_{it}=O_p(1)$. We have
+\begin{align*}
+    N^{-1/2}\sum_{i=1}^N\sum_{t=1}^N{\hat{\sigma}_t}^{-2}\textbf{x}_{it}'u_{it}-N^{-1/2}\sum_{i=1}^N\sum_{t=1}^N{\sigma_t}^{-2}\textbf{x}_{it}'u_{it}&=\sum_{t=1}^T\left(N^{-1/2}\sum_{i=1}^N\textbf{x}_{it}'u_{it}\right)(\hat{\sigma}_t^{-2}-\sigma_t^{-2})\\
+    &=O_p(1)\cdot \o_p(1)=o_p(1).
+\end{align*}
+Finally we will have
+\begin{align*}
+    \sqrt{N}(\hat{\pmb{\beta}}-\pmb{\beta})&=\left(N^{-1}\sum_{i=1}^N\sum_{t=1}^T{\sigma_t^}^{-2}\textbf{x}_{it}'\textbf{x}_{it}\right)^{-1}\left(N^{-1/2}\sum_{i=1}^N\sum_{t=1}^N{\sigma_t}^{-2}\textbf{x}_{it}'u_{it}\right)+o_p(1)\\
+    &=\left(N^{-1}\sum_{i=1}^N\sum_{t=1}^T{\hat{\sigma}_t^}^{-2}\textbf{x}_{it}'\textbf{x}_{it}-o_p(1)\right)^{-1}\left(N^{-1/2}\sum_{i=1}^N\sum_{t=1}^N{\hat{\sigma}_t}^{-2}\textbf{x}_{it}'u_{it}-o_p(1)\right)+o_p(1)\\
+    &=\left(N^{-1}\sum_{i=1}^N\sum_{t=1}^T{\hat{\sigma}_t^}^{-2}\textbf{x}_{it}'\textbf{x}_{it}\right)^{-1}\left(N^{-1/2}\sum_{i=1}^N\sum_{t=1}^N{\hat{\sigma}_t}^{-2}\textbf{x}_{it}'u_{it}\right)+o_p(1).
+\end{align*}
+Now we showed that by transforming the data $(y_{it},\textbf{x}_{it})$ to $(y_{it}/\hat{\sigma}_t,\textbf{x}_{it}/\hat{\sigma}_t)$ have the same asymptotic distribution. Note that the way we get the residuals should be different and refer to answer in point e. \qed
 
 \item[g.] What happen if we assume that $\sigma_t^2=\sigma^2$ for all $t=1,\ldots,T$?
 \\ Answer: \\
-
+If we assume $\sigma_t^2=\sigma^2$ for all $t=1,\ldots,T$ then we can use the standard OLS regression pooled across $i$ and $t$ because now the variance is independently distributed across $i$ and $t$.
 \end{enumerate}
 
 \section*{Chapter 8}
@@ -152,13 +245,43 @@ Consider the panel data model
 \item[a.] Show that GMM estimator that solves the problem (8.27) satisfies the first order-condition
 \[\left(\sum_{i=1}^N \textbf{Z}_i'\textbf{X}_i\right)'\hat{\textbf{W}}\left(\sum_{i=1}^N \textbf{Z}_i'(\textbf{y}_i-\textbf{X}_i \hat{\pmb{\beta}})\right)=0\]
 \\ Answer: \\
-
+Recall the minimization problem
+\begin{align*}
+    \min_\textbf{b} Q(\textbf{b}) = \min_\textbf{b} \left[\sum_{i=1}^N \textbf{Z}_i'(\textbf{y}_i-\textbf{X}_i \textbf{b})\right]'\hat{\textbf{W}}\left[\sum_{i=1}^N \textbf{Z}_i'(\textbf{y}_i-\textbf{X}_i \textbf{b})\right].
+\end{align*}
+Since $\hat{\pmb{\beta}}=\arg\min_\textbf{b} Q(\textbf{b})$, take the first order condition with respect to \textbf{b}, we have
+\begin{align*}
+    \frac{\partial Q(\textbf{b})'}{\partial \textbf{b}}=-2\left(\sum_{i=1}^N \textbf{Z}_i'\textbf{X}_i\right)'\hat{\textbf{W}}\left(\sum_{i=1}^N \textbf{Z}_i'(\textbf{y}_i-\textbf{X}_i \textbf{b})\right)=\textbf{0}.
+\end{align*}
+At the solution of the F.O.C, we get $\hat{\pmb{\beta}}$ by solving
+\begin{align*}
+    \left(\sum_{i=1}^N \textbf{Z}_i'\textbf{X}_i\right)'\hat{\textbf{W}}\left(\sum_{i=1}^N \textbf{Z}_i'(\textbf{y}_i-\textbf{X}_i \hat{\pmb{\beta}})\right)=\textbf{0}.
+\end{align*}
 \item[b.] Use this expression to obtain (8.28)
 \\ Answer: \\
-
+We can write result from a in full matrix
+\begin{align*}
+    &\left(\sum_{i=1}^N \textbf{Z}_i'\textbf{X}_i\right)'\hat{\textbf{W}}\left(\sum_{i=1}^N \textbf{Z}_i'(\textbf{y}_i-\textbf{X}_i \hat{\pmb{\beta}})\right)=\textbf{0}\\
+    &\Leftrightarrow (\textbf{X}'\textbf{Z})\hat{\textbf{W}}(\textbf{Z}'\textbf{Y}-\textbf{Z}'\textbf{X}\hat{\pmb{\beta}})=\textbf{0}\\
+    &\Leftrightarrow (\textbf{X}'\textbf{Z}\hat{\textbf{W}}\textbf{Z}'\textbf{Y})=(\textbf{X}'\textbf{Z}\hat{\textbf{W}}\textbf{Z}'\textbf{X})\hat{\pmb{\beta}}\\
+    &\Leftrightarrow \hat{\pmb{\beta}}=(\textbf{X}'\textbf{Z}\hat{\textbf{W}}\textbf{Z}'\textbf{X})^{-1}(\textbf{X}'\textbf{Z}\hat{\textbf{W}}\textbf{Z}'\textbf{Y}).
+\end{align*}\qed
 \end{enumerate}
+
 \subsection*{Problem 8.5}
-Verify that the difference $(\textbf{C}'\pmb{\Lambda}^{-1}\textbf{C})-(\textbf{C}'\textbf{W}\textbf{C})(\textbf{C}'\textbf{W}\pmb{\Lambda}\textbf{W}\textbf{C})\textbf{C})^{-1}(\textbf{C}'\textbf{W}\textbf{C})$ in expression (8.34) is positive semidefinite for any symmetric positive definite matrices $\textbf{W}$ and $\pmb{\Lambda}$. (Hint: Show that the difference can be expressed as $\textbf{C}'\pmb{\Lambda}^{-1/2}[\textbf{I}_L-\textbf{D}(\textbf{D}'\textbf{D})^{-1}\textbf{D}']\pmb{\Lambda}^{-1/2}\textbf{C}$ where $D\equiv\pmb{\Lambda}^{1/2}\textbf{WC}.$ Then, note that for any $L\times K$ matrix $\textbf{D},\textbf{I}_L-\textbf{D}(\textbf{D}'\textbf{D})^{-1}\textbf{D}'$ is a symmetric, idempotent matrix, and therefore positive semidefinite.)
+Verify that the difference $(\textbf{C}'\pmb{\Lambda}^{-1}\textbf{C})-(\textbf{C}'\textbf{W}\textbf{C})(\textbf{C}'\textbf{W}\pmb{\Lambda}\textbf{W}\textbf{C})\textbf{C})^{-1}(\textbf{C}'\textbf{W}\textbf{C})$ in expression (8.34) is positive semidefinite for any symmetric positive definite matrices $\textbf{W}$ and $\pmb{\Lambda}$. (Hint: Show that the difference can be expressed as $\textbf{C}'\pmb{\Lambda}^{-1/2}[\textbf{I}_L-\textbf{D}(\textbf{D}'\textbf{D})^{-1}\textbf{D}']\pmb{\Lambda}^{-1/2}\textbf{C}$ where $\textbf{D}\equiv\pmb{\Lambda}^{1/2}\textbf{WC}.$ Then, note that for any $L\times K$ matrix $\textbf{D},\textbf{I}_L-\textbf{D}(\textbf{D}'\textbf{D})^{-1}\textbf{D}'$ is a symmetric, idempotent matrix, and therefore positive semidefinite.)
+\\ Answer:\\
+Following the hint, let $\textbf{D}=\pmb{\Lambda}^{1/2}\textbf{WC}$, then we have
+\begin{align*}
+    \textbf{C}'\pmb{\Lambda}^{-1/2}[\textbf{I}_L-\textbf{D}(\textbf{D}'\textbf{D})^{-1}\textbf{D}']\pmb{\Lambda}^{-1/2}\textbf{C}&=
+    \textbf{C}'\pmb{\Lambda}^{-1/2}[\textbf{I}_L-(\pmb{\Lambda}^{1/2}\textbf{WC})((\pmb{\Lambda}^{1/2}\textbf{WC})'(\pmb{\Lambda}^{1/2}\textbf{WC}))^{-1}(\pmb{\Lambda}^{1/2}\textbf{WC})']\pmb{\Lambda}^{-1/2}\textbf{C}\\
+    &=(\textbf{C}'\pmb{\Lambda}^{-1}\textbf{C})\\
+    & \ \ \ \ \ \ \ -\textbf{C}'\pmb{\Lambda}^{-1/2}(\pmb{\Lambda}^{1/2}\textbf{WC})((\pmb{\Lambda}^{1/2}\textbf{WC})'(\pmb{\Lambda}^{1/2}\textbf{WC}))^{-1}(\pmb{\Lambda}^{1/2}\textbf{WC})'\pmb{\Lambda}^{-1/2}\textbf{C}\\
+    &=(\textbf{C}'\pmb{\Lambda}^{-1}\textbf{C})\\
+    & \ \ \ \ \ \ \ -(\textbf{C}'\textbf{WC})((\textbf{C}'\textbf{W}\pmb{\Lambda}^{1/2}')(\pmb{\Lambda}^{1/2}'\textbf{WC}))^{-1}(\pmb{\Lambda}^{1/2}(\textbf{C}'\textbf{WC})\\
+    &=(\textbf{C}'\pmb{\Lambda}^{-1}\textbf{C})-(\textbf{C}'\textbf{W}\textbf{C})(\textbf{C}'\textbf{W}\pmb{\Lambda}\textbf{W}\textbf{C})\textbf{C})^{-1}(\textbf{C}'\textbf{W}\textbf{C}).
+\end{align*}
+It turns out it is true. Then since $\textbf{C}'\pmb{\Lambda}^{-1/2}[\textbf{I}_L-\textbf{D}(\textbf{D}'\textbf{D})^{-1}\textbf{D}']\pmb{\Lambda}^{-1/2}\textbf{C}$ is a matrix quadratic form, it is p.s.d. if the meat matrix in the sandwich form is p.s.d. We know that $\textbf{D}(\textbf{D}'\textbf{D})^{-1}\textbf{D}'$ is a projection matrix, call $P_\textbf{D}$, then $(\textbf{I}_L-P_\textbf{D})$ is an idempotent matrix so it must be p.s.d and we showed that the difference is p.s.d.\qed 
 
 \section*{Chapter 9}
 \subsection*{Problem 9.8}
