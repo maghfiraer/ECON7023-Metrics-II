@@ -44,12 +44,18 @@ The data in FERTIL1.RAW are a pooled cross section on more than a thousand U.S. 
 \begin{enumerate}
 \item[a.] Use OLS to estimate a model relating number of children ever born to a woman ($kids$) to years of education, age, region, race, and type of environment reared in. You should use a quadratic in age and should include year dummies. What is the estimated relationship between fertility and education? Holding other factors fixed, has there been any notable secular change in fertility over the time period?
 \\ Answer: \\
+\input{HW4/68a}
+The OLS estimate shows that women with eight more years of education on average have about one fewer kid ($-0.128\times8\approx -1)$, holding all other variables. The estimate on years of education is statistically very significant. Observing the year dummies coefficient, in almost periods except for the year 1974, fertility has been declining with a negative sign. However, the year dummy variables that are significant are the year dummy for 1982 and 1984, when women had about half a child less than a similar type of woman than the base year 1972.
 
-\item[b.] Reestimate the model in part a, but use $motheduc$ and $fatheduc$ as instruments for $educ$. First check that these instruments are sufficiently partially correlated with $educ$. Test whether $educ$ is in fact exogenous in the fertility equation.
+\item[b.] Reestimate the model in part a, but use $motheduc$ and $fatheduc$ as instruments for $educ$. First, check that these instruments are sufficiently partially correlated with $educ$. Test whether $educ$ is in fact exogenous in the fertility equation.
 \\ Answer: \\
+From the reduced form regression result, we can see that $educ$ is very significantly partially correlated with $feduc$ and $meduc$. Also, the F-test result indicates the same thing with a p-value of zero.\\ \\
+\input{HW4/68b}
+Then using a residual-based test of $educ$ against the null that $educ$ is exogenous, the p-value of the residual from the reduced form in the original regression model is around one-half, showing little evidence that $educ$ is endogenous in the equation. From the 2SLS estimate,  
 
 \item[c.]Now allow the effect of education to change over time by including interaction terms such as $y74\cdot educ$, $y76\cdot educ$, and so on in the model. Use interactions of time dummies and parents’ education as instruments for the interaction terms. Test that there has been no change in the relationship between fertility and education over time.
 \\ Answer: \\
+\input{HW4/68c}
 
 \end{enumerate}
 
@@ -58,12 +64,14 @@ Use the data in INJURY.RAW for this question.
 \begin{enumerate}
 \item[a.] Using the data for Kentucky, reestimate equation (6.54) adding as explanatory variables $male$, $married$, and a full set of industry- and injury-type dummy variables. How does the estimate on $afchnge\cdot highearn$ change when these other factors are controlled for? Is the estimate still statistically significant? 
 \\ Answer: \\
+\input{HW4/69a}
 
 \item[b.] What do you make of the small R-squared from part a? Does this mean the equation is useless? 
 \\ Answer: \\
 
 \item[c.] Estimate equation (6.54) using the data for Michigan. Compare the estimate on the interaction term for Michigan and Kentucky, as well as their statistical significance.
 \\ Answer: \\
+\input{HW4/69c}
 
 \end{enumerate}
 
