@@ -1,0 +1,29 @@
+texdoc init ".\HW4\98a.tex", replace
+
+/***
+Generate Interaction Variables
+***/
+texdoc stlog
+gen educ2=educ^2
+gen nearc4exper=nearc4*exper
+gen nearc4expersq=nearc4*expersq
+gen nearc4black=nearc4*black
+texdoc stlog close
+/***
+Reduced Form Estimates for Extension of Problem 5.4b
+***/
+texdoc stlog
+reg educ2 exper expersq black south smsa reg661-reg668 smsa66 nearc4 nearc4exper nearc4expersq nearc4black, robust
+texdoc stlog close
+/***
+Test Joint Significant of Instrument
+***/
+texdoc stlog
+test nearc4exper nearc4expersq nearc4black
+texdoc stlog close
+/***
+2SLS Regression Result
+***/
+texdoc stlog
+ivreg lwage exper expersq black south smsa reg661-reg668 smsa66 (educ educ2 = nearc4 nearc4exper nearc4expersq nearc4black)
+texdoc stlog close

@@ -1,0 +1,40 @@
+. ivreg kids age age2 black east northcen west farm othrural town smcity y74 (educ y74
+> educ-y84educ = meduc feduc y74meduc-y84feduc )
+{\smallskip}
+Instrumental variables 2SLS regression
+{\smallskip}
+      Source {\VBAR}       SS           df       MS      Number of obs   =     1,129
+\HLI{13}{\PLUS}\HLI{34}   F(18, 1110)     =      7.40
+       Model {\VBAR}  406.162425        18  22.5645792   Prob > F        =    0.0000
+    Residual {\VBAR}  2679.34688     1,110  2.41382601   R-squared       =    0.1316
+\HLI{13}{\PLUS}\HLI{34}   Adj R-squared   =    0.1176
+       Total {\VBAR}   3085.5093     1,128  2.73538059   Root MSE        =    1.5536
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+        kids {\VBAR} Coefficient  Std. err.      t    P>|t|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+        educ {\VBAR}  -.1281456   .0442233    -2.90   0.004    -.2149162    -.041375
+     y74educ {\VBAR}   .0392542   .1082955     0.36   0.717    -.1732328    .2517412
+     y76educ {\VBAR}  -.0188478    .015178    -1.24   0.215    -.0486285     .010933
+     y78educ {\VBAR}  -.0174725   .0150433    -1.16   0.246    -.0469891    .0120441
+     y80educ {\VBAR}  -.0096295   .0151773    -0.63   0.526    -.0394089    .0201498
+     y82educ {\VBAR}  -.0477111   .0144041    -3.31   0.001    -.0759734   -.0194487
+     y84educ {\VBAR}  -.0477952   .0143867    -3.32   0.001    -.0760233   -.0195671
+         age {\VBAR}   .4979232   .1398254     3.56   0.000     .2235712    .7722752
+        age2 {\VBAR}  -.0054354   .0015787    -3.44   0.001     -.008533   -.0023378
+       black {\VBAR}   1.061408   .1737569     6.11   0.000     .7204788    1.402337
+        east {\VBAR}   .2187422   .1337294     1.64   0.102    -.0436486    .4811331
+    northcen {\VBAR}   .3640495   .1219907     2.98   0.003     .1246911    .6034078
+        west {\VBAR}   .1850113   .1676614     1.10   0.270    -.1439576    .5139803
+        farm {\VBAR}  -.0666629   .1511741    -0.44   0.659    -.3632822    .2299564
+    othrural {\VBAR}  -.1829343   .1810601    -1.01   0.313     -.538193    .1723244
+        town {\VBAR}   .0891165   .1246913     0.71   0.475    -.1555407    .3337737
+      smcity {\VBAR}   .2171135   .1603366     1.35   0.176    -.0974836    .5317106
+         y74 {\VBAR}  -.3023562   1.331661    -0.23   0.820    -2.915213    2.310501
+       _cons {\VBAR}  -6.874234   3.170511    -2.17   0.030     -13.0951   -.6533642
+\HLI{13}{\BOTT}\HLI{64}
+Instrumented: educ y74educ y76educ y78educ y80educ y82educ y84educ
+ Instruments: age age2 black east northcen west farm othrural town smcity
+              y74 meduc feduc y74meduc y76meduc y78meduc y80meduc y82meduc
+              y84meduc y74feduc y76feduc y78feduc y80feduc y82feduc y84feduc
+{\smallskip}

@@ -1,0 +1,10 @@
+texdoc init ".\HW4\98b.tex", replace
+
+/***
+Reduced Form from 5.4b
+***/
+texdoc stlog
+gen blackeduc=black*educ
+reg educ exper expersq black south smsa reg661-reg668 smsa66 nearc4 blackeduc
+reg educ exper expersq black south smsa reg661-reg668 smsa66 nearc4 nearc2 blackeduc
+texdoc stlog close

@@ -1,0 +1,14 @@
+texdoc init ".\HW4\68c.tex", replace
+
+/***
+Estimation Result from 2SLS for the Full Model
+***/
+texdoc stlog
+ivreg kids age age2 black east northcen west farm othrural town smcity y74 (educ y74educ-y84educ = meduc feduc y74meduc-y84feduc )
+texdoc stlog close
+/***
+Test Joint Significant of Interaction Variables
+***/
+texdoc stlog
+test y74educ y76educ y78educ y80educ y82educ y84educ
+texdoc stlog close

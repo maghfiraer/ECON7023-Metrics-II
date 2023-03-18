@@ -1,0 +1,16 @@
+texdoc init ".\HW4\611e.tex", replace
+
+/***
+Regression with Transformed Data to Test Linear Combination
+***/
+texdoc stlog
+gen y85xeduc_12=y85*(educ-12)
+reg lwage y85 educ y85xeduc_12 exper expersq union female y85fem
+texdoc stlog close
+/***
+Compare with Regular Stata Result
+***/
+texdoc stlog
+quietly reg lwage y85 educ y85educ exper expersq union female y85fem
+lincom y85 +12*y85educ
+texdoc stlog close

@@ -1,0 +1,12 @@
+. quietly reg lwage y85 educ y85educ exper expersq union female y85fem
+{\smallskip}
+. lincom y85 +12*y85educ
+{\smallskip}
+ ( 1)  y85 + 12*y85educ = 0
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+       lwage {\VBAR} Coefficient  Std. err.      t    P>|t|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+         (1) {\VBAR}   .3393326   .0340099     9.98   0.000     .2725993    .4060659
+\HLI{13}{\BOTT}\HLI{64}
+{\smallskip}

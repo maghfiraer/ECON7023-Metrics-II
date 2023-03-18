@@ -1,0 +1,14 @@
+texdoc init ".\HW4\69a.tex", replace
+
+/***
+OLS Regression Output
+***/
+texdoc stlog
+reg ldurat afchnge highearn afhigh if ky
+texdoc stlog close
+/***
+OLS Regression Output with Added Explanatory Variables
+***/
+texdoc stlog
+reg ldurat afchnge highearn afhigh male married head-construc if ky
+texdoc stlog close

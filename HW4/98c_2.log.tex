@@ -1,0 +1,38 @@
+. reg educ exper expersq black south smsa reg661-reg668 smsa66 blackeduc nearc4 nearc4
+> black
+{\smallskip}
+      Source {\VBAR}       SS           df       MS      Number of obs   =     3,010
+\HLI{13}{\PLUS}\HLI{34}   F(17, 2992)     =    213.50
+       Model {\VBAR}  11819.0711        17  695.239479   Prob > F        =    0.0000
+    Residual {\VBAR}  9743.00893     2,992  3.25635325   R-squared       =    0.5481
+\HLI{13}{\PLUS}\HLI{34}   Adj R-squared   =    0.5456
+       Total {\VBAR}  21562.0801     3,009  7.16586243   Root MSE        =    1.8045
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+        educ {\VBAR} Coefficient  Std. err.      t    P>|t|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+       exper {\VBAR}  -.4457136   .0313962   -14.20   0.000    -.5072739   -.3841532
+     expersq {\VBAR}   .0058054   .0015532     3.74   0.000       .00276    .0088509
+       black {\VBAR}  -8.119618   .3586088   -22.64   0.000    -8.822763   -7.416473
+       south {\VBAR}   .1054791   .1262872     0.84   0.404    -.1421394    .3530977
+        smsa {\VBAR}    .280686   .0976823     2.87   0.004     .0891547    .4722172
+      reg661 {\VBAR}  -.3110527   .1883341    -1.65   0.099    -.6803302    .0582248
+      reg662 {\VBAR}  -.2924091   .1370314    -2.13   0.033    -.5610944   -.0237238
+      reg663 {\VBAR}  -.2918145   .1327478    -2.20   0.028    -.5521008   -.0315283
+      reg664 {\VBAR}   -.163697   .1731927    -0.95   0.345    -.5032859    .1758919
+      reg665 {\VBAR}  -.6454611   .1751856    -3.68   0.000    -.9889575   -.3019647
+      reg666 {\VBAR}  -.7210471   .1954412    -3.69   0.000     -1.10426   -.3378344
+      reg667 {\VBAR}  -.6113298   .1914017    -3.19   0.001     -.986622   -.2360375
+      reg668 {\VBAR}   .2516459   .2247713     1.12   0.263    -.1890761    .6923679
+      smsa66 {\VBAR}   -.003745   .0983889    -0.04   0.970    -.1966618    .1891717
+   blackeduc {\VBAR}   .6218376   .0286742    21.69   0.000     .5656144    .6780607
+      nearc4 {\VBAR}   .3756946   .0909876     4.13   0.000       .19729    .5540992
+ nearc4black {\VBAR}  -.5409504   .1662799    -3.25   0.001    -.8669848   -.2149159
+       _cons {\VBAR}   16.79022   .1998693    84.01   0.000     16.39832    17.18211
+\HLI{13}{\BOTT}\HLI{64}
+{\smallskip}
+. predict educhat
+(option {\bftt{xb}} assumed; fitted values)
+{\smallskip}
+. gen blackeduchat=black*educhat
+{\smallskip}

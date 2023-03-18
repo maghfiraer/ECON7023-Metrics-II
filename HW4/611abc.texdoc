@@ -1,0 +1,8 @@
+texdoc init ".\HW4\611abc.tex", replace
+
+/***
+OLS Regression Output
+***/
+texdoc stlog
+reg lwage y85 educ y85educ exper expersq union female y85fem
+texdoc stlog close

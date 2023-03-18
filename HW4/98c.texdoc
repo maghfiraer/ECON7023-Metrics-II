@@ -1,0 +1,22 @@
+texdoc init ".\HW4\98c.tex", replace
+
+/***
+2SLS Regression Result
+***/
+texdoc stlog
+ivreg lwage exper expersq black south smsa reg661-reg668 smsa66 (educ blackeduc = nearc4 nearc4black), robust
+texdoc stlog close
+/***
+Generate Fitted Value for educ from First Stage Regression
+***/
+texdoc stlog
+reg educ exper expersq black south smsa reg661-reg668 smsa66 blackeduc nearc4 nearc4black
+predict educhat
+gen blackeduchat=black*educhat
+texdoc stlog close
+/***
+2SLS Regression Result
+***/
+texdoc stlog
+ivreg lwage exper expersq black south smsa reg661-reg668 smsa66 (educ blackeduc = nearc4 blackeduchat), robust
+texdoc stlog close
