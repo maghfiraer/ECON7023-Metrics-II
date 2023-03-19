@@ -43,19 +43,19 @@ March 18, 2022}
 The data in FERTIL1.RAW are a pooled cross section on more than a thousand U.S. women for the even years between 1972 and 1984, inclusive; the data set is similar to the one used by Sande (1992). These data can be used to study the relationship between women's education and fertility.
 \begin{enumerate}
 \item[a.] Use OLS to estimate a model relating number of children ever born to a woman ($kids$) to years of education, age, region, race, and type of environment reared in. You should use a quadratic in age and should include year dummies. What is the estimated relationship between fertility and education? Holding other factors fixed, has there been any notable secular change in fertility over the time period?
-\\ Answer: \\
+\\ Answer: \\ \\
 \input{HW4/68a}
-The OLS estimate shows that women with eight more years of education on average have about one fewer kid ($-0.128\times8\approx -1)$, holding all other variables. The estimate on years of education is statistically very significant. Observing the year dummies coefficient, in almost periods except for the year 1974, fertility has been declining with a negative sign. However, the year dummy variables that are significant are the year dummy for 1982 and 1984, when women had about half a child less than a similar type of woman than the base year 1972.
+The OLS estimate shows that women with eight more years of education on average have about one fewer kid ($-0.128\times8\approx -1)$, holding all other variables the same. The estimate on years of education is statistically very significant. Observing the year dummies coefficient, in almost all periods except for the year 1974, fertility has been declining with a negative sign. However, the year dummy variables that are significant are the year dummy for 1982 and 1984, when women had about half a child less than a similar type of woman than the base year 1972.
 
 \item[b.] Reestimate the model in part a, but use $motheduc$ and $fatheduc$ as instruments for $educ$. First, check that these instruments are sufficiently partially correlated with $educ$. Test whether $educ$ is in fact exogenous in the fertility equation.
 \\ Answer: \\
 From the reduced form regression result, we can see that $educ$ is very significantly partially correlated with $feduc$ and $meduc$. Also, the F-test result indicates the same thing with a p-value of zero.\\ \\
 \input{HW4/68b}
-Then using a residual-based test of $educ$ against the null that $educ$ is exogenous, the p-value of the residual from the reduced form in the original regression model is around one-half, showing little evidence that $educ$ is endogenous in the equation. From the 2SLS estimate, the coefficient on $educ$ is larger than the one from OLS, but since we find that there is not enough evidence of endogeneity the difference can be due to the sampling problem.  
+Then using a residual-based test of $educ$ against the null that $educ$ is exogenous, the p-value of the residual from the reduced form in the original regression model is around one-half, showing little evidence that $educ$ is endogenous in the equation. From the 2SLS estimate, the coefficient on $educ$ is larger than the one from OLS, but since we find that there is not enough evidence of endogeneity, the difference can be due to the sampling problem.  
 
 \item[c.] Now allow the effect of education to change over time by including interaction terms such as $y74\cdot educ$, $y76\cdot educ$, and so on in the model. Use interactions of time dummies and parents’ education as instruments for the interaction terms. Test that there has been no change in the relationship between fertility and education over time.
 \\ Answer: \\
-Since there is no strong evidence of endogeneity of $educ$, I run the full model using OLS, and test the joint significance for all $time$ and $educ$ interaction terms. Also, I performed regression for the full model using 2SLS to compare.\\
+Since there is no strong evidence of endogeneity of $educ$, I run the full model using OLS, and test the joint significance for all $time$ and $educ$ interaction terms. Also, I performed regression for the full model using 2SLS to compare.\\ \\
 \input{HW4/68c}
 From the OLS model, the individual significance of the interaction terms is significant in the last two years that is 1984 and 1982 with negative coefficients. A similar result is obtained from the 2SLS estimate, with relatively close values to those from the OLS. From the joint significance of all interaction terms, there is enough evidence that there have been changes in the relationship between fertility and education over time.
 \end{enumerate}
@@ -64,7 +64,7 @@ From the OLS model, the individual significance of the interaction terms is sign
 Use the data in INJURY.RAW for this question. 
 \begin{enumerate}
 \item[a.] Using the data for Kentucky, reestimate equation (6.54) adding as explanatory variables $male$, $married$, and a full set of industry- and injury-type dummy variables. How does the estimate on $afchnge\cdot highearn$ change when these other factors are controlled for? Is the estimate still statistically significant? 
-\\ Answer: \\
+\\ Answer: \\ \\
 \input{HW4/69a}
 Compared to without adding the new variables, the estimated coefficient on the interaction terms is now higher at 0.23 than at .19 from the previous result. It is also statistically more significant with a p-value of 0.001. Adding the new variables only slightly affects the standard error on the interaction terms. 
 
@@ -73,7 +73,7 @@ Compared to without adding the new variables, the estimated coefficient on the i
 Comparing the R-squared that is quite small at 4.1\% and adjusted R-square of 3.9\%. It means that our model does not explain much of the variation. It means that we can not really use our model for making good predictions considering the variable that we have included so far. However, we can still get a good causal inference if the coefficient is statistically significant.
 
 \item[c.] Estimate equation (6.54) using the data for Michigan. Compare the estimate on the interaction term for Michigan and Kentucky, as well as their statistical significance.
-\\ Answer: \\
+\\ Answer: \\ \\
 \input{HW4/69c}
 Comparing the estimate for Michigan and Kentucky we have similar estimates on the interaction terms consecutively .192 and .191, although the statistical significance for Michigan is lower probably due to the smaller sample size compared to those of Kentucky.
 
@@ -90,7 +90,7 @@ where the explanatory variables are standard. The variable $union$ is a dummy va
 \begin{enumerate}
 \item[a.] Estimate this equation and test whether the return to education has changed over the seven-year period.
 \\ Answer: \\
-Table show the estimates of the regression model. The return to education increased by 1.85 percent between the years 1978 and 1985 interpreted from the coefficient on $y85\cdot educ$, which is statistically significant at 5\% level (two-sided).\\
+Table show the estimates of the regression model. The return to education increased by 1.85 percent between the years 1978 and 1985 interpreted from the coefficient on $y85\cdot educ$, which is statistically significant at 5\% level (two-sided).\\ \\
 \input{HW4/611abc}
 
 \item[b.] What has happened to the gender gap over the period? 
@@ -100,11 +100,11 @@ The positive coefficient on $y85fem$ indicates that the estimated gender gap dec
 \item[c.] Wages are measured in nominal dollars. What coefficients would change if we measure $wage$ in 1978 dollars in both years? (Hint: Use the fact that for all 1985 observations, $\log(wage_i/P85)=\log(wage_i)-\log(P85)$, where $P85$ is the common deflator; $P85=1.65$ according to the Consumer Price Index.)
 \\ Answer: \\
 If we use the 1978 dollars wage, the coefficient on $y85$ will change, mathematically
-\[\beta_{y85}'=\frac{\partial (\log{wage_i}-\log{P85})}{\partial y85}=\underbrace{\frac{\partial \log{wage_i}}{\partial y85}}_{\displaystyle \beta_{y85}}-\log{P85}=.118-\log(1.65)=-.118-.501\approx -.383\]
+\[\beta_{y85}'=\frac{\partial (\log{wage_i}-\log{P85})}{\partial y85}=\underbrace{\frac{\partial \log{wage_i}}{\partial y85}}_{\displaystyle \beta_{y85}}-\log{P85}=.118-\log(1.65)=-.118-.501\approx -.383.\]
 
 \item[d.] Is there evidence that the variance of the error has changed over time?
 \\ Answer: \\
-One idea is to estimate the variance using residual-squared. Then I regress it on the time dummy variable $y85$, if the coefficient is significant then there is some evidence that the variance error has changed over time.\\
+One idea is to estimate the variance using residual-squared. Then I regress it on the time dummy variable $y85$, if the coefficient is significant then there is some evidence that the variance error has changed over time. The coefficient is .418 and is statistically significant at 10\% level. Thus, there is some evidence that the variance error has changed over time. \\ \\
 \input{HW4/611d}
 
 \item[e.] With wages measured nominally, and holding other factors fixed, what is the estimated increase in nominal wage for a male with 12 years of education? Propose a regression to obtain a confidence interval for this estimate. (Hint: You must replace $y85\cdot educ$ with something else.)
@@ -308,7 +308,7 @@ It turns out it is true. Then since $\textbf{C}'\pmb{\Lambda}^{-1/2}[\textbf{I}_
 \subsection*{Problem 9.8}
 \begin{enumerate}
 \item[a.] Extend Problem 5.4b using CARD.RAW to allow $educ^2$ to appear in the $\log(wage)$ equation, without using $nearc2$ as an instrument. Specifically, use interactions of $nearc4$ with some or all of the other exogenous variables in the $\log(wage)$ equation as instruments for $educ^2$. Compute a heteroskedasticity-robust test to be sure that at least one of these additional instruments appears in the linear projection of $educ^2$ onto your entire list of instruments. Test whether $educ^2$ needs to be in the $\log(wage)$ equation. 
-\\ Answer:\\
+\\ Answer:\\ \\
 \input{HW4/98a}
 After performing heteroskedasticity-robust Wald test for the joint significance of the instrument, it can be reported that the three interaction terms are partially correlated with $educ^2$. The p-value is .011. In the 2SLS estimates the coefficient of $educ^2$ is not significant, thus we can leave it out of the equation.
 
