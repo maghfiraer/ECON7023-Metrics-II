@@ -13,7 +13,8 @@ texdoc stlog close
 Reduced Form Estimates for Extension of Problem 5.4b
 ***/
 texdoc stlog
-reg educ2 exper expersq black south smsa reg661-reg668 smsa66 nearc4 nearc4exper nearc4expersq nearc4black, robust
+reg educ2 exper expersq black south smsa reg661-reg668 smsa66 nearc4 ///
+nearc4exper nearc4expersq nearc4black, robust
 texdoc stlog close
 /***
 Test Joint Significant of Instrument
@@ -25,5 +26,6 @@ texdoc stlog close
 2SLS Regression Result
 ***/
 texdoc stlog
-ivreg lwage exper expersq black south smsa reg661-reg668 smsa66 (educ educ2 = nearc4 nearc4exper nearc4expersq nearc4black)
+ivreg lwage exper expersq black south smsa reg661-reg668 smsa66 ///
+(educ educ2 = nearc4 nearc4exper nearc4expersq nearc4black)
 texdoc stlog close
