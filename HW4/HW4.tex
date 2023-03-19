@@ -309,19 +309,27 @@ It turns out it is true. Then since $\textbf{C}'\pmb{\Lambda}^{-1/2}[\textbf{I}_
 \item[a.] Extend Problem 5.4b using CARD.RAW to allow $educ^2$ to appear in the $\log(wage)$ equation, without using $nearc2$ as an instrument. Specifically, use interactions of $nearc4$ with some or all of the other exogenous variables in the $\log(wage)$ equation as instruments for $educ^2$. Compute a heteroskedasticity-robust test to be sure that at least one of these additional instruments appears in the linear projection of $educ^2$ onto your entire list of instruments. Test whether $educ^2$ needs to be in the $\log(wage)$ equation. 
 \\ Answer:\\
 \input{HW4/98a}
-After performing heteroskedasticity-robust Wald test for the joint significant of the instrument, it can be reported that the three interaction terms are partially correlated with $educ^2$. The p-value is .011. In the 2SLS estimates the coefficient of $educ^2$ is not significant, thus we can leave it out of the equation.
+After performing heteroskedasticity-robust Wald test for the joint significance of the instrument, it can be reported that the three interaction terms are partially correlated with $educ^2$. The p-value is .011. In the 2SLS estimates the coefficient of $educ^2$ is not significant, thus we can leave it out of the equation.
 
 \item[b.] Start again with the model estimated in Problem 5.4b, but suppose we add the interaction $black\cdot educ$. Explain why $black\cdot z_j$ is a potential IV for $black\cdot educ$, where $z_j$ is any exogenous variable in the system (including $nearc4$). 
 \\ Answer:\\
 \input{HW4/98b}
-
+If the error term in the reduced form is independent of $z_j$, then any function of $\textbf{z}$ will not be correlated with the error of the population model as well, including any interaction taking the form of $black\cdot z_j$. Thus, if any $z_j$ is correlated with $educ$ it is very likely that it is correlated with $black\cdot z_j$ as well. Thus it will be a good potential IV.
 
 \item[c.] In Example 6.2 we used $black\cdot nearc4$ as the IV for $black\cdot educ$. Now use 2SLS with $black\cdot\hat{educ}$ as the IV for $black\cdot educ$, where $\hat{educ}$ are the fitted values from the first-stage regression of $educ$ on all exogenous variables (including $nearc4$). What do you find? 
 \\ Answer:\\
 \input{HW4/98c}
+Comparing the standard error for the two procedures, it turns out that using $black\cdot\hat{educ}$ as the IV yields a smaller standard error than using $black\cdot nearc4$.
 
-\item[d.] If $\E(educ|\textbf{z})$ is linear and $\V(u_2|\textbf{z})=\sigma_1^2$, where \textbf{z} is the set of all exogenous variables and $u_1$ is the error in the $\log(wage)$ equation, explain why the estimator using $black\cdot\hat{educ}$ as the IV is asymptotically more efficient than the estimator using $black\cdot nearc4$ as the IV.
+\item[d.] If $\E(educ|\textbf{z})$ is linear and $\V(u_1|\textbf{z})=\sigma_1^2$, where \textbf{z} is the set of all exogenous variables and $u_1$ is the error in the $\log(wage)$ equation, explain why the estimator using $black\cdot\hat{educ}$ as the IV is asymptotically more efficient than the estimator using $black\cdot nearc4$ as the IV.
 \\ Answer:\\
+Suppose $\E(educ|\textbf{z})$ is linear, write as $\E(educ|\textbf{z})=\textbf{z}\pmb{\pi}_2$. We also have $\V(u_1|\textbf{z})=\sigma_1^2$. We can find the optimal choice of instruments from Theorem 8.5 in the textbook. The theorem says if we have $\E(u_{ig}|\textbf{w}_i)=0,\  g=1,\ldots,G$ for some vector $\textbf{w}_i$, suppose $\pmb{\Omega}(\textbf{w}_i)=\E(\textbf{u}_i'\textbf{u}_i|\textbf{w}_i)$ and that rank $\E(\textbf{Z}_i^*'\textbf{X}_i)=K$, then the optimal instruments is $\textbf{Z}_i^*=\pmb{\Omega}(\textbf{w}_i)^{-1}\E(\textbf{X}_i|\textbf{w}_i).$
+Applying the theorem we have the optimal IV for $educ$ and $black\cdot educ$ are the following
+\begin{align*}
+    &\textbf{Z}_{educ}^*=\E(\textbf{u}_1'\textbf{u}_1|\textbf{z})^{-1}\E(educ|\textbf{z})=\V(u_1|\textbf{z})^{-1}\textbf{z}\pmb{\pi}_2=\sigma_1^{-2}\textbf{z}\pmb{\pi}_2.\\
+    &\textbf{Z}_{black\cdot educ}^*=\E(\textbf{u}_1'\textbf{u}_1|\textbf{z})^{-1}\E(black\cdot educ|\textbf{z})=\E(\textbf{u}_1'\textbf{u}_1|\textbf{z})^{-1}black \cdot \E(educ|\textbf{z})=\sigma_1^{-2}black\cdot \textbf{z}\pmb{\pi}_2.
+\end{align*}
+Now since the variance is constant it is just a scalar for the remaining term. We can take the optimal IV as $\textbf{z}\pmb{\pi}_2$ and $black\cdot \textbf{z}\pmb{\pi}_2$. Note that if we get $\textbf{z}\pmb{\pi}_2$ from the linear projection of $educ$ on $\textbf{z}$ and implement using $\hat{\pmb{\pi}}_2$.It turns out that $\textbf{z}\hat{\pmb{\pi}}_2$ is the fitted value of $educ$ i.e. $\hat{educ}$ from the regressing $educ$ on all exogenous variable \textbf{z}. Thus our optimal instrument now are $\textbf{z}, \ \hat{educ},$ and $black \cdot \hat{educ}$. Thus, using 2SLS with these instruments will give us an asymptotically more efficient estimator than any other option of IV.
 
 \end{enumerate}
 
