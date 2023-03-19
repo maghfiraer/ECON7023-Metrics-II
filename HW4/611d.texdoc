@@ -1,0 +1,9 @@
+texdoc init ".\HW4\611d.tex", replace
+
+/***
+OLS Regression of Residuals-Squared with Year Dummy
+***/
+texdoc stlog
+predict u2, resid
+reg u2 y85
+texdoc stlog close

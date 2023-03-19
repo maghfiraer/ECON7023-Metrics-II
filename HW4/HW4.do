@@ -31,6 +31,8 @@ clear
 use ".\data\cps78_85.dta"
 *6.11abc
 texdoc do ".\HW4\611abc.texdoc"
+*6.11d
+texdoc do ".\HW4\611d.texdoc"
 *6.11e
 texdoc do ".\HW4\611e.texdoc"
 
