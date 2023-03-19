@@ -1,18 +1,20 @@
-. predict u2, resid
+. predict u, resid
+{\smallskip}
+. gen u2=u{\caret}2
 {\smallskip}
 . reg u2 y85
 {\smallskip}
       Source {\VBAR}       SS           df       MS      Number of obs   =     1,084
-\HLI{13}{\PLUS}\HLI{34}   F(1, 1082)      =      0.00
-       Model {\VBAR}           0         1           0   Prob > F        =    1.0000
-    Residual {\VBAR}  183.099095     1,082  .169222823   R-squared       =    0.0000
-\HLI{13}{\PLUS}\HLI{34}   Adj R-squared   =   -0.0009
-       Total {\VBAR}  183.099095     1,083  .169066569   Root MSE        =    .41137
+\HLI{13}{\PLUS}\HLI{34}   F(1, 1082)      =      3.63
+       Model {\VBAR}  .474853374         1  .474853374   Prob > F        =    0.0572
+    Residual {\VBAR}  141.708808     1,082  .130969324   R-squared       =    0.0033
+\HLI{13}{\PLUS}\HLI{34}   Adj R-squared   =    0.0024
+       Total {\VBAR}  142.183662     1,083  .131286853   Root MSE        =     .3619
 {\smallskip}
 \HLI{13}{\TOPT}\HLI{64}
           u2 {\VBAR} Coefficient  Std. err.      t    P>|t|     [95\% conf. interval]
 \HLI{13}{\PLUS}\HLI{64}
-         y85 {\VBAR}   5.06e-10   .0249915     0.00   1.000    -.0490373    .0490373
-       _cons {\VBAR}  -5.41e-10   .0175407    -0.00   1.000    -.0344177    .0344177
+         y85 {\VBAR}   .0418642   .0219861     1.90   0.057     -.001276    .0850043
+       _cons {\VBAR}   .1482875   .0154313     9.61   0.000     .1180088    .1785662
 \HLI{13}{\BOTT}\HLI{64}
 {\smallskip}

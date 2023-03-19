@@ -4,6 +4,7 @@ texdoc init ".\HW4\611d.tex", replace
 OLS Regression of Residuals-Squared with Year Dummy
 ***/
 texdoc stlog
-predict u2, resid
+predict u, resid
+gen u2=u^2
 reg u2 y85
 texdoc stlog close
