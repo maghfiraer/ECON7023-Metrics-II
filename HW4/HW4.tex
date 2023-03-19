@@ -64,7 +64,7 @@ From the OLS model, the individual significance of the interaction terms is sign
 Use the data in INJURY.RAW for this question. 
 \begin{enumerate}
 \item[a.] Using the data for Kentucky, reestimate equation (6.54) adding as explanatory variables $male$, $married$, and a full set of industry- and injury-type dummy variables. How does the estimate on $afchnge\cdot highearn$ change when these other factors are controlled for? Is the estimate still statistically significant? 
-\\ Answer: \\
+\\ Answer: \\ \\
 \input{HW4/69a}
 Compared to without adding the new variables, the estimated coefficient on the interaction terms is now higher at 0.23 than at .19 from the previous result. It is also statistically more significant with a p-value of 0.001. Adding the new variables only slightly affects the standard error on the interaction terms. 
 
@@ -73,7 +73,7 @@ Compared to without adding the new variables, the estimated coefficient on the i
 Comparing the R-squared that is quite small at 4.1\% and adjusted R-square of 3.9\%. It means that our model does not explain much of the variation. It means that we can not really use our model for making good predictions considering the variable that we have included so far. However, we can still get a good causal inference if the coefficient is statistically significant.
 
 \item[c.] Estimate equation (6.54) using the data for Michigan. Compare the estimate on the interaction term for Michigan and Kentucky, as well as their statistical significance.
-\\ Answer: \\
+\\ Answer: \\ \\
 \input{HW4/69c}
 Comparing the estimate for Michigan and Kentucky we have similar estimates on the interaction terms consecutively .192 and .191, although the statistical significance for Michigan is lower probably due to the smaller sample size compared to those of Kentucky.
 
@@ -308,7 +308,7 @@ It turns out it is true. Then since $\textbf{C}'\pmb{\Lambda}^{-1/2}[\textbf{I}_
 \subsection*{Problem 9.8}
 \begin{enumerate}
 \item[a.] Extend Problem 5.4b using CARD.RAW to allow $educ^2$ to appear in the $\log(wage)$ equation, without using $nearc2$ as an instrument. Specifically, use interactions of $nearc4$ with some or all of the other exogenous variables in the $\log(wage)$ equation as instruments for $educ^2$. Compute a heteroskedasticity-robust test to be sure that at least one of these additional instruments appears in the linear projection of $educ^2$ onto your entire list of instruments. Test whether $educ^2$ needs to be in the $\log(wage)$ equation. 
-\\ Answer:\\
+\\ Answer:\\ \\
 \input{HW4/98a}
 After performing heteroskedasticity-robust Wald test for the joint significance of the instrument, it can be reported that the three interaction terms are partially correlated with $educ^2$. The p-value is .011. In the 2SLS estimates the coefficient of $educ^2$ is not significant, thus we can leave it out of the equation.
 
