@@ -104,7 +104,8 @@ If we use the 1978 dollars wage, the coefficient on $y85$ will change, mathemati
 
 \item[d.] Is there evidence that the variance of the error has changed over time?
 \\ Answer: \\
-
+One idea is to estimate the variance using residual-squared. Then I regress it on the time dummy variable $y85$, if the coefficient is significant then there is some evidence that the variance error has changed over time.\\
+\input{HW4/611d}
 
 \item[e.] With wages measured nominally, and holding other factors fixed, what is the estimated increase in nominal wage for a male with 12 years of education? Propose a regression to obtain a confidence interval for this estimate. (Hint: You must replace $y85\cdot educ$ with something else.)
 \\ Answer: \\
