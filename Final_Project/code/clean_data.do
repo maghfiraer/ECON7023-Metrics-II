@@ -2,11 +2,15 @@
 * AUTHOR		: MAGHFIRA RAMADHANI											*
 * PROJECT		: MEASURING VILLAGE INFRASTRUCTURE DEVELOPMENT IN INDONESIA		*
 * COURSE		: ECON 7023 Econometrics II										*
-* DESCRIPTION	: Clean climate data											*
+* DESCRIPTION	: Clean data													*
 * INPUT			: podes2011.dta, podes2014.dta, podes2017.dta					*
 * OUTPUT		: podes_processed.dta											*
+* STATA VERSION	: Stata/MP 17.0 (March 2022)									*
 *********************************************************************************
 
+*********************************************************************************
+* Structuring podes2017.dta														*
+*********************************************************************************
 clear
 
 * Open .dta
@@ -24,8 +28,14 @@ destring r102, replace
 recast int r102
 destring r103, replace
 destring r104, replace
-gen village_id=r101*10000000000+r102*1000000+r103*1000+r104
+gen double village_id=r101*100000000+r102*1000000+r103*1000+r104
 label variable village_id "Village ID"
+
+* Village, Subdistrict, District, Province Name
+rename r101n name_prov
+rename r102n name_d
+rename r103n name_subd
+rename r104n name_vil
 
 * Village Type
 rename r301 vil_type
@@ -58,13 +68,16 @@ label variable forest "=1 if inside or border with forest, =0 outside forest"
 * Electricity 
 rename r501a1 elec_pln
 label variable elec_pln "Number of PLN electricity user household"
-rename r501a2 elec_nonpln "Number of Non-PLN electricity user household"
-rename r501b elec_na "Number of household without electricity"
+rename r501a2 elec_nonpln
+label variable elec_nonpln "Number of Non-PLN electricity user household"
+rename r501b elec_na
+label variable elec_na "Number of household without electricity"
 
 * Cooking Fuel of Majority
 rename r503b cook_fuel
 label variable cook_fuel "Cooking Fuel Majority"
-label define cook_fuel 1 "City gas" 2 "3 kgs LPG" 3 "> 3 kgs LPG" 4 "Kerosene" 5 "Firewood" 6 "Others"
+replace cook_fuel=cook_fuel-1 if cook_fuel>2
+label define cook_fuel 1 "City gas" 2 "LPG" 3 "Kerosene" 4 "Firewood" 5 "Others"
 label values cook_fuel cook_fuel
 
 * River Transporation Use
@@ -73,7 +86,7 @@ replace trans_river=0 if trans_river==2
 label variable trans_river "=1 if river used for transportation, =0 otherwise"
 
 * Lake Transporation Use
-rename r509b7k2 trans_lake
+rename r509b7k4 trans_lake
 replace trans_lake=0 if trans_lake==2
 label variable trans_lake "=1 if lake used for transportation, =0 otherwise"
 
@@ -82,9 +95,9 @@ label variable trans_lake "=1 if lake used for transportation, =0 otherwise"
 rename r601ak3 landfall_3
 rename r601ak5 landfall_2
 rename r601ak7 landfall_1
-replace landfall_1=0 if misssing(landfall_1)
-replace landfall_2=0 if misssing(landfall_2)
-replace landfall_3=0 if misssing(landfall_3)
+replace landfall_1=0 if missing(landfall_1)
+replace landfall_2=0 if missing(landfall_2)
+replace landfall_3=0 if missing(landfall_3)
 label variable landfall_1 "Landfall frequency [y-1]"
 label variable landfall_2 "Landfall frequency [y-2]"
 label variable landfall_3 "Landfall frequency [y-3]"
@@ -93,9 +106,9 @@ label variable landfall_3 "Landfall frequency [y-3]"
 rename r601dk3 earthq_3
 rename r601dk5 earthq_2
 rename r601dk7 earthq_1
-replace earthq_1=0 if misssing(earthq_1)
-replace earthq_2=0 if misssing(earthq_2)
-replace earthq_3=0 if misssing(earthq_3)
+replace earthq_1=0 if missing(earthq_1)
+replace earthq_2=0 if missing(earthq_2)
+replace earthq_3=0 if missing(earthq_3)
 label variable earthq_1 "Earthquake frequency [y-1]"
 label variable earthq_2 "Earthquake frequency [y-2]"
 label variable earthq_3 "Earthquake frequency [y-3]"
@@ -111,13 +124,497 @@ label variable sch_jh "Number of Junior High School"
 gen sch_sh=r701ek2+r701ek3+r701fk2+r701fk3
 label variable sch_sh "Number of Senior High School or Vocational High School"
 * Higher Education
-gen sch_uni=r701gk2+r701gk3 "Number of University"
+gen sch_uni=r701gk2+r701gk3 
+label variable sch_uni "Number of University"
 
 * Poverty, Number of Poverty Statement 2017
 rename r711b pov_let
-label variable pov_ket "Number of poverty statement request"
+label variable pov_let "Number of poverty statement request"
 
+* Transportation, Communication, and Information
+
+* Transportation from village office to subdistrict office
+* Transport Mode
+rename r1002ak2 vil_subd_mode
+label variable vil_subd_mode "Transport Mode from Village Office to Subdistrict Office"
+replace vil_subd_mode=3 if vil_subd_mode>3
+label define vil_subd_mode 1 "Public Transport" 2 "Private Vehicles" 3 "Others"
+label values vil_subd_mode vil_subd_mode
+
+* Distance (km)
+rename r1002ak5 vil_subd_dis
+label variable vil_subd_dis "Distance from Village Office to Subdistrict Office"
+
+* Travel Duration (hr)
+gen vil_subd_dur=r1002ajm+r1002ame/60
+label variable vil_subd_dur "Travel duration from Village Office to Subdistrict Office"
+
+* Tranport Cost
+rename r1002ak7 vil_subd_cost
+label variable vil_subd_cost "Transportation cost from Village Office to Subdistrict Office in 000s Rp."
+
+* Cleaning data
+
+* Transportation from village office to neighboring subdistrict office
+* Transport Mode
+rename r1002bk2 vil_nsubd_mode
+label variable vil_nsubd_mode "Transport Mode from Village Office to Neighbouring Subdistrict Office"
+replace vil_nsubd_mode=3 if vil_nsubd_mode>3
+label define vil_nsubd_mode 1 "Public Transport" 2 "Private Vehicles" 3 "Others"
+label values vil_nsubd_mode vil_nsubd_mode
+
+* Distance (km)
+rename r1002bk5 vil_nsubd_dis
+label variable vil_nsubd_dis "Distance from Village Office to Neighbouring Subdistrict Office"
+
+* Travel Duration (hr)
+gen vil_nsubd_dur=r1002bjm+r1002bme/60
+label variable vil_nsubd_dur "Travel duration from Village Office to Neighbouring Subdistrict Office"
+
+* Tranport Cost
+rename r1002bk7 vil_nsubd_cost
+label variable vil_nsubd_cost "Transportation cost from Village Office to Neighbouring Subdistrict Office in 000s Rp."
+
+* Village Governance
+* Government Domestic Income
+gen inc_dom=.
+
+* Government VF Allocation
+gen inc_vf=.
+
+* Government Revenue Sharing / Grant
+gen inc_rsg=.
+
+keep year village_id name_prov name_d name_subd name_vil vil_type land_topo office_loc sea forest elec_pln elec_nonpln elec_na cook_fuel trans_river trans_lake landfall_1 landfall_2 landfall_3 earthq_1 earthq_2 earthq_3 sch_el sch_jh sch_sh sch_uni pov_let vil_subd_mode vil_subd_dis vil_subd_dur vil_subd_cost vil_nsubd_mode vil_nsubd_dis vil_nsubd_dur vil_nsubd_cost inc_dom inc_vf inc_rsg
+
+* Save processed data
+save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes17_processed.dta", replace
+
+*********************************************************************************
+* Structuring podes2014.dta														*
+*********************************************************************************
+
+clear
+
+* Open .dta
+use "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\sketch\PODES data\podes2014.dta"
+
+* Preprocessing Data
+
+* Year
+gen year=2014
+
+* Village_ID
+destring r101, replace
+recast int r101
+destring r102, replace
+recast int r102
+destring r103, replace
+destring r104, replace
+gen double village_id=r101*100000000+r102*1000000+r103*1000+r104
+label variable village_id "Village ID"
+
+* Village, Subdistrict, District, Province Name
+rename r101n name_prov
+rename r102n name_d
+rename r103n name_subd
+rename r104n name_vil
+
+* Village Type
+destring r301, replace
+rename r301 vil_type
+drop if vil_type==3 | vil_type==4 // Drop Podes Transmigration Settlement Unit (UPT) or Transmigration Settlement Unit (SPT) observation
+replace vil_type=0 if vil_type==2
+label variable vil_type "=1 if village subsdistrict, =0 if urban subdistrict"
+
+* Mainland Topography
+destring r305b, replace
+rename r305b land_topo
+replace land_topo=0 if land_topo==3
+replace land_topo=1 if land_topo==1 | land_topo==2
+label variable land_topo "=1 if slope/valleys, =0 vast land"
+
+* Village Government Office Location
+destring r306a, replace
+rename r306a office_loc
+replace office_loc=0 if office_loc==2
+label variable office_loc "=1 if inside region, =0 outside region"
+
+* Village Bordering with Sea
+destring r307a, replace
+rename r307a sea
+replace sea=0 if sea==2
+label variable sea "=1 if border with sea, =0 no border with sea"
+
+* Village Bordering with Forest
+destring r308a, replace
+rename r308a forest
+replace forest=0 if forest==3
+replace forest=1 if forest==1 | forest==2
+label variable forest "=1 if inside or border with forest, =0 outside forest"
+
+* Electricity 
+rename r501a1 elec_pln
+label variable elec_pln "Number of PLN electricity user household"
+rename r501a2 elec_nonpln
+label variable elec_nonpln "Number of Non-PLN electricity user household"
+rename r501b elec_na
+label variable elec_na "Number of household without electricity"
+
+* Cooking Fuel of Majority
+destring r503, replace
+rename r503 cook_fuel
+label variable cook_fuel "Cooking Fuel Majority" // Need to be changed category
+label define cook_fuel 1 "City gas" 2 "LPG" 3 "Kerosene" 4 "Firewood" 5 "Others"
+label values cook_fuel cook_fuel
+
+* River Transporation Use
+destring r508b6_k2, replace
+rename r508b6_k2 trans_river
+replace trans_river=0 if trans_river==2
+label variable trans_river "=1 if river used for transportation, =0 otherwise"
+
+* Lake Transporation Use
+destring r508b6_k4, replace
+rename r508b6_k4 trans_lake
+replace trans_lake=0 if trans_lake==2
+label variable trans_lake "=1 if lake used for transportation, =0 otherwise"
+
+* Natural Disaster
+* Landfall Frequency
+rename r601a_k3 landfall_3
+rename r601a_k5 landfall_2
+rename r601a_k7 landfall_1
+replace landfall_1=0 if missing(landfall_1)
+replace landfall_2=0 if missing(landfall_2)
+replace landfall_3=0 if missing(landfall_3)
+label variable landfall_1 "Landfall frequency [y-1]"
+label variable landfall_2 "Landfall frequency [y-2]"
+label variable landfall_3 "Landfall frequency [y-3]"
+
+* Earthquake Frequency
+rename r601d_k3 earthq_3
+rename r601d_k5 earthq_2
+rename r601d_k7 earthq_1
+replace earthq_1=0 if missing(earthq_1)
+replace earthq_2=0 if missing(earthq_2)
+replace earthq_3=0 if missing(earthq_3)
+label variable earthq_1 "Earthquake frequency [y-1]"
+label variable earthq_2 "Earthquake frequency [y-2]"
+label variable earthq_3 "Earthquake frequency [y-3]"
+
+* Education and Health
+* Elementary School
+gen sch_el=r701b_k2+r701b_k3
+label variable sch_el "Number of Elementary School"
+* Junior High School
+gen sch_jh=r701c_k2+r701c_k3 
+label variable sch_jh "Number of Junior High School"
+* Senior High School/ Vocational High School
+gen sch_sh=r701d_k2+r701d_k3+r701e_k2+r701e_k3
+label variable sch_sh "Number of Senior High School or Vocational High School"
+* Higher Education
+gen sch_uni=r701f_k2+r701f_k3 
+label variable sch_uni "Number of University"
+
+* Poverty, Number of Poverty Statement 2017
+rename r711b pov_let
+label variable pov_let "Number of poverty statement request"
+
+* Transportation, Communication, and Information
+
+* Transportation from village office to subdistrict office
+* Transport Mode
+destring r1002a_k4, replace
+rename r1002a_k4 vil_subd_mode
+label variable vil_subd_mode "Transport Mode from Village Office to Subdistrict Office"
+replace vil_subd_mode=3 if vil_subd_mode>3
+label define vil_subd_mode 1 "Public Transport" 2 "Private Vehicles" 3 "Others"
+label values vil_subd_mode vil_subd_mode
+
+* Distance (km)
+rename r1002a_k2 vil_subd_dis
+label variable vil_subd_dis "Distance from Village Office to Subdistrict Office"
+
+* Travel Duration (hr)
+gen vil_subd_dur=r1002a_k3
+label variable vil_subd_dur "Travel duration from Village Office to Subdistrict Office"
+
+* Tranport Cost
+rename r1002a_k7 vil_subd_cost
+label variable vil_subd_cost "Transportation cost from Village Office to Subdistrict Office in 000s Rp."
+
+* Cleaning data
+
+* Transportation from village office to neighboring subdistrict office
+* Transport Mode
+destring r1002c_k4, replace
+rename r1002c_k4 vil_nsubd_mode //destring
+label variable vil_nsubd_mode "Transport Mode from Village Office to Neighbouring Subdistrict Office"
+replace vil_nsubd_mode=3 if vil_nsubd_mode>3
+label define vil_nsubd_mode 1 "Public Transport" 2 "Private Vehicles" 3 "Others"
+label values vil_nsubd_mode vil_nsubd_mode
+
+* Distance (km)
+rename r1002c_k2 vil_nsubd_dis
+label variable vil_nsubd_dis "Distance from Village Office to Neighbouring Subdistrict Office"
+
+* Travel Duration (hr)
+gen vil_nsubd_dur=r1002c_k3
+label variable vil_nsubd_dur "Travel duration from Village Office to Neighbouring Subdistrict Office"
+
+* Tranport Cost
+rename r1002c_k7 vil_nsubd_cost
+label variable vil_nsubd_cost "Transportation cost from Village Office to Neighbouring Subdistrict Office in 000s Rp."
+
+* Village Governance
+* Government Domestic Income
+rename r1501a_k3 inc_dom
+destring r1501a_k2, replace
+replace inc_dom=0 if r1501a_k2==4 
+
+* Government VF Allocation
+rename r1501b_k3 inc_vf
+destring r1501b_k2, replace
+replace inc_vf=0 if r1501b_k2==4
+
+* Government Revenue Sharing / Grant
+destring r1501c1_k2, replace
+destring r1501c2_k2, replace
+destring r1501c3_k2, replace
+destring r1501c4_k2, replace
+destring r1501c5_k2, replace
+destring r1501c6_k2, replace
+replace r1501c1_k3=0 if r1501c1_k2==4
+replace r1501c2_k3=0 if r1501c2_k2==4
+replace r1501c3_k3=0 if r1501c3_k2==4
+replace r1501c4_k3=0 if r1501c4_k2==4
+replace r1501c5_k3=0 if r1501c5_k2==4
+replace r1501c6_k3=0 if r1501c6_k2==4
+gen inc_rsg=r1501c1_k3+r1501c2_k3+r1501c3_k3+r1501c4_k3+r1501c5_k3+r1501c6_k3
+
+keep year village_id name_prov name_d name_subd name_vil vil_type land_topo office_loc sea forest elec_pln elec_nonpln elec_na cook_fuel trans_river trans_lake landfall_1 landfall_2 landfall_3 earthq_1 earthq_2 earthq_3 sch_el sch_jh sch_sh sch_uni pov_let vil_subd_mode vil_subd_dis vil_subd_dur vil_subd_cost vil_nsubd_mode vil_nsubd_dis vil_nsubd_dur vil_nsubd_cost inc_dom inc_vf inc_rsg
+
+* Save processed data
+save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes14_processed.dta", replace
+
+
+*********************************************************************************
+* Structuring podes2011.dta														*
+*********************************************************************************
+clear
+
+* Open .dta
+use "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\sketch\PODES data\podes2011.dta"
+
+* Preprocessing Data
+
+* Year
+gen year=2011
+
+* Village_ID
+destring iddesa, replace
+rename iddesa village_id
+label variable village_id "Village ID"
+
+* Village, Subdistrict, District, Province Name
+rename nama_prov name_prov
+rename nama_kab name_d
+rename nama_kec name_subd
+rename nama_desa name_vil
+
+* Village Type
+destring r301, replace
+rename r301 vil_type
+drop if vil_type==3 | vil_type==4 // Drop Podes Transmigration Settlement Unit (UPT) or Transmigration Settlement Unit (SPT) observation
+replace vil_type=0 if vil_type==2
+label variable vil_type "=1 if village subsdistrict, =0 if urban subdistrict"
+
+* Mainland Topography
+destring r305a, replace
+rename r305a land_topo
+replace land_topo=0 if land_topo==4
+replace land_topo=1 if land_topo==1 | land_topo==2 | land_topo==3
+label variable land_topo "=1 if slope/valleys, =0 vast land"
+
+* Village Government Office Location
+destring r302b, replace
+rename r302b office_loc
+replace office_loc=0 if office_loc==2
+replace office_loc=. if office_loc==3 // No office
+label variable office_loc "=1 if inside region, =0 outside region"
+
+* Village Bordering with Sea
+destring r305d, replace
+rename r305d sea
+replace sea=0 if sea==2
+label variable sea "=1 if border with sea, =0 no border with sea"
+
+* Village Bordering with Forest
+destring r306a, replace
+rename r306a forest
+replace forest=0 if forest==3
+replace forest=1 if forest==1 | forest==2
+label variable forest "=1 if inside or border with forest, =0 outside forest"
+
+* Electricity 
+rename r501a elec_pln
+label variable elec_pln "Number of PLN electricity user household"
+rename r501b elec_nonpln
+label variable elec_nonpln "Number of Non-PLN electricity user household"
+gen elec_na=.
+label variable elec_na "Number of household without electricity"
+
+* Cooking Fuel of Majority
+destring r503, replace
+rename r503 cook_fuel
+label variable cook_fuel "Cooking Fuel Majority"
+label define cook_fuel 1 "City gas" 2 "LPG" 3 "Kerosene" 4 "Firewood" 5 "Others"
+label values cook_fuel cook_fuel
+
+* River Transporation Use
+destring r506b5k2, replace
+rename r506b5k2 trans_river
+replace trans_river=0 if trans_river==2
+label variable trans_river "=1 if river used for transportation, =0 otherwise"
+
+* Lake Transporation Use
+destring r506b5k4, replace
+rename r506b5k4 trans_lake
+replace trans_lake=0 if trans_lake==2
+label variable trans_lake "=1 if lake used for transportation, =0 otherwise"
+
+* Natural Disaster
+* Landfall Frequency
+rename r60101k3 landfall
+gen landfall_3=landfall/3
+gen landfall_2=landfall/3
+gen landfall_1=landfall/3
+replace landfall_1=0 if missing(landfall_1)
+replace landfall_2=0 if missing(landfall_2)
+replace landfall_3=0 if missing(landfall_3)
+label variable landfall_1 "Landfall frequency [y-1]"
+label variable landfall_2 "Landfall frequency [y-2]"
+label variable landfall_3 "Landfall frequency [y-3]"
+
+* Earthquake Frequency
+rename r60104k3 earth
+gen earthq_3=earth/3
+gen earthq_2=earth/3
+gen earthq_1=earth/3
+replace earthq_1=0 if missing(earthq_1)
+replace earthq_2=0 if missing(earthq_2)
+replace earthq_3=0 if missing(earthq_3)
+label variable earthq_1 "Earthquake frequency [y-1]"
+label variable earthq_2 "Earthquake frequency [y-2]"
+label variable earthq_3 "Earthquake frequency [y-3]"
+
+* Education and Health
+* Elementary School
+gen sch_el=r701bk2+r701bk3
+label variable sch_el "Number of Elementary School"
+* Junior High School
+gen sch_jh=r701ck2+r701ck3 
+label variable sch_jh "Number of Junior High School"
+* Senior High School/ Vocational High School
+gen sch_sh=r701dk2+r701dk3+r701ek2+r701ek3
+label variable sch_sh "Number of Senior High School or Vocational High School"
+* Higher Education
+gen sch_uni=r701fk2+r701fk3 
+label variable sch_uni "Number of University"
+
+* Poverty, Number of Poverty Statement 2017
+rename r712 pov_let
+label variable pov_let "Number of poverty statement request"
+
+* Transportation, Communication, and Information
+
+* Transportation from village office to subdistrict office
+* Transport Mode
+gen vil_subd_mode=.
+label variable vil_subd_mode "Transport Mode from Village Office to Subdistrict Office"
+replace vil_subd_mode=3 if vil_subd_mode>3
+label define vil_subd_mode 1 "Public Transport" 2 "Private Vehicles" 3 "Others"
+label values vil_subd_mode vil_subd_mode
+
+* Distance (km)
+rename r1004ak2 vil_subd_dis
+label variable vil_subd_dis "Distance from Village Office to Subdistrict Office"
+
+* Travel Duration (hr)
+gen vil_subd_dur=.
+label variable vil_subd_dur "Travel duration from Village Office to Subdistrict Office"
+
+* Tranport Cost
+gen vil_subd_cost=.
+label variable vil_subd_cost "Transportation cost from Village Office to Subdistrict Office in 000s Rp."
+
+* Cleaning data
+
+* Transportation from village office to neighboring subdistrict office
+* Transport Mode
+gen vil_nsubd_mode=.
+label variable vil_nsubd_mode "Transport Mode from Village Office to Neighbouring Subdistrict Office"
+replace vil_nsubd_mode=3 if vil_nsubd_mode>3
+label define vil_nsubd_mode 1 "Public Transport" 2 "Private Vehicles" 3 "Others"
+label values vil_nsubd_mode vil_nsubd_mode
+
+* Distance (km)
+gen vil_nsubd_dis=.
+label variable vil_nsubd_dis "Distance from Village Office to Neighbouring Subdistrict Office"
+
+* Travel Duration (hr)
+gen vil_nsubd_dur=.
+label variable vil_nsubd_dur "Travel duration from Village Office to Neighbouring Subdistrict Office"
+
+* Tranport Cost
+gen vil_nsubd_cost=.
+label variable vil_nsubd_cost "Transportation cost from Village Office to Neighbouring Subdistrict Office in 000s Rp."
+
+* Village Governance
+* Government Domestic Income
+rename r1401ak3 inc_dom
+destring r1401ak2, replace
+replace inc_dom=0 if r1401ak2==4 
+
+* Government VF Allocation
+gen inc_vf=.
+
+* Government Revenue Sharing / Grant
+destring r1401b1k2, replace
+destring r1401b2k2, replace
+destring r1401b3k2, replace
+destring r1401b4k2, replace
+destring r1401b5k2, replace
+destring r1401b6k2, replace
+replace r1401b1k3=0 if r1401b1k2==4
+replace r1401b2k3=0 if r1401b2k2==4
+replace r1401b3k3=0 if r1401b3k2==4
+replace r1401b4k3=0 if r1401b4k2==4
+replace r1401b5k3=0 if r1401b5k2==4
+replace r1401b6k3=0 if r1401b6k2==4
+gen inc_rsg=r1401b1k3+r1401b2k3+r1401b3k3+r1401b4k3+r1401b5k3+r1401b6k3
+
+keep year village_id name_prov name_d name_subd name_vil vil_type land_topo office_loc sea forest elec_pln elec_nonpln elec_na cook_fuel trans_river trans_lake landfall_1 landfall_2 landfall_3 earthq_1 earthq_2 earthq_3 sch_el sch_jh sch_sh sch_uni pov_let vil_subd_mode vil_subd_dis vil_subd_dur vil_subd_cost vil_nsubd_mode vil_nsubd_dis vil_nsubd_dur vil_nsubd_cost inc_dom inc_vf inc_rsg
 
 
 * Save processed data
+save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes11_processed.dta", replace
 
+*********************************************************************************
+* Combine all data																*
+*********************************************************************************
+* Append data
+append using "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes17_processed.dta"
+
+append using "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes14_processed.dta"
+
+* Save processed data
+save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes_processed.dta", replace
+
+* Erase temporary files
+erase "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes17_processed.dta"
+
+erase "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes14_processed.dta"
+
+erase "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes11_processed.dta"
