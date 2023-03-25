@@ -74,6 +74,14 @@
   \@AEJtrue
 }
 
+\DeclareOption{ECON7023}{
+  \def\@issueName{ECONOMETRICS II FINAL PROJECT}
+  \@twosidetrue  
+  \@twocolumnfalse
+  \@AEJtrue
+}
+
+
 % double spacing and other options
 \def\@spacingStretch{1}
 \def\spacingStretch#1{\gdef\@spacingStretch{#1}}
