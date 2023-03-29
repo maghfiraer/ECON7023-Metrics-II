@@ -1,0 +1,1444 @@
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\output\logs\final_project_28_Mar_2023_11_55_21.log
+  log type:  text
+ opened on:  28 Mar 2023, 11:55:21
+
+. 
+. *********************************************************************************
+. * Cleaning data                                                                                                                                 *
+. *********************************************************************************
+. do "code\clean_data.do"
+
+. *********************************************************************************
+. * AUTHOR                : MAGHFIRA RAMADHANI                                                                                    *
+. * PROJECT               : MEASURING VILLAGE INFRASTRUCTURE DEVELOPMENT IN INDONESIA             *
+. * COURSE                : ECON 7023 Econometrics II                                                                             *
+. * DESCRIPTION   : Clean data                                                                                                    *
+. * INPUT                 : podes2011.dta, podes2014.dta, podes2017.dta                                   *
+. * OUTPUT                : podes_processed.dta                                                                                   *
+. * STATA VERSION : Stata/MP 17.0 (March 2022)                                                                    *
+. *********************************************************************************
+. 
+. *********************************************************************************
+. * Structuring podes2017.dta                                                                                                             *
+. *********************************************************************************
+. clear
+
+. 
+. * Open .dta
+. use "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\sketch\PODES data\podes2017.dta"
+
+. 
+. * Preprocessing Data
+. 
+. * Year
+. gen year=2018
+
+. 
+. * Village_ID
+. destring r101, replace
+r101: all characters numeric; replaced as byte
+
+. recast int r101
+
+. destring r102, replace
+r102: all characters numeric; replaced as byte
+
+. recast int r102
+
+. destring r103, replace
+r103: all characters numeric; replaced as int
+
+. destring r104, replace
+r104: all characters numeric; replaced as int
+
+. gen double village_id=r101*100000000+r102*1000000+r103*1000+r104
+
+. label variable village_id "Village ID"
+
+. 
+. * Village, Subdistrict, District, Province Name
+. rename r101n name_prov
+
+. rename r101 id_prov
+
+. rename r102n name_d
+
+. rename r102 id_d
+
+. rename r103n name_subd
+
+. rename r103 id_subd
+
+. rename r104n name_vil
+
+. rename r104 id_vil
+
+. 
+. * Village Type
+. rename r301 vil_type
+
+. drop if vil_type==3 | vil_type==4 // Drop Podes Transmigration Settlement Unit (UPT) or Transmigration Settlement Unit (SPT) observation
+(970 observations deleted)
+
+. replace vil_type=0 if vil_type==2
+(8,444 real changes made)
+
+. label variable vil_type "=1 if village subsdistrict, =0 if urban subdistrict"
+
+. 
+. * Mainland Topography
+. rename r305b land_topo
+
+. replace land_topo=0 if land_topo==3
+(65,361 real changes made)
+
+. replace land_topo=1 if land_topo==1 | land_topo==2
+(3,123 real changes made)
+
+. label variable land_topo "=1 if slope/valleys, =0 vast land"
+
+. 
+. * Village Government Office Location
+. rename r306d office_loc
+
+. replace office_loc=0 if office_loc==2
+(268 real changes made)
+
+. label variable office_loc "=1 if inside region, =0 outside region"
+
+. 
+. * Village Bordering with Sea
+. rename r308a sea
+
+. replace sea=0 if sea==2
+(70,172 real changes made)
+
+. label variable sea "=1 if border with sea, =0 no border with sea"
+
+. 
+. * Village Bordering with Forest
+. rename r309a forest
+
+. replace forest=0 if forest==3
+(61,985 real changes made)
+
+. replace forest=1 if forest==1 | forest==2
+(18,243 real changes made)
+
+. label variable forest "=1 if inside or border with forest, =0 outside forest"
+
+. 
+. * Electricity 
+. rename r501a1 elec_pln
+
+. label variable elec_pln "Number of PLN electricity user household"
+
+. rename r501a2 elec_nonpln
+
+. label variable elec_nonpln "Number of Non-PLN electricity user household"
+
+. rename r501b elec_na
+
+. label variable elec_na "Number of household without electricity"
+
+. 
+. * Cooking Fuel of Majority
+. rename r503b cook_fuel
+
+. label variable cook_fuel "Cooking Fuel Majority"
+
+. replace cook_fuel=cook_fuel-1 if cook_fuel>2
+(28,642 real changes made)
+
+. label define cook_fuel 1 "City gas" 2 "LPG" 3 "Kerosene" 4 "Firewood" 5 "Others"
+
+. label values cook_fuel cook_fuel
+
+. 
+. * River Transporation Use
+. rename r509b7k2 trans_river
+
+. replace trans_river=0 if trans_river==2
+(56,127 real changes made)
+
+. label variable trans_river "=1 if river used for transportation, =0 otherwise"
+
+. 
+. * Lake Transporation Use
+. rename r509b7k4 trans_lake
+
+. replace trans_lake=0 if trans_lake==2
+(5,875 real changes made)
+
+. label variable trans_lake "=1 if lake used for transportation, =0 otherwise"
+
+. 
+. * Natural Disaster
+. * Landfall Frequency
+. rename r601ak3 landfall_3
+
+. rename r601ak5 landfall_2
+
+. rename r601ak7 landfall_1
+
+. replace landfall_1=0 if missing(landfall_1)
+(72,950 real changes made)
+
+. replace landfall_2=0 if missing(landfall_2)
+(72,950 real changes made)
+
+. replace landfall_3=0 if missing(landfall_3)
+(72,950 real changes made)
+
+. label variable landfall_1 "Landfall frequency [y-1]"
+
+. label variable landfall_2 "Landfall frequency [y-2]"
+
+. label variable landfall_3 "Landfall frequency [y-3]"
+
+. 
+. * Earthquake Frequency
+. rename r601dk3 earthq_3
+
+. rename r601dk5 earthq_2
+
+. rename r601dk7 earthq_1
+
+. replace earthq_1=0 if missing(earthq_1)
+(73,153 real changes made)
+
+. replace earthq_2=0 if missing(earthq_2)
+(73,153 real changes made)
+
+. replace earthq_3=0 if missing(earthq_3)
+(73,153 real changes made)
+
+. label variable earthq_1 "Earthquake frequency [y-1]"
+
+. label variable earthq_2 "Earthquake frequency [y-2]"
+
+. label variable earthq_3 "Earthquake frequency [y-3]"
+
+. 
+. * Education and Health
+. * Elementary School
+. gen sch_el=r701ck2+r701ck3
+
+. label variable sch_el "Number of Elementary School"
+
+. * Junior High School
+. gen sch_jh=r701dk2+r701dk3 
+
+. label variable sch_jh "Number of Junior High School"
+
+. * Senior High School/ Vocational High School
+. gen sch_sh=r701ek2+r701ek3+r701fk2+r701fk3
+
+. label variable sch_sh "Number of Senior High School or Vocational High School"
+
+. * Higher Education
+. gen sch_uni=r701gk2+r701gk3 
+
+. label variable sch_uni "Number of University"
+
+. 
+. * Poverty, Number of Poverty Statement 2017
+. rename r711b pov_let
+
+. label variable pov_let "Number of poverty statement request"
+
+. 
+. * Transportation, Communication, and Information
+. 
+. * Transportation from village office to subdistrict office
+. * Transport Mode
+. rename r1002ak2 vil_subd_mode
+
+. label variable vil_subd_mode "Transport Mode from Village Office to Subdistrict Office"
+
+. replace vil_subd_mode=3 if vil_subd_mode>3
+(12,049 real changes made)
+
+. label define vil_subd_mode 1 "Public Transport" 2 "Private Vehicles" 3 "Others"
+
+. label values vil_subd_mode vil_subd_mode
+
+. 
+. * Distance (km)
+. rename r1002ak5 vil_subd_dis
+
+. label variable vil_subd_dis "Distance from Village Office to Subdistrict Office"
+
+. 
+. * Travel Duration (hr)
+. gen vil_subd_dur=r1002ajm+r1002ame/60
+
+. label variable vil_subd_dur "Travel duration from Village Office to Subdistrict Office"
+
+. 
+. * Tranport Cost
+. rename r1002ak7 vil_subd_cost
+
+. label variable vil_subd_cost "Transportation cost from Village Office to Subdistrict Office in 000s Rp."
+
+. 
+. * Cleaning data
+. 
+. * Transportation from village office to neighboring subdistrict office
+. * Transport Mode
+. rename r1002bk2 vil_nsubd_mode
+
+. label variable vil_nsubd_mode "Transport Mode from Village Office to Neighbouring Subdistrict Office"
+
+. replace vil_nsubd_mode=3 if vil_nsubd_mode>3
+(5,334 real changes made)
+
+. label define vil_nsubd_mode 1 "Public Transport" 2 "Private Vehicles" 3 "Others"
+
+. label values vil_nsubd_mode vil_nsubd_mode
+
+. 
+. * Distance (km)
+. rename r1002bk5 vil_nsubd_dis
+
+. label variable vil_nsubd_dis "Distance from Village Office to Neighbouring Subdistrict Office"
+
+. 
+. * Travel Duration (hr)
+. gen vil_nsubd_dur=r1002bjm+r1002bme/60
+
+. label variable vil_nsubd_dur "Travel duration from Village Office to Neighbouring Subdistrict Office"
+
+. 
+. * Tranport Cost
+. rename r1002bk7 vil_nsubd_cost
+
+. label variable vil_nsubd_cost "Transportation cost from Village Office to Neighbouring Subdistrict Office in 000s Rp."
+note: label truncated to 80 characters
+
+. 
+. * Village Governance
+. * Government Domestic Income
+. gen inc_dom=.
+(82,961 missing values generated)
+
+. 
+. * Government VF Allocation
+. gen inc_vf=.
+(82,961 missing values generated)
+
+. 
+. * Government Revenue Sharing / Grant
+. gen inc_rsg=.
+(82,961 missing values generated)
+
+. 
+. keep year village_id name_prov name_d name_subd name_vil id_prov id_d id_subd id_vil vil_type land_topo office_loc sea forest elec_pln elec_nonpln elec_na cook_fuel trans_river trans_lake landfall_1 landfall_2 landfall_3 earthq_1 earthq_2 earthq_3 sc
+> h_el sch_jh sch_sh sch_uni pov_let vil_subd_mode vil_subd_dis vil_subd_dur vil_subd_cost vil_nsubd_mode vil_nsubd_dis vil_nsubd_dur vil_nsubd_cost inc_dom inc_vf inc_rsg
+
+. 
+. * Save processed data
+. save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes17_processed.dta", replace
+(file C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes17_processed.dta not found)
+file C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes17_processed.dta saved
+
+. 
+. *********************************************************************************
+. * Structuring podes2014.dta                                                                                                             *
+. *********************************************************************************
+. 
+. clear
+
+. 
+. * Open .dta
+. use "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\sketch\PODES data\podes2014.dta"
+
+. 
+. * Preprocessing Data
+. 
+. * Year
+. gen year=2014
+
+. 
+. * Village_ID
+. destring r101, replace
+r101: all characters numeric; replaced as byte
+
+. recast int r101
+
+. destring r102, replace
+r102: all characters numeric; replaced as byte
+
+. recast int r102
+
+. destring r103, replace
+r103: all characters numeric; replaced as int
+
+. destring r104, replace
+r104: all characters numeric; replaced as int
+
+. gen double village_id=r101*100000000+r102*1000000+r103*1000+r104
+
+. label variable village_id "Village ID"
+
+. 
+. * Village, Subdistrict, District, Province Name
+. rename r101n name_prov
+
+. rename r101 id_prov
+
+. rename r102n name_d
+
+. rename r102 id_d
+
+. rename r103n name_subd
+
+. rename r103 id_subd
+
+. rename r104n name_vil
+
+. rename r104 id_vil
+
+. 
+. * Village Type
+. destring r301, replace
+r301: all characters numeric; replaced as byte
+
+. rename r301 vil_type
+
+. drop if vil_type==3 | vil_type==4 | vil_type==5 // Drop Podes Transmigration Settlement Unit (UPT) or Transmigration Settlement Unit (SPT) observation
+(829 observations deleted)
+
+. replace vil_type=0 if vil_type==2
+(8,412 real changes made)
+
+. label variable vil_type "=1 if village subsdistrict, =0 if urban subdistrict"
+
+. 
+. * Mainland Topography
+. destring r305b, replace
+r305b: all characters numeric; replaced as byte
+
+. rename r305b land_topo
+
+. replace land_topo=0 if land_topo==3
+(61,964 real changes made)
+
+. replace land_topo=1 if land_topo==1 | land_topo==2
+(3,575 real changes made)
+
+. label variable land_topo "=1 if slope/valleys, =0 vast land"
+
+. 
+. * Village Government Office Location
+. destring r306a, replace
+r306a: all characters numeric; replaced as byte
+
+. rename r306a office_loc
+
+. replace office_loc=0 if office_loc>1
+(13,775 real changes made)
+
+. label variable office_loc "=1 if inside region, =0 outside region"
+
+. 
+. * Village Bordering with Sea
+. destring r307a, replace
+r307a: all characters numeric; replaced as byte
+
+. rename r307a sea
+
+. replace sea=0 if sea==2
+(68,600 real changes made)
+
+. label variable sea "=1 if border with sea, =0 no border with sea"
+
+. 
+. * Village Bordering with Forest
+. destring r308a, replace
+r308a: all characters numeric; replaced as byte
+
+. rename r308a forest
+
+. replace forest=0 if forest==3
+(60,415 real changes made)
+
+. replace forest=1 if forest==1 | forest==2
+(18,938 real changes made)
+
+. label variable forest "=1 if inside or border with forest, =0 outside forest"
+
+. 
+. * Electricity 
+. rename r501a1 elec_pln
+
+. label variable elec_pln "Number of PLN electricity user household"
+
+. rename r501a2 elec_nonpln
+
+. label variable elec_nonpln "Number of Non-PLN electricity user household"
+
+. rename r501b elec_na
+
+. label variable elec_na "Number of household without electricity"
+
+. 
+. * Cooking Fuel of Majority
+. destring r503, replace
+r503: all characters numeric; replaced as byte
+
+. rename r503 cook_fuel
+
+. label variable cook_fuel "Cooking Fuel Majority" // Need to be changed category
+
+. label define cook_fuel 1 "City gas" 2 "LPG" 3 "Kerosene" 4 "Firewood" 5 "Others"
+
+. label values cook_fuel cook_fuel
+
+. 
+. * River Transporation Use
+. destring r508b6_k2, replace
+r508b6_k2: all characters numeric; replaced as byte
+(18830 missing values generated)
+
+. rename r508b6_k2 trans_river
+
+. replace trans_river=0 if trans_river==2
+(55,351 real changes made)
+
+. label variable trans_river "=1 if river used for transportation, =0 otherwise"
+
+. 
+. * Lake Transporation Use
+. destring r508b6_k4, replace
+r508b6_k4: all characters numeric; replaced as byte
+(74802 missing values generated)
+
+. rename r508b6_k4 trans_lake
+
+. replace trans_lake=0 if trans_lake==2
+(6,168 real changes made)
+
+. label variable trans_lake "=1 if lake used for transportation, =0 otherwise"
+
+. 
+. * Natural Disaster
+. * Landfall Frequency
+. rename r601a_k3 landfall_3
+
+. rename r601a_k5 landfall_2
+
+. rename r601a_k7 landfall_1
+
+. replace landfall_1=0 if missing(landfall_1)
+(74,323 real changes made)
+
+. replace landfall_2=0 if missing(landfall_2)
+(74,742 real changes made)
+
+. replace landfall_3=0 if missing(landfall_3)
+(74,786 real changes made)
+
+. label variable landfall_1 "Landfall frequency [y-1]"
+
+. label variable landfall_2 "Landfall frequency [y-2]"
+
+. label variable landfall_3 "Landfall frequency [y-3]"
+
+. 
+. * Earthquake Frequency
+. rename r601d_k3 earthq_3
+
+. rename r601d_k5 earthq_2
+
+. rename r601d_k7 earthq_1
+
+. replace earthq_1=0 if missing(earthq_1)
+(77,943 real changes made)
+
+. replace earthq_2=0 if missing(earthq_2)
+(78,264 real changes made)
+
+. replace earthq_3=0 if missing(earthq_3)
+(78,310 real changes made)
+
+. label variable earthq_1 "Earthquake frequency [y-1]"
+
+. label variable earthq_2 "Earthquake frequency [y-2]"
+
+. label variable earthq_3 "Earthquake frequency [y-3]"
+
+. 
+. * Education and Health
+. * Elementary School
+. gen sch_el=r701b_k2+r701b_k3
+
+. label variable sch_el "Number of Elementary School"
+
+. * Junior High School
+. gen sch_jh=r701c_k2+r701c_k3 
+
+. label variable sch_jh "Number of Junior High School"
+
+. * Senior High School/ Vocational High School
+. gen sch_sh=r701d_k2+r701d_k3+r701e_k2+r701e_k3
+
+. label variable sch_sh "Number of Senior High School or Vocational High School"
+
+. * Higher Education
+. gen sch_uni=r701f_k2+r701f_k3 
+
+. label variable sch_uni "Number of University"
+
+. 
+. * Poverty, Number of Poverty Statement 2017
+. rename r711b pov_let
+
+. label variable pov_let "Number of poverty statement request"
+
+. 
+. * Transportation, Communication, and Information
+. 
+. * Transportation from village office to subdistrict office
+. * Transport Mode
+. destring r1002a_k4, replace
+r1002a_k4: all characters numeric; replaced as byte
+
+. rename r1002a_k4 vil_subd_mode
+
+. label variable vil_subd_mode "Transport Mode from Village Office to Subdistrict Office"
+
+. replace vil_subd_mode=3 if vil_subd_mode>3
+(0 real changes made)
+
+. label define vil_subd_mode 1 "Public Transport" 2 "Private Vehicles" 3 "Others"
+
+. label values vil_subd_mode vil_subd_mode
+
+. 
+. * Distance (km)
+. rename r1002a_k2 vil_subd_dis
+
+. label variable vil_subd_dis "Distance from Village Office to Subdistrict Office"
+
+. 
+. * Travel Duration (hr)
+. gen vil_subd_dur=r1002a_k3
+
+. label variable vil_subd_dur "Travel duration from Village Office to Subdistrict Office"
+
+. 
+. * Tranport Cost
+. rename r1002a_k7 vil_subd_cost
+
+. label variable vil_subd_cost "Transportation cost from Village Office to Subdistrict Office in 000s Rp."
+
+. 
+. * Cleaning data
+. 
+. * Transportation from village office to neighboring subdistrict office
+. * Transport Mode
+. destring r1002c_k4, replace
+r1002c_k4: all characters numeric; replaced as byte
+
+. rename r1002c_k4 vil_nsubd_mode //destring
+
+. label variable vil_nsubd_mode "Transport Mode from Village Office to Neighbouring Subdistrict Office"
+
+. replace vil_nsubd_mode=3 if vil_nsubd_mode>3
+(0 real changes made)
+
+. label define vil_nsubd_mode 1 "Public Transport" 2 "Private Vehicles" 3 "Others"
+
+. label values vil_nsubd_mode vil_nsubd_mode
+
+. 
+. * Distance (km)
+. rename r1002c_k2 vil_nsubd_dis
+
+. label variable vil_nsubd_dis "Distance from Village Office to Neighbouring Subdistrict Office"
+
+. 
+. * Travel Duration (hr)
+. gen vil_nsubd_dur=r1002c_k3
+
+. label variable vil_nsubd_dur "Travel duration from Village Office to Neighbouring Subdistrict Office"
+
+. 
+. * Tranport Cost
+. rename r1002c_k7 vil_nsubd_cost
+
+. label variable vil_nsubd_cost "Transportation cost from Village Office to Neighbouring Subdistrict Office in 000s Rp."
+note: label truncated to 80 characters
+
+. 
+. * Village Governance
+. * Government Domestic Income
+. rename r1501a_k3 inc_dom
+
+. destring r1501a_k2, replace
+r1501a_k2: all characters numeric; replaced as byte
+(8412 missing values generated)
+
+. replace inc_dom=0 if r1501a_k2==4 
+(29,634 real changes made)
+
+. 
+. * Government VF Allocation
+. rename r1501b_k3 inc_vf
+
+. destring r1501b_k2, replace
+r1501b_k2: all characters numeric; replaced as byte
+(8412 missing values generated)
+
+. replace inc_vf=0 if r1501b_k2==4
+(7,226 real changes made)
+
+. 
+. * Government Revenue Sharing / Grant
+. destring r1501c1_k2, replace
+r1501c1_k2: all characters numeric; replaced as byte
+(8412 missing values generated)
+
+. destring r1501c2_k2, replace
+r1501c2_k2: all characters numeric; replaced as byte
+(8412 missing values generated)
+
+. destring r1501c3_k2, replace
+r1501c3_k2: all characters numeric; replaced as byte
+(8412 missing values generated)
+
+. destring r1501c4_k2, replace
+r1501c4_k2: all characters numeric; replaced as byte
+(8412 missing values generated)
+
+. destring r1501c5_k2, replace
+r1501c5_k2: all characters numeric; replaced as byte
+(8412 missing values generated)
+
+. destring r1501c6_k2, replace
+r1501c6_k2: all characters numeric; replaced as byte
+(8412 missing values generated)
+
+. replace r1501c1_k3=0 if r1501c1_k2==4
+(28,799 real changes made)
+
+. replace r1501c2_k3=0 if r1501c2_k2==4
+(30,124 real changes made)
+
+. replace r1501c3_k3=0 if r1501c3_k2==4
+(54,621 real changes made)
+
+. replace r1501c4_k3=0 if r1501c4_k2==4
+(71,614 real changes made)
+
+. replace r1501c5_k3=0 if r1501c5_k2==4
+(69,921 real changes made)
+
+. replace r1501c6_k3=0 if r1501c6_k2==4
+(66,816 real changes made)
+
+. gen inc_rsg=r1501c1_k3+r1501c2_k3+r1501c3_k3+r1501c4_k3+r1501c5_k3+r1501c6_k3
+(8,412 missing values generated)
+
+. 
+. keep year village_id name_prov name_d name_subd name_vil id_prov id_d id_subd id_vil vil_type land_topo office_loc sea forest elec_pln elec_nonpln elec_na cook_fuel trans_river trans_lake landfall_1 landfall_2 landfall_3 earthq_1 earthq_2 earthq_3 sc
+> h_el sch_jh sch_sh sch_uni pov_let vil_subd_mode vil_subd_dis vil_subd_dur vil_subd_cost vil_nsubd_mode vil_nsubd_dis vil_nsubd_dur vil_nsubd_cost inc_dom inc_vf inc_rsg
+
+. 
+. * Save processed data
+. save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes14_processed.dta", replace
+(file C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes14_processed.dta not found)
+file C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes14_processed.dta saved
+
+. 
+. 
+. *********************************************************************************
+. * Structuring podes2011.dta                                                                                                             *
+. *********************************************************************************
+. clear
+
+. 
+. * Open .dta
+. use "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\sketch\PODES data\podes2011.dta"
+
+. 
+. * Preprocessing Data
+. 
+. * Year
+. gen year=2011
+
+. 
+. * Village_ID
+. destring iddesa, replace
+iddesa: all characters numeric; replaced as double
+
+. rename iddesa village_id
+
+. label variable village_id "Village ID"
+
+. 
+. * Village, Subdistrict, District, Province Name
+. rename nama_prov name_prov
+
+. rename kode_prov id_prov
+
+. rename nama_kab name_d
+
+. rename kode_kab id_d
+
+. rename nama_kec name_subd
+
+. rename kode_kec id_subd
+
+. rename nama_desa name_vil
+
+. rename kode_desa id_vil
+
+. 
+. * Village Type
+. destring r301, replace
+r301: all characters numeric; replaced as byte
+
+. rename r301 vil_type
+
+. drop if vil_type==3 | vil_type==4 // Drop Podes Transmigration Settlement Unit (UPT) or Transmigration Settlement Unit (SPT) observation
+(136 observations deleted)
+
+. replace vil_type=0 if vil_type==2
+(8,083 real changes made)
+
+. label variable vil_type "=1 if village subsdistrict, =0 if urban subdistrict"
+
+. 
+. * Mainland Topography
+. destring r305a, replace
+r305a: all characters numeric; replaced as byte
+
+. rename r305a land_topo
+
+. replace land_topo=0 if land_topo==4
+(57,004 real changes made)
+
+. replace land_topo=1 if land_topo==1 | land_topo==2 | land_topo==3
+(19,738 real changes made)
+
+. label variable land_topo "=1 if slope/valleys, =0 vast land"
+
+. 
+. * Village Government Office Location
+. destring r302b, replace
+r302b: all characters numeric; replaced as byte
+
+. rename r302b office_loc
+
+. replace office_loc=0 if office_loc==2
+(854 real changes made)
+
+. replace office_loc=. if office_loc==3 // No office
+(7,911 real changes made, 7,911 to missing)
+
+. label variable office_loc "=1 if inside region, =0 outside region"
+
+. 
+. * Village Bordering with Sea
+. destring r305d, replace
+r305d: all characters numeric; replaced as byte
+
+. rename r305d sea
+
+. replace sea=0 if sea==2
+(66,007 real changes made)
+
+. label variable sea "=1 if border with sea, =0 no border with sea"
+
+. 
+. * Village Bordering with Forest
+. destring r306a, replace
+r306a: all characters numeric; replaced as byte
+
+. rename r306a forest
+
+. replace forest=0 if forest==3
+(59,462 real changes made)
+
+. replace forest=1 if forest==1 | forest==2
+(15,501 real changes made)
+
+. label variable forest "=1 if inside or border with forest, =0 outside forest"
+
+. 
+. * Electricity 
+. rename r501a elec_pln
+
+. label variable elec_pln "Number of PLN electricity user household"
+
+. rename r501b elec_nonpln
+
+. label variable elec_nonpln "Number of Non-PLN electricity user household"
+
+. gen elec_na=.
+(77,825 missing values generated)
+
+. label variable elec_na "Number of household without electricity"
+
+. 
+. * Cooking Fuel of Majority
+. destring r503, replace
+r503: all characters numeric; replaced as byte
+
+. rename r503 cook_fuel
+
+. label variable cook_fuel "Cooking Fuel Majority"
+
+. label define cook_fuel 1 "City gas" 2 "LPG" 3 "Kerosene" 4 "Firewood" 5 "Others"
+
+. label values cook_fuel cook_fuel
+
+. 
+. * River Transporation Use
+. destring r506b5k2, replace
+r506b5k2: all characters numeric; replaced as byte
+(18469 missing values generated)
+
+. rename r506b5k2 trans_river
+
+. replace trans_river=0 if trans_river==2
+(52,214 real changes made)
+
+. label variable trans_river "=1 if river used for transportation, =0 otherwise"
+
+. 
+. * Lake Transporation Use
+. destring r506b5k4, replace
+r506b5k4: all characters numeric; replaced as byte
+(73822 missing values generated)
+
+. rename r506b5k4 trans_lake
+
+. replace trans_lake=0 if trans_lake==2
+(3,600 real changes made)
+
+. label variable trans_lake "=1 if lake used for transportation, =0 otherwise"
+
+. 
+. * Natural Disaster
+. * Landfall Frequency
+. rename r60101k3 landfall
+
+. gen landfall_3=landfall/3
+(70,516 missing values generated)
+
+. gen landfall_2=landfall/3
+(70,516 missing values generated)
+
+. gen landfall_1=landfall/3
+(70,516 missing values generated)
+
+. replace landfall_1=0 if missing(landfall_1)
+(70,516 real changes made)
+
+. replace landfall_2=0 if missing(landfall_2)
+(70,516 real changes made)
+
+. replace landfall_3=0 if missing(landfall_3)
+(70,516 real changes made)
+
+. label variable landfall_1 "Landfall frequency [y-1]"
+
+. label variable landfall_2 "Landfall frequency [y-2]"
+
+. label variable landfall_3 "Landfall frequency [y-3]"
+
+. 
+. * Earthquake Frequency
+. rename r60104k3 earth
+
+. gen earthq_3=earth/3
+(73,717 missing values generated)
+
+. gen earthq_2=earth/3
+(73,717 missing values generated)
+
+. gen earthq_1=earth/3
+(73,717 missing values generated)
+
+. replace earthq_1=0 if missing(earthq_1)
+(73,717 real changes made)
+
+. replace earthq_2=0 if missing(earthq_2)
+(73,717 real changes made)
+
+. replace earthq_3=0 if missing(earthq_3)
+(73,717 real changes made)
+
+. label variable earthq_1 "Earthquake frequency [y-1]"
+
+. label variable earthq_2 "Earthquake frequency [y-2]"
+
+. label variable earthq_3 "Earthquake frequency [y-3]"
+
+. 
+. * Education and Health
+. * Elementary School
+. gen sch_el=r701bk2+r701bk3
+
+. label variable sch_el "Number of Elementary School"
+
+. * Junior High School
+. gen sch_jh=r701ck2+r701ck3 
+
+. label variable sch_jh "Number of Junior High School"
+
+. * Senior High School/ Vocational High School
+. gen sch_sh=r701dk2+r701dk3+r701ek2+r701ek3
+
+. label variable sch_sh "Number of Senior High School or Vocational High School"
+
+. * Higher Education
+. gen sch_uni=r701fk2+r701fk3 
+
+. label variable sch_uni "Number of University"
+
+. 
+. * Poverty, Number of Poverty Statement 2017
+. rename r712 pov_let
+
+. label variable pov_let "Number of poverty statement request"
+
+. 
+. * Transportation, Communication, and Information
+. 
+. * Transportation from village office to subdistrict office
+. * Transport Mode
+. gen vil_subd_mode=.
+(77,825 missing values generated)
+
+. label variable vil_subd_mode "Transport Mode from Village Office to Subdistrict Office"
+
+. label define vil_subd_mode 1 "Public Transport" 2 "Private Vehicles" 3 "Others"
+
+. label values vil_subd_mode vil_subd_mode
+
+. 
+. * Distance (km)
+. rename r1004ak2 vil_subd_dis
+
+. label variable vil_subd_dis "Distance from Village Office to Subdistrict Office"
+
+. 
+. * Travel Duration (hr)
+. gen vil_subd_dur=.
+(77,825 missing values generated)
+
+. label variable vil_subd_dur "Travel duration from Village Office to Subdistrict Office"
+
+. 
+. * Tranport Cost
+. gen vil_subd_cost=.
+(77,825 missing values generated)
+
+. label variable vil_subd_cost "Transportation cost from Village Office to Subdistrict Office in 000s Rp."
+
+. 
+. * Cleaning data
+. 
+. * Transportation from village office to neighboring subdistrict office
+. * Transport Mode
+. gen vil_nsubd_mode=.
+(77,825 missing values generated)
+
+. label variable vil_nsubd_mode "Transport Mode from Village Office to Neighbouring Subdistrict Office"
+
+. replace vil_nsubd_mode=3 if vil_nsubd_mode>3
+(77,825 real changes made)
+
+. label define vil_nsubd_mode 1 "Public Transport" 2 "Private Vehicles" 3 "Others"
+
+. label values vil_nsubd_mode vil_nsubd_mode
+
+. 
+. * Distance (km)
+. gen vil_nsubd_dis=.
+(77,825 missing values generated)
+
+. label variable vil_nsubd_dis "Distance from Village Office to Neighbouring Subdistrict Office"
+
+. 
+. * Travel Duration (hr)
+. gen vil_nsubd_dur=.
+(77,825 missing values generated)
+
+. label variable vil_nsubd_dur "Travel duration from Village Office to Neighbouring Subdistrict Office"
+
+. 
+. * Tranport Cost
+. gen vil_nsubd_cost=.
+(77,825 missing values generated)
+
+. label variable vil_nsubd_cost "Transportation cost from Village Office to Neighbouring Subdistrict Office in 000s Rp."
+note: label truncated to 80 characters
+
+. 
+. * Village Governance
+. * Government Domestic Income
+. rename r1401ak3 inc_dom
+
+. destring r1401ak2, replace
+r1401ak2: all characters numeric; replaced as byte
+(8084 missing values generated)
+
+. replace inc_dom=0 if r1401ak2==4 
+(26,508 real changes made)
+
+. 
+. * Government VF Allocation
+. gen inc_vf=.
+(77,825 missing values generated)
+
+. 
+. * Government Revenue Sharing / Grant
+. destring r1401b1k2, replace
+r1401b1k2: all characters numeric; replaced as byte
+(8084 missing values generated)
+
+. destring r1401b2k2, replace
+r1401b2k2: all characters numeric; replaced as byte
+(8084 missing values generated)
+
+. destring r1401b3k2, replace
+r1401b3k2: all characters numeric; replaced as byte
+(8084 missing values generated)
+
+. destring r1401b4k2, replace
+r1401b4k2: all characters numeric; replaced as byte
+(8084 missing values generated)
+
+. destring r1401b5k2, replace
+r1401b5k2: all characters numeric; replaced as byte
+(8084 missing values generated)
+
+. destring r1401b6k2, replace
+r1401b6k2: all characters numeric; replaced as byte
+(8080 missing values generated)
+
+. replace r1401b1k3=0 if r1401b1k2==4
+(6,198 real changes made)
+
+. replace r1401b2k3=0 if r1401b2k2==4
+(31,715 real changes made)
+
+. replace r1401b3k3=0 if r1401b3k2==4
+(47,823 real changes made)
+
+. replace r1401b4k3=0 if r1401b4k2==4
+(68,834 real changes made)
+
+. replace r1401b5k3=0 if r1401b5k2==4
+(67,170 real changes made)
+
+. replace r1401b6k3=0 if r1401b6k2==4
+(64,047 real changes made)
+
+. gen inc_rsg=r1401b1k3+r1401b2k3+r1401b3k3+r1401b4k3+r1401b5k3+r1401b6k3
+(8,088 missing values generated)
+
+. 
+. keep year village_id name_prov name_d name_subd name_vil id_prov id_d id_subd id_vil vil_type land_topo office_loc sea forest elec_pln elec_nonpln elec_na cook_fuel trans_river trans_lake landfall_1 landfall_2 landfall_3 earthq_1 earthq_2 earthq_3 sc
+> h_el sch_jh sch_sh sch_uni pov_let vil_subd_mode vil_subd_dis vil_subd_dur vil_subd_cost vil_nsubd_mode vil_nsubd_dis vil_nsubd_dur vil_nsubd_cost inc_dom inc_vf inc_rsg
+
+. 
+. 
+. * Save processed data
+. save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes11_processed.dta", replace
+(file C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes11_processed.dta not found)
+file C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes11_processed.dta saved
+
+. 
+. *********************************************************************************
+. * Combine all data                                                                                                                              *
+. *********************************************************************************
+. * Append data
+. append using "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes17_processed.dta"
+(variable id_prov was byte, now int to accommodate using data's values)
+(variable id_d was byte, now int to accommodate using data's values)
+(variable name_d was str25, now str26 to accommodate using data's values)
+(variable name_vil was str39, now str44 to accommodate using data's values)
+(variable pov_let was int, now long to accommodate using data's values)
+(variable vil_subd_cost was float, now double to accommodate using data's values)
+(variable vil_nsubd_cost was float, now double to accommodate using data's values)
+(variable inc_dom was int, now float to accommodate using data's values)
+(label vil_nsubd_mode already defined)
+(label vil_subd_mode already defined)
+(label cook_fuel already defined)
+
+. 
+. append using "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes14_processed.dta"
+(label vil_nsubd_mode already defined)
+(label vil_subd_mode already defined)
+(label cook_fuel already defined)
+
+. 
+. * Save processed data
+. save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes_processed.dta", replace
+file C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes_processed.dta saved
+
+. 
+. * Erase temporary files
+. erase "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes17_processed.dta"
+
+. 
+. erase "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes14_processed.dta"
+
+. 
+. erase "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes11_processed.dta"
+
+. 
+. *********************************************************************************
+. * Generate year dummy                                                                                                                   *
+. *********************************************************************************
+. gen y14=0
+
+. replace y14=1 if year==2014
+(81,361 real changes made)
+
+. gen y18=0
+
+. replace y18=1 if year==2018
+(82,961 real changes made)
+
+. 
+. *********************************************************************************
+. * Save processed data                                                                                                                   *
+. *********************************************************************************
+. 
+. save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes_processed.dta", replace
+file C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes_processed.dta saved
+
+. 
+end of do-file
+
+. 
+. *********************************************************************************
+. * Analyzing data                                                                                                                                *
+. *********************************************************************************
+. 
+. * Produce Summary Statistics
+. est clear
+
+. estpost tabstat ///
+> vil_subd_dis vil_subd_mode vil_subd_dur vil_subd_cost office_loc land_topo sea forest elec_pln elec_nonpln elec_na trans_river trans_lake landfall_3 landfall_2 landfall_1 earthq_3 earthq_2 earthq_1 sch_el sch_jh sch_sh sch_uni pov_let inc_dom inc_vf 
+> inc_rsg if vil_type==1, ///
+> by(year) c(stat) stat(mean sd min max n) nototal
+
+Summary statistics: mean sd min max count
+     for variables: vil_subd_dis vil_subd_mode vil_subd_dur vil_subd_cost office_loc land_topo sea forest elec_pln elec_nonpln elec_na trans_river trans_lake landfall_3 landfall_2 landfall_1 earthq_3 earthq_2 earthq_1 sch_el sch_jh sch_sh sch_uni pov_l
+> et inc_dom inc_vf inc_rsg
+  by categories of: year
+
+        year |   e(mean)      e(sd)     e(min)     e(max)   e(count) 
+-------------+-------------------------------------------------------
+2011         |                                                       
+vil_subd_dis |   11.1234    45.3573         .1      999.9      69742 
+vil_subd_m~e |         .          .          .          .          0 
+vil_subd_dur |         .          .          .          .          0 
+vil_subd_c~t |         .          .          .          .          0 
+  office_loc |  .9881579   .1081759          0          1      61898 
+   land_topo |  .2866852   .4522165          0          1      69742 
+         sea |  .1494795   .3565631          0          1      69742 
+      forest |  .2526741   .4345488          0          1      69742 
+    elec_pln |  447.5179   680.5315          0      21255      69742 
+ elec_nonpln |  158.4176   260.5122          0       5422      69742 
+     elec_na |         .          .          .          .          0 
+ trans_river |   .121198   .3263603          0          1      53722 
+  trans_lake |    .10141   .3019118          0          1       3688 
+  landfall_3 |  .0772753   .3250939          0   16.66667      69742 
+  landfall_2 |  .0772753   .3250939          0   16.66667      69742 
+  landfall_1 |  .0772753   .3250939          0   16.66667      69742 
+    earthq_3 |   .030522   .1721218          0   2.666667      69742 
+    earthq_2 |   .030522   .1721218          0   2.666667      69742 
+    earthq_1 |   .030522   .1721218          0   2.666667      69742 
+      sch_el |  1.908749   1.693416          0         28      69742 
+      sch_jh |  .4883714   .7729054          0         11      69742 
+      sch_sh |   .230435   .6304946          0         20      69742 
+     sch_uni |  .0178372   .1751635          0         11      69742 
+     pov_let |  41.38096   115.6268          0      11223      69742 
+     inc_dom |  46.04111   204.6177          0       9998      69741 
+      inc_vf |         .          .          .          .          0 
+     inc_rsg |  207.9694   466.3207          0      29994      69737 
+-------------+-------------------------------------------------------
+2014         |                                                       
+vil_subd_dis |  11.47047   145.4483          1       9999      72949 
+vil_subd_m~e |  1.758324   .5863883          1          3      72949 
+vil_subd_dur |  1.538842   5.328126          1         99      72949 
+vil_subd_c~t |  107.9313   1255.233          0      98999      67092 
+  office_loc |  .8127733   .3900961          0          1      72949 
+   land_topo |   .255754   .4362872          0          1      72949 
+         sea |  .1545737   .3615003          0          1      72949 
+      forest |  .2771937    .447616          0          1      72949 
+    elec_pln |  630.3444   857.0885          0      19714      72949 
+ elec_nonpln |  28.00299   121.7192          0      10293      72949 
+     elec_na |  36.23146   93.20581          0       5692      72949 
+ trans_river |  .1162811   .3205646          0          1      56544 
+  trans_lake |  .0605211   .2384695          0          1       6064 
+  landfall_3 |  .0779312   .4390523          0          9      72949 
+  landfall_2 |  .0765466   .4270646          0          9      72949 
+  landfall_1 |  .1017012   .4973263          0          9      72949 
+    earthq_3 |  .0399868   .2919183          0          9      72949 
+    earthq_2 |  .0419745   .3011437          0          7      72949 
+    earthq_1 |   .055998   .3976036          0          9      72949 
+      sch_el |  1.875529   1.741624          0         92      72949 
+      sch_jh |  .5281772   .8162055          0         22      72949 
+      sch_sh |  .2707782    .697074          0         40      72949 
+     sch_uni |  .0181771   .1781775          0         12      72949 
+     pov_let |  74.89722    172.195          0      13705      72949 
+     inc_dom |   52.8525   209.4179          0       9999      72949 
+      inc_vf |  109.9197   201.3347          0       7792      72949 
+     inc_rsg |  179.0909   394.5042          0      16300      72949 
+-------------+-------------------------------------------------------
+2018         |                                                       
+vil_subd_dis |  12.16475   175.0849          1       9999      74517 
+vil_subd_m~e |  2.321712   .6049765          1          3      74517 
+vil_subd_dur |  .5697655   1.712459          0       60.5      74517 
+vil_subd_c~t |  45.46313   661.2792          0      99999      74517 
+  office_loc |  .9963916   .0599623          0          1      67065 
+   land_topo |  .2278272   .4194333          0          1      74517 
+         sea |  .1519519   .3589767          0          1      74517 
+      forest |  .2724882   .4452427          0          1      74517 
+    elec_pln |   700.226   963.5695          0      23755      74517 
+ elec_nonpln |  24.10634   107.7532          0       8489      74517 
+     elec_na |  23.72948   73.88509          0       2688      74517 
+ trans_river |  .1143741   .3182678          0          1      57242 
+  trans_lake |  .0695381    .254389          0          1       5781 
+  landfall_3 |  .1122697   .5267898          0          9      74517 
+  landfall_2 |  .1150744   .5243831          0          9      74517 
+  landfall_1 |  .1439806   .6110203          0          9      74517 
+    earthq_3 |  .1720681   .8736526          0          9      74517 
+    earthq_2 |  .1879303   .8954426          0          9      74517 
+    earthq_1 |  .2158702   .9380505          0          9      74517 
+      sch_el |    1.8519   1.714567          0         35      74517 
+      sch_jh |  .5666626   .8551024          0         12      74517 
+      sch_sh |  .3206382    .744367          0         13      74517 
+     sch_uni |  .0174188   .1715668          0         13      74517 
+     pov_let |  141.3419   2552.794          0      99999      74517 
+     inc_dom |         .          .          .          .          0 
+      inc_vf |         .          .          .          .          0 
+     inc_rsg |         .          .          .          .          0 
+
+. 
+. esttab, cells(mean(fmt(2)) sd(par)) nostar  nonumber unstack ///
+>   nomtitle nonote noobs label  ///
+>    collabels(none) gap ///
+>    eqlabels("2011" "2014" "2018") ///  
+>    nomtitles
+
+-----------------------------------------------------------
+                             2011         2014         2018
+-----------------------------------------------------------
+Distance from Vill~         11.12        11.47        12.16
+                          (45.36)     (145.45)     (175.08)
+
+Transport Mode fro~i            .         1.76         2.32
+                              (.)       (0.59)       (0.60)
+
+Travel duration fr~f            .         1.54         0.57
+                              (.)       (5.33)       (1.71)
+
+Transportation cos..            .       107.93        45.46
+                              (.)    (1255.23)     (661.28)
+
+=1 if inside regio~          0.99         0.81         1.00
+                           (0.11)       (0.39)       (0.06)
+
+=1 if slope/valley~n         0.29         0.26         0.23
+                           (0.45)       (0.44)       (0.42)
+
+=1 if border with ~r         0.15         0.15         0.15
+                           (0.36)       (0.36)       (0.36)
+
+=1 if inside or bo~e         0.25         0.28         0.27
+                           (0.43)       (0.45)       (0.45)
+
+Number of PLN elec~h       447.52       630.34       700.23
+                         (680.53)     (857.09)     (963.57)
+
+Number of Non-PLN ~s       158.42        28.00        24.11
+                         (260.51)     (121.72)     (107.75)
+
+Number of househol~c            .        36.23        23.73
+                              (.)      (93.21)      (73.89)
+
+=1 if river used f~t         0.12         0.12         0.11
+                           (0.33)       (0.32)       (0.32)
+
+=1 if lake used fo~i         0.10         0.06         0.07
+                           (0.30)       (0.24)       (0.25)
+
+Landfall frequenc~3]         0.08         0.08         0.11
+                           (0.33)       (0.44)       (0.53)
+
+Landfall frequenc~2]         0.08         0.08         0.12
+                           (0.33)       (0.43)       (0.52)
+
+Landfall frequenc~1]         0.08         0.10         0.14
+                           (0.33)       (0.50)       (0.61)
+
+Earthquake freque~3]         0.03         0.04         0.17
+                           (0.17)       (0.29)       (0.87)
+
+Earthquake freque~2]         0.03         0.04         0.19
+                           (0.17)       (0.30)       (0.90)
+
+Earthquake freque~1]         0.03         0.06         0.22
+                           (0.17)       (0.40)       (0.94)
+
+Number of Elementa~l         1.91         1.88         1.85
+                           (1.69)       (1.74)       (1.71)
+
+Number of Junior H~l         0.49         0.53         0.57
+                           (0.77)       (0.82)       (0.86)
+
+Number of Senior H~          0.23         0.27         0.32
+                           (0.63)       (0.70)       (0.74)
+
+Number of University         0.02         0.02         0.02
+                           (0.18)       (0.18)       (0.17)
+
+Number of poverty ~u        41.38        74.90       141.34
+                         (115.63)     (172.20)    (2552.79)
+
+inc_dom                     46.04        52.85            .
+                         (204.62)     (209.42)          (.)
+
+inc_vf                          .       109.92            .
+                              (.)     (201.33)          (.)
+
+inc_rsg                    207.97       179.09            .
+                         (466.32)     (394.50)          (.)
+-----------------------------------------------------------
+
+. 
+end of do-file
+
+. do "C:\Users\MRAMAD~1\AppData\Local\Temp\STD79fc_000000.tmp"
+
+. *********************************************************************************
+. * AUTHOR                : MAGHFIRA RAMADHANI                                                                                    *
+. * PROJECT               : MEASURING VILLAGE INFRASTRUCTURE DEVELOPMENT IN INDONESIA             *
+. * COURSE                : ECON 7023 Econometrics II                                                                             *
+. * DESCRIPTION   : Main Code                                                                                                             *
+. * INPUT                 : podes2011.dta, podes2014.dta, podes2017.dta                                   *
+. * OUTPUT                : /figures, /table                                                                                              *
+. * STATA VERSION : Stata/MP 17.0 (March 2022)                                                                    *
+. *********************************************************************************
+. 
+. clear
+
+. macro drop _all
+
+. set more off, permanently
+(set more preference recorded)
+
+. capture log close

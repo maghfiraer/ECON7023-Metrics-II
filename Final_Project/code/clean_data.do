@@ -33,9 +33,13 @@ label variable village_id "Village ID"
 
 * Village, Subdistrict, District, Province Name
 rename r101n name_prov
+rename r101 id_prov
 rename r102n name_d
+rename r102 id_d
 rename r103n name_subd
+rename r103 id_subd
 rename r104n name_vil
+rename r104 id_vil
 
 * Village Type
 rename r301 vil_type
@@ -184,8 +188,11 @@ gen inc_vf=.
 
 * Government Revenue Sharing / Grant
 gen inc_rsg=.
+label variable inc_dom "Revenue generated locally"
+label variable inc_vf "Revenue from village fund transfer"
+label variable inc_rsg "Revenue from other sources"
 
-keep year village_id name_prov name_d name_subd name_vil vil_type land_topo office_loc sea forest elec_pln elec_nonpln elec_na cook_fuel trans_river trans_lake landfall_1 landfall_2 landfall_3 earthq_1 earthq_2 earthq_3 sch_el sch_jh sch_sh sch_uni pov_let vil_subd_mode vil_subd_dis vil_subd_dur vil_subd_cost vil_nsubd_mode vil_nsubd_dis vil_nsubd_dur vil_nsubd_cost inc_dom inc_vf inc_rsg
+keep year village_id name_prov name_d name_subd name_vil id_prov id_d id_subd id_vil vil_type land_topo office_loc sea forest elec_pln elec_nonpln elec_na cook_fuel trans_river trans_lake landfall_1 landfall_2 landfall_3 earthq_1 earthq_2 earthq_3 sch_el sch_jh sch_sh sch_uni pov_let vil_subd_mode vil_subd_dis vil_subd_dur vil_subd_cost vil_nsubd_mode vil_nsubd_dis vil_nsubd_dur vil_nsubd_cost inc_dom inc_vf inc_rsg
 
 * Save processed data
 save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes17_processed.dta", replace
@@ -216,14 +223,18 @@ label variable village_id "Village ID"
 
 * Village, Subdistrict, District, Province Name
 rename r101n name_prov
+rename r101 id_prov
 rename r102n name_d
+rename r102 id_d
 rename r103n name_subd
+rename r103 id_subd
 rename r104n name_vil
+rename r104 id_vil
 
 * Village Type
 destring r301, replace
 rename r301 vil_type
-drop if vil_type==3 | vil_type==4 // Drop Podes Transmigration Settlement Unit (UPT) or Transmigration Settlement Unit (SPT) observation
+drop if vil_type==3 | vil_type==4 | vil_type==5 // Drop Podes Transmigration Settlement Unit (UPT) or Transmigration Settlement Unit (SPT) observation
 replace vil_type=0 if vil_type==2
 label variable vil_type "=1 if village subsdistrict, =0 if urban subdistrict"
 
@@ -237,7 +248,7 @@ label variable land_topo "=1 if slope/valleys, =0 vast land"
 * Village Government Office Location
 destring r306a, replace
 rename r306a office_loc
-replace office_loc=0 if office_loc==2
+replace office_loc=0 if office_loc>1
 label variable office_loc "=1 if inside region, =0 outside region"
 
 * Village Bordering with Sea
@@ -393,7 +404,12 @@ replace r1501c5_k3=0 if r1501c5_k2==4
 replace r1501c6_k3=0 if r1501c6_k2==4
 gen inc_rsg=r1501c1_k3+r1501c2_k3+r1501c3_k3+r1501c4_k3+r1501c5_k3+r1501c6_k3
 
-keep year village_id name_prov name_d name_subd name_vil vil_type land_topo office_loc sea forest elec_pln elec_nonpln elec_na cook_fuel trans_river trans_lake landfall_1 landfall_2 landfall_3 earthq_1 earthq_2 earthq_3 sch_el sch_jh sch_sh sch_uni pov_let vil_subd_mode vil_subd_dis vil_subd_dur vil_subd_cost vil_nsubd_mode vil_nsubd_dis vil_nsubd_dur vil_nsubd_cost inc_dom inc_vf inc_rsg
+label variable inc_dom "Revenue generated locally"
+label variable inc_vf "Revenue from village fund transfer"
+label variable inc_rsg "Revenue from other sources"
+
+
+keep year village_id name_prov name_d name_subd name_vil id_prov id_d id_subd id_vil vil_type land_topo office_loc sea forest elec_pln elec_nonpln elec_na cook_fuel trans_river trans_lake landfall_1 landfall_2 landfall_3 earthq_1 earthq_2 earthq_3 sch_el sch_jh sch_sh sch_uni pov_let vil_subd_mode vil_subd_dis vil_subd_dur vil_subd_cost vil_nsubd_mode vil_nsubd_dis vil_nsubd_dur vil_nsubd_cost inc_dom inc_vf inc_rsg
 
 * Save processed data
 save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes14_processed.dta", replace
@@ -419,9 +435,13 @@ label variable village_id "Village ID"
 
 * Village, Subdistrict, District, Province Name
 rename nama_prov name_prov
+rename kode_prov id_prov
 rename nama_kab name_d
+rename kode_kab id_d
 rename nama_kec name_subd
+rename kode_kec id_subd
 rename nama_desa name_vil
+rename kode_desa id_vil
 
 * Village Type
 destring r301, replace
@@ -479,10 +499,10 @@ replace trans_river=0 if trans_river==2
 label variable trans_river "=1 if river used for transportation, =0 otherwise"
 
 * Lake Transporation Use
-destring r506b5k4, replace
-rename r506b5k4 trans_lake
-replace trans_lake=0 if trans_lake==2
-label variable trans_lake "=1 if lake used for transportation, =0 otherwise"
+* destring r506b5k4, replace
+* rename r506b5k4 trans_lake
+* replace trans_lake=0 if trans_lake==2
+* label variable trans_lake "=1 if lake used for transportation, =0 otherwise"
 
 * Natural Disaster
 * Landfall Frequency
@@ -533,7 +553,6 @@ label variable pov_let "Number of poverty statement request"
 * Transport Mode
 gen vil_subd_mode=.
 label variable vil_subd_mode "Transport Mode from Village Office to Subdistrict Office"
-replace vil_subd_mode=3 if vil_subd_mode>3
 label define vil_subd_mode 1 "Public Transport" 2 "Private Vehicles" 3 "Others"
 label values vil_subd_mode vil_subd_mode
 
@@ -595,7 +614,12 @@ replace r1401b5k3=0 if r1401b5k2==4
 replace r1401b6k3=0 if r1401b6k2==4
 gen inc_rsg=r1401b1k3+r1401b2k3+r1401b3k3+r1401b4k3+r1401b5k3+r1401b6k3
 
-keep year village_id name_prov name_d name_subd name_vil vil_type land_topo office_loc sea forest elec_pln elec_nonpln elec_na cook_fuel trans_river trans_lake landfall_1 landfall_2 landfall_3 earthq_1 earthq_2 earthq_3 sch_el sch_jh sch_sh sch_uni pov_let vil_subd_mode vil_subd_dis vil_subd_dur vil_subd_cost vil_nsubd_mode vil_nsubd_dis vil_nsubd_dur vil_nsubd_cost inc_dom inc_vf inc_rsg
+label variable inc_dom "Revenue generated locally"
+label variable inc_vf "Revenue from village fund transfer"
+label variable inc_rsg "Revenue from other sources"
+
+
+keep year village_id name_prov name_d name_subd name_vil id_prov id_d id_subd id_vil vil_type land_topo office_loc sea forest elec_pln elec_nonpln elec_na cook_fuel trans_river trans_lake landfall_1 landfall_2 landfall_3 earthq_1 earthq_2 earthq_3 sch_el sch_jh sch_sh sch_uni pov_let vil_subd_mode vil_subd_dis vil_subd_dur vil_subd_cost vil_nsubd_mode vil_nsubd_dis vil_nsubd_dur vil_nsubd_cost inc_dom inc_vf inc_rsg
 
 
 * Save processed data
@@ -618,3 +642,27 @@ erase "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents
 erase "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes14_processed.dta"
 
 erase "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes11_processed.dta"
+
+*********************************************************************************
+* Generate year dummy															*
+*********************************************************************************
+gen y14=0
+replace y14=1 if year==2014
+gen y18=0
+replace y18=1 if year==2018
+
+*********************************************************************************
+* Begin data cleaning															*
+*********************************************************************************
+
+drop trans_lake // Relatively low around 10 percent of village having this
+xtset village_id year
+gen riv_avail=1
+replace riv_avail=0 if missing(river_trans) & year==2011
+
+
+*********************************************************************************
+* Save processed data															*
+*********************************************************************************
+
+save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes_processed.dta", replace
