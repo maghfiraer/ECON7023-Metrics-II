@@ -39795,3 +39795,2889 @@ file C:\Users\mramadhani3\OneDrive - Georgia
 . 
 end of do-file
 
+. do "C:\Users\MRAMAD~1\AppData\Local\Temp\STD79fc_00
+> 0000.tmp"
+
+. clear
+
+. 
+. * Open .dta
+. use "C:\Users\mramadhani3\OneDrive - Georgia Instit
+> ute of Technology\Documents\Spring 23\Metrics II EC
+> ON7023\sketch\PODES data\podes2017.dta"
+
+. 
+. * Preprocessing Data
+. 
+end of do-file
+
+. do "C:\Users\MRAMAD~1\AppData\Local\Temp\STD79fc_00
+> 0000.tmp"
+
+. ***************************************************
+> ******************************
+. * AUTHOR                : MAGHFIRA RAMADHANI       
+>                                                    
+>                           *
+. * PROJECT               : MEASURING VILLAGE INFRAST
+> RUCTURE DEVELOPMENT IN INDONESIA             *
+. * COURSE                : ECON 7023 Econometrics II
+>                                                    
+>                           *
+. * DESCRIPTION   : Geocode and Graphing             
+>                                                    
+>                   *
+. * INPUT                 : ESRI shapefile           
+>                                                    
+>                                   *
+. * OUTPUT                : /figures, /table         
+>                                                    
+>                                   *
+. * STATA VERSION : Stata/MP 17.0 (March 2022)       
+>                                                    
+>           *
+. ***************************************************
+> ******************************
+. 
+. ***************************************************
+> ******************************
+. * Transport Cost Map                               
+>                                                    
+>                                   *
+. ***************************************************
+> ******************************
+. clear
+
+. use "C:\Users\mramadhani3\OneDrive - Georgia Instit
+> ute of Technology\Documents\Spring 23\Metrics II EC
+> ON7023\ECON7023-Metrics-II\Final_Project\processed_
+> data\podes_processed.dta"
+
+. 
+. keep if year==2018
+(159,186 observations deleted)
+
+. keep year village_id name_vil vil_subd_cost /// Can
+>  add other variable
+> 
+
+. *** Data cleaning
+. drop if vil_subd_cost==0 | vil_subd_cost>9000
+(4,432 observations deleted)
+
+. 
+. save "C:\Users\mramadhani3\OneDrive - Georgia Insti
+> tute of Technology\Documents\Spring 23\Metrics II E
+> CON7023\ECON7023-Metrics-II\Final_Project\processed
+> _data\podes_tmp.dta", replace
+file C:\Users\mramadhani3\OneDrive - Georgia
+    Institute of Technology\Documents\Spring
+    23\Metrics II
+    ECON7023\ECON7023-Metrics-II\Final_Project\proc
+    > essed_data\podes_tmp.dta saved
+
+. 
+. *The following package must be installed
+. *ssc install spmap    // for the maps package
+. *ssc install shp2dta  // shapefiles to dta. For ver
+> sions < v15.
+. *ssc install geo2xy   // for fixing the coordinate 
+> system
+. *ssc install palettes, replace    // for color pale
+> ttes
+. *ssc install colrspace, replace   // for expanding 
+> the color base
+. 
+. ********* get the shapefiles in order in order
+. cd "C:\Users\mramadhani3\OneDrive - Georgia Institu
+> te of Technology\Documents\Spring 23\Metrics II ECO
+> N7023\GIS\bps"    // switch to the GIS folder
+C:\Users\mramadhani3\OneDrive - Georgia Institute of 
+> Technology\Documents\Spring 23\Metrics II ECON7023\
+> GIS\bps
+
+. spshape2dta "idn_bnd_adm4_2017_bps_a.shp", replace 
+> saving(id_vil)
+  (importing .shp file)
+  (importing .dbf file)
+  (creating _ID spatial-unit id)
+  (creating _CX coordinate)
+  (creating _CY coordinate)
+
+  file id_vil_shp.dta created
+  file id_vil.dta     created
+
+. 
+. *** explore the outline file
+. use id_vil_shp, clear
+
+. *scatter _Y _X, msize(tiny) msymbol(point)
+. 
+. *** merge with attributes file to get the names
+. merge m:1 _ID using id_vil
+
+    Result                      Number of obs
+    -----------------------------------------
+    Not matched                             0
+    Matched                        15,880,192  (_merg
+> e==3)
+    -----------------------------------------
+
+. drop rec_header- _merge    // drop all additional v
+> ariables
+
+. *scatter _Y _X, msize(tiny) msymbol(point)
+. 
+. sort _ID
+
+. save, replace
+file id_vil_shp.dta saved
+
+. 
+. *** generate a file for labels
+. use id_vil, clear  
+
+.  ren A4N_BPS name_vil
+
+.  keep _CX _CY name_vil
+
+.  geo2xy _CY _CX, proj(web_mercator) replace  // fix
+>  the projection
+
+.  compress
+  (0 bytes saved)
+
+.  save id_vil_label.dta, replace
+file id_vil_label.dta saved
+
+.  
+. use id_vil, clear
+
+.  ren A4C_BPS village_id
+
+. *** the first map
+. *spmap using id_vil_shp, id(_ID)
+. 
+. merge 1:m village_id using "C:\Users\mramadhani3\On
+> eDrive - Georgia Institute of Technology\Documents\
+> Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\F
+> inal_Project\processed_data\podes_tmp.dta"
+
+    Result                      Number of obs
+    -----------------------------------------
+    Not matched                         5,991
+        from master                     4,687  (_merg
+> e==1)
+        from using                      1,304  (_merg
+> e==2)
+
+    Matched                            77,225  (_merg
+> e==3)
+    -----------------------------------------
+
+. tab name_vil if _m==1  // show the unmerged countri
+> es in world.dta
+no observations
+
+. tab name_vil if _m==2 // show the unmerged countrie
+> s in COVID data
+
+                               name_vil |      Freq. 
+>     Percent        Cum.
+----------------------------------------+------------
+> -----------------------
+                                ABAGIMA |          1 
+>        0.08        0.08
+                                  ABILI |          1 
+>        0.08        0.15
+                               ADORBARI |          1 
+>        0.08        0.23
+                                 AFEFBO |          1 
+>        0.08        0.31
+                                   AFES |          1 
+>        0.08        0.38
+                                 AFKREM |          1 
+>        0.08        0.46
+                                AFOGOMA |          1 
+>        0.08        0.54
+                                 AFRAWI |          1 
+>        0.08        0.61
+                                  AGAPA |          1 
+>        0.08        0.69
+                                   AGIN |          1 
+>        0.08        0.77
+                                AGOBAGA |          1 
+>        0.08        0.84
+                                  AGRIS |          1 
+>        0.08        0.92
+                                   AIMO |          1 
+>        0.08        1.00
+                              AINAMSATO |          1 
+>        0.08        1.07
+                               AINGOGIN |          1 
+>        0.08        1.15
+                                  AINOD |          1 
+>        0.08        1.23
+                            AISAF SAMAN |          1 
+>        0.08        1.30
+                           AIWARANGGANI |          1 
+>        0.08        1.38
+                                   AJIN |          1 
+>        0.08        1.46
+                               AJOKWAPI |          1 
+>        0.08        1.53
+                             AKAN TAPAK |          1 
+>        0.08        1.61
+                               AKARINDA |          1 
+>        0.08        1.69
+                          ALALAK PADANG |          1 
+>        0.08        1.76
+                               ALINDUDA |          1 
+>        0.08        1.84
+                                ALUKUNI |          1 
+>        0.08        1.92
+                                  AMAGO |          1 
+>        0.08        1.99
+                                 AMAITA |          1 
+>        0.08        2.07
+                                 AMAKOT |          1 
+>        0.08        2.15
+                              AMBITMBIT |          1 
+>        0.08        2.22
+                                AMGOTRO |          1 
+>        0.08        2.30
+                                    AMK |          1 
+>        0.08        2.38
+                                  AMOLE |          1 
+>        0.08        2.45
+                            AMOUGI BUTU |          1 
+>        0.08        2.53
+                                  AMUKI |          1 
+>        0.08        2.61
+                                 AMULUK |          1 
+>        0.08        2.68
+                             AMYABENRAM |          1 
+>        0.08        2.76
+                                   AMYU |          1 
+>        0.08        2.84
+                                ANA OSU |          1 
+>        0.08        2.91
+                                 ANARUM |          1 
+>        0.08        2.99
+                              ANATAUREI |          1 
+>        0.08        3.07
+                               ANDAMATA |          1 
+>        0.08        3.14
+                              ANDEI SUP |          1 
+>        0.08        3.22
+                                ANDIRON |          1 
+>        0.08        3.30
+                                ANDOINA |          1 
+>        0.08        3.37
+                                ANDOMAK |          1 
+>        0.08        3.45
+                              ANGGITARI |          1 
+>        0.08        3.53
+                             ANGKASA II |          1 
+>        0.08        3.60
+                               ANJEREUW |          1 
+>        0.08        3.68
+                                  ANOBO |          1 
+>        0.08        3.76
+                                 ANSUDU |          1 
+>        0.08        3.83
+                                ANUMBOB |          1 
+>        0.08        3.91
+                                   ANUS |          1 
+>        0.08        3.99
+                                ANUS II |          1 
+>        0.08        4.06
+                                  APOKI |          1 
+>        0.08        4.14
+                                  ARARE |          1 
+>        0.08        4.22
+                                ARARENI |          1 
+>        0.08        4.29
+                                  ARARO |          1 
+>        0.08        4.37
+                                 AREKON |          1 
+>        0.08        4.45
+                                 ARGUNI |          1 
+>        0.08        4.52
+                              ARIEPI II |          1 
+>        0.08        4.60
+                             ARIMI JAYA |          1 
+>        0.08        4.68
+                                  ARMNU |          1 
+>        0.08        4.75
+                                 ARTIBE |          1 
+>        0.08        4.83
+                                  ARUMI |          1 
+>        0.08        4.91
+                                 ARYOBU |          1 
+>        0.08        4.98
+                               ASAIBORI |          1 
+>        0.08        5.06
+                         ASAM JAWA RAYA |          1 
+>        0.08        5.14
+                                  ASGUN |          1 
+>        0.08        5.21
+                                ASJITBA |          1 
+>        0.08        5.29
+                            ASMURUF TEE |          1 
+>        0.08        5.37
+                                  ASSEM |          1 
+>        0.08        5.44
+                                  ASSES |          1 
+>        0.08        5.52
+                                  ASSET |          1 
+>        0.08        5.60
+                                   ASUA |          1 
+>        0.08        5.67
+                                   ATAY |          1 
+>        0.08        5.75
+                                 ATOUDA |          1 
+>        0.08        5.83
+                                AULAKME |          1 
+>        0.08        5.90
+                                  AUSEM |          1 
+>        0.08        5.98
+                                  AWADO |          1 
+>        0.08        6.06
+                              AWET MAIM |          1 
+>        0.08        6.13
+                                   AYAK |          1 
+>        0.08        6.21
+                                  BABIN |          1 
+>        0.08        6.29
+                               BABRINBO |          1 
+>        0.08        6.37
+                                BABURIA |          1 
+>        0.08        6.44
+                                BADAUWO |          1 
+>        0.08        6.52
+                                 BAGAIR |          1 
+>        0.08        6.60
+                            BAGAISERWAR |          1 
+>        0.08        6.67
+                               BAGOU II |          1 
+>        0.08        6.75
+                               BAGUMOMA |          1 
+>        0.08        6.83
+                                 BAHWAT |          1 
+>        0.08        6.90
+                                 BAIREI |          1 
+>        0.08        6.98
+                                BAITATE |          1 
+>        0.08        7.06
+                               BALAIMAI |          1 
+>        0.08        7.13
+                                BALAOLI |          1 
+>        0.08        7.21
+                                 BALUNI |          1 
+>        0.08        7.29
+                            BAMUSBAYMAN |          1 
+>        0.08        7.36
+                             BANASRARES |          1 
+>        0.08        7.44
+                            BANDONGGWAN |          1 
+>        0.08        7.52
+                                 BANFOT |          1 
+>        0.08        7.59
+                           BANGKIT RAYA |          1 
+>        0.08        7.67
+                                   BANO |          1 
+>        0.08        7.75
+                               BANTI II |          1 
+>        0.08        7.82
+                                  BANUM |          1 
+>        0.08        7.90
+                             BARAWAIKAP |          1 
+>        0.08        7.98
+                                BARKORI |          1 
+>        0.08        8.05
+                              BARU JAYA |          1 
+>        0.08        8.13
+                                 BASMAN |          1 
+>        0.08        8.21
+                                BATBIRO |          1 
+>        0.08        8.28
+                         BATE / BIBIOSI |          1 
+>        0.08        8.36
+                               BATEFALU |          1 
+>        0.08        8.44
+                        BATU TIMBAU ULU |          1 
+>        0.08        8.51
+                                  BAWAI |          1 
+>        0.08        8.59
+                                  BAWOS |          1 
+>        0.08        8.67
+                                   BAWY |          1 
+>        0.08        8.74
+                                   BEIM |          1 
+>        0.08        8.82
+                                 BENGGO |          1 
+>        0.08        8.90
+                          BENTENG NDOPE |          1 
+>        0.08        8.97
+                            BENUA ANYAR |          1 
+>        0.08        9.05
+                               BERELEME |          1 
+>        0.08        9.13
+                                 BESIKA |          1 
+>        0.08        9.20
+                              BETAF III |          1 
+>        0.08        9.28
+                                  BIATI |          1 
+>        0.08        9.36
+                                 BIAWER |          1 
+>        0.08        9.43
+                                   BIFO |          1 
+>        0.08        9.51
+                                  BIKAR |          1 
+>        0.08        9.59
+                           BINA SEMPIAN |          1 
+>        0.08        9.66
+                                   BINI |          1 
+>        0.08        9.74
+                           BINTANG LIMA |          1 
+>        0.08        9.82
+                                BINYERI |          1 
+>        0.08        9.89
+                            BIRAK AMBUT |          1 
+>        0.08        9.97
+                               BIRICARE |          1 
+>        0.08       10.05
+                                 BIRUBI |          1 
+>        0.08       10.12
+                                 BIS II |          1 
+>        0.08       10.20
+                                BISIREG |          1 
+>        0.08       10.28
+                                  BITTI |          1 
+>        0.08       10.35
+                                   BIUK |          1 
+>        0.08       10.43
+                               BODATADI |          1 
+>        0.08       10.51
+                                 BOFAIT |          1 
+>        0.08       10.58
+                                BOGONUK |          1 
+>        0.08       10.66
+                                  BOHUM |          1 
+>        0.08       10.74
+                                  BOKEM |          1 
+>        0.08       10.81
+    BOMBERAY VII (UPT) / WONODADI MULYA |          1 
+>        0.08       10.89
+                              BOMOU III |          1 
+>        0.08       10.97
+                                 BOMPAI |          1 
+>        0.08       11.04
+                                 BONDEK |          1 
+>        0.08       11.12
+                                 BONGGI |          1 
+>        0.08       11.20
+                                BONPAYA |          1 
+>        0.08       11.27
+                              BORA BORA |          1 
+>        0.08       11.35
+                                  BORAI |          1 
+>        0.08       11.43
+                             BORI TIMUR |          1 
+>        0.08       11.50
+                                  BOSMA |          1 
+>        0.08       11.58
+                             BOSNIK SUP |          1 
+>        0.08       11.66
+                                 BOUTAI |          1 
+>        0.08       11.73
+                                 BU EPE |          1 
+>        0.08       11.81
+                             BUKADUWATA |          1 
+>        0.08       11.89
+                                  BUKIT |          2 
+>        0.15       12.04
+                                BUKURIK |          1 
+>        0.08       12.12
+                                  BULMU |          1 
+>        0.08       12.19
+                                BULUMEN |          1 
+>        0.08       12.27
+                                 BUMBUM |          1 
+>        0.08       12.35
+                              BUMI ASRI |          1 
+>        0.08       12.42
+                                   BUMU |          1 
+>        0.08       12.50
+                                 BUOHSA |          1 
+>        0.08       12.58
+                                BURGENA |          1 
+>        0.08       12.65
+                                  BURIM |          1 
+>        0.08       12.73
+                       BUSALANGGA BARAT |          1 
+>        0.08       12.81
+                       BUSALANGGA TIMUR |          1 
+>        0.08       12.88
+                                 BUSIRI |          1 
+>        0.08       12.96
+                                   BUTI |          1 
+>        0.08       13.04
+                              BUWOUDIMI |          1 
+>        0.08       13.11
+                            CANDRA JAYA |          1 
+>        0.08       13.19
+                                 CINDUR |          1 
+>        0.08       13.27
+                             CINTA PURI |          1 
+>        0.08       13.34
+                                COMPANG |          1 
+>        0.08       13.42
+                          COMPANG KULES |          1 
+>        0.08       13.50
+                             DAGGENPAGA |          1 
+>        0.08       13.57
+                             DAHONAIKMA |          1 
+>        0.08       13.65
+                              DALEK ESA |          1 
+>        0.08       13.73
+                                   DAMA |          1 
+>        0.08       13.80
+                              DAMA DAMA |          1 
+>        0.08       13.88
+                                  DAMAI |          1 
+>        0.08       13.96
+                              DANGGOMBA |          1 
+>        0.08       14.03
+                                 DANTAR |          1 
+>        0.08       14.11
+                                DAPAIBA |          1 
+>        0.08       14.19
+                              DAREMBANG |          1 
+>        0.08       14.26
+                                  DASDO |          1 
+>        0.08       14.34
+                                 DAWAWA |          1 
+>        0.08       14.42
+                                 DEBITE |          1 
+>        0.08       14.49
+                                 DEDIFU |          1 
+>        0.08       14.57
+                             DEFNAWANGA |          1 
+>        0.08       14.65
+                                  DEGEI |          1 
+>        0.08       14.72
+                                DEKAMER |          1 
+>        0.08       14.80
+                                   DELA |          1 
+>        0.08       14.88
+                                 DERVOS |          1 
+>        0.08       14.95
+          DESA PERSIAPAN GADING KENCANA |          1 
+>        0.08       15.03
+     DESA PERSIAPAN KAGUNGAN RATU AGUNG |          1 
+>        0.08       15.11
+              DESA PERSIAPAN KARTA RAYA |          1 
+>        0.08       15.18
+   DESA PERSIAPAN KARTA TANJUNG SELAMAT |          1 
+>        0.08       15.26
+              DESA PERSIAPAN MARGA ASRI |          1 
+>        0.08       15.34
+              DESA PERSIAPAN MEKAR ASRI |          1 
+>        0.08       15.41
+               DESA PERSIAPAN PADI JAYA |          1 
+>        0.08       15.49
+            DESA PERSIAPAN PARIT KELADI |          1 
+>        0.08       15.57
+            DESA PERSIAPAN PERMATA JAYA |          1 
+>        0.08       15.64
+           DESA PERSIAPAN RENGAS KAPUAS |          1 
+>        0.08       15.72
+              DESA PERSIAPAN SIDO AGUNG |          1 
+>        0.08       15.80
+            DESA PERSIAPAN SUKU LANTING |          1 
+>        0.08       15.87
+                                DETAUWO |          1 
+>        0.08       15.95
+                            DINGONARAMA |          1 
+>        0.08       16.03
+                               DINUBUTU |          1 
+>        0.08       16.10
+                            DOFYO WAFOR |          1 
+>        0.08       16.18
+                              DOLIGOBAK |          1 
+>        0.08       16.26
+                            DOLINGGOBAK |          1 
+>        0.08       16.33
+                                  DONDO |          1 
+>        0.08       16.41
+                                  DORAU |          1 
+>        0.08       16.49
+                            DOREIMANONA |          1 
+>        0.08       16.56
+                                  DOREY |          1 
+>        0.08       16.64
+                                   DUAI |          1 
+>        0.08       16.72
+                                 DUATIA |          1 
+>        0.08       16.79
+                              DULUNGGUN |          1 
+>        0.08       16.87
+                                  DUNDA |          1 
+>        0.08       16.95
+                             DURIANKARI |          1 
+>        0.08       17.02
+                                 DUWONG |          1 
+>        0.08       17.10
+                                 EBESKE |          1 
+>        0.08       17.18
+                               EKEITADI |          1 
+>        0.08       17.25
+                     EKNEMBA / ELENEMBA |          1 
+>        0.08       17.33
+                                 ELESIM |          1 
+>        0.08       17.41
+                                 EMAURI |          1 
+>        0.08       17.48
+                                   EMON |          1 
+>        0.08       17.56
+                     EMPLASMENT SISUMUT |          1 
+>        0.08       17.64
+                                 EPANAI |          1 
+>        0.08       17.71
+                             EPIL BARAT |          1 
+>        0.08       17.79
+                                 EPOUGI |          1 
+>        0.08       17.87
+                                  EREGI |          1 
+>        0.08       17.94
+                               ES WAMBI |          1 
+>        0.08       18.02
+                                ESMAMBO |          1 
+>        0.08       18.10
+                                  ESYUM |          1 
+>        0.08       18.17
+                                    EVO |          1 
+>        0.08       18.25
+                                   EWAN |          1 
+>        0.08       18.33
+                                FAFARUI |          1 
+>        0.08       18.40
+                              FAFENUMBU |          1 
+>        0.08       18.48
+                                   FAFI |          1 
+>        0.08       18.56
+                                 FAISAU |          1 
+>        0.08       18.63
+                       FAIT MAYAF BARAT |          1 
+>        0.08       18.71
+                              FAITHOWES |          1 
+>        0.08       18.79
+                               FAITSAWE |          1 
+>        0.08       18.87
+                              FAITWOSUR |          1 
+>        0.08       18.94
+                               FAKNIKDI |          1 
+>        0.08       19.02
+                              FAMBOAMAN |          1 
+>        0.08       19.10
+                                 FARIDE |          1 
+>        0.08       19.17
+                               FATELILO |          1 
+>        0.08       19.25
+                                  FATEM |          1 
+>        0.08       19.33
+                                 FIALEM |          1 
+>        0.08       19.40
+                                    FII |          1 
+>        0.08       19.48
+                                   FIMA |          1 
+>        0.08       19.56
+                                  FOISA |          1 
+>        0.08       19.63
+                                  FOKRI |          1 
+>        0.08       19.71
+                             FOLONGSILI |          1 
+>        0.08       19.79
+                               FRAMAFIR |          1 
+>        0.08       19.86
+                              FRASAYUOH |          1 
+>        0.08       19.94
+                                FRAWEBO |          1 
+>        0.08       20.02
+                                FUAFUNI |          1 
+>        0.08       20.09
+                                  FUAHE |          1 
+>        0.08       20.17
+                           FUOG SELATAN |          1 
+>        0.08       20.25
+                                FYEPURI |          1 
+>        0.08       20.32
+                             GAJAH MATI |          1 
+>        0.08       20.40
+                               GAKOKOTU |          1 
+>        0.08       20.48
+                                GALUGUK |          1 
+>        0.08       20.55
+                             GAMEI BIRU |          1 
+>        0.08       20.63
+                             GANEYATAKA |          1 
+>        0.08       20.71
+                                    GAR |          1 
+>        0.08       20.78
+                           GARIS HANYAR |          1 
+>        0.08       20.86
+                                  GEIBU |          1 
+>        0.08       20.94
+                                   GEKA |          1 
+>        0.08       21.01
+                                   GEKO |          1 
+>        0.08       21.09
+                                GENIPUR |          1 
+>        0.08       21.17
+                                 GETIEM |          1 
+>        0.08       21.24
+                                 GETIYO |          1 
+>        0.08       21.32
+                                  GHANU |          1 
+>        0.08       21.40
+                                 GIBAGA |          1 
+>        0.08       21.47
+                                GINIGOM |          1 
+>        0.08       21.55
+                            GINIMANGGEN |          1 
+>        0.08       21.63
+                               GINIPAGO |          1 
+>        0.08       21.70
+                                GIRIMIO |          1 
+>        0.08       21.78
+                                   GIWU |          1 
+>        0.08       21.86
+                                 GOLENA |          1 
+>        0.08       21.93
+                            GOLO LAJANG |          1 
+>        0.08       22.01
+                      GOLO LAJANG BARAT |          1 
+>        0.08       22.09
+                              GOLO LEWE |          1 
+>        0.08       22.16
+                              GOLO RIWU |          1 
+>        0.08       22.24
+                            GOLO WEDONG |          1 
+>        0.08       22.32
+                          GRUJUGAN BARU |          1 
+>        0.08       22.39
+                               GUBURINI |          1 
+>        0.08       22.47
+                           GUDANG GARAM |          1 
+>        0.08       22.55
+                                  GULAK |          1 
+>        0.08       22.62
+                                   GUNA |          1 
+>        0.08       22.70
+                                 GUNALO |          1 
+>        0.08       22.78
+                                 GUWERI |          1 
+>        0.08       22.85
+                                   GUWO |          1 
+>        0.08       22.93
+                              HAENKANES |          1 
+>        0.08       23.01
+                                  HAFFO |          1 
+>        0.08       23.08
+                               HAIHOREI |          1 
+>        0.08       23.16
+                               HAIMARAN |          1 
+>        0.08       23.24
+                                   HAKU |          1 
+>        0.08       23.31
+                                HALIPUT |          1 
+>        0.08       23.39
+                                HALISEK |          1 
+>        0.08       23.47
+                         HAMBRANGKENDIK |          1 
+>        0.08       23.54
+                             HAMORKOKMA |          1 
+>        0.08       23.62
+                              HANGAITJI |          1 
+>        0.08       23.70
+                                 HARITI |          1 
+>        0.08       23.77
+                                 HAROME |          1 
+>        0.08       23.85
+                                 HASWEH |          1 
+>        0.08       23.93
+                               HEAHOBAK |          1 
+>        0.08       24.00
+                                 HELABU |          1 
+>        0.08       24.08
+                                  HEREK |          1 
+>        0.08       24.16
+                                 HESMAT |          1 
+>        0.08       24.23
+                              HILIAMURI |          1 
+>        0.08       24.31
+                                 HILING |          1 
+>        0.08       24.39
+                               HITADIPA |          1 
+>        0.08       24.46
+                                HOBAKMA |          1 
+>        0.08       24.54
+                                 HOBIAH |          1 
+>        0.08       24.62
+                                 HOLANI |          1 
+>        0.08       24.69
+                               HOLMAFEM |          1 
+>        0.08       24.77
+                                HOLULAI |          1 
+>        0.08       24.85
+                                HOM-HOM |          1 
+>        0.08       24.92
+                              HOMILIKIA |          1 
+>        0.08       25.00
+                               HONBANMA |          1 
+>        0.08       25.08
+                                  HONYA |          1 
+>        0.08       25.15
+                               HORA IEK |          1 
+>        0.08       25.23
+                                HORAKIA |          1 
+>        0.08       25.31
+                              HORENIKMA |          1 
+>        0.08       25.38
+                              HOSYO ATA |          1 
+>        0.08       25.46
+                            HOSYO BANAH |          1 
+>        0.08       25.54
+                               HUGITAPA |          1 
+>        0.08       25.61
+                               HUKULIMO |          1 
+>        0.08       25.69
+                                  HULAM |          1 
+>        0.08       25.77
+                             HUMBE AWAI |          1 
+>        0.08       25.84
+                               HUNDIHUK |          1 
+>        0.08       25.92
+                               HUNDILIP |          1 
+>        0.08       26.00
+                                  HWAIT |          1 
+>        0.08       26.07
+                                IBODIYO |          1 
+>        0.08       26.15
+                               IBOUWAGU |          1 
+>        0.08       26.23
+                             IDAIYODAGI |          1 
+>        0.08       26.30
+                                 IDEEGE |          1 
+>        0.08       26.38
+                                IGIMBUT |          1 
+>        0.08       26.46
+                                  IKANA |          1 
+>        0.08       26.53
+                               IKIYAUWO |          1 
+>        0.08       26.61
+                             ILAMBURAWI |          1 
+>        0.08       26.69
+                                ILMABET |          1 
+>        0.08       26.76
+                                ILOKAMA |          1 
+>        0.08       26.84
+                                IMANDOA |          1 
+>        0.08       26.92
+                                 IMBARI |          1 
+>        0.08       26.99
+                              INAMBUARI |          1 
+>        0.08       27.07
+                                 INAUGA |          1 
+>        0.08       27.15
+                              INDAIBORI |          1 
+>        0.08       27.22
+                                 INDAWI |          1 
+>        0.08       27.30
+                                INGGUPI |          1 
+>        0.08       27.38
+                                  INMDI |          1 
+>        0.08       27.45
+                                  INOFI |          1 
+>        0.08       27.53
+                                  INOWA |          1 
+>        0.08       27.61
+                                INPENDI |          1 
+>        0.08       27.68
+                                  INSAS |          1 
+>        0.08       27.76
+                              INSUSBARI |          1 
+>        0.08       27.84
+                                  IPIRI |          1 
+>        0.08       27.91
+                             IPOKEUGIDA |          1 
+>        0.08       27.99
+                                  IRATA |          1 
+>        0.08       28.07
+                                  IREJI |          1 
+>        0.08       28.14
+                              IROH MRAR |          1 
+>        0.08       28.22
+                            IROH SOHSER |          1 
+>        0.08       28.30
+                                IRUMFEI |          1 
+>        0.08       28.37
+                                 ITEUWO |          1 
+>        0.08       28.45
+                                  IWAKA |          1 
+>        0.08       28.53
+                               IYAITAKA |          1 
+>        0.08       28.60
+                                JABANDA |          1 
+>        0.08       28.68
+                                JAMAIMO |          1 
+>        0.08       28.76
+                                JAMARIA |          1 
+>        0.08       28.83
+                            JARAT TIMUR |          1 
+>        0.08       28.91
+                         JATIBARU TIMUR |          1 
+>        0.08       28.99
+                       JEMBATAN GANTUNG |          1 
+>        0.08       29.06
+                                 JEMBER |          1 
+>        0.08       29.14
+                            JENGGERPAGA |          1 
+>        0.08       29.22
+                               JENGKOAN |          1 
+>        0.08       29.29
+                             JIBINGGAME |          1 
+>        0.08       29.37
+                              JIFANGGRY |          1 
+>        0.08       29.45
+                              JIGONIKME |          1 
+>        0.08       29.52
+                             JIGUNIKIME |          1 
+>        0.08       29.60
+                              JIMBENERI |          1 
+>        0.08       29.68
+                                  JIMBI |          1 
+>        0.08       29.75
+                                 JINGGI |          1 
+>        0.08       29.83
+                               JIOGOBAK |          1 
+>        0.08       29.91
+                                  JIRAK |          1 
+>        0.08       29.98
+                                  JIREI |          1 
+>        0.08       30.06
+                             JONGKOGOMA |          1 
+>        0.08       30.14
+                                KABABUR |          1 
+>        0.08       30.21
+                              KABANMOLO |          1 
+>        0.08       30.29
+                               KABUAENA |          1 
+>        0.08       30.37
+                               KABURBUR |          1 
+>        0.08       30.44
+                             KADUN JAYA |          1 
+>        0.08       30.52
+                                  KAGAS |          1 
+>        0.08       30.60
+                                   KAGI |          1 
+>        0.08       30.67
+                                   KAHO |          1 
+>        0.08       30.75
+                                KAITANA |          1 
+>        0.08       30.83
+                                KALADUM |          1 
+>        0.08       30.90
+                                  KALAK |          1 
+>        0.08       30.98
+                              KALAMANUK |          1 
+>        0.08       31.06
+                               KALASUAT |          1 
+>        0.08       31.13
+                                KALEBUT |          1 
+>        0.08       31.21
+                          KALIJAGA BARU |          1 
+>        0.08       31.29
+                               KALIREJO |          1 
+>        0.08       31.37
+                                 KALOME |          1 
+>        0.08       31.44
+                                   KAMA |          1 
+>        0.08       31.52
+                             KAMAHEDOGA |          1 
+>        0.08       31.60
+                          KAMANDU TETAR |          1 
+>        0.08       31.67
+                                KAMANGI |          1 
+>        0.08       31.75
+                             KAMENAWARI |          1 
+>        0.08       31.83
+                                 KAMLIN |          1 
+>        0.08       31.90
+                              KAMORFUAR |          1 
+>        0.08       31.98
+                            KAMORO JAYA |          1 
+>        0.08       32.06
+                           KAMPUNG BARU |          1 
+>        0.08       32.13
+                          KAMRO SELATAN |          1 
+>        0.08       32.21
+                                 KAMUMI |          1 
+>        0.08       32.29
+                                KAMUNDU |          1 
+>        0.08       32.36
+                                  KANAI |          1 
+>        0.08       32.44
+                              KANDIBUNG |          1 
+>        0.08       32.52
+                            KANDOWARIRA |          1 
+>        0.08       32.59
+                            KAPAURTUTIN |          1 
+>        0.08       32.67
+                              KAPAYAP I |          1 
+>        0.08       32.75
+                             KAPAYAP II |          1 
+>        0.08       32.82
+                            KAPAYAP III |          1 
+>        0.08       32.90
+                                 KAPESO |          1 
+>        0.08       32.98
+                         KARANG NANDING |          1 
+>        0.08       33.05
+                               KAREMONI |          1 
+>        0.08       33.13
+                               KARFASIA |          1 
+>        0.08       33.21
+                               KARNINDI |          1 
+>        0.08       33.28
+                               KARUBATE |          1 
+>        0.08       33.36
+                          KARYA KENCANA |          1 
+>        0.08       33.44
+                           KARYA MAKMUR |          1 
+>        0.08       33.51
+                               KARYENDI |          1 
+>        0.08       33.59
+                              KASI BARU |          1 
+>        0.08       33.67
+                             KASI INDAH |          1 
+>        0.08       33.74
+                              KASI INOM |          1 
+>        0.08       33.82
+                              KASI JAYA |          1 
+>        0.08       33.90
+                                  KASIH |          1 
+>        0.08       33.97
+                               KATALINA |          1 
+>        0.08       34.05
+                            KAWA-KAWALI |          1 
+>        0.08       34.13
+                             KAWOKHOLIK |          1 
+>        0.08       34.20
+                                 KAYUNI |          1 
+>        0.08       34.28
+                               KEBIKDUK |          1 
+>        0.08       34.36
+                            KEBUN SIRIH |          1 
+>        0.08       34.43
+                                 KEDEGE |          1 
+>        0.08       34.51
+                               KEDER II |          1 
+>        0.08       34.59
+                                 KEGAMA |          1 
+>        0.08       34.66
+                                 KELESU |          1 
+>        0.08       34.74
+                                 KEPITO |          1 
+>        0.08       34.82
+                           KERAMAT MINA |          1 
+>        0.08       34.89
+                             KERNYANYAN |          1 
+>        0.08       34.97
+                                 KESUWI |          1 
+>        0.08       35.05
+                                   KETA |          1 
+>        0.08       35.12
+                                KETUAPI |          1 
+>        0.08       35.20
+                                KIAMBRA |          1 
+>        0.08       35.28
+                             KIBOGOLOME |          1 
+>        0.08       35.35
+                             KIMINA KRA |          1 
+>        0.08       35.43
+                                 KIMUGU |          1 
+>        0.08       35.51
+                                KIMUNUK |          1 
+>        0.08       35.58
+                                 KINMOM |          1 
+>        0.08       35.66
+                                KLABALA |          1 
+>        0.08       35.74
+                                KLABLIM |          1 
+>        0.08       35.81
+                                KLABULU |          1 
+>        0.08       35.89
+                                KLADUFU |          1 
+>        0.08       35.97
+                                 KLADUK |          1 
+>        0.08       36.04
+                                KLAFLUK |          1 
+>        0.08       36.12
+                                 KLAFMA |          1 
+>        0.08       36.20
+                                KLAGANA |          1 
+>        0.08       36.27
+                                KLAGETE |          1 
+>        0.08       36.35
+                               KLAGULUS |          1 
+>        0.08       36.43
+                              KLAJARING |          1 
+>        0.08       36.50
+                                  KLAKA |          1 
+>        0.08       36.58
+                                 KLAKAK |          1 
+>        0.08       36.66
+                              KLAKUBLIK |          1 
+>        0.08       36.73
+                             KLALIN MOS |          1 
+>        0.08       36.81
+                                KLALWOK |          1 
+>        0.08       36.89
+                                 KLAMAK |          1 
+>        0.08       36.96
+                               KLAMINTU |          1 
+>        0.08       37.04
+                                 KLAMIT |          1 
+>        0.08       37.12
+                         KLAMUGUN(SP V) |          1 
+>        0.08       37.19
+                                  KLARU |          1 
+>        0.08       37.27
+                               KLASAMAN |          1 
+>        0.08       37.35
+                                 KLASAN |          1 
+>        0.08       37.42
+                                KLASIGI |          1 
+>        0.08       37.50
+                             KLASIMIGIK |          1 
+>        0.08       37.58
+                                 KLASIN |          1 
+>        0.08       37.65
+                                KLASMAN |          1 
+>        0.08       37.73
+                                KLASUUR |          1 
+>        0.08       37.81
+                                 KLATOK |          1 
+>        0.08       37.88
+                               KLATOMOK |          1 
+>        0.08       37.96
+                                 KLAWON |          1 
+>        0.08       38.04
+                                KLAWREN |          1 
+>        0.08       38.11
+                               KLAWULUH |          1 
+>        0.08       38.19
+                             KLAYASTANI |          1 
+>        0.08       38.27
+                                  KMAFO |          1 
+>        0.08       38.34
+                                 KOBETA |          1 
+>        0.08       38.42
+                           KOCUAS UTARA |          1 
+>        0.08       38.50
+                        KOCUWER SELATAN |          1 
+>        0.08       38.57
+                                KOFALIT |          1 
+>        0.08       38.65
+                               KOFKERBU |          1 
+>        0.08       38.73
+                                 KOGAGI |          1 
+>        0.08       38.80
+                               KOGEMANI |          1 
+>        0.08       38.88
+                                  KOGIR |          1 
+>        0.08       38.96
+                                 KOKOYA |          1 
+>        0.08       39.03
+                                KOLAIMA |          1 
+>        0.08       39.11
+                              KOLAITAGA |          1 
+>        0.08       39.19
+                                 KOLANG |          1 
+>        0.08       39.26
+                              KOLANGGUN |          1 
+>        0.08       39.34
+                                  KOMBO |          1 
+>        0.08       39.42
+                          KOMBO SELATAN |          1 
+>        0.08       39.49
+                           KOMBO TENGAH |          1 
+>        0.08       39.57
+                                  KOMRA |          1 
+>        0.08       39.65
+                                 KONEBI |          1 
+>        0.08       39.72
+                            KONJA BARAT |          1 
+>        0.08       39.80
+                              KONTIUNAI |          1 
+>        0.08       39.88
+                               KOPABUTU |          1 
+>        0.08       39.95
+                              KOPAIDAGI |          1 
+>        0.08       40.03
+                                 KORDEI |          1 
+>        0.08       40.11
+                                  KORLO |          1 
+>        0.08       40.18
+                                KOROBUK |          1 
+>        0.08       40.26
+                                  KORUR |          1 
+>        0.08       40.34
+                               KORYAKAM |          1 
+>        0.08       40.41
+                              KOTA NIUR |          1 
+>        0.08       40.49
+                                  KOTAM |          1 
+>        0.08       40.57
+                                 KOWOGI |          1 
+>        0.08       40.64
+                          KRIM / PODENA |          1 
+>        0.08       40.72
+                                KRISNOS |          1 
+>        0.08       40.80
+                                   KRUS |          1 
+>        0.08       40.87
+                              KUGAISIGA |          1 
+>        0.08       40.95
+                                 KUGAPA |          1 
+>        0.08       41.03
+                            KULI AISELE |          1 
+>        0.08       41.10
+                                KULIRIK |          1 
+>        0.08       41.18
+                           KULOKENGGAME |          1 
+>        0.08       41.26
+                                KUMABAN |          1 
+>        0.08       41.33
+                                 KUMIGI |          1 
+>        0.08       41.41
+                              KUMLAGUPA |          1 
+>        0.08       41.49
+                                KUMPEKI |          1 
+>        0.08       41.56
+                                    KWA |          1 
+>        0.08       41.64
+                                  KWAMA |          1 
+>        0.08       41.72
+                                  KWARI |          1 
+>        0.08       41.79
+                              KWAWILIBE |          1 
+>        0.08       41.87
+                                  LAGAN |          1 
+>        0.08       41.95
+                           LAGAN BUNGIN |          1 
+>        0.08       42.02
+                                 LALANU |          1 
+>        0.08       42.10
+                               LALO ATO |          1 
+>        0.08       42.18
+                               LALOWULO |          1 
+>        0.08       42.25
+                                  LALUK |          1 
+>        0.08       42.33
+                                 LAMOPI |          1 
+>        0.08       42.41
+                           LANDUM MEKAR |          1 
+>        0.08       42.48
+                   LANGARA TANJUNG BATU |          1 
+>        0.08       42.56
+                             LANGKOWALA |          1 
+>        0.08       42.64
+                                   LANI |          1 
+>        0.08       42.71
+                                  LASIK |          1 
+>        0.08       42.79
+                                LASIKMA |          1 
+>        0.08       42.87
+                                  LAURA |          1 
+>        0.08       42.94
+                                 LAWUKA |          1 
+>        0.08       43.02
+                                  LAYAN |          1 
+>        0.08       43.10
+                                 LEKONA |          1 
+>        0.08       43.17
+                                LEKUNIK |          1 
+>        0.08       43.25
+                          LEMBAH NEIDAM |          1 
+>        0.08       43.33
+                                  LENEK |          1 
+>        0.08       43.40
+                             LENEK BARU |          1 
+>        0.08       43.48
+                             LENEK DAYA |          1 
+>        0.08       43.56
+                            LENEK DUREN |          1 
+>        0.08       43.63
+                     LENEK KALI BAMBANG |          1 
+>        0.08       43.71
+                             LENEK LAUQ |          1 
+>        0.08       43.79
+                        LENEK PESIRAMAN |          1 
+>        0.08       43.87
+                      LENEK RAMBAN BIAK |          1 
+>        0.08       43.94
+                                LENTERA |          1 
+>        0.08       44.02
+                              LERA WERA |          1 
+>        0.08       44.10
+                                  LIKET |          1 
+>        0.08       44.17
+                              LILUKIKMA |          1 
+>        0.08       44.25
+                             LIMAU ASRI |          1 
+>        0.08       44.33
+                       LIMAU ASRI BARAT |          1 
+>        0.08       44.40
+                                 LINDUK |          1 
+>        0.08       44.48
+                               LINGGIRA |          1 
+>        0.08       44.56
+                               LINGGUNI |          1 
+>        0.08       44.63
+                                   LOGI |          1 
+>        0.08       44.71
+                                   LOHA |          1 
+>        0.08       44.79
+                              LOHOMABEL |          1 
+>        0.08       44.86
+                                LOHSARI |          1 
+>        0.08       44.94
+                                LOLEOEN |          1 
+>        0.08       45.02
+                            LONGGOALOME |          1 
+>        0.08       45.09
+                               LUGUBAGO |          1 
+>        0.08       45.17
+                                LUNAIMA |          1 
+>        0.08       45.25
+                             LUNGGINERI |          1 
+>        0.08       45.32
+                                MAATADI |          1 
+>        0.08       45.40
+                                MADIRAI |          1 
+>        0.08       45.48
+                                   MADU |          1 
+>        0.08       45.55
+                              MAFEN TOR |          1 
+>        0.08       45.63
+                              MAGATARUM |          1 
+>        0.08       45.71
+                                  MAIBO |          1 
+>        0.08       45.78
+                               MAKIDIMI |          1 
+>        0.08       45.86
+                               MAKLALUT |          1 
+>        0.08       45.94
+                           MAKMUR KARYA |          1 
+>        0.08       46.01
+                               MALAFLON |          1 
+>        0.08       46.09
+                              MALAGASIH |          1 
+>        0.08       46.17
+                               MALAGUSA |          1 
+>        0.08       46.24
+                            MALAINGKEDI |          1 
+>        0.08       46.32
+                               MALAJAPA |          1 
+>        0.08       46.40
+                                MALAMAY |          1 
+>        0.08       46.47
+                               MALAMOJA |          1 
+>        0.08       46.55
+                                MALAMSO |          1 
+>        0.08       46.63
+                               MALASAUM |          1 
+>        0.08       46.70
+                      MALASIGIT (SP II) |          1 
+>        0.08       46.78
+                              MALASILEN |          1 
+>        0.08       46.86
+                                  MALEO |          1 
+>        0.08       46.93
+                                 MAMBAI |          1 
+>        0.08       47.01
+                          MAMBERAMONGEN |          1 
+>        0.08       47.09
+                         MAMBONDO SAWAI |          1 
+>        0.08       47.16
+                                 MAMBOR |          1 
+>        0.08       47.24
+                                MAMFIAS |          1 
+>        0.08       47.32
+                                MAMORBO |          1 
+>        0.08       47.39
+                                MANAINI |          1 
+>        0.08       47.47
+                               MANAININ |          1 
+>        0.08       47.55
+                              MANANAYAM |          1 
+>        0.08       47.62
+                 MANANMUR/RANGKENDAK II |          1 
+>        0.08       47.70
+                               MANBEORI |          1 
+>        0.08       47.78
+                            MANDARALANI |          1 
+>        0.08       47.85
+                           MANDIRI JAYA |          1 
+>        0.08       47.93
+                            MANDORI SUP |          1 
+>        0.08       48.01
+                                MANDURA |          1 
+>        0.08       48.08
+                               MANFANIM |          1 
+>        0.08       48.16
+                          MANGGANDISAPI |          1 
+>        0.08       48.24
+                              MANGGIALO |          1 
+>        0.08       48.31
+                                   MANI |          1 
+>        0.08       48.39
+                                 MANIRI |          1 
+>        0.08       48.47
+                                 MANIWA |          1 
+>        0.08       48.54
+                                MANOKET |          1 
+>        0.08       48.62
+                                 MANONG |          1 
+>        0.08       48.70
+                               MANSIESI |          1 
+>        0.08       48.77
+                               MANTEMBU |          1 
+>        0.08       48.85
+                          MANUBAR DALAM |          1 
+>        0.08       48.93
+                              MANUSUNDU |          1 
+>        0.08       49.00
+                           MANWOR INDAH |          1 
+>        0.08       49.08
+                                 MAPANE |          1 
+>        0.08       49.16
+                                MARALOL |          1 
+>        0.08       49.23
+                                  MARAU |          1 
+>        0.08       49.31
+                                 MARAWI |          1 
+>        0.08       49.39
+                                 MARBIN |          1 
+>        0.08       49.46
+                                MARBUAN |          1 
+>        0.08       49.54
+                               MARIADEI |          1 
+>        0.08       49.62
+                                 MARIBU |          1 
+>        0.08       49.69
+                              MARIK MAY |          1 
+>        0.08       49.77
+                                MARTAIM |          1 
+>        0.08       49.85
+                           MASALAP RAYA |          1 
+>        0.08       49.92
+                                 MASARA |          1 
+>        0.08       50.00
+                                  MASIN |          1 
+>        0.08       50.08
+                                 MASINA |          1 
+>        0.08       50.15
+                              MASMASPOP |          1 
+>        0.08       50.23
+                                MASMILI |          1 
+>        0.08       50.31
+                             MATALAMAGI |          1 
+>        0.08       50.38
+                                MATANAE |          1 
+>        0.08       50.46
+                             MAWESWARES |          1 
+>        0.08       50.54
+                          MBAHAMDANDARA |          1 
+>        0.08       50.61
+                              MBILUSIGA |          1 
+>        0.08       50.69
+                             MBIMA JAYA |          1 
+>        0.08       50.77
+                                MBOMBAN |          1 
+>        0.08       50.84
+                                   MEDA |          1 
+>        0.08       50.92
+                             MEIMORUFOF |          1 
+>        0.08       51.00
+                                 MEINAD |          1 
+>        0.08       51.07
+                                   MEIS |          1 
+>        0.08       51.15
+                          MEKAR MERANTI |          1 
+>        0.08       51.23
+                          MEKARJAYA D.1 |          1 
+>        0.08       51.30
+                               MEKURIMA |          1 
+>        0.08       51.38
+                            MEMIYAIBUTU |          1 
+>        0.08       51.46
+                         MENGGEGENIKIME |          1 
+>        0.08       51.53
+                               MEROKIMA |          1 
+>        0.08       51.61
+                            MESERIKWEDA |          1 
+>        0.08       51.69
+                               METBELUM |          1 
+>        0.08       51.76
+                                  METIM |          1 
+>        0.08       51.84
+                               METIMBER |          1 
+>        0.08       51.92
+                                 MEYAUP |          1 
+>        0.08       51.99
+                            MEYCOCFORGA |          1 
+>        0.08       52.07
+                                 MEYEPA |          1 
+>        0.08       52.15
+                            MEYUMENSILI |          1 
+>        0.08       52.22
+                                   MIBI |          1 
+>        0.08       52.30
+                                 MIDLAL |          1 
+>        0.08       52.38
+                          MIMIKA GUNUNG |          1 
+>        0.08       52.45
+                                  MIMPE |          1 
+>        0.08       52.53
+                           MINIPONOGOMA |          1 
+>        0.08       52.61
+                                 MIYAMO |          1 
+>        0.08       52.68
+                                MLABOLO |          1 
+>        0.08       52.76
+                                 MLAWER |          1 
+>        0.08       52.84
+                                MNUKWAR |          1 
+>        0.08       52.91
+                                MNUSWOR |          1 
+>        0.08       52.99
+                                  MOBAN |          1 
+>        0.08       53.07
+                                   MOBI |          1 
+>        0.08       53.14
+                                 MOBIGI |          1 
+>        0.08       53.22
+                              MOGATEMIN |          1 
+>        0.08       53.30
+                                MOIWANI |          1 
+>        0.08       53.37
+                               MOLINGGU |          1 
+>        0.08       53.45
+                              MOMAGEIDA |          1 
+>        0.08       53.53
+                              MOMONHUSI |          1 
+>        0.08       53.60
+                            MONDOGONERI |          1 
+>        0.08       53.68
+                                  MONDU |          1 
+>        0.08       53.76
+                              MONGGOAFI |          1 
+>        0.08       53.83
+                           MONOKAU JAYA |          1 
+>        0.08       53.91
+                                 MONTEK |          1 
+>        0.08       53.99
+                                   MOOR |          1 
+>        0.08       54.06
+                         MOROMBO PANTAI |          1 
+>        0.08       54.14
+                                  MOSAN |          1 
+>        0.08       54.22
+                            MOSUN TIMUR |          1 
+>        0.08       54.29
+                            MOSUN UTARA |          1 
+>        0.08       54.37
+                                  MOWES |          1 
+>        0.08       54.45
+                                     MU |          1 
+>        0.08       54.52
+                                  MUARA |          1 
+>        0.08       54.60
+                           MUARA MIGUNI |          1 
+>        0.08       54.68
+                                MUGOUDA |          1 
+>        0.08       54.75
+                                MUKAMAT |          1 
+>        0.08       54.83
+                                   MULI |          1 
+>        0.08       54.91
+                          MULIA KENCANA |          1 
+>        0.08       54.98
+                            MULIAGAMBUT |          1 
+>        0.08       55.06
+                              MULIAMBUT |          1 
+>        0.08       55.14
+                                  MULIP |          1 
+>        0.08       55.21
+                       MULYA / BOROBAHA |          1 
+>        0.08       55.29
+                                 MUNDEK |          1 
+>        0.08       55.37
+                                 MURARA |          1 
+>        0.08       55.44
+                                 MURUWI |          1 
+>        0.08       55.52
+                            MUSANAHIKMA |          1 
+>        0.08       55.60
+                        NAENA MUKTIPURA |          1 
+>        0.08       55.67
+                                NAGATUN |          1 
+>        0.08       55.75
+                                NAKOGWE |          1 
+>        0.08       55.83
+                                   NALU |          1 
+>        0.08       55.90
+                                  NAMLA |          1 
+>        0.08       55.98
+                                 NAMUAS |          1 
+>        0.08       56.06
+                                NANGGOU |          1 
+>        0.08       56.13
+                                  NANOT |          1 
+>        0.08       56.21
+                                  NARAI |          1 
+>        0.08       56.29
+                                  NAREI |          1 
+>        0.08       56.37
+                                  NARUM |          1 
+>        0.08       56.44
+                               NAWARIPI |          1 
+>        0.08       56.52
+                              NDUGUSIGA |          1 
+>        0.08       56.60
+                               NENOMANI |          1 
+>        0.08       56.67
+                                  NESET |          1 
+>        0.08       56.75
+                              NGGELODAE |          1 
+>        0.08       56.83
+                                NGGOLAR |          1 
+>        0.08       56.90
+                              NIKA TIDI |          1 
+>        0.08       56.98
+                                 NILITI |          1 
+>        0.08       57.06
+                                NINABUA |          1 
+>        0.08       57.13
+                                  NIOGA |          1 
+>        0.08       57.21
+                             NIPURALOME |          1 
+>        0.08       57.29
+                                 NIRUWI |          1 
+>        0.08       57.36
+                              NISANDAUW |          1 
+>        0.08       57.44
+                                  NISRO |          1 
+>        0.08       57.52
+                               NOFUALMA |          1 
+>        0.08       57.59
+                              NOHOLUWOK |          1 
+>        0.08       57.67
+                                NOMBRAK |          1 
+>        0.08       57.75
+                              NOSELANOP |          1 
+>        0.08       57.82
+                                   NOWO |          1 
+>        0.08       57.90
+                                NUMAMAM |          1 
+>        0.08       57.98
+                              NUNDAWIPI |          1 
+>        0.08       58.05
+                               NUNIANDE |          1 
+>        0.08       58.13
+                                 NURAWI |          1 
+>        0.08       58.21
+                                NUWIORA |          1 
+>        0.08       58.28
+                                 OBABIN |          1 
+>        0.08       58.36
+                                   OBAI |          1 
+>        0.08       58.44
+                               OBAIDAGI |          1 
+>        0.08       58.51
+                                   OBIO |          1 
+>        0.08       58.59
+                                 OBUTAI |          1 
+>        0.08       58.67
+                                 ODIYAI |          1 
+>        0.08       58.74
+                                 OEBOLE |          1 
+>        0.08       58.82
+                                 OELEKA |          1 
+>        0.08       58.90
+                                OENGGAE |          1 
+>        0.08       58.97
+                              OFALANGGA |          1 
+>        0.08       59.05
+                                 OGEAPA |          1 
+>        0.08       59.13
+                                 OGEIDA |          1 
+>        0.08       59.20
+                                OGORITO |          1 
+>        0.08       59.28
+                                  OGOTO |          1 
+>        0.08       59.36
+                                  OHOAM |          1 
+>        0.08       59.43
+                                OHONIAM |          1 
+>        0.08       59.51
+                                OHOTHAY |          1 
+>        0.08       59.59
+                                  OIMBO |          1 
+>        0.08       59.66
+                              OKOMOTADI |          1 
+>        0.08       59.74
+                             OKONOBAIDA |          1 
+>        0.08       59.82
+                                 OLAROA |          1 
+>        0.08       59.89
+                            OMTE/KWEPKE |          1 
+>        0.08       59.97
+                                 ONEIBO |          1 
+>        0.08       60.05
+                              ONIM JAYA |          1 
+>        0.08       60.12
+                               ONIMSEFA |          1 
+>        0.08       60.20
+                                 ORILUK |          1 
+>        0.08       60.28
+                                ORKDORI |          1 
+>        0.08       60.35
+                                  ORWEN |          1 
+>        0.08       60.43
+                                   OSSO |          1 
+>        0.08       60.51
+                                OTOMONA |          1 
+>        0.08       60.58
+                                OTOWERI |          1 
+>        0.08       60.66
+                                   PABA |          1 
+>        0.08       60.74
+                          PADANG SIRING |          1 
+>        0.08       60.81
+                           PADWA PANTAI |          1 
+>        0.08       60.89
+                                 PAEDAM |          1 
+>        0.08       60.97
+                               PAGALEME |          1 
+>        0.08       61.04
+                           PAGAR GUNUNG |          1 
+>        0.08       61.12
+                             PAGAR JATI |          1 
+>        0.08       61.20
+                               PAGARGOM |          1 
+>        0.08       61.27
+                          PAHGE NKINDIK |          1 
+>        0.08       61.35
+                              PAL PUTIH |          1 
+>        0.08       61.43
+                            PAMATA JAYA |          1 
+>        0.08       61.50
+                                 PAMUMU |          1 
+>        0.08       61.58
+                              PANALULUN |          1 
+>        0.08       61.66
+                              PANG WADA |          1 
+>        0.08       61.73
+                                PANGKIK |          1 
+>        0.08       61.81
+                                   PANO |          1 
+>        0.08       61.89
+                                  PAPAK |          1 
+>        0.08       61.96
+                                 PAPELA |          1 
+>        0.08       62.04
+                                 PARIPI |          1 
+>        0.08       62.12
+                          PASAR SENTRAL |          1 
+>        0.08       62.19
+                              PASIMPOLO |          1 
+>        0.08       62.27
+                            PASIR PUTIH |          1 
+>        0.08       62.35
+                               PATTUKAR |          1 
+>        0.08       62.42
+                                PAYAPOP |          1 
+>        0.08       62.50
+                                PAYOGEI |          1 
+>        0.08       62.58
+                                 PEKEGE |          1 
+>        0.08       62.65
+                                 PEKEPA |          1 
+>        0.08       62.73
+                                   PEKU |          1 
+>        0.08       62.81
+                               PENGODUA |          1 
+>        0.08       62.88
+                                 PEPERA |          1 
+>        0.08       62.96
+                                  PEREA |          1 
+>        0.08       63.04
+                                 PEREYA |          1 
+>        0.08       63.11
+                               PERINTIS |          1 
+>        0.08       63.19
+                         PERKEBUNAN ABM |          1 
+>        0.08       63.27
+                   PERKEBUNAN AEK TOROP |          1 
+>        0.08       63.34
+                  PERKEBUNAN SEI KEBARA |          1 
+>        0.08       63.42
+                  PERSIAPAN BATU SELIPI |          1 
+>        0.08       63.50
+             PERSIAPAN LIKU MULYA SAKTI |          1 
+>        0.08       63.57
+                                 PETEWI |          1 
+>        0.08       63.65
+                                   PIER |          1 
+>        0.08       63.73
+                                 PIGAPU |          1 
+>        0.08       63.80
+                                 PIKERE |          1 
+>        0.08       63.88
+                                PILASUE |          1 
+>        0.08       63.96
+                                   PINA |          1 
+>        0.08       64.03
+                            PINANG AWAN |          1 
+>        0.08       64.11
+                          PIOKA KENCANA |          1 
+>        0.08       64.19
+                              PIRIKALEM |          1 
+>        0.08       64.26
+                                  PIRIP |          1 
+>        0.08       64.34
+                                  PITOR |          1 
+>        0.08       64.42
+                              PODENA II |          1 
+>        0.08       64.49
+                            POMDORI SUP |          1 
+>        0.08       64.57
+                            PONG KOLONG |          1 
+>        0.08       64.65
+                                  PORIR |          1 
+>        0.08       64.72
+                                  PORUM |          1 
+>        0.08       64.80
+                                   POSA |          1 
+>        0.08       64.88
+                                 POSMAN |          1 
+>        0.08       64.95
+                                   PRIS |          1 
+>        0.08       65.03
+                               PUDOTADI |          1 
+>        0.08       65.11
+                               PUGISIGA |          1 
+>        0.08       65.18
+                                   PUGO |          1 
+>        0.08       65.26
+                               PUJODADI |          1 
+>        0.08       65.34
+                            PULAU TIMUR |          1 
+>        0.08       65.41
+                     PUNCAK CENDRAWASIH |          1 
+>        0.08       65.49
+                          PUNCAK SENYUM |          1 
+>        0.08       65.57
+                              PUNGGAHIK |          1 
+>        0.08       65.64
+                            PURAWANDERU |          1 
+>        0.08       65.72
+                          PURUK KAMBANG |          1 
+>        0.08       65.80
+                                  PYAWI |          1 
+>        0.08       65.87
+                                   RAHA |          1 
+>        0.08       65.95
+                           RAMANGKURANI |          1 
+>        0.08       66.03
+                                 RAMBAI |          1 
+>        0.08       66.10
+                                 RANGGU |          1 
+>        0.08       66.18
+                             RANGKENDAK |          1 
+>        0.08       66.26
+                               RARSBARI |          1 
+>        0.08       66.33
+                                   RAWA |          1 
+>        0.08       66.41
+                              REJO SARI |          1 
+>        0.08       66.49
+                                   REMU |          1 
+>        0.08       66.56
+                             RIMBA RAYA |          1 
+>        0.08       66.64
+                             RIMSERSARI |          1 
+>        0.08       66.72
+                                  RINDU |          1 
+>        0.08       66.79
+                               ROIPI II |          1 
+>        0.08       66.87
+                                   ROMA |          1 
+>        0.08       66.95
+                                 ROMANG |          1 
+>        0.08       67.02
+                                 RORENA |          1 
+>        0.08       67.10
+                                  ROTEA |          1 
+>        0.08       67.18
+                           RUKUN RAHAYU |          1 
+>        0.08       67.25
+                                 SABAKE |          1 
+>        0.08       67.33
+                           SABILIRONGGO |          1 
+>        0.08       67.41
+                         SABUNGAN HILIR |          1 
+>        0.08       67.48
+                          SABUNGAN HULU |          1 
+>        0.08       67.56
+                                   SACK |          1 
+>        0.08       67.64
+                             SAEFEN 4.2 |          1 
+>        0.08       67.71
+                              SAFOETIEK |          1 
+>        0.08       67.79
+                                  SAGIS |          1 
+>        0.08       67.87
+                                 SAGRIM |          1 
+>        0.08       67.94
+                                 SAILEN |          1 
+>        0.08       68.02
+                               SAINDULE |          1 
+>        0.08       68.10
+                              SAKAMERIN |          1 
+>        0.08       68.17
+                                SAKAPUL |          1 
+>        0.08       68.25
+                              SAKUBATUN |          1 
+>        0.08       68.33
+                               SALAKITI |          1 
+>        0.08       68.40
+                                  SALEM |          1 
+>        0.08       68.48
+                                SALEWOK |          1 
+>        0.08       68.56
+                                   SALO |          1 
+>        0.08       68.63
+                                 SALOHE |          1 
+>        0.08       68.71
+                              SAMA JAYA |          1 
+>        0.08       68.79
+                              SAMARUKIE |          1 
+>        0.08       68.87
+                            SAMERAKATOR |          1 
+>        0.08       68.94
+                              SAMORKENA |          1 
+>        0.08       69.02
+                                SAMPIKA |          1 
+>        0.08       69.10
+                                 SAMUSA |          1 
+>        0.08       69.17
+                               SANAYOKA |          1 
+>        0.08       69.25
+                                  SANEM |          1 
+>        0.08       69.33
+                            SANGGANDOLU |          1 
+>        0.08       69.40
+                                 SANOBA |          1 
+>        0.08       69.48
+                            SANOBA ATAS |          1 
+>        0.08       69.56
+                                 SANUMI |          1 
+>        0.08       69.63
+                                  SAOKA |          1 
+>        0.08       69.71
+                              SAPIWAREK |          1 
+>        0.08       69.79
+                           SASAWAKWESAR |          1 
+>        0.08       69.86
+                               SASWARBO |          1 
+>        0.08       69.94
+                               SAU URAM |          1 
+>        0.08       70.02
+                                  SAURI |          1 
+>        0.08       70.09
+                                SAWABUM |          1 
+>        0.08       70.17
+                               SAWENDUI |          1 
+>        0.08       70.25
+                              SAWYATAMI |          1 
+>        0.08       70.32
+                                  SAYAM |          1 
+>        0.08       70.40
+                              SEGAR TOR |          1 
+>        0.08       70.48
+                               SEI DAUN |          1 
+>        0.08       70.55
+                              SEI KALAM |          1 
+>        0.08       70.63
+                                 SEKBAN |          1 
+>        0.08       70.71
+                                  SEKRU |          1 
+>        0.08       70.78
+                                 SELEBI |          1 
+>        0.08       70.86
+                                SEMAYEN |          1 
+>        0.08       70.94
+                               SEMIDANG |          1 
+>        0.08       71.01
+                                 SEMPAN |          1 
+>        0.08       71.09
+                               SENGKITI |          1 
+>        0.08       71.17
+                         SERAWANDORI II |          1 
+>        0.08       71.24
+                                SERDORI |          1 
+>        0.08       71.32
+                              SERE SERE |          1 
+>        0.08       71.40
+                        SERSELION  BARU |          1 
+>        0.08       71.47
+                             SETIA JAYA |          1 
+>        0.08       71.55
+                               SEWAN II |          1 
+>        0.08       71.63
+                              SIARATESA |          1 
+>        0.08       71.70
+                                   SIBI |          1 
+>        0.08       71.78
+                                 SIBITA |          1 
+>        0.08       71.86
+                                 SIBORU |          1 
+>        0.08       71.93
+                                   SIDI |          1 
+>        0.08       72.01
+                       SIDODADI BLOK 40 |          1 
+>        0.08       72.09
+                                  SIGAD |          1 
+>        0.08       72.16
+                                  SIGOU |          1 
+>        0.08       72.24
+                              SILANKURU |          1 
+>        0.08       72.32
+                                   SILI |          1 
+>        0.08       72.39
+                                SIMIYAH |          1 
+>        0.08       72.47
+                           SIMPANG LIMA |          1 
+>        0.08       72.55
+                                 SINABO |          1 
+>        0.08       72.62
+                             SINAR JAYA |          1 
+>        0.08       72.70
+                           SINDANG JAYA |          1 
+>        0.08       72.78
+                                SIOMEDA |          1 
+>        0.08       72.85
+                             SIPATNANAM |          1 
+>        0.08       72.93
+                                 SIPSOI |          1 
+>        0.08       73.01
+                                 SIPSON |          1 
+>        0.08       73.08
+                                   SIRA |          1 
+>        0.08       73.16
+                               SIRANGGO |          1 
+>        0.08       73.24
+                             SIRE TIMUR |          1 
+>        0.08       73.31
+                                   SIYO |          1 
+>        0.08       73.39
+                                SOAGAMA |          1 
+>        0.08       73.47
+                                   SOAN |          1 
+>        0.08       73.54
+                                   SOHI |          2 
+>        0.15       73.70
+                               SOHOMANE |          1 
+>        0.08       73.77
+                              SOHOMBUNU |          1 
+>        0.08       73.85
+                                    SOI |          1 
+>        0.08       73.93
+                                 SOKANI |          1 
+>        0.08       74.00
+                                 SOMNAK |          1 
+>        0.08       74.08
+                                 SOMOHI |          1 
+>        0.08       74.16
+                         SOMPANG KOLANG |          1 
+>        0.08       74.23
+                     SOPENDO SUP KARKIR |          1 
+>        0.08       74.31
+                                 SORAIN |          1 
+>        0.08       74.39
+                                  SOSAR |          1 
+>        0.08       74.46
+                                   SOWI |          1 
+>        0.08       74.54
+                              SRIRTABAM |          1 
+>        0.08       74.62
+                                   SRUM |          1 
+>        0.08       74.69
+                                SRUMATE |          1 
+>        0.08       74.77
+                                 SUAGAI |          1 
+>        0.08       74.85
+                                  SUAHE |          1 
+>        0.08       74.92
+                                SUATOLO |          1 
+>        0.08       75.00
+                                  SUBIN |          1 
+>        0.08       75.08
+                                 SUBRIT |          1 
+>        0.08       75.15
+                                   SUBU |          1 
+>        0.08       75.23
+                                  SUELE |          1 
+>        0.08       75.31
+                                   SUFU |          1 
+>        0.08       75.38
+                              SUKA JADI |          1 
+>        0.08       75.46
+                               SUKAREMA |          1 
+>        0.08       75.54
+                           SUKURU TUARE |          1 
+>        0.08       75.61
+                           SUMBER MULIA |          1 
+>        0.08       75.69
+                            SUMBER SARI |          1 
+>        0.08       75.77
+                               SUMBERJO |          1 
+>        0.08       75.84
+                                 SUMSAR |          1 
+>        0.08       75.92
+                             SUMUNAIKMA |          1 
+>        0.08       76.00
+                                   SUNE |          1 
+>        0.08       76.07
+                                SUNGGAK |          1 
+>        0.08       76.15
+                              SUNGGUWAN |          1 
+>        0.08       76.23
+                               SUNUM II |          1 
+>        0.08       76.30
+                              SUP MBRUR |          1 
+>        0.08       76.38
+                                 SUPRAU |          1 
+>        0.08       76.46
+                          SURIAN HANYAR |          1 
+>        0.08       76.53
+                           SUSUK TENGAH |          1 
+>        0.08       76.61
+                                  SUYAM |          1 
+>        0.08       76.69
+                          SYENA SALAWIR |          1 
+>        0.08       76.76
+                                SYUKWES |          1 
+>        0.08       76.84
+                                SYUMBAB |          1 
+>        0.08       76.92
+                                 SYUNAI |          1 
+>        0.08       76.99
+                                 SYUNAM |          1 
+>        0.08       77.07
+                                SYURAUW |          1 
+>        0.08       77.15
+                             TABA LAGAN |          1 
+>        0.08       77.22
+                               TABRAWAR |          1 
+>        0.08       77.30
+                              TAFAREWAR |          1 
+>        0.08       77.38
+                               TAGABABA |          1 
+>        0.08       77.45
+                        TAGAIMON KORAME |          1 
+>        0.08       77.53
+                          TAGAIMON SIWO |          1 
+>        0.08       77.61
+                                TAGALOA |          1 
+>        0.08       77.68
+                                 TAGIYA |          1 
+>        0.08       77.76
+                    TAKAR III / KWENTOR |          1 
+>        0.08       77.84
+                         TALANG MANDUNG |          1 
+>        0.08       77.91
+                         TALANG SIMPANG |          1 
+>        0.08       77.99
+                               TALILOME |          1 
+>        0.08       78.07
+                             TALINAMBER |          1 
+>        0.08       78.14
+                            TAMPA GARAM |          1 
+>        0.08       78.22
+                              TAMUGAUWO |          1 
+>        0.08       78.30
+                                 TANAMA |          1 
+>        0.08       78.37
+                              TANAPASIR |          1 
+>        0.08       78.45
+                              TANEHAMUR |          1 
+>        0.08       78.53
+                           TANJUNG BATU |          1 
+>        0.08       78.60
+                        TANJUNG KASUARI |          1 
+>        0.08       78.68
+                    TANJUNG MULIA BARAT |          1 
+>        0.08       78.76
+                                 TANOBA |          1 
+>        0.08       78.83
+                                  TARWA |          1 
+>        0.08       78.91
+                                 TASILO |          1 
+>        0.08       78.99
+                                  TAURO |          1 
+>        0.08       79.06
+                                  TAVER |          1 
+>        0.08       79.14
+                                  TAWAR |          1 
+>        0.08       79.22
+                                  TAYAI |          1 
+>        0.08       79.29
+                         TEGOUGIPUGAIDA |          1 
+>        0.08       79.37
+                              TEHAK TEE |          1 
+>        0.08       79.45
+                             TELENGGEME |          1 
+>        0.08       79.52
+                             TELUK BARU |          1 
+>        0.08       79.60
+                                   TEMU |          1 
+>        0.08       79.68
+                               TENA LAI |          1 
+>        0.08       79.75
+                                  TENEK |          1 
+>        0.08       79.83
+                                 TENGKU |          1 
+>        0.08       79.91
+                                TENOLOK |          1 
+>        0.08       79.98
+                                 THOMAS |          1 
+>        0.08       80.06
+                             TIGADAMUTO |          1 
+>        0.08       80.14
+                                 TIHIBO |          1 
+>        0.08       80.21
+                                 TIKAWO |          1 
+>        0.08       80.29
+                                TILIGUM |          1 
+>        0.08       80.37
+                                  TIMER |          1 
+>        0.08       80.44
+                           TIMIKA INDAH |          1 
+>        0.08       80.52
+                                 TIMRON |          1 
+>        0.08       80.60
+                                TIONGGI |          1 
+>        0.08       80.67
+                                TIRIGOI |          1 
+>        0.08       80.75
+                               TIRINERI |          1 
+>        0.08       80.83
+                                 TITIGI |          1 
+>        0.08       80.90
+                    TOGONFO / TEMINABOR |          1 
+>        0.08       80.98
+                                 TOHMRI |          1 
+>        0.08       81.06
+                                   TOKO |          1 
+>        0.08       81.13
+                                  TOLAK |          1 
+>        0.08       81.21
+                                 TOMAGE |          1 
+>        0.08       81.29
+                                 TOMAGI |          1 
+>        0.08       81.37
+                             TOMAGIPURA |          1 
+>        0.08       81.44
+                             TOMAN BARU |          1 
+>        0.08       81.52
+                                 TOMASE |          1 
+>        0.08       81.60
+                            TONGANGGURA |          1 
+>        0.08       81.67
+                            TONOMANGGEN |          1 
+>        0.08       81.75
+                                  TOREA |          1 
+>        0.08       81.83
+                                  TOROA |          1 
+>        0.08       81.90
+                                 TOTIYO |          1 
+>        0.08       81.98
+                                 TOWETA |          1 
+>        0.08       82.06
+                                 TOWOGI |          1 
+>        0.08       82.13
+                                TOWOLOK |          1 
+>        0.08       82.21
+                               TOWOLOME |          1 
+>        0.08       82.29
+                                TRIKORA |          1 
+>        0.08       82.36
+                                  TUENG |          1 
+>        0.08       82.44
+                                TUGUMAU |          1 
+>        0.08       82.52
+                                  TUKWI |          1 
+>        0.08       82.59
+                            TUNAS MATOA |          1 
+>        0.08       82.67
+                                   TUSO |          1 
+>        0.08       82.75
+                                   TWER |          1 
+>        0.08       82.82
+                            TWOOTKENDIK |          1 
+>        0.08       82.90
+                                UBADARI |          1 
+>        0.08       82.98
+                                    UBI |          1 
+>        0.08       83.05
+                                 UDAUGI |          1 
+>        0.08       83.13
+                               UDAUGIDA |          1 
+>        0.08       83.21
+                                UGIBUTU |          1 
+>        0.08       83.28
+                                    ULE |          1 
+>        0.08       83.36
+                                ULI-ULI |          1 
+>        0.08       83.44
+                                    ULO |          1 
+>        0.08       83.51
+                           ULU LAMOKUNI |          1 
+>        0.08       83.59
+                               ULUHUFUK |          1 
+>        0.08       83.67
+                               ULUKHUMI |          1 
+>        0.08       83.74
+                                   ULUN |          1 
+>        0.08       83.82
+                                  ULUSI |          1 
+>        0.08       83.90
+                               UMANDERU |          1 
+>        0.08       83.97
+                             UNI POKPOK |          1 
+>        0.08       84.05
+                   UPT ARSO VI / YAMMUA |          1 
+>        0.08       84.13
+                   UPT ARSO VII / WARBO |          1 
+>        0.08       84.20
+                 UPT ARSO VIII / DUKWIA |          1 
+>        0.08       84.28
+               UPT ARSO X / YATURAHARJA |          1 
+>        0.08       84.36
+                 UPT ARSO XI / IFIA-FIA |          1 
+>        0.08       84.43
+                  UPT PIR IV / WONOREJO |          1 
+>        0.08       84.51
+                     UPT PIR V / YAMARA |          1 
+>        0.08       84.59
+                                  URUFU |          1 
+>        0.08       84.66
+                                 USABIE |          1 
+>        0.08       84.74
+                                   USIR |          1 
+>        0.08       84.82
+                                 USKWAR |          1 
+>        0.08       84.89
+                             UTIKINI II |          1 
+>        0.08       84.97
+                            UTIKINI III |          1 
+>        0.08       85.05
+                                UWAMANI |          1 
+>        0.08       85.12
+                                UWEBUTU |          1 
+>        0.08       85.20
+                                  VAKAM |          1 
+>        0.08       85.28
+                              VAKAM DUA |          1 
+>        0.08       85.35
+                                   VETA |          1 
+>        0.08       85.43
+                                  WABAK |          1 
+>        0.08       85.51
+                                WABANEK |          1 
+>        0.08       85.58
+                                WABUHUK |          1 
+>        0.08       85.66
+                                WACAKAM |          1 
+>        0.08       85.74
+                                  WACAM |          1 
+>        0.08       85.81
+                                WADERBO |          1 
+>        0.08       85.89
+                                 WAGAGU |          1 
+>        0.08       85.97
+                            WAGHASILIMO |          1 
+>        0.08       86.04
+                                  WAGOM |          1 
+>        0.08       86.12
+                            WAGOM UTARA |          1 
+>        0.08       86.20
+                                 WAHUKA |          1 
+>        0.08       86.27
+                                 WAIEPO |          1 
+>        0.08       86.35
+                                  WAIPA |          1 
+>        0.08       86.43
+                                  WAIRO |          1 
+>        0.08       86.50
+                              WAITAKOTU |          1 
+>        0.08       86.58
+                                WAITUKU |          1 
+>        0.08       86.66
+                                  WAJUR |          1 
+>        0.08       86.73
+                                   WAKA |          1 
+>        0.08       86.81
+                               WALAGIMA |          1 
+>        0.08       86.89
+                                 WALANI |          1 
+>        0.08       86.96
+                                 WALASE |          1 
+>        0.08       87.04
+                                 WALELO |          1 
+>        0.08       87.12
+                                  WALEY |          1 
+>        0.08       87.19
+                                 WALIAM |          1 
+>        0.08       87.27
+                                 WALKEP |          1 
+>        0.08       87.35
+                                  WALMA |          1 
+>        0.08       87.42
+                                  WALOM |          1 
+>        0.08       87.50
+                              WAMBAGALO |          1 
+>        0.08       87.58
+                                 WAMBAR |          1 
+>        0.08       87.65
+                           WAMBAR TIMUR |          1 
+>        0.08       87.73
+                                 WAMBES |          1 
+>        0.08       87.81
+                                 WAMHOR |          1 
+>        0.08       87.88
+                                 WAMIGI |          1 
+>        0.08       87.96
+                                 WAMMAR |          1 
+>        0.08       88.04
+                                WAMOSAN |          1 
+>        0.08       88.11
+                                WANAGON |          1 
+>        0.08       88.19
+                            WANANUK DUA |          1 
+>        0.08       88.27
+                           WANDENGGOBAK |          1 
+>        0.08       88.34
+                                WANDOGA |          1 
+>        0.08       88.42
+                                WANDURI |          1 
+>        0.08       88.50
+                                WANGGUN |          1 
+>        0.08       88.57
+                                WANGIBO |          1 
+>        0.08       88.65
+                               WANGIRJA |          1 
+>        0.08       88.73
+                                 WANIMO |          1 
+>        0.08       88.80
+                                 WANIRI |          1 
+>        0.08       88.88
+                                WANIWON |          1 
+>        0.08       88.96
+                               WANTARMA |          1 
+>        0.08       89.03
+                                  WANUK |          1 
+>        0.08       89.11
+                                 WANUWI |          1 
+>        0.08       89.19
+                                 WANWAL |          1 
+>        0.08       89.26
+                                 WAPEKO |          1 
+>        0.08       89.34
+                                 WARARI |          1 
+>        0.08       89.42
+                                WARAWAF |          1 
+>        0.08       89.49
+                                  WARBO |          1 
+>        0.08       89.57
+                                 WARBON |          1 
+>        0.08       89.65
+                               WARBUKOR |          1 
+>        0.08       89.72
+                                 WAREMU |          1 
+>        0.08       89.80
+                                   WARI |          1 
+>        0.08       89.88
+                                WARIKMA |          1 
+>        0.08       89.95
+                           WARISA MULIA |          1 
+>        0.08       90.03
+                          WARMON KOKODA |          1 
+>        0.08       90.11
+                                WAROHAM |          1 
+>        0.08       90.18
+                                WAROKON |          1 
+>        0.08       90.26
+                                  WARPA |          1 
+>        0.08       90.34
+                              WARPAPERI |          1 
+>        0.08       90.41
+                               WARTUTIN |          1 
+>        0.08       90.49
+                                 WARUME |          1 
+>        0.08       90.57
+                             WASA MULYA |          1 
+>        0.08       90.64
+                               WASABITI |          1 
+>        0.08       90.72
+                              WASANGGON |          1 
+>        0.08       90.80
+                                WASERAT |          1 
+>        0.08       90.87
+                                 WASORI |          1 
+>        0.08       90.95
+                                  WASUA |          1 
+>        0.08       91.03
+                              WASUPAHIK |          1 
+>        0.08       91.10
+                              WAUKOTOPA |          1 
+>        0.08       91.18
+                                 WAWOEA |          1 
+>        0.08       91.26
+                                WAY 'U' |          1 
+>        0.08       91.33
+                                 WAYATI |          1 
+>        0.08       91.41
+                           WAYATI BARAT |          1 
+>        0.08       91.49
+                           WAYATI TIMUR |          1 
+>        0.08       91.56
+                             WAYBOMATAH |          1 
+>        0.08       91.64
+                                WEGELAS |          1 
+>        0.08       91.72
+                               WEJATADI |          1 
+>        0.08       91.79
+                                 WEKARI |          1 
+>        0.08       91.87
+                                 WEKARU |          1 
+>        0.08       91.95
+                                  WEKIA |          1 
+>        0.08       92.02
+                               WEKOLANI |          1 
+>        0.08       92.10
+                                  WEMBI |          1 
+>        0.08       92.18
+                                WENGGUN |          1 
+>        0.08       92.25
+                                 WENIGI |          1 
+>        0.08       92.33
+                               WENSLOLO |          1 
+>        0.08       92.41
+                               WEPRIARI |          1 
+>        0.08       92.48
+                            WERBA UTARA |          1 
+>        0.08       92.56
+                                WEREKMA |          1 
+>        0.08       92.64
+                                  WERFA |          1 
+>        0.08       92.71
+                                 WERTAM |          1 
+>        0.08       92.79
+                                 WERTIM |          1 
+>        0.08       92.87
+                                  WERUR |          1 
+>        0.08       92.94
+                            WERUR BESAR |          1 
+>        0.08       93.02
+                                 WERWAF |          1 
+>        0.08       93.10
+                                  WEYEN |          1 
+>        0.08       93.17
+                                   WIHO |          1 
+>        0.08       93.25
+                                  WIKMA |          1 
+>        0.08       93.33
+                                  WILAK |          1 
+>        0.08       93.40
+                       WILEKAMA/SAWAREK |          1 
+>        0.08       93.48
+                               WILIROMA |          1 
+>        0.08       93.56
+                                WILOFIN |          1 
+>        0.08       93.63
+                              WIR INSOS |          1 
+>        0.08       93.71
+                         WISATA BINSARI |          1 
+>        0.08       93.79
+                                WISBIAK |          1 
+>        0.08       93.87
+                                 WISMAN |          1 
+>        0.08       93.94
+                              WITLANGKO |          1 
+>        0.08       94.02
+                                  WIYAR |          1 
+>        0.08       94.10
+                                WODLAMA |          1 
+>        0.08       94.17
+                                   WODU |          1 
+>        0.08       94.25
+                                 WOLUIN |          1 
+>        0.08       94.33
+                                  WOMOM |          1 
+>        0.08       94.40
+                                 WONABU |          1 
+>        0.08       94.48
+                                  WONAM |          1 
+>        0.08       94.56
+                                 WONGGI |          1 
+>        0.08       94.63
+                                 WONITU |          1 
+>        0.08       94.71
+                              WONO REJO |          1 
+>        0.08       94.79
+                               WONOREJO |          1 
+>        0.08       94.86
+                          WONOSARI JAYA |          1 
+>        0.08       94.94
+                             WONUA RODA |          1 
+>        0.08       95.02
+                                  WOPES |          1 
+>        0.08       95.09
+                                 WORMON |          1 
+>        0.08       95.17
+                                  WOROI |          1 
+>        0.08       95.25
+                                    WOS |          1 
+>        0.08       95.32
+                              WOUYEBUTU |          1 
+>        0.08       95.40
+                           WOWA ANDAROA |          1 
+>        0.08       95.48
+                             WOWA NARIO |          1 
+>        0.08       95.55
+                            WOWA PORESA |          1 
+>        0.08       95.63
+                                WOYOUTO |          1 
+>        0.08       95.71
+                               WUDOKURI |          1 
+>        0.08       95.78
+                               WUGURIMA |          1 
+>        0.08       95.86
+                                  WULUK |          1 
+>        0.08       95.94
+                                WUMELAK |          1 
+>        0.08       96.01
+                               WUNAGELO |          1 
+>        0.08       96.09
+                                  WUNAN |          1 
+>        0.08       96.17
+                              WURUNIKME |          1 
+>        0.08       96.24
+                                WUTIKME |          1 
+>        0.08       96.32
+                               WUTLARIN |          1 
+>        0.08       96.40
+                                WUWILIK |          1 
+>        0.08       96.47
+                                YABA II |          1 
+>        0.08       96.55
+                              YAGAGOBAK |          1 
+>        0.08       96.63
+                                   YAGU |          1 
+>        0.08       96.70
+                                YAHATMA |          1 
+>        0.08       96.78
+                          YAIBU/UDAPUGI |          1 
+>        0.08       96.86
+                                 YAKIMA |          1 
+>        0.08       96.93
+                               YALIBATE |          1 
+>        0.08       97.01
+                              YALIKAMBI |          1 
+>        0.08       97.09
+                                  YAMBI |          1 
+>        0.08       97.16
+                             YAMBIDUGUM |          1 
+>        0.08       97.24
+                                   YAME |          1 
+>        0.08       97.32
+                                YANAMIK |          1 
+>        0.08       97.39
+                            YANGKIKALMA |          1 
+>        0.08       97.47
+                                YANGPOP |          1 
+>        0.08       97.55
+                                  YAPAN |          1 
+>        0.08       97.62
+                               YAPANANI |          1 
+>        0.08       97.70
+                                 YARAYA |          1 
+>        0.08       97.78
+                                 YARORI |          1 
+>        0.08       97.85
+                                 YARSUN |          1 
+>        0.08       97.93
+                               YAURIA I |          1 
+>        0.08       98.01
+                                 YEBENA |          1 
+>        0.08       98.08
+                                   YEEK |          1 
+>        0.08       98.16
+                              YEIHINERI |          1 
+>        0.08       98.24
+                                   YELI |          1 
+>        0.08       98.31
+                               YENBEROK |          1 
+>        0.08       98.39
+                               YENDAKEM |          1 
+>        0.08       98.47
+                              YENGKIKMA |          1 
+>        0.08       98.54
+                                YENMANU |          1 
+>        0.08       98.62
+                                YENSAMA |          1 
+>        0.08       98.70
+                           YENUSI MARAU |          1 
+>        0.08       98.77
+                                  YEREI |          1 
+>        0.08       98.85
+                                 YERFUM |          1 
+>        0.08       98.93
+                             YIGINIKIME |          1 
+>        0.08       99.00
+                                  YILUK |          1 
+>        0.08       99.08
+                              YIMBANIME |          1 
+>        0.08       99.16
+                                YIMOUTO |          1 
+>        0.08       99.23
+                               YINUWANU |          1 
+>        0.08       99.31
+                               YIOGOBAK |          1 
+>        0.08       99.39
+                                 YOHWER |          1 
+>        0.08       99.46
+                                YOMAIMA |          1 
+>        0.08       99.54
+                                  YOMOP |          1 
+>        0.08       99.62
+                                 YONGGI |          1 
+>        0.08       99.69
+                                 YOWONG |          1 
+>        0.08       99.77
+                              YUGUMABUR |          1 
+>        0.08       99.85
+                                 YUMAME |          1 
+>        0.08       99.92
+                                  YURUF |          1 
+>        0.08      100.00
+----------------------------------------+------------
+> -----------------------
+                                  Total |      1,304 
+>      100.00
+
+. *** see exactly how many countries merged
+. egen tag = tag(name_vil)  // tag=1 for each country
+>  observation
+
+. tab _m if tag==1         // 178 countries merge per
+> fectly.
+
+   Matching result from |
+                  merge |      Freq.     Percent     
+>    Cum.
+------------------------+----------------------------
+> -------
+         Using only (2) |      1,208        2.04     
+>    2.04
+            Matched (3) |     58,117       97.96     
+>  100.00
+------------------------+----------------------------
+> -------
+                  Total |     59,325      100.00
+
+. 
+. drop if _m==2   // drop the unmerged countries from
+>  the policy data
+(1,304 observations deleted)
+
+. 
+. 
+. ***************************************************
+> ******************************
+. * Transport Cost Map                               
+>                                                    
+>                                   *
+. ***************************************************
+> ******************************
+. *** generate a local for the w3 color scheme
+. colorpalette DarkGoldenRod Green Red, n(10)  nograp
+> h
+
+. local colors `r(p)'
+
+. 
+. summ year
+
+    Variable |        Obs        Mean    Std. dev.   
+>     Min        Max
+-------------+---------------------------------------
+> ------------------
+        year |     77,225        2018           0    
+>    2018       2018
+
+. spmap vil_subd_cost using id_vil_shp, ///
+>         id(_ID) ///
+>         clmethod(custom) clbreaks(0(10)100)    ///
+>         ocolor(black ..) fcolor("`colors'") osize(0
+> .001 ..)  ///
+>         ndocolor(black ..) ndfcolor(black ..) ndsiz
+> e(0.01 ..) ndlabel("Missing") ///
+>         legend(pos(7) size(*0.8)) legstyle(2) /// 
+>         title("Transportation Cost", size(medium)) 
+> ///
+>         note("Data source: Village Potential Statis
+> tics." , size(tiny))
+
+. graph export "C:\Users\mramadhani3\OneDrive - Georg
+> ia Institute of Technology\Documents\Spring 23\Metr
+> ics II ECON7023\ECON7023-Metrics-II\Final_Project\o
+> utput\figure\Transcost.png", as(png) name("Graph") 
+> replace
+file C:\Users\mramadhani3\OneDrive - Georgia
+    Institute of Technology\Documents\Spring
+    23\Metrics II
+    ECON7023\ECON7023-Metrics-II\Final_Project\outp
+    > ut\figure\Transcost.png saved as PNG format
+
+. 
+. ***************************************************
+> ******************************
+. * Other Graph                                      
+>                                                    
+>                                           *
+. ***************************************************
+> ******************************
+. 
+. 
+end of do-file
+
