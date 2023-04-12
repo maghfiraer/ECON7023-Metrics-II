@@ -1,0 +1,15 @@
+texdoc init ".\HW5\108a.tex", replace
+
+/***
+Pooled OLS Estimates and test for serial correlation AR(1)
+***/
+texdoc stlog
+xtset district year, delta(6)
+
+* pooled OLS
+reg lcrime d78 clrprc_1 clrprc_2
+* residual based test 
+predict vhat, resid
+gen vhat_1=1.vhat
+reg vhat vhat_1
+texdoc stlog close

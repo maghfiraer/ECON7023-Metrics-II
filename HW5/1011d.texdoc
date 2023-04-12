@@ -1,0 +1,9 @@
+texdoc init ".\HW5\1011c.tex", replace
+
+/***
+FD Estimates after Adding Variables
+***/
+texdoc stlog
+reg clowbrth cafdcprc cafdcpsq clphypc clbedspc clpcinc clpopul, robust
+count if afdcprc >= 6.4 & d90
+texdoc stlog close

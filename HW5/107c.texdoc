@@ -37,6 +37,4 @@ black female, re
 estimates store re
 * Hausman test
 hausman fe re, sigmamore
-
-
 texdoc stlog close

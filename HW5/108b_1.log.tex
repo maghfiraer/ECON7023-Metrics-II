@@ -1,0 +1,46 @@
+. * FE regression
+. xtreg lcrime d78 clrprc_1 clrprc_2, fe
+{\smallskip}
+Fixed-effects (within) regression               Number of obs     =        106
+Group variable: district                        Number of groups  =         53
+{\smallskip}
+R-squared:                                      Obs per group:
+     Within  = 0.4209                                         min =          2
+     Between = 0.4798                                         avg =        2.0
+     Overall = 0.4234                                         max =          2
+{\smallskip}
+                                                F(3,50)           =      12.12
+corr(u_i, Xb) = 0.3645                          Prob > F          =     0.0000
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+      lcrime {\VBAR} Coefficient  Std. err.      t    P>|t|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+         d78 {\VBAR}   .0856556   .0637825     1.34   0.185    -.0424553    .2137665
+    clrprc_1 {\VBAR}  -.0040475   .0047199    -0.86   0.395    -.0135276    .0054326
+    clrprc_2 {\VBAR}  -.0131966   .0051946    -2.54   0.014    -.0236302   -.0027629
+       _cons {\VBAR}   3.350995   .2324736    14.41   0.000     2.884058    3.817932
+\HLI{13}{\PLUS}\HLI{64}
+     sigma_u {\VBAR}  .47140473
+     sigma_e {\VBAR}   .2436645
+         rho {\VBAR}  .78915666   (fraction of variance due to u_i)
+\HLI{13}{\BOTT}\HLI{64}
+F test that all u_i=0: F(52, 50) = 5.88                      Prob > F = 0.0000
+{\smallskip}
+. * pooled OLS regression using first difference
+. reg clcrime cclrprc_1 cclrprc_2, robust
+{\smallskip}
+Linear regression                               Number of obs     =         53
+                                                F(2, 50)          =       4.78
+                                                Prob > F          =     0.0126
+                                                R-squared         =     0.1933
+                                                Root MSE          =     .34459
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+             {\VBAR}               Robust
+     clcrime {\VBAR} Coefficient  std. err.      t    P>|t|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+   cclrprc_1 {\VBAR}  -.0040475   .0042659    -0.95   0.347    -.0126158    .0045207
+   cclrprc_2 {\VBAR}  -.0131966   .0047286    -2.79   0.007    -.0226942    -.003699
+       _cons {\VBAR}   .0856556   .0554876     1.54   0.129    -.0257945    .1971057
+\HLI{13}{\BOTT}\HLI{64}
+{\smallskip}

@@ -1,0 +1,9 @@
+texdoc init ".\HW5\1011c.tex", replace
+
+/***
+FD Estimates
+***/
+texdoc stlog
+reg clowbrth cafdcprc clphypc clbedspc clpcinc clpopul
+reg clowbrth cafdcprc clphypc clbedspc clpcinc clpopul, robust
+texdoc stlog close

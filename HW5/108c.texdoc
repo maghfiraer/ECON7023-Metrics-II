@@ -1,0 +1,19 @@
+texdoc init ".\HW5\108c.tex", replace
+
+/***
+Test hypothesis using FE
+***/
+texdoc stlog
+* pre-run FE regression
+qui xtreg lcrime d78 clrprc_1 clrprc_2, fe
+* test
+lincom clrprc_1 - clrprc_2
+
+* Try test using FD, pre-run FD regression
+qui reg clcrime cclrprc_1 cclrprc_2, robust
+* test
+lincom cclrprc_1 - cclrprc_2
+
+reg clcrime cavgclr, robust
+reg clcrime cavgclr
+texdoc stlog close

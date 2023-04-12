@@ -1,0 +1,11 @@
+texdoc init ".\HW5\108b.tex", replace
+
+/***
+FE Estimates and Pooled OLS estimates
+***/
+texdoc stlog
+* FE regression
+xtreg lcrime d78 clrprc_1 clrprc_2, fe
+* pooled OLS regression using first difference
+reg clcrime cclrprc_1 cclrprc_2, robust
+texdoc stlog close

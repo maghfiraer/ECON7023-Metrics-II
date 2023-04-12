@@ -1,0 +1,48 @@
+. xtset district year, delta(6)
+{\smallskip}
+Panel variable: district (strongly balanced)
+ Time variable: year, 72 to 78
+         Delta: 6 units
+{\smallskip}
+. 
+. * pooled OLS
+. reg lcrime d78 clrprc_1 clrprc_2
+{\smallskip}
+      Source {\VBAR}       SS           df       MS      Number of obs   =       106
+\HLI{13}{\PLUS}\HLI{34}   F(3, 102)       =     30.27
+       Model {\VBAR}  18.7948264         3  6.26494214   Prob > F        =    0.0000
+    Residual {\VBAR}  21.1114968       102  .206975459   R-squared       =    0.4710
+\HLI{13}{\PLUS}\HLI{34}   Adj R-squared   =    0.4554
+       Total {\VBAR}  39.9063233       105  .380060222   Root MSE        =    .45495
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+      lcrime {\VBAR} Coefficient  Std. err.      t    P>|t|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+         d78 {\VBAR}  -.0547246   .0944947    -0.58   0.564    -.2421544    .1327051
+    clrprc_1 {\VBAR}  -.0184955   .0053035    -3.49   0.001    -.0290149    -.007976
+    clrprc_2 {\VBAR}  -.0173881   .0054376    -3.20   0.002    -.0281735   -.0066026
+       _cons {\VBAR}    4.18122   .1878879    22.25   0.000     3.808545    4.553894
+\HLI{13}{\BOTT}\HLI{64}
+{\smallskip}
+. * residual based test 
+. predict vhat, resid
+{\smallskip}
+. gen vhat_1=1.vhat
+{\smallskip}
+. reg vhat vhat_1
+note: {\bftt{vhat_1}} omitted because of collinearity.
+{\smallskip}
+      Source {\VBAR}       SS           df       MS      Number of obs   =       106
+\HLI{13}{\PLUS}\HLI{34}   F(0, 105)       =      0.00
+       Model {\VBAR}           0         0           .   Prob > F        =         .
+    Residual {\VBAR}  21.1114968       105  .201061874   R-squared       =    0.0000
+\HLI{13}{\PLUS}\HLI{34}   Adj R-squared   =    0.0000
+       Total {\VBAR}  21.1114968       105  .201061874   Root MSE        =     .4484
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+        vhat {\VBAR} Coefficient  Std. err.      t    P>|t|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+      vhat_1 {\VBAR}          0  (omitted)
+       _cons {\VBAR}  -1.12e-09   .0435524    -0.00   1.000    -.0863563    .0863563
+\HLI{13}{\BOTT}\HLI{64}
+{\smallskip}

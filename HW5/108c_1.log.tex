@@ -1,0 +1,62 @@
+. * pre-run FE regression
+. qui xtreg lcrime d78 clrprc_1 clrprc_2, fe
+{\smallskip}
+. * test
+. lincom clrprc_1 - clrprc_2
+{\smallskip}
+ ( 1)  clrprc_1 - clrprc_2 = 0
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+      lcrime {\VBAR} Coefficient  Std. err.      t    P>|t|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+         (1) {\VBAR}    .009149   .0085216     1.07   0.288     -.007967    .0262651
+\HLI{13}{\BOTT}\HLI{64}
+{\smallskip}
+. 
+. * Try test using FD, pre-run FD regression
+. qui reg clcrime cclrprc_1 cclrprc_2, robust
+{\smallskip}
+. * test
+. lincom cclrprc_1 - cclrprc_2
+{\smallskip}
+ ( 1)  cclrprc_1 - cclrprc_2 = 0
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+     clcrime {\VBAR} Coefficient  Std. err.      t    P>|t|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+         (1) {\VBAR}    .009149   .0067729     1.35   0.183    -.0044548    .0227529
+\HLI{13}{\BOTT}\HLI{64}
+{\smallskip}
+. 
+. reg clcrime cavgclr, robust
+{\smallskip}
+Linear regression                               Number of obs     =         53
+                                                F(1, 51)          =       8.38
+                                                Prob > F          =     0.0056
+                                                R-squared         =     0.1747
+                                                Root MSE          =     .34511
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+             {\VBAR}               Robust
+     clcrime {\VBAR} Coefficient  std. err.      t    P>|t|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+     cavgclr {\VBAR}  -.0166511   .0057529    -2.89   0.006    -.0282006   -.0051016
+       _cons {\VBAR}   .0993289   .0554764     1.79   0.079    -.0120446    .2107024
+\HLI{13}{\BOTT}\HLI{64}
+{\smallskip}
+. reg clcrime cavgclr
+{\smallskip}
+      Source {\VBAR}       SS           df       MS      Number of obs   =        53
+\HLI{13}{\PLUS}\HLI{34}   F(1, 51)        =     10.80
+       Model {\VBAR}  1.28607105         1  1.28607105   Prob > F        =    0.0018
+    Residual {\VBAR}  6.07411496        51  .119100293   R-squared       =    0.1747
+\HLI{13}{\PLUS}\HLI{34}   Adj R-squared   =    0.1586
+       Total {\VBAR}  7.36018601        52  .141542039   Root MSE        =    .34511
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+     clcrime {\VBAR} Coefficient  Std. err.      t    P>|t|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+     cavgclr {\VBAR}  -.0166511   .0050672    -3.29   0.002    -.0268239   -.0064783
+       _cons {\VBAR}   .0993289   .0625916     1.59   0.119    -.0263289    .2249867
+\HLI{13}{\BOTT}\HLI{64}
+{\smallskip}

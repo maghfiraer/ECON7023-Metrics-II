@@ -1,0 +1,43 @@
+. reg lowbrth d90 afdcprc lphypc lbedspc lpcinc lpopul
+{\smallskip}
+      Source {\VBAR}       SS           df       MS      Number of obs   =       100
+\HLI{13}{\PLUS}\HLI{34}   F(6, 93)        =      5.19
+       Model {\VBAR}  33.7710894         6   5.6285149   Prob > F        =    0.0001
+    Residual {\VBAR}  100.834005        93  1.08423661   R-squared       =    0.2509
+\HLI{13}{\PLUS}\HLI{34}   Adj R-squared   =    0.2026
+       Total {\VBAR}  134.605095        99  1.35964742   Root MSE        =    1.0413
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+     lowbrth {\VBAR} Coefficient  Std. err.      t    P>|t|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+         d90 {\VBAR}   .5797136   .2761244     2.10   0.038     .0313853    1.128042
+     afdcprc {\VBAR}   .0955932   .0921802     1.04   0.302    -.0874584    .2786448
+      lphypc {\VBAR}   .3080648     .71546     0.43   0.668    -1.112697    1.728827
+     lbedspc {\VBAR}   .2790041   .5130275     0.54   0.588    -.7397668    1.297775
+      lpcinc {\VBAR}  -2.494685   .9783021    -2.55   0.012      -4.4374   -.5519711
+      lpopul {\VBAR}    .739284   .7023191     1.05   0.295    -.6553826    2.133951
+       _cons {\VBAR}   26.57786   7.158022     3.71   0.000     12.36344    40.79227
+\HLI{13}{\BOTT}\HLI{64}
+{\smallskip}
+. reg lowbrth d90 afdcprc lphypc lbedspc lpcinc lpopul, cluster(state)
+{\smallskip}
+Linear regression                               Number of obs     =        100
+                                                F(6, 49)          =       4.73
+                                                Prob > F          =     0.0007
+                                                R-squared         =     0.2509
+                                                Root MSE          =     1.0413
+{\smallskip}
+                                 (Std. err. adjusted for 50 clusters in state)
+\HLI{13}{\TOPT}\HLI{64}
+             {\VBAR}               Robust
+     lowbrth {\VBAR} Coefficient  std. err.      t    P>|t|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+         d90 {\VBAR}   .5797136   .2214303     2.62   0.012     .1347327    1.024694
+     afdcprc {\VBAR}   .0955932   .1199883     0.80   0.429    -.1455324    .3367188
+      lphypc {\VBAR}   .3080648   .9063342     0.34   0.735    -1.513282    2.129411
+     lbedspc {\VBAR}   .2790041   .7853754     0.36   0.724    -1.299267    1.857275
+      lpcinc {\VBAR}  -2.494685   1.203901    -2.07   0.044    -4.914014   -.0753567
+      lpopul {\VBAR}    .739284   .9041915     0.82   0.418    -1.077757    2.556325
+       _cons {\VBAR}   26.57786    9.29106     2.86   0.006     7.906773    45.24894
+\HLI{13}{\BOTT}\HLI{64}
+{\smallskip}

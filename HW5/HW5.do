@@ -17,33 +17,24 @@ texdoc do ".\HW5\107b.texdoc"
 *10.7c
 texdoc do ".\HW5\107c.texdoc"
 
-*Problem 6.9
+*Problem 10.8
 clear
-use ".\data\injury.dta"
-*6.9a
-texdoc do ".\HW4\69a.texdoc"
-*6.9c
-texdoc do ".\HW4\69c.texdoc"
+use ".\data\norway.dta"
+*10.8a
+texdoc do ".\HW5\108a.texdoc"
+*10.8b
+texdoc do ".\HW5\108b.texdoc"
+*10.8c
+texdoc do ".\HW5\108c.texdoc"
 
-
-*Problem 6.11
+*Problem 10.11
 clear
-use ".\data\cps78_85.dta"
-*6.11abc
-texdoc do ".\HW4\611abc.texdoc"
-*6.11d
-texdoc do ".\HW4\611d.texdoc"
-*6.11e
-texdoc do ".\HW4\611e.texdoc"
-
-*Problem 9.8
-clear
-use ".\data\card.dta"
-*9.8a
-texdoc do ".\HW4\98a.texdoc"
-*9.8b
-texdoc do ".\HW4\98b.texdoc"
-*9.8c
-texdoc do ".\HW4\98c.texdoc"
+use ".\data\lowbirth.dta"
+*10.11b
+texdoc do ".\HW5\1011b.texdoc"
+*10.11c
+texdoc do ".\HW5\1011c.texdoc"
+*10.11d
+texdoc do ".\HW5\1011d.texdoc"
 
 clear

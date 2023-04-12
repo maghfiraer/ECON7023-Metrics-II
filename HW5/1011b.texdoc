@@ -1,0 +1,9 @@
+texdoc init ".\HW5\1011b.tex", replace
+
+/***
+Pooled OLS Estimates
+***/
+texdoc stlog
+reg lowbrth d90 afdcprc lphypc lbedspc lpcinc lpopul
+reg lowbrth d90 afdcprc lphypc lbedspc lpcinc lpopul, cluster(state)
+texdoc stlog close
