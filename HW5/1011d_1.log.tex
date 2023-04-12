@@ -1,0 +1,24 @@
+. reg clowbrth cafdcprc cafdcpsq clphypc clbedspc clpcinc clpopul, robust
+{\smallskip}
+Linear regression                               Number of obs     =         50
+                                                F(6, 43)          =       2.07
+                                                Prob > F          =     0.0762
+                                                R-squared         =     0.2499
+                                                Root MSE          =     .25956
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+             {\VBAR}               Robust
+    clowbrth {\VBAR} Coefficient  std. err.      t    P>|t|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+    cafdcprc {\VBAR}  -.5035049   .2612029    -1.93   0.061    -1.030271     .023261
+    cafdcpsq {\VBAR}   .0396094   .0317531     1.25   0.219    -.0244267    .1036456
+     clphypc {\VBAR}   6.620885   3.448026     1.92   0.061     -.332723    13.57449
+    clbedspc {\VBAR}  -1.407963   1.344117    -1.05   0.301    -4.118634    1.302707
+     clpcinc {\VBAR}  -.9987865   1.541609    -0.65   0.521    -4.107738    2.110165
+     clpopul {\VBAR}   4.429026   2.925156     1.51   0.137    -1.470113    10.32817
+       _cons {\VBAR}   .1245915    .386679     0.32   0.749     -.655221    .9044041
+\HLI{13}{\BOTT}\HLI{64}
+{\smallskip}
+. count if afdcprc >= 6.4 \& d90
+  4
+{\smallskip}

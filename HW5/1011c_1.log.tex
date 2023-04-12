@@ -1,24 +1,40 @@
-. reg clowbrth cafdcprc cafdcpsq clphypc clbedspc clpcinc clpopul, robust
+. reg clowbrth cafdcprc clphypc clbedspc clpcinc clpopul
+{\smallskip}
+      Source {\VBAR}       SS           df       MS      Number of obs   =        50
+\HLI{13}{\PLUS}\HLI{34}   F(5, 44)        =      2.53
+       Model {\VBAR}  .861531934         5  .172306387   Prob > F        =    0.0428
+    Residual {\VBAR}  3.00026764        44  .068187901   R-squared       =    0.2231
+\HLI{13}{\PLUS}\HLI{34}   Adj R-squared   =    0.1348
+       Total {\VBAR}  3.86179958        49  .078812236   Root MSE        =    .26113
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+    clowbrth {\VBAR} Coefficient  Std. err.      t    P>|t|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+    cafdcprc {\VBAR}  -.1760763   .0903733    -1.95   0.058    -.3582116     .006059
+     clphypc {\VBAR}   5.894509   2.816689     2.09   0.042     .2178452    11.57117
+    clbedspc {\VBAR}  -1.576195   .8852111    -1.78   0.082    -3.360221    .2078308
+     clpcinc {\VBAR}  -.8455268   1.356773    -0.62   0.536    -3.579924     1.88887
+     clpopul {\VBAR}   3.441116   2.872175     1.20   0.237    -2.347372    9.229604
+       _cons {\VBAR}   .1060158   .3090664     0.34   0.733    -.5168667    .7288983
+\HLI{13}{\BOTT}\HLI{64}
+{\smallskip}
+. reg clowbrth cafdcprc clphypc clbedspc clpcinc clpopul, robust
 {\smallskip}
 Linear regression                               Number of obs     =         50
-                                                F(6, 43)          =       2.07
-                                                Prob > F          =     0.0762
-                                                R-squared         =     0.2499
-                                                Root MSE          =     .25956
+                                                F(5, 44)          =       1.97
+                                                Prob > F          =     0.1024
+                                                R-squared         =     0.2231
+                                                Root MSE          =     .26113
 {\smallskip}
 \HLI{13}{\TOPT}\HLI{64}
              {\VBAR}               Robust
     clowbrth {\VBAR} Coefficient  std. err.      t    P>|t|     [95\% conf. interval]
 \HLI{13}{\PLUS}\HLI{64}
-    cafdcprc {\VBAR}  -.5035049   .2612029    -1.93   0.061    -1.030271     .023261
-    cafdcpsq {\VBAR}   .0396094   .0317531     1.25   0.219    -.0244267    .1036456
-     clphypc {\VBAR}   6.620885   3.448026     1.92   0.061     -.332723    13.57449
-    clbedspc {\VBAR}  -1.407963   1.344117    -1.05   0.301    -4.118634    1.302707
-     clpcinc {\VBAR}  -.9987865   1.541609    -0.65   0.521    -4.107738    2.110165
-     clpopul {\VBAR}   4.429026   2.925156     1.51   0.137    -1.470113    10.32817
-       _cons {\VBAR}   .1245915    .386679     0.32   0.749     -.655221    .9044041
+    cafdcprc {\VBAR}  -.1760763   .0767568    -2.29   0.027    -.3307695    -.021383
+     clphypc {\VBAR}   5.894509   3.098646     1.90   0.064    -.3504018    12.13942
+    clbedspc {\VBAR}  -1.576195   1.236188    -1.28   0.209    -4.067567    .9151775
+     clpcinc {\VBAR}  -.8455268   1.484034    -0.57   0.572      -3.8364    2.145346
+     clpopul {\VBAR}   3.441116   2.687705     1.28   0.207    -1.975596    8.857829
+       _cons {\VBAR}   .1060158   .3675668     0.29   0.774    -.6347664    .8467981
 \HLI{13}{\BOTT}\HLI{64}
-{\smallskip}
-. count if afdcprc >= 6.4 \& d90
-  4
 {\smallskip}
