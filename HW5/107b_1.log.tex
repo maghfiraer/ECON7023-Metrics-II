@@ -1,0 +1,28 @@
+. xtreg trmgpa spring crsgpa frstsem season, fe
+{\smallskip}
+Fixed-effects (within) regression               Number of obs     =        732
+Group variable: id                              Number of groups  =        366
+{\smallskip}
+R-squared:                                      Obs per group:
+     Within  = 0.2069                                         min =          2
+     Between = 0.0333                                         avg =        2.0
+     Overall = 0.0613                                         max =          2
+{\smallskip}
+                                                F(4,362)          =      23.61
+corr(u_i, Xb) = -0.0893                         Prob > F          =     0.0000
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+      trmgpa {\VBAR} Coefficient  Std. err.      t    P>|t|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+      spring {\VBAR}  -.0657817   .0391404    -1.68   0.094    -.1427528    .0111895
+      crsgpa {\VBAR}   1.140688   .1186538     9.61   0.000     .9073505    1.374025
+     frstsem {\VBAR}   .0128523   .0688364     0.19   0.852    -.1225172    .1482218
+      season {\VBAR}  -.0566454   .0414748    -1.37   0.173    -.1382072    .0249165
+       _cons {\VBAR}  -.7708055   .3305004    -2.33   0.020    -1.420747   -.1208636
+\HLI{13}{\PLUS}\HLI{64}
+     sigma_u {\VBAR}  .67913296
+     sigma_e {\VBAR}  .40882825
+         rho {\VBAR}  .73400603   (fraction of variance due to u_i)
+\HLI{13}{\BOTT}\HLI{64}
+F test that all u_i=0: F(365, 362) = 5.40                    Prob > F = 0.0000
+{\smallskip}

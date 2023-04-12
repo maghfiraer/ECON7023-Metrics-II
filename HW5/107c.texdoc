@@ -1,0 +1,42 @@
+texdoc init ".\HW5\107c.tex", replace
+
+/***
+RE Regression Output
+***/
+texdoc stlog
+* Calculate time-mean variable
+egen crsgpabar=mean(crsgpa), by(id)
+egen frstsembar=mean(frstsem), by(id)
+egen seasonbar=mean(season), by(id)
+* Run RE regression
+xtreg trmgpa spring crsgpa frstsem season sat verbmath hsperc hssize ///
+black female crsgpabar frstsembar seasonbar, re
+* Test
+test crsgpabar frstsembar seasonbar
+test seasonbar
+* Run RE regression
+xtreg trmgpa spring crsgpa frstsem season sat verbmath hsperc hssize ///
+black female crsgpabar frstsembar seasonbar, re cluster(id)
+* Test
+test crsgpabar frstsembar seasonbar
+test seasonbar
+* Prerun FE and RE regression
+qui xtreg trmgpa spring crsgpa frstsem season, fe
+estimates store fe
+qui xtreg trmgpa spring crsgpa frstsem season sat verbmath hsperc hssize ///
+black female, re
+estimates store re
+* Hausman test
+hausman fe re 
+
+* Prerun FE and RE regression
+qui xtreg trmgpa spring crsgpa frstsem season, fe
+estimates store fe
+qui xtreg trmgpa spring crsgpa frstsem season sat verbmath hsperc hssize ///
+black female, re
+estimates store re
+* Hausman test
+hausman fe re, sigmamore
+
+
+texdoc stlog close

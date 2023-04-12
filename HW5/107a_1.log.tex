@@ -1,0 +1,39 @@
+. xtset id term
+{\smallskip}
+Panel variable: id (strongly balanced)
+ Time variable: term, 8808 to 8901, but with gaps
+         Delta: 1 unit
+{\smallskip}
+. xtreg trmgpa spring crsgpa frstsem season sat verbmath hsperc hssize black female, re
+{\smallskip}
+Random-effects GLS regression                   Number of obs     =        732
+Group variable: id                              Number of groups  =        366
+{\smallskip}
+R-squared:                                      Obs per group:
+     Within  = 0.2067                                         min =          2
+     Between = 0.5390                                         avg =        2.0
+     Overall = 0.4785                                         max =          2
+{\smallskip}
+                                                Wald chi2(10)     =     512.77
+corr(u_i, X) = 0 (assumed)                      Prob > chi2       =     0.0000
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+      trmgpa {\VBAR} Coefficient  Std. err.      z    P>|z|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+      spring {\VBAR}  -.0606536   .0371605    -1.63   0.103    -.1334868    .0121797
+      crsgpa {\VBAR}   1.082365   .0930877    11.63   0.000     .8999166    1.264814
+     frstsem {\VBAR}   .0029948   .0599542     0.05   0.960    -.1145132    .1205028
+      season {\VBAR}  -.0440992   .0392381    -1.12   0.261    -.1210044     .032806
+         sat {\VBAR}   .0017052   .0001771     9.63   0.000     .0013582    .0020523
+    verbmath {\VBAR}    -.15752     .16351    -0.96   0.335    -.4779937    .1629538
+      hsperc {\VBAR}  -.0084622   .0012426    -6.81   0.000    -.0108977   -.0060268
+      hssize {\VBAR}  -.0000775   .0001248    -0.62   0.534     -.000322     .000167
+       black {\VBAR}  -.2348189   .0681573    -3.45   0.001    -.3684048   -.1012331
+      female {\VBAR}    .358153   .0612948     5.84   0.000     .2380173    .4782886
+       _cons {\VBAR}   -1.73492   .3566599    -4.86   0.000     -2.43396   -1.035879
+\HLI{13}{\PLUS}\HLI{64}
+     sigma_u {\VBAR}  .37185442
+     sigma_e {\VBAR}  .40882825
+         rho {\VBAR}   .4527451   (fraction of variance due to u_i)
+\HLI{13}{\BOTT}\HLI{64}
+{\smallskip}

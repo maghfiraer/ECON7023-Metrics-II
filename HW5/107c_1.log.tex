@@ -1,0 +1,188 @@
+. * Calculate time-mean variable
+. egen crsgpabar=mean(crsgpa), by(id)
+{\smallskip}
+. egen frstsembar=mean(frstsem), by(id)
+{\smallskip}
+. egen seasonbar=mean(season), by(id)
+{\smallskip}
+. * Run RE regression
+. xtreg trmgpa spring crsgpa frstsem season sat verbmath hsperc hssize ///
+> black female crsgpabar frstsembar seasonbar, re
+{\smallskip}
+Random-effects GLS regression                   Number of obs     =        732
+Group variable: id                              Number of groups  =        366
+{\smallskip}
+R-squared:                                      Obs per group:
+     Within  = 0.2069                                         min =          2
+     Between = 0.5408                                         avg =        2.0
+     Overall = 0.4802                                         max =          2
+{\smallskip}
+                                                Wald chi2(13)     =     513.77
+corr(u_i, X) = 0 (assumed)                      Prob > chi2       =     0.0000
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+      trmgpa {\VBAR} Coefficient  Std. err.      z    P>|z|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+      spring {\VBAR}  -.0657817   .0391404    -1.68   0.093    -.1424954    .0109321
+      crsgpa {\VBAR}   1.140688   .1186538     9.61   0.000     .9081308    1.373245
+     frstsem {\VBAR}   .0128523   .0688364     0.19   0.852    -.1220646    .1477692
+      season {\VBAR}  -.0566454   .0414748    -1.37   0.172    -.1379345    .0246438
+         sat {\VBAR}   .0016681   .0001804     9.24   0.000     .0013145    .0020218
+    verbmath {\VBAR}  -.1316461   .1654748    -0.80   0.426    -.4559708    .1926785
+      hsperc {\VBAR}  -.0084655   .0012554    -6.74   0.000    -.0109259    -.006005
+      hssize {\VBAR}  -.0000783    .000125    -0.63   0.531    -.0003232    .0001666
+       black {\VBAR}  -.2447934   .0686106    -3.57   0.000    -.3792676   -.1103192
+      female {\VBAR}   .3357016   .0711808     4.72   0.000     .1961898    .4752134
+   crsgpabar {\VBAR}  -.1861551   .2011254    -0.93   0.355    -.5803537    .2080434
+  frstsembar {\VBAR}   -.078244   .1461014    -0.54   0.592    -.3645975    .2081095
+   seasonbar {\VBAR}   .1243006   .1293555     0.96   0.337    -.1292315    .3778326
+       _cons {\VBAR}  -1.423761   .5183296    -2.75   0.006    -2.439668   -.4078539
+\HLI{13}{\PLUS}\HLI{64}
+     sigma_u {\VBAR}  .37185442
+     sigma_e {\VBAR}  .40882825
+         rho {\VBAR}   .4527451   (fraction of variance due to u_i)
+\HLI{13}{\BOTT}\HLI{64}
+{\smallskip}
+. * Test
+. test crsgpabar frstsembar seasonbar
+{\smallskip}
+ ( 1)  crsgpabar = 0
+ ( 2)  frstsembar = 0
+ ( 3)  seasonbar = 0
+{\smallskip}
+           chi2(  3) =    1.83
+         Prob > chi2 =    0.6084
+{\smallskip}
+. test seasonbar
+{\smallskip}
+ ( 1)  seasonbar = 0
+{\smallskip}
+           chi2(  1) =    0.92
+         Prob > chi2 =    0.3366
+{\smallskip}
+. * Run RE regression
+. xtreg trmgpa spring crsgpa frstsem season sat verbmath hsperc hssize ///
+> black female crsgpabar frstsembar seasonbar, re cluster(id)
+{\smallskip}
+Random-effects GLS regression                   Number of obs     =        732
+Group variable: id                              Number of groups  =        366
+{\smallskip}
+R-squared:                                      Obs per group:
+     Within  = 0.2069                                         min =          2
+     Between = 0.5408                                         avg =        2.0
+     Overall = 0.4802                                         max =          2
+{\smallskip}
+                                                Wald chi2(13)     =     629.75
+corr(u_i, X) = 0 (assumed)                      Prob > chi2       =     0.0000
+{\smallskip}
+                                   (Std. err. adjusted for 366 clusters in id)
+\HLI{13}{\TOPT}\HLI{64}
+             {\VBAR}               Robust
+      trmgpa {\VBAR} Coefficient  std. err.      z    P>|z|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+      spring {\VBAR}  -.0657817   .0394865    -1.67   0.096    -.1431737    .0116104
+      crsgpa {\VBAR}   1.140688   .1317893     8.66   0.000     .8823856     1.39899
+     frstsem {\VBAR}   .0128523   .0684334     0.19   0.851    -.1212746    .1469793
+      season {\VBAR}  -.0566454   .0411639    -1.38   0.169    -.1373251    .0240344
+         sat {\VBAR}   .0016681   .0001848     9.03   0.000     .0013059    .0020304
+    verbmath {\VBAR}  -.1316461    .166478    -0.79   0.429    -.4579371    .1946448
+      hsperc {\VBAR}  -.0084655   .0013131    -6.45   0.000    -.0110391   -.0058918
+      hssize {\VBAR}  -.0000783   .0001172    -0.67   0.504     -.000308    .0001514
+       black {\VBAR}  -.2447934    .075569    -3.24   0.001     -.392906   -.0966808
+      female {\VBAR}   .3357016    .067753     4.95   0.000     .2029081    .4684951
+   crsgpabar {\VBAR}  -.1861551   .1956503    -0.95   0.341    -.5696227    .1973125
+  frstsembar {\VBAR}   -.078244   .1465886    -0.53   0.594    -.3655525    .2090644
+   seasonbar {\VBAR}   .1243006   .1342238     0.93   0.354    -.1387732    .3873743
+       _cons {\VBAR}  -1.423761   .4571037    -3.11   0.002    -2.319668   -.5278545
+\HLI{13}{\PLUS}\HLI{64}
+     sigma_u {\VBAR}  .37185442
+     sigma_e {\VBAR}  .40882825
+         rho {\VBAR}   .4527451   (fraction of variance due to u_i)
+\HLI{13}{\BOTT}\HLI{64}
+{\smallskip}
+. * Test
+. test crsgpabar frstsembar seasonbar
+{\smallskip}
+ ( 1)  crsgpabar = 0
+ ( 2)  frstsembar = 0
+ ( 3)  seasonbar = 0
+{\smallskip}
+           chi2(  3) =    1.95
+         Prob > chi2 =    0.5829
+{\smallskip}
+. test seasonbar
+{\smallskip}
+ ( 1)  seasonbar = 0
+{\smallskip}
+           chi2(  1) =    0.86
+         Prob > chi2 =    0.3544
+{\smallskip}
+. * Prerun FE and RE regression
+. qui xtreg trmgpa spring crsgpa frstsem season, fe
+{\smallskip}
+. estimates store fe
+{\smallskip}
+. qui xtreg trmgpa spring crsgpa frstsem season sat verbmath hsperc hssize ///
+> black female, re
+{\smallskip}
+. estimates store re
+{\smallskip}
+. * Hausman test
+. hausman fe re 
+{\smallskip}
+                 \HLI{4} Coefficients \HLI{4}
+             {\VBAR}      (b)          (B)            (b-B)     sqrt(diag(V_b-V_B))
+             {\VBAR}       fe           re         Difference       Std. err.
+\HLI{13}{\PLUS}\HLI{64}
+      spring {\VBAR}   -.0657817    -.0606536       -.0051281         .012291
+      crsgpa {\VBAR}    1.140688     1.082365        .0583227        .0735758
+     frstsem {\VBAR}    .0128523     .0029948        .0098575        .0338223
+      season {\VBAR}   -.0566454    -.0440992       -.0125462        .0134363
+\HLI{13}{\BOTT}\HLI{64}
+                          b = Consistent under H0 and Ha; obtained from {\bftt{xtreg}}.
+           B = Inconsistent under Ha, efficient under H0; obtained from {\bftt{xtreg}}.
+{\smallskip}
+Test of H0: Difference in coefficients not systematic
+{\smallskip}
+    chi2(4) = (b-B)'[(V_b-V_B){\caret}(-1)](b-B)
+            =   1.81
+Prob > chi2 = 0.7702
+{\smallskip}
+. 
+. * Prerun FE and RE regression
+. qui xtreg trmgpa spring crsgpa frstsem season, fe
+{\smallskip}
+. estimates store fe
+{\smallskip}
+. qui xtreg trmgpa spring crsgpa frstsem season sat verbmath hsperc hssize ///
+> black female, re
+{\smallskip}
+. estimates store re
+{\smallskip}
+. * Hausman test
+. hausman fe re, sigmamore
+{\smallskip}
+Note: the rank of the differenced variance matrix (3) does not equal the number of coefficients being tested (4); be sure this is what you expect, or there may be problems computing the test.  Examine the output of your estimators for anything
+        unexpected and possibly consider scaling your variables so that the coefficients are on a similar scale.
+{\smallskip}
+                 \HLI{4} Coefficients \HLI{4}
+             {\VBAR}      (b)          (B)            (b-B)     sqrt(diag(V_b-V_B))
+             {\VBAR}       fe           re         Difference       Std. err.
+\HLI{13}{\PLUS}\HLI{64}
+      spring {\VBAR}   -.0657817    -.0606536       -.0051281        .0121895
+      crsgpa {\VBAR}    1.140688     1.082365        .0583227        .0734205
+     frstsem {\VBAR}    .0128523     .0029948        .0098575        .0337085
+      season {\VBAR}   -.0566454    -.0440992       -.0125462         .013332
+\HLI{13}{\BOTT}\HLI{64}
+                          b = Consistent under H0 and Ha; obtained from {\bftt{xtreg}}.
+           B = Inconsistent under Ha, efficient under H0; obtained from {\bftt{xtreg}}.
+{\smallskip}
+Test of H0: Difference in coefficients not systematic
+{\smallskip}
+    chi2(3) = (b-B)'[(V_b-V_B){\caret}(-1)](b-B)
+            =   1.83
+Prob > chi2 = 0.6077
+(V_b-V_B is not positive definite)
+{\smallskip}
+. 
+. 

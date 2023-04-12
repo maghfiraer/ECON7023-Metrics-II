@@ -1,0 +1,9 @@
+texdoc init ".\HW5\107a.tex", replace
+
+/***
+RE Regression Output
+***/
+texdoc stlog
+xtset id term
+xtreg trmgpa spring crsgpa frstsem season sat verbmath hsperc hssize black female, re
+texdoc stlog close

@@ -1,0 +1,8 @@
+texdoc init ".\HW5\107b.tex", replace
+
+/***
+FE Regression Output
+***/
+texdoc stlog
+xtreg trmgpa spring crsgpa frstsem season, fe
+texdoc stlog close
