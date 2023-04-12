@@ -1,0 +1,278 @@
+\documentclass[10pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts, graphicx, multicol, array}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{stata/stata}
+\usepackage{wrapfig}
+
+\graphicspath{ {images/} }
+
+\newcommand\iid{\stackrel{\mathclap{iid}}{\sim}}
+\newcommand\asym{\stackrel{\mathclap{a}}{\sim}}
+\newcommand\convprob{\xrightarrow{p}}
+\newcommand\convdist{\xrightarrow{d}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\E}{\text{E}}
+\newcommand{\V}{\text{Var}}
+\newcommand{\Av}{\text{Avar}}
+\newcommand{\se}{\text{se}}
+\newcommand{\corr}{\text{Corr}}
+\newcommand{\cov}{\text{Cov}}
+\newcommand{\norm}{\text{Normal}}
+\newcommand{\indep}{\perp \!\!\! \perp}
+\newcommand{\Hy}{\text{H}}
+
+ 
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+ 
+\title{Homework 5}
+\author{ECON 7023: Econometrics II\\
+Maghfira Ramadhani\\
+April 11, 2023}
+\date{Spring 2023}
+\maketitle
+
+\section*{Chapter 10}
+\subsection*{Problem 10.1}
+Consider a model for new capital investment in a particular industry (say, manufacturing), where the cross-section observations are at the county level and there are $T$ years of data for each county:
+\[\log(invest_{it})=\theta_t+\textbf{z}_{it}\pmb{\gamma}+\delta_1 tax_{it}+\delta_2 disaster_{it}+c_i+u_{it}.\]
+The variable $tax_{it}$ is a measure of the marginal tax rate on capital in the county, and $disaster_{it}$ is a dummy indicator equal to one if there was a significant natural disaster in county $i$ at time period $t$ (for example, a major flood, a hurricane, or an earthquake). The variables in $\textbf{z}_{it}$ are other factors affecting capital investment, and the $\theta_t$ represent different time intercepts. 
+\begin{enumerate}
+\item[a.] Why is allowing for aggregate time effects in the equation important?
+\\ Answer: \\ 
+It is common to think that investment is affected by the position of the macroeconomic business cycle that might be different from time to time, thus allowing for aggregate time effect with different time intercepts $\theta_t$ is very important. The intercepts will absorb these time-varying variations by adding T-1 time period dummy variables.
+
+\item[b.] What kinds of variables are captured in $c_i$? 
+\\ Answer: \\
+The county unobserved effect $c_i$ will account for the time-invariant characteristics of a specific county $i$ that affect investment, for example, the county's wealth, economic condition, natural resources endowment, county's political condition, etc.
+
+\item[c.] Interpreting the equation in a causal fashion, what sign does economic reasoning suggest for $\delta_1$? 
+\\ Answer: \\
+Macroeconomic theory suggests that larger marginal tax rates are associated with lower investment, thus we expect $\delta_1<0.$
+
+\item[d.] Explain in detail how you would estimate this model; be specific about the assumptions you are making. 
+\\ Answer: \\
+First, I will run a simple pooled OLS to get a preliminary result. Then, I will run a fixed effect method to accommodate for arbitrary correlation between $c_i$ and any time varying explanatory variable, i.e. $\textbf{z}_{it}, tax_{it}, disaster_{it}.$ I will need to impose strict exogeneity assumption, i.e. $\textbf{z}_{it}, tax_{it}, disaster_{it}$ is not correlated with $u_{is},\ \forall t,s.$ Also, we must also check for possible serial correlation because we have $T$ years. It will be safer to use the robust variance estimator to allow for any heteroskedasticity or serial correlation provided $T$ is small relative to the number of county, $N$. However, if I can test and show that there is no strong serial correlation then I can use the standard fixed effect variance estimator, since Assumption FE.3 is satisfied under this condition.
+
+\item[e.] Discuss whether strict exogeneity is reasonable for the two variables $tax_{it}$ and $disaster_{it}$; assume that neither of these variables has a lagged effect on capital investment.
+\\ Answer: \\ 
+If the two variables $tax_{it}$ and $disaster_{it}$ do not have lagged effect on capital investment, for strict exogeneity to hold we need the future values the two variables $tax_{i,t+k}$ and $disaster_{i,t+k} \ \forall k>0$ to be not correlated with $u_{it}.$ It make sense for natural disaster to not be random and not determined by past investment. However, future tax rate might be determined by the government depending on past investment because in some settings the government will set a tax revenue target for the next year in each year. But, we allow the variables $tax_{it}$ to be correlated with $c_i$ then feedback may not be a big problem.
+\end{enumerate}
+
+\subsection*{Problem 10.2}
+Suppose you have $T=2$ years of data on the same group of $N$ working individuals. Consider the following model of wage determination:
+\[\log(wage_{it})=\theta_1+\theta_2d2_t+\textbf{z}_{it}\pmb{\gamma}+\delta_1 female_{i}+\delta_2 d2_t \cdot female_{i}+c_i+u_{it}.\]
+The unobserved effect $c_i$ is allowed to be correlated with $\textbf{z}_{it}$ and $female_{i}$. The variable $d2_t$ is a time period indicator, where $d2_t=1$ if $t=2$ and $d2_t=0$ if $t=1$. In what follows, assume that $\E(u_{it}|female_i,\textbf{z}_{i1},\textbf{z}_{i2},c_i)=0,\ t=1,2.$
+\begin{enumerate}
+\item[a.] Without further assumptions, what parameters in the log wage equation can be consistently estimated? 
+\\ Answer: \\
+The intercept, $\theta_1$, cannot be estimated because it will be collinear with $d2_t$. The coefficient on $female_i$, $\delta_1$, cannot be estimated because it will be absorbed in $c_i$. Thus, we can consistently estimate the remaining coefficients, $\theta_2\, \delta_2\,$ and $\pmb{\gamma}$, if we assume variables in $\textbf{z}_{it}$ vary over time.
+
+\item[b.] Interpret the coefficients $\theta_2$ and $\delta_2$. 
+\\ Answer: \\
+The coefficients $\theta_2$ will represent wage growth for men over the two period, all else equal, i.e. \[\theta_2=\E(\log(wage_{it}|d2_t=1,female_i=0)-\E(\log(wage_{it}|d2_t=0,female_i=0).\] and $\delta_2$ represent the difference in wage growth between women and men, all else equal, i.e. \begin{align*}
+    \delta_2&=\left[\E(\log(wage_{it}|d2_t=1,female_i=1)-\E(\log(wage_{it}|d2_t=0,female_i=1)\right]\\
+    &\ \ \ -\left[\E(\log(wage_{it}|d2_t=1,female_i=0)-\E(\log(wage_{it}|d2_t=0,female_i=0)\right]\\
+    &=[\theta_2+\delta_2]-[\theta_2].
+\end{align*}
+
+\item[c.] Write the log wage equation explicitly for the two time periods. Show that the differenced equation can be written as
+\[\Delta\log(wage_i)=\theta_2+\Delta\textbf{z}_i\pmb{\gamma}+\delta_2female_i+\Delta u_i,\]
+where $\Delta\log(wage_i)=\log(wage_{i2})-\log(wage_{i1}),$ and so on.
+\\ Answer: \\
+Write the following equation for $t=1,2$,
+\begin{align*}
+    \log(wage_{i2})&=\theta_1+\theta_2+\textbf{z}_{i2}\pmb{\gamma}+\delta_1 female_{i}+\delta_2 female_{i}+c_i+u_{i2}\\
+    \log(wage_{i1})&=\theta_1+\textbf{z}_{i1}\pmb{\gamma}+\delta_1 female_{i}+c_i+u_{i1}.
+\end{align*}
+Then, subtract the first with the second, we have
+\[\Delta\log(wage_i)=\theta_2+\Delta\textbf{z}_{i}\pmb{\gamma}+\delta_2 female_{i}+\Delta u_i.\]\qed
+\item[d.] How would you test $\Hy_0 :\delta_2=0$ if $\V(\Delta u_i|\Delta\textbf{z}_i,female_i)$ is not constant?
+\\ Answer: \\
+If $\V(\Delta u_i|\Delta\textbf{z}_i,female_i)$ is not constant then Assumption FD.3 is violated. Hence, we use the robust variance matrix for inference given by equation (10.70) in the textbook, i.e.
+\[\hat{\Av(\hat{\pmb{\beta}}_{FD})}=(\Delta\textbf{X}'\Delta\textbf{X})^{-1}\left(\sum_{i=1}^N(\Delta u_i)^2\Delta\textbf{X}'\Delta\textbf{X}\right)(\Delta\textbf{X}'\Delta\textbf{X})^{-1}\]
+Since there's only two periods, $\Delta u_i$ will be scalar, and suppose $z_{it}$ is $Z\times 1$ then $\Delta \textbf{X}$ is $N\times(Z+1)$ matrix consisting of $\Delta\textbf{z}_{i}$ and $female_i$ stacked together.
+
+\end{enumerate}
+
+\subsection*{Problem 10.3}
+For $T=2$ consider the standard unobserved effects model
+\[y_{it}=\textbf{x}_{it}\pmb{\beta}+c_i+u_{it},\ t=1,2.\]
+Let $\hat{\pmb{\beta}}_{FE}$ and $\hat{\pmb{\beta}}_{FD}$ denote the fixed effects and first difference estimators, respectively.
+\begin{enumerate}
+\item[a.] Show that the FE and FD estimates are numerically identical. 
+\\ Answer: \\
+Recall the fixed effect estimator and specify for $T=2$, we have
+\begin{align*}
+    \hat{\pmb{\beta}}_{FE}&=\left(\sum_{i=1}^N\sum_{t=1}^2\ddot{\textbf{x}}_{it}'\ddot{\textbf{x}}_{it}\right)^{-1}\left(\sum_{i=1}^N\sum_{t=1}^2\ddot{\textbf{x}}_{it}'\ddot{y}_{it}\right)\\
+    &=\left(\sum_{i=1}^N(\ddot{\textbf{x}}_{i1}'\ddot{\textbf{x}}_{i1}+\ddot{\textbf{x}}_{i2}'\ddot{\textbf{x}}_{i2})\right)^{-1}\left(\sum_{i=1}^N(\ddot{\textbf{x}}_{i1}'\ddot{y}_{i1}+\ddot{\textbf{x}}_{i2}'\ddot{y}_{i2}\right),
+\end{align*}
+with $\ddot{\textbf{x}}_{i1}={\textbf{x}}_{i1}-\overline{\textbf{x}}_i,\ \ddot{\textbf{x}}_{i2}={\textbf{x}}_{i2}-\overline{\textbf{x}}_i,\ \ddot{y}_{i1}={y}_{i1}-\overline{y}_i,\ \ddot{y}_{i2}={y}_{i2}-\overline{y}_i,$ and $\overline{y}_i=(y_{i1}+y_{i2})/2,\ \overline{\textbf{x}}_i=(\textbf{x}_{i1}+\textbf{x}_{i2})/2$. We can then rearrange and get the following relationship,
+\begin{align*}
+    &\ddot{\textbf{x}}_{i1}={\textbf{x}}_{i1}-\overline{\textbf{x}}_i={\textbf{x}}_{i1}-\frac{(\textbf{x}_{i1}+\textbf{x}_{i2})}{2}=\frac{(\textbf{x}_{i1}-\textbf{x}_{i2})}{2}=-\frac{\Delta\textbf{x}_i}{2},\\
+    &\ddot{\textbf{x}}_{i2}={\textbf{x}}_{i2}-\overline{\textbf{x}}_i={\textbf{x}}_{i2}-\frac{(\textbf{x}_{i1}+\textbf{x}_{i2})}{2}=\frac{(\textbf{x}_{i2}-\textbf{x}_{i1})}{2}=\frac{\Delta\textbf{x}_i}{2},\\ 
+    &\ddot{y}_{i1}={y}_{i1}-\overline{y}_i={{y}}_{i1}-\frac{({y}_{i1}+{y}_{i2})}{2}=\frac{({y}_{i1}-{y}_{i2})}{2}=-\frac{\Delta {y}_i}{2},\\ 
+    &\ddot{y}_{i2}={y}_{i2}-\overline{y}_i={{y}}_{i2}-\frac{({y}_{i1}+{y}_{i2})}{2}=\frac{({y}_{i2}-{y}_{i1})}{2}=\frac{\Delta {y}_i}{2}.
+\end{align*}
+Substituting it into the fixed effect estimator, we have
+\begin{align*}
+    \hat{\pmb{\beta}}_{FE}&=\left(\sum_{i=1}^N(\ddot{\textbf{x}}_{i1}'\ddot{\textbf{x}}_{i1}+\ddot{\textbf{x}}_{i2}'\ddot{\textbf{x}}_{i2})\right)^{-1}\left(\sum_{i=1}^N(\ddot{\textbf{x}}_{i1}'\ddot{y}_{i1}+\ddot{\textbf{x}}_{i2}'\ddot{y}_{i2}\right)\\
+    &=\left(\sum_{i=1}^N\left(-\frac{\Delta\textbf{x}_i}{2}\right)'\left(-\frac{\Delta\textbf{x}_i}{2}\right)+\left(\frac{\Delta\textbf{x}_i}{2}\right)'\left(\frac{\Delta\textbf{x}_i}{2}\right)\right)^{-1}
+    \left(\sum_{i=1}^N\left(-\frac{\Delta\textbf{x}_i}{2}\right)'\left(-\frac{\Delta{y}_i}{2}\right)+\left(\frac{\Delta\textbf{x}_i}{2}\right)'\left(\frac{\Delta{y}_i}{2}\right)\right)\\
+    &=\left(\sum_{i=1}^N\frac{1}{2}\Delta\textbf{x}_i'\Delta\textbf{x}_i\right)^{-1}
+    \left(\sum_{i=1}^N\frac{1}{2}\Delta\textbf{x}_i'\Delta{y}_i\right)\\
+    &=\left(\sum_{i=1}^N\Delta\textbf{x}_i'\Delta\textbf{x}_i\right)^{-1}
+    \left(\sum_{i=1}^N\Delta\textbf{x}_i'\Delta{y}_i\right)=\hat{\pmb{\beta}}_{FD}.
+\end{align*}\qed
+
+\item[b.] Show that the error variance estimates from the FE and FD methods are numerically identical.
+\\ Answer: \\
+We start with the residual from fixed effect estimation, we have $\hat{\ddot{u}}_{i1}=\ddot{y}_{i1}-\ddot{\textbf{x}}_{i1}\hat{\pmb{\beta}}_{FE},\ \hat{\ddot{u}}_{i2}=\ddot{y}_{i2}-\ddot{\textbf{x}}_{i2}\hat{\pmb{\beta}}_{FE}.$ Using the result from part a, i.e. $\hat{\pmb{\beta}}_{FE}=\hat{\pmb{\beta}}_{FD}$, and the previous relationship, we have
+\begin{align*}
+    &\hat{\ddot{u}}_{i1}=\ddot{y}_{i1}-\ddot{\textbf{x}}_{i1}\hat{\pmb{\beta}}_{FE}=-\frac{\Delta {y}_i}{2}-(-\frac{\Delta\textbf{x}_i}{2})\hat{\pmb{\beta}}_{FD}=-\frac{1}{2}(\Delta {y}_i-\Delta\textbf{x}_i\hat{\pmb{\beta}}_{FD})=-\frac{1}{2}\hat{\Delta u_i},\\
+    &\hat{\ddot{u}}_{i2}=\ddot{y}_{i2}-\ddot{\textbf{x}}_{i2}\hat{\pmb{\beta}}_{FE}=\frac{\Delta {y}_i}{2}-\frac{\Delta\textbf{x}_i}{2}\hat{\pmb{\beta}}_{FD}=\frac{1}{2}(\Delta {y}_i-\Delta\textbf{x}_i\hat{\pmb{\beta}}_{FD})=\frac{1}{2}\hat{\Delta u_i},
+\end{align*}
+with $\hat{\Delta u_i}$ is the residual from first difference estimation. We can see from these result that the SSR from both methods have the following relationship.
+\[SSR_{FE}=\sum_{i=1}^N(\hat{\ddot{u}}_{i1}^2+\hat{\ddot{u}}_{i2}^2)=\sum_{i=1}^N(\hat{\Delta u_i}^2/4+\hat{\Delta u_i}^2/4)=\frac{1}{2}\sum_{i=1}^N\hat{\Delta u_i}^2=\frac{1}{2}SSR_{FD}.\]
+The variance estimator for FE under Assumptions FE.1-FE.3 is given by $\hat{\sigma}_{u_{FE}}^2=SSR_{FE}/[N(T-1)-K]$ which is $\hat{\sigma}_u_{FE}^2=SSR_{FE}/[N-K]$ for $T=2.$ And for first difference, we have the standard variance estimator $\hat{\sigma}_u_{FD}^2=SSR_{FD}/[N-K].$ Having previous result that $SSR_{FE}=\frac{1}{2}SSR_{FD}$, we end up with $\hat{\sigma}_u_{FE}^2=\frac{1}{2}\hat{\sigma}_u_{FD}^2.$ And then we have the variance matrix estimate for fixed effect is
+\begin{align*}
+    \hat{\Av(\hat{\pmb{\beta}}_{FE})}&=\hat{\sigma}_u_{FE}^2\left(\sum_{i=1}^N(\ddot{\textbf{x}}_{i1}'\ddot{\textbf{x}}_{i1}+\ddot{\textbf{x}}_{i2}'\ddot{\textbf{x}}_{i2})\right)^{-1}\\
+    &=\frac{1}{2}\hat{\sigma}_u_{FD}^2\left(\sum_{i=1}^N\frac{1}{2}\Delta\textbf{x}_i'\Delta\textbf{x}_i\right)^{-1}=\hat{\sigma}_u_{FD}^2\left(\sum_{i=1}^N\Delta\textbf{x}_i'\Delta\textbf{x}_i\right)^{-1}=\hat{\Av(\hat{\pmb{\beta}}_{FD})}.
+\end{align*}\qed
+\end{enumerate}
+
+
+\subsection*{Problem 10.4}
+A common setup for program evaluation with two periods of panel data is the following. Let $y_{it}$ denote the outcome of interest for unit $i$ in period $t$. At $t=1$, no one is in the program; at $t=2$, some units are in the control group and others are in the experimental group. Let $prog_{it}$ be a binary indicator equal to one if unit $i$ is in the program in period $t$; by the program design, $prog_{i1}=0$ for all $i$. An unobserved effects model without additional covariates is
+\[y_{it}=\theta_1+\theta_2d2_t+\delta_1prog_{it}+c_i+u_{it},\ \E(u_{it}|prog_{i2},c_i)=0,\]
+where $d2_t$ is dummy variable equal to unity if $t=2$, and zero if $t=1$, and $c_i$ is the unobserved effect. 
+\begin{enumerate}
+\item[a.] Explain why including $d2_t$ is important in these contexts. In particular, what problems might be caused by leaving it out? 
+\\ Answer: \\
+Including $d2_t$ is important for partial out the average change over time caused by other factors other than the program. For example, on average the height of a kid will increase every year, thus $d2_t>0$ will show the average height change over a year without the kid's taking growth supplements (program treatment). Leaving $d2_t$ out means we assume that all change in $y_{it}$ will be caused by the program, taking supplements, while on average kids will become taller and taller every year without any intervention.
+
+\item[b.] Why is it important to include $c_i$ in the equation?
+\\ Answer: \\
+Including $c_i$ in the equation is important to allow for individual heterogeneity. In the hypothetical example about the height of a kid, it can be associated with the parents' economic condition, the daily diet of the kid, etc. The model allow $c_i$ to be correlated with program participation, this is important when the experimental group may self-select or a specifically targeted by the program.
+
+\item[c.] Using the first difference method, show that $\hat{\theta}_2=\overline{\Delta y}_{control}$ and $\hat{\delta}_1=\overline{\Delta y}_{treat}-\overline{\Delta y}_{control}$, where $\overline{\Delta y}_{control}$ is the average change in $y$ over two periods for the group with $prog_{i2}=0$, and $\overline{\Delta y}_{treat}$ is the average change in $y$ for the group where $prog_{i2}=1$. This formula shows that $\hat{\delta}_1$, the difference-in-differences estimator, arises out of an unobserved effects panel data model.
+\\ Answer: \\
+Recall that we have $prog_{i1}=0\ \forall i, d2_1=0, d2_2=1.$ Now we have
+\begin{align}
+    y_{i2}-y_{i1}=(\theta_2+\delta_1prog_{i2}+u_{i2})-(u_{i1})\Rightarrow \Delta y_i=\theta_2+\delta_1prog_{i2}+\Delta u_i. \label{e5.1}
+\end{align}
+Since there is only two period, we know that FE and FD estimates are the same, and $\theta_2$ and $\delta_1$ is the OLS estimator from the equation \eqref{e5.1}. Recall that or simple regression model with dummy variable, the intercept estimate, in this case $\hat{\theta}_2$, is the average of $\Delta y_i$ for the observation with $prog_{i2}=0$, we call it control group. And the coefficient plus intercept estimates, $\hat{\theta}_2+\hat{\delta}_1$, is the average of $\Delta y_i$ for the observation with $prog_{i2}=1$, we call it treatment group. And it is true that $\hat{\theta}_2=\overline{\Delta y}_{control}$ and $\hat{\delta}_1=\overline{\Delta y}_{treat}-\overline{\Delta y}_{control}$.
+
+\item[d.] Write the extension of the model for $T$ time periods.
+\\ Answer: \\
+For $T$ time periods we need $T-1$ period dummy, we can write our model as follows.
+\[y_{it}=\theta_1+\theta_2d2_t+\ldots+\theta_T dT_t+\delta_1prog_{it}+c_i+u_{it}\]
+
+\item[e.] A common way to obtain the DD estimator for two years of panel data is from the model
+\[y_{it}=\alpha_1+\alpha_2 start_t+\alpha_3 start_t prog_i+u_{it}, \tag{10.89}\label{10.89}\]
+where $\E(u_{it}|start_t,prog_i)=0$, $prog_i$ denotes whether unit $i$ is in the program in the second period, and $start_t$ is a binary variable indicating when the program starts. In the two-period setup, $start_t=d2_t$ and $prog_{it}=start_t prog_i$. The pooled OLS estimator of $\delta_1$ is the DD estimator from part c. With $T>2$, the unobserved effects model from part d and pooled estimation of equation \eqref{10.89} no longer generally give the same estimate of the program effect. Which approach do you prefer, and why?
+\\ Answer: \\
+I think the model in part d is more flexible, because we do not restrict program participation, for example an observation can be treated or not treated at every time periods, while the model in (10.89) only assume that after an observation is treated, it will always treated in the remaining period.
+
+\end{enumerate}
+
+\subsection*{Problem 10.7}
+Use the two terms of data in GPA.RAW to estimate an unobserved effects version of the model in Example 7.8. You should drop the variable $cumgpa$ (since this variable violates strict exogeneity).
+\begin{enumerate}
+\item[a.] Estimate the model by RE, and interpret the coefficient on the in-season variable. 
+\\ Answer: \\
+The random effect estimates are shown below.
+
+\item[b.] Estimate the model by FE; informally compare the estimates to the RE estimates, in particular that on the in-season effect. 
+\\ Answer: \\
+The fixed effect estimates are shown below.
+
+\item[c.] Construct the nonrobust Hausman test comparing RE and FE. Include all variables in $\textbf{w}_{it}$ that have some variation across $i$ and $t$, except for the term dummy.
+\\ Answer: \\ \\
+\end{enumerate}
+
+\subsection*{Problem 10.8}
+Use the data in NORWAY.RAW for the years 1972 and 1978 for a two-year panel data analysis. The model is a simple distributed lag model:
+\[\log(crime_{it})=\theta_0+\theta_1d78_t+\beta_1clrdprc_{i,t-1}+\beta_2clrprc_{i,t-2}+c_i+u_{it}.\]
+The variable $clrprc$ is the clear-up percentage (the percentage of crimes solved). The data are stored for two years, with the needed lags given as variables for each year. 
+\begin{enumerate}
+\item[a.] First estimate this equation using a pooled OLS analysis. Comment on the deterrent effect of the clear-up percentage, including interpreting the size of the coefficients. Test for serial correlation in the composite error $v_{it}$ assuming strict exogeneity (see Section 7.8). 
+\\ Answer: \\
+The pooled OLS estimates are shown below.
+
+\item[b.] Estimate the equation by FE, and compare the estimates with the pooled OLS estimates. Is there any reason to test for serial correlation? Obtain heteroskedasticity robust standard errors for the FE estimates. 
+\\ Answer: \\
+The fixed effect estimates are shown below.
+
+\item[c.] Using FE analysis, test the hypothesis $\Hy_0:\beta_1=\beta_2$. What do you conclude? If the hypothesis is not rejected, what would be a more parsimonious model? Estimate this model.
+\\ Answer: \\ \\
+\end{enumerate}
+
+\subsection*{Problem 10.11}
+The data in LOWBIRTH.RAW for this question. 
+\begin{enumerate}
+\item[a.] For 1987 and 1990, consider the state-level equation 
+\begin{align*}
+    lowbrth_{it}=&\theta_1+\theta_2d90_t+\beta_1afdcprc_{it}+\beta_2\log(phypc_{it})\\
+    &+\beta_3\log(bedspc_{it})+\beta_4\log(pcinc_{it})+\beta_5\log(popul_{it})+c_i+u_{it},
+\end{align*} 
+where the dependent variable is percentage of births that are classified as low birth weight and the key explanatory variable is $afdcprc$, the percentage of the population in the welfare program, Aid to Families with Dependent Children (AFDC). The other variables, which act as controls for quality of health care and income levels, are physicians per capita, hospital beds per capita, per capita income, and population. Interpreting the equation causally, what sign should each $\beta_j$ have? (Note: Participation in AFDC makes poor women eligible for nutritional programs and prenatal care.) 
+\\ Answer: \\
+$\beta_1$ is our main variable. The welfare program participation will increase access to nutritional program and prenatal care so we expect the percentage of low-weight birth to decrease, all else equal. Thus we expect $\beta_1<0.$ For $\beta_2$, we also expect it to be negative, meaning an increase in physician per capita is expected to lower the percent of low-weight birth. For $\beta_3$, the number of hospital beds per capita represent the availability of a health facility, thus we expect more availability to lower percentage of low-weight birth, $\beta_3<0$. Per capita income represent financial capacity, higher financial capacity should decrease the percentage of low-weight birth to decrease, thus $\beta_4<0$. Regarding population I have no idea how it will affect the percent of low-weight birth, holding all else equal, $\beta_5$ can be both negative or positive. For example, we can assume positive sign because of course a lot of population means health treatment and health care gets really crowded and it become harder to access. On the other hand, the negative sign if we assume by increasing population it may increase the number of demand for health care, thus health facility will grow larger.
+
+\item[b.] Estimate the preceding equation by pooled OLS, and discuss the results. You should report the usual standard errors and serial correlation–robust standard errors. 
+\\ Answer: \\
+The pooled OLS estimates is shown below.
+
+\item[c.] Difference the equation to eliminate the state FE, $ci$, and reestimate the equation. Interpret the estimate of $\beta_1$ and compare it to the estimate from part b. What do you make of $\hat{\beta}_2$? \\ Answer: \\
+The first difference estimates is shown below.
+
+\item[d.] Add $afdcprc^2$ to the model, and estimate it by FD. Are the estimates on $afdcprc$ and $afdcprc^2$ sensible? What is the estimated turning point in the quadratic?
+\\ Answer: \\
+The first difference estimates by adding $afdcprc^2$ is shown below.
+
+\end{enumerate}
+
+\subsection*{Problem 10.14}
+Suppose that we have the unobserved effects model
+\[y_{it}=\alpha+\textbf{x}_{it}\pmb{\beta}+\textbf{z}_i\pmb{\gamma}+h_i+u_{it}\]
+where the $\textbf{x}_{it}\ (1\times K)$ are time-varying, the $\textbf{z}_i\ (1\times M)$ are time-constant, $\E(u_{it}|\textbf{x}_i,\textbf{z}_i,h_i)=0,\ t=1,\ldots,T,$ and $\E(h_i|\textbf{x}_i,\textbf{z}_i)=0.$ Let $\sigma_h^2=\V(h_i)$ and $\sigma_u^2=\V(u_{it}).$ If we estimate $\pmb{\beta}$ by fixed effects, we are estimating the equation $y_{it}=\textbf{x}_{it}\pmb{\beta}+c_i+u_{it},$ where $c_i=\alpha+\textbf{z}_i\pmb{\gamma}+h_i$.  
+\begin{enumerate}
+\item[a.] Find $\sigma_c^2\equiv \V(c_i)$. Show that $\sigma_c^2$ is at least as large as $\sigma_h^2$, and usually strictly larger.
+\\ Answer: \\
+We know that $c_i=\alpha+\textbf{z}_i\pmb{\gamma}+h_i$. Thus we have $\V(c_i)=\V(\alpha+\textbf{z}_i\pmb{\gamma}+h_i)$, I treat $\alpha$ as a constant or an intercept. Since $\E(h_i|\textbf{x}_i,\textbf{z}_i)=0$, we have that $\textbf{z}_i\pmb{\gamma} \text{ and } h_i$ are not correlated. Thus the variance term simplify to $\V(c_i)=\V(\textbf{z}_i\pmb{\gamma})+\V(h_i)=\pmb{\gamma}'\V(\textbf{z}_i)\pmb{\gamma}+\sigma_h^2,$ the first term is in quadratic form that is at least positive semi-definite, thus $\V(c_i)=\pmb{\gamma}'\V(\textbf{z}_i)\pmb{\gamma}+\sigma_h^2\geq\sigma_h^2.$ Strict inequality hold if $\pmb{\gamma}'\V(\textbf{z}_i)\pmb{\gamma}$ is strictly positive, which require $\pmb{\gamma}\neq0,\ \V(\textbf{z}_i)$ to be positive definite, which is most of the time satisfied by the rank condition.
+
+\item[b.] Explain why estimation of the model by fixed effects will lead to a larger estimated variance of the unobserved effect than if we estimate the model by random effects. Does this result make intuitive sense? 
+\\ Answer: \\
+When we estimate by fixed effect, the variance of the unobserved part will be given by $\sigma_c^2$, while in random effect, the variance will be given by $\sigma_h^2.$ So, with random effect, we control for time-contract variation by taking out $\textbf{z}_i$ from $c_i$.
+
+\item[c.] If $\lambda_c$ is the quasi-time-demeaning parameter without $\textbf{z}_i$ in the model and $\lambda_h$ is the quasi-time-demeaning parameter with $\textbf{z}_i$ in the model, show that $\lambda_c\geq\lambda_h$, with strict inequality if $\gamma\neq0$. 
+\\ Answer: \\
+We can write $\lambda_c$ and $\lambda_h$ following equation (10.81) in the textbook,
+\begin{align*}
+    &\lambda_c=1-{1/[1+T(\sigma_c^2/\sigma_u^2)]}^{1/2}\\
+    &\lambda_h=1-{1/[1+T(\sigma_h^2/\sigma_u^2)]}^{1/2}\\
+    &\Leftrightarrow \lambda_c-\lambda_h={1/[1+T(\sigma_h^2/\sigma_u^2)]}^{1/2}-{1/[1+T(\sigma_c^2/\sigma_u^2)]}^{1/2}.
+\end{align*}
+Thus, we have that $\lambda_c-\lambda_h$ is equivalent with ${1/[1+T(\sigma_h^2/\sigma_u^2)]}^{1/2}\geq{1/[1+T(\sigma_c^2/\sigma_u^2)]}^{1/2}$. Further manipulation yield
+\begin{align*}
+    {1/[1+T(\sigma_h^2/\sigma_u^2)]}^{1/2}\geq{1/[1+T(\sigma_c^2/\sigma_u^2)]}^{1/2}\Leftrightarrow
+    \sigma_c^2\geq\sigma_h^2,
+\end{align*}
+which is always true as shown in part a.
+
+\item[d.] What does part c imply about using pooled OLS versus FE as the first step estimator for estimating the variance of the unobserved heterogeneity in RE estimation? 
+\\ Answer: \\
+When we use FE, we are estimating $\sigma_c^2$, which means we use $\lambda_c$ as the quasi-time demeaning parameter in the RE estimation. If we use pooled OLS, we are estimating $sigma_h^2$, which means we use  $\lambda_h$ as the quasi-time demeaning parameter in the RE estimation. Therefore, we should use pooled OLS as the first step estimator.
+
+\item[e.] Suppose that, in addition to RE.1-RE.3 holding in the original model, $\E(\textbf{z}_i|\textbf{x}_i)=\textbf{0}, t=1,\ldots,T$ and $\V(\textbf{z}_i|\textbf{x}_i)=\V(\textbf{z}_i)$. Show directly---that is, by comparing the two asymptotic variances---that the RE estimator that includes $\textbf{z}_i$ is asymptotically more efficient than the RE estimator that excludes $\textbf{z}_i$. (The result also follows from Problem 7.15 without the assumption $\V(c_i|\textbf{x}_i)=\V(c_i)$; in fact, we only need to assume $\textbf{z}_i$ is uncorrelated with $\textbf{x}_i$.)
+\\ Answer: \\
+
+\end{enumerate}
+\end{document}
