@@ -50,4 +50,5 @@ esttab using "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Do
 refcat(unit_cost "\emph{Transportation}" land_topo "\vspace{0.1em} \\ \emph{Geographic and Natural Disaster}" elec_pln "\vspace{0.1em} \\ \emph{Infrastructure}", nolabel) ///
  cells("mean(fmt(2)) sd min max count(fmt(0))") nostar unstack nonumber ///
   compress nomtitle nonote noobs label booktabs ///
+  eqlabels("2014" "2018") ///
   collabels("Mean" "SD" "Min" "Max" "N")
