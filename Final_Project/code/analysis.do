@@ -64,4 +64,4 @@ refcat(unit_cost "\emph{Transportation Cost}" land_topo "\vspace{0.05em} \\ \emp
  cells("mean(fmt(2)) sd min max count(fmt(0))") nostar unstack nonumber ///
   compress nomtitle nonote noobs label booktabs ///
   eqlabels("2014" "2018") ///
-  collabels("Mean" "SD" "Min" "Max" "N")
+  collabels("Mean" "S.D." "Min" "Max" "Obs.")
