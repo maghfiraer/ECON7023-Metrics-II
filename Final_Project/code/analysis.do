@@ -19,6 +19,7 @@ label variable unit_cost "Unit transportation cost in 000s Rp./km"
 label variable vil_subd_cost "Transportation cost in 000s Rp."
 label variable landfall_1 "Landfall occurence average per year"
 label variable earthq_1 "Earthquake occurence average per year"
+label variable sch_sh "Number of Senior High School"
 
 foreach x of varlist unit_cost vil_subd_cost vil_subd_dis vil_subd_mode vil_subd_dur land_topo sea forest trans_river landfall_1 earthq_1 elec_pln elec_nonpln sch_el sch_jh sch_sh sch_uni pov_let inc_vf {
   local t : var label `x'
