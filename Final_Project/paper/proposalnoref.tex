@@ -1,5 +1,6 @@
 \documentclass[letterpaper,11pt,leqno]{article}
 \usepackage{proposal}
+\usepackage{pdflscape}
 \bibliographystyle{bibliography}
 
 % Enter paper title:
@@ -30,12 +31,14 @@
 
 I measure rural accessibility using the unit transportation cost (in Rp/km) of each individual village, which I define as the transportation cost from the village office to the sub-district office (in thousands Rp), divided by the distance (in km). The main explanatory variables are the treatment variable of fuel provision and the fund transfer from the central government to the village. These two variables potentially have endogeneity problems.  Other  data on geographic characteristics, number of schools, natural disaster occurrence, electricity customers, and poverty are used as covariates or instruments. I also add village-level fixed effects to account for different village characteristics that are not explained by other variables.
 
+\begin{landscape}
 \begin{table}[t]
 \caption{Descriptive Statistics}
 \input{Final_Project/output/table/table1b}
 \label{t1}\end{table}
 
 
-\bibliography{\bib}
 
+\bibliography{\bib}
+\end{landscape}
 \end{document}
