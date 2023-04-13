@@ -38,12 +38,12 @@ describe
 * Table 1 Option A
 est clear
 estpost tabstat ///
-unit_cost vil_subd_cost land_topo sea forest trans_river landfall_1 earthq_1 elec_pln elec_nonpln sch_jh pov_let inc_vf if vil_type==1, ///
+unit_cost vil_subd_cost landfall_1 earthq_1 elec_pln elec_nonpln sch_jh pov_let inc_vf if vil_type==1, ///
 by(year) c(stat) stat(mean sd min max n) nototal
 
 cd "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project"
 esttab using "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\output\table\table1.tex", replace ///
-refcat(unit_cost "\emph{Transportation Cost}" land_topo "\vspace{0.05em} \\ \emph{Geographic and Natural Disaster}" elec_pln "\vspace{0.05em} \\ \emph{Infrastructure}" inc_vf "\vspace{0.05em} \\ \emph{Inter-government Transfer}", nolabel) ///
+refcat(unit_cost "\emph{Transportation Cost}" land_topo "\vspace{0.05em} \\ \emph{Natural Disaster}" elec_pln "\vspace{0.05em} \\ \emph{Infrastructure}" inc_vf "\vspace{0.05em} \\ \emph{Inter-government Transfer}", nolabel) ///
 	 cells(mean(fmt(2)) sd(par)) nostar  nonumber unstack ///
   nomtitle nonote obs label  ///
    collabels(none) ///
@@ -54,13 +54,13 @@ refcat(unit_cost "\emph{Transportation Cost}" land_topo "\vspace{0.05em} \\ \emp
 
 est clear
 estpost tabstat ///
-unit_cost vil_subd_cost land_topo sea forest trans_river landfall_1 earthq_1 elec_pln elec_nonpln sch_jh pov_let inc_vf if vil_type==1, ///
+unit_cost vil_subd_cost landfall_1 earthq_1 elec_pln elec_nonpln sch_jh pov_let inc_vf if vil_type==1, ///
 by(year) c(stat) stat(mean sd min max n) nototal
 esttab, cells("mean sd min max count")
 estout, cells("mean sd min max count")
 
 esttab using "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\output\table\table1b.tex", replace ////
-refcat(unit_cost "\emph{Transportation Cost}" land_topo "\vspace{0.05em} \\ \emph{Geographic and Natural Disaster}" elec_pln "\vspace{0.05em} \\ \emph{Infrastructure}" inc_vf "\vspace{0.05em} \\ \emph{Inter-government Transfer}", nolabel) ///
+refcat(unit_cost "\emph{Transportation Cost}" land_topo "\vspace{0.05em} \\ \emph{Natural Disaster}" elec_pln "\vspace{0.05em} \\ \emph{Infrastructure}" inc_vf "\vspace{0.05em} \\ \emph{Inter-government Transfer}", nolabel) ///
  cells("mean(fmt(2)) sd min max count(fmt(0))") nostar unstack nonumber ///
   compress nomtitle nonote noobs label booktabs ///
   eqlabels("2014" "2018") ///
