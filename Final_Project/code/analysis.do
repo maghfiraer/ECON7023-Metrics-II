@@ -17,6 +17,7 @@ drop if vil_subd_cost>999
 drop if pov_let>50000
 egen count1 = count(village_id), by(village_id)
 drop if count1 == 1
+order unit_cost vil_subd_cost vil_subd_dis vil_subd_mode vil_subd_dur land_topo sea forest trans_river landfall_1 earthq_1 elec_pln elec_nonpln sch_el sch_jh sch_sh sch_uni pov_let inc_vf, sequential
 
 
 * Produce Summary Statistics
@@ -35,6 +36,7 @@ esttab using "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Do
    nomtitles
 
 * Table 1 Option B
+
 est clear
 estpost tabstat ///
  unit_cost vil_subd_cost vil_subd_dis vil_subd_mode vil_subd_dur land_topo sea forest elec_pln elec_nonpln trans_river landfall_1 earthq_1 sch_el sch_jh sch_sh sch_uni pov_let inc_vf if vil_type==1, ///
