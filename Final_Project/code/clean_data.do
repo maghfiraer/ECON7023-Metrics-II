@@ -710,8 +710,6 @@ replace y18=1 if year==2018
 
 xtset village_id year
 gen unit_cost=vil_subd_cost/vil_subd_dis
-label variable unit_cost "Unit transportation cost in 000s Rp./km"
-label variable vil_subd_cost "Transportation cost in 000s Rp."
 replace trans_river=0 if missing(trans_river)
 
 sort village_id year

@@ -15,6 +15,11 @@ use "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\S
 drop if vil_subd_dis>9000
 drop if vil_subd_cost>90000
 drop if pov_let>99000
+label variable unit_cost "Unit transportation cost in 000s Rp./km"
+label variable vil_subd_cost "Transportation cost in 000s Rp."
+label variable landfall_1 "Landfall occurence average per year"
+label variable earthq_1 "Earthquake occurence average per year"
+
 * Rebalancing village
 egen count1 = count(village_id), by(village_id)
 drop if count1 == 1
