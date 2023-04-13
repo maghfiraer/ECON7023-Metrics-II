@@ -207,14 +207,18 @@ The variable $clrprc$ is the clear-up percentage (the percentage of crimes solve
 \begin{enumerate}
 \item[a.] First estimate this equation using a pooled OLS analysis. Comment on the deterrent effect of the clear-up percentage, including interpreting the size of the coefficients. Test for serial correlation in the composite error $v_{it}$ assuming strict exogeneity (see Section 7.8). 
 \\ Answer: \\
-The pooled OLS estimates are shown below.
+The pooled OLS estimates are shown below. The coefficient for lag 1 and lag 2 is reasonably close. Test for correlation show that there is strong evidence of serial correlation with lag 1.
+\\ \input{HW5/108a}
 
 \item[b.] Estimate the equation by FE, and compare the estimates with the pooled OLS estimates. Is there any reason to test for serial correlation? Obtain heteroskedasticity robust standard errors for the FE estimates. 
 \\ Answer: \\
-The fixed effect estimates are shown below.
+The fixed effect estimates are shown below. The coefficient for $clrprc\_1$ decrease in magnitude and become not significant. The coefficient for $clrprc\_1$ also decrease in magnitude but remain significant. For the robust standard error, we use FD estimation.
+\\ \input{HW5/108b}
 
 \item[c.] Using FE analysis, test the hypothesis $\Hy_0:\beta_1=\beta_2$. What do you conclude? If the hypothesis is not rejected, what would be a more parsimonious model? Estimate this model.
-\\ Answer: \\ \\
+\\ Answer: \\
+The following STATA output run several test. The p-value of using FE regression is different than using FD. As we know, the FE is not robust to heteroskedasticity. Thus we use the FD for inference. The p-value is .183, thus we do not reject $\Hy_0: \beta_1=\beta_2.$
+\\ \input{HW5/108c}
 \end{enumerate}
 
 \subsection*{Problem 10.11}
@@ -231,17 +235,20 @@ $\beta_1$ is our main variable. The welfare program participation will increase 
 
 \item[b.] Estimate the preceding equation by pooled OLS, and discuss the results. You should report the usual standard errors and serial correlation–robust standard errors. 
 \\ Answer: \\
-The pooled OLS estimates is shown below.
+The pooled OLS estimates is shown below. In general, the robust standard error is larger.
 \\ \input{HW5/1011b}
 
+
 \item[c.] Difference the equation to eliminate the state FE, $ci$, and reestimate the equation. Interpret the estimate of $\beta_1$ and compare it to the estimate from part b. What do you make of $\hat{\beta}_2$? \\ Answer: \\
-The first difference estimates is shown below.
+The first difference estimates is shown below. Now, the robust standard error for the main variable, AFDC is smaller. However, now the variable physician per capita has a positive sign the opposite of what we expect.
 \\ \input{HW5/1011c}
+
 
 \item[d.] Add $afdcprc^2$ to the model, and estimate it by FD. Are the estimates on $afdcprc$ and $afdcprc^2$ sensible? What is the estimated turning point in the quadratic?
 \\ Answer: \\
 The first difference estimates by adding $afdcprc^2$ is shown below.
-\\ \input{HW5/1011}
+\\ \input{HW5/1011d}
+First of all, the quadratic term is not statistically significant. The sign show that there is a stationary point at $afdcprc\approx 6.4$ indicating that there is a diminishing marginal return to AFDC participation. However, there is only 4 states that experience these marginal return, and most of the observation lies in the interval where the impact is increasing. 
 
 \end{enumerate}
 
@@ -279,6 +286,9 @@ When we use FE, we are estimating $\sigma_c^2$, which means we use $\lambda_c$ a
 
 \item[e.] Suppose that, in addition to RE.1-RE.3 holding in the original model, $\E(\textbf{z}_i|\textbf{x}_i)=\textbf{0}, t=1,\ldots,T$ and $\V(\textbf{z}_i|\textbf{x}_i)=\V(\textbf{z}_i)$. Show directly---that is, by comparing the two asymptotic variances---that the RE estimator that includes $\textbf{z}_i$ is asymptotically more efficient than the RE estimator that excludes $\textbf{z}_i$. (The result also follows from Problem 7.15 without the assumption $\V(c_i|\textbf{x}_i)=\V(c_i)$; in fact, we only need to assume $\textbf{z}_i$ is uncorrelated with $\textbf{x}_i$.)
 \\ Answer: \\
+This proof require 
+\[\Av[\sqrt{N}(\tilde{\pmb{\beta}}-\pmb{\beta})]-\Av[\sqrt{N}(\hat{\pmb{\beta}}-\pmb{\beta})]\]
+to be positive semi definite, where $\tilde{\pmb{\beta}}$ is the asymptotic variance from RE estimator that excludes $\textbf{z}_i$ and $\hat{\pmb{\beta}}$ is the asymptotic variance from RE that includes $\textbf{z}_i$, the full model.
 
 \end{enumerate}
 \end{document}
