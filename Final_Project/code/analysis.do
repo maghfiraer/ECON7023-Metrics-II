@@ -47,6 +47,6 @@ estout, cells("mean sd min max count")
 
 esttab using "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\output\table\table1b.tex", replace ////
 refcat(unit_cost "\emph{Transportation}" land_topo "\vspace{0.1em} \\ \emph{Geographic and Natural Disaster}" elec_pln "\vspace{0.1em} \\ \emph{Infrastructure}", nolabel) ///
- cells("mean(fmt(%8.0fc %8.0fc %8.0fc %8.0fc  2)) sd min max count(fmt(0))") nostar unstack nonumber ///
+ cells(mean(fmt(2)) sd(par) min max count(fmt(0))) nostar unstack nonumber ///
   compress nomtitle nonote noobs label booktabs ///
   collabels("Mean" "SD" "Min" "Max" "N")
