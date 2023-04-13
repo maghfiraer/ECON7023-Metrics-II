@@ -4,7 +4,7 @@
 * COURSE		: ECON 7023 Econometrics II										*
 * DESCRIPTION	: Geocode and Graphing											*
 * INPUT			: ESRI shapefile 												*
-* OUTPUT		: /figures, /table												*
+* OUTPUT		: \output\figures												*
 * STATA VERSION	: Stata/MP 17.0 (March 2022)									*
 *********************************************************************************
 

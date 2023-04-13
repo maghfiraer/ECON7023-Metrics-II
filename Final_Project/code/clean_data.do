@@ -3,10 +3,57 @@
 * PROJECT		: MEASURING VILLAGE INFRASTRUCTURE DEVELOPMENT IN INDONESIA		*
 * COURSE		: ECON 7023 Econometrics II										*
 * DESCRIPTION	: Clean data													*
-* INPUT			: podes2011.dta, podes2014.dta, podes2017.dta					*
-* OUTPUT		: podes_processed.dta											*
+* INPUT			: kemendes.xls, podes2011.dta, podes2014.dta, podes2017.dta		*
+* OUTPUT		: \data\podes_processed.dta										*
 * STATA VERSION	: Stata/MP 17.0 (March 2022)									*
 *********************************************************************************
+
+*********************************************************************************
+* Structuring kemendes.xls														*
+*********************************************************************************
+clear
+
+* Import xls
+import excel "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\data\kemendes.xlsx", sheet("UTAMA") firstrow allstring clear
+drop in 74954/74957
+
+* Year
+gen year=2018
+
+* Village_ID
+replace KODEBPS2019="." if KODEBPS2019=="Tidak Ada"
+destring KODEBPS2019, replace
+rename KODEBPS2019 village_id
+label variable village_id "Village ID"
+
+*IDM and Status 2018
+destring IDM2018, replace
+rename IDM2018 idm18
+label variable idm18 "Village Index"
+rename STATUSIDM2018 sidm18
+label variable sidm18 "Village Status"
+
+* Government VF Allocation
+replace PengeluaranBidangPembangunanD="." if PengeluaranBidangPembangunanD=="Tidak Ada Data"
+replace PengeluaranBidangPemberdayaan="." if PengeluaranBidangPemberdayaan=="Tidak Ada Data"
+replace P="." if P=="Tidak Ada Data"
+replace Q="." if Q=="Tidak Ada Data"
+destring PengeluaranBidangPembangunanD, replace
+destring PengeluaranBidangPemberdayaan, replace
+destring P, replace
+destring Q, replace
+replace P=P/1000000
+replace Q=Q/1000000
+replace PengeluaranBidangPembangunanD=PengeluaranBidangPembangunanD/1000000
+replace PengeluaranBidangPemberdayaan=PengeluaranBidangPemberdayaan/1000000
+gen inc_vf=PengeluaranBidangPemberdayaan
+label variable inc_vf "Revenue from village fund transfer"
+
+keep year village_id idm18 sidm18 inc_vf
+drop if missing(village_id)
+
+* Save processed data
+save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\kemendes.dta", replace
 
 *********************************************************************************
 * Structuring podes2017.dta														*
@@ -43,9 +90,9 @@ rename r104 id_vil
 
 * Village Type
 rename r301 vil_type
-drop if vil_type==3 | vil_type==4 // Drop Podes Transmigration Settlement Unit (UPT) or Transmigration Settlement Unit (SPT) observation
-replace vil_type=0 if vil_type==2
-label variable vil_type "=1 if village subsdistrict, =0 if urban subdistrict"
+*drop if vil_type==3 | vil_type==4 // Drop Podes Transmigration Settlement Unit (UPT) or Transmigration Settlement Unit (SPT) observation
+replace vil_type=0 if vil_type==2 | vil_type==3 | vil_type==4
+label variable vil_type "=1 if village subsdistrict, =0 if non-village subdistrict"
 
 * Mainland Topography
 rename r305b land_topo
@@ -192,7 +239,11 @@ label variable inc_dom "Revenue generated locally"
 label variable inc_vf "Revenue from village fund transfer"
 label variable inc_rsg "Revenue from other sources"
 
-keep year village_id name_prov name_d name_subd name_vil id_prov id_d id_subd id_vil vil_type land_topo office_loc sea forest elec_pln elec_nonpln elec_na cook_fuel trans_river trans_lake landfall_1 landfall_2 landfall_3 earthq_1 earthq_2 earthq_3 sch_el sch_jh sch_sh sch_uni pov_let vil_subd_mode vil_subd_dis vil_subd_dur vil_subd_cost vil_nsubd_mode vil_nsubd_dis vil_nsubd_dur vil_nsubd_cost inc_dom inc_vf inc_rsg
+keep year village_id name_prov name_d name_subd name_vil id_prov id_d id_subd id_vil vil_type land_topo office_loc sea forest elec_pln elec_nonpln elec_na cook_fuel trans_river landfall_1 landfall_2 landfall_3 earthq_1 earthq_2 earthq_3 sch_el sch_jh sch_sh sch_uni pov_let vil_subd_mode vil_subd_dis vil_subd_dur vil_subd_cost vil_nsubd_mode vil_nsubd_dis vil_nsubd_dur vil_nsubd_cost inc_dom inc_rsg
+
+* Merge VF transfer from Kemendes
+merge 1:1 village_id year using "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\kemendes.dta"
+drop _merge idm18 sidm18
 
 * Save processed data
 save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes17_processed.dta", replace
@@ -234,9 +285,9 @@ rename r104 id_vil
 * Village Type
 destring r301, replace
 rename r301 vil_type
-drop if vil_type==3 | vil_type==4 | vil_type==5 // Drop Podes Transmigration Settlement Unit (UPT) or Transmigration Settlement Unit (SPT) observation
-replace vil_type=0 if vil_type==2
-label variable vil_type "=1 if village subsdistrict, =0 if urban subdistrict"
+*drop if vil_type==3 | vil_type==4 | vil_type==5 // Drop Podes Transmigration Settlement Unit (UPT) or Transmigration Settlement Unit (SPT) observation
+replace vil_type=0 if vil_type==2 | vil_type==3 | vil_type==4 | vil_type==5
+label variable vil_type "=1 if village subsdistrict, =0 if non-village subdistrict"
 
 * Mainland Topography
 destring r305b, replace
@@ -409,7 +460,7 @@ label variable inc_vf "Revenue from village fund transfer"
 label variable inc_rsg "Revenue from other sources"
 
 
-keep year village_id name_prov name_d name_subd name_vil id_prov id_d id_subd id_vil vil_type land_topo office_loc sea forest elec_pln elec_nonpln elec_na cook_fuel trans_river trans_lake landfall_1 landfall_2 landfall_3 earthq_1 earthq_2 earthq_3 sch_el sch_jh sch_sh sch_uni pov_let vil_subd_mode vil_subd_dis vil_subd_dur vil_subd_cost vil_nsubd_mode vil_nsubd_dis vil_nsubd_dur vil_nsubd_cost inc_dom inc_vf inc_rsg
+keep year village_id name_prov name_d name_subd name_vil id_prov id_d id_subd id_vil vil_type land_topo office_loc sea forest elec_pln elec_nonpln elec_na cook_fuel trans_river landfall_1 landfall_2 landfall_3 earthq_1 earthq_2 earthq_3 sch_el sch_jh sch_sh sch_uni pov_let vil_subd_mode vil_subd_dis vil_subd_dur vil_subd_cost vil_nsubd_mode vil_nsubd_dis vil_nsubd_dur vil_nsubd_cost inc_dom inc_vf inc_rsg
 
 * Save processed data
 save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes14_processed.dta", replace
@@ -446,8 +497,8 @@ rename kode_desa id_vil
 * Village Type
 destring r301, replace
 rename r301 vil_type
-drop if vil_type==3 | vil_type==4 // Drop Podes Transmigration Settlement Unit (UPT) or Transmigration Settlement Unit (SPT) observation
-replace vil_type=0 if vil_type==2
+*drop if vil_type==3 | vil_type==4 // Drop Podes Transmigration Settlement Unit (UPT) or Transmigration Settlement Unit (SPT) observation
+replace vil_type=0 if vil_type==2 | vil_type==3 | vil_type==4
 label variable vil_type "=1 if village subsdistrict, =0 if urban subdistrict"
 
 * Mainland Topography
@@ -619,7 +670,7 @@ label variable inc_vf "Revenue from village fund transfer"
 label variable inc_rsg "Revenue from other sources"
 
 
-keep year village_id name_prov name_d name_subd name_vil id_prov id_d id_subd id_vil vil_type land_topo office_loc sea forest elec_pln elec_nonpln elec_na cook_fuel trans_river trans_lake landfall_1 landfall_2 landfall_3 earthq_1 earthq_2 earthq_3 sch_el sch_jh sch_sh sch_uni pov_let vil_subd_mode vil_subd_dis vil_subd_dur vil_subd_cost vil_nsubd_mode vil_nsubd_dis vil_nsubd_dur vil_nsubd_cost inc_dom inc_vf inc_rsg
+keep year village_id name_prov name_d name_subd name_vil id_prov id_d id_subd id_vil vil_type land_topo office_loc sea forest elec_pln elec_nonpln elec_na cook_fuel trans_river landfall_1 landfall_2 landfall_3 earthq_1 earthq_2 earthq_3 sch_el sch_jh sch_sh sch_uni pov_let vil_subd_mode vil_subd_dis vil_subd_dur vil_subd_cost vil_nsubd_mode vil_nsubd_dis vil_nsubd_dur vil_nsubd_cost inc_dom inc_vf inc_rsg
 
 
 * Save processed data
@@ -646,6 +697,8 @@ erase "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents
 *********************************************************************************
 * Generate year dummy															*
 *********************************************************************************
+gen y11=0
+replace y11=1 if year==2011
 gen y14=0
 replace y14=1 if year==2014
 gen y18=0
@@ -655,14 +708,23 @@ replace y18=1 if year==2018
 * Begin data cleaning															*
 *********************************************************************************
 
-drop trans_lake // Relatively low around 10 percent of village having this
 xtset village_id year
-gen riv_avail=1
-replace riv_avail=0 if missing(river_trans) & year==2011
 
+sort village_id year
+
+preserve
+drop if year == 2011
+egen count = count(village_id), by(village_id)
+drop if count == 1
 
 *********************************************************************************
-* Save processed data															*
+* Save processed data 2014, 2018												*
 *********************************************************************************
-
 save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes_processed.dta", replace
+
+
+*********************************************************************************
+* Save raw clean data															*
+*********************************************************************************
+restore
+save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes_raw.dta", replace
