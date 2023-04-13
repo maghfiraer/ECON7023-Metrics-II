@@ -20,6 +20,13 @@ label variable vil_subd_cost "Transportation cost in 000s Rp."
 label variable landfall_1 "Landfall occurence average per year"
 label variable earthq_1 "Earthquake occurence average per year"
 
+foreach x of varlist unit_cost vil_subd_cost vil_subd_dis vil_subd_mode vil_subd_dur land_topo sea forest trans_river landfall_1 earthq_1 elec_pln elec_nonpln sch_el sch_jh sch_sh sch_uni pov_let inc_vf {
+  local t : var label `x'
+  local t = "\hspace{0.25cm} `t'"
+  lab var `x' "`t'"
+}
+
+
 * Rebalancing village
 egen count1 = count(village_id), by(village_id)
 drop if count1 == 1
@@ -36,6 +43,7 @@ by(year) c(stat) stat(mean sd min max n) nototal
 
 cd "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project"
 esttab using "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\output\table\table1.tex", replace ///
+refcat(unit_cost "\emph{Transportation}" land_topo "\vspace{0.1em} \\ \emph{Geographic and Natural Disaster}" elec_pln "\vspace{0.1em} \\ \emph{Infrastructure}", nolabel) ///
 	 cells(mean(fmt(2)) sd(par)) nostar  nonumber unstack ///
   nomtitle nonote obs label  ///
    collabels(none) ///
