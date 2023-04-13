@@ -43,7 +43,7 @@ by(year) c(stat) stat(mean sd min max n) nototal
 
 cd "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project"
 esttab using "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\output\table\table1.tex", replace ///
-refcat(unit_cost "\emph{Transportation Cost}" land_topo "\vspace{0.1em} \\ \emph{Geographic and Natural Disaster}" elec_pln "\vspace{0.1em} \\ \emph{Infrastructure}" inc_vf "\vspace{0.1em} \\ \emph{Inter-government Transfer}", nolabel) ///
+refcat(unit_cost "\emph{Transportation Cost}" land_topo "\vspace{0.05em} \\ \emph{Geographic and Natural Disaster}" elec_pln "\vspace{0.05em} \\ \emph{Infrastructure}" inc_vf "\vspace{0.05em} \\ \emph{Inter-government Transfer}", nolabel) ///
 	 cells(mean(fmt(2)) sd(par)) nostar  nonumber unstack ///
   nomtitle nonote obs label  ///
    collabels(none) ///
