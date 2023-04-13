@@ -12,17 +12,18 @@ clear
 use "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes_processed.dta"
 
 * Clean strange data
-drop if vil_subd_dis<100
-drop if vil_subd_cost<1000
-egen count = count(village_id), by(village_id)
-drop if count == 1
+drop if vil_subd_dis>99
+drop if vil_subd_cost>999
+drop if pov_let>50000
+egen count1 = count(village_id), by(village_id)
+drop if count1 == 1
 
 
 * Produce Summary Statistics
 * Table 1 Option A
 est clear
 estpost tabstat ///
-vil_subd_dis vil_subd_mode vil_subd_dur vil_subd_cost land_topo sea forest trans_river landfall_1 earthq_1 elec_pln elec_nonpln sch_el sch_jh sch_sh sch_uni pov_let inc_vf if vil_type==1, ///
+unit_cost vil_subd_cost vil_subd_dis vil_subd_mode vil_subd_dur land_topo sea forest elec_pln elec_nonpln trans_river landfall_1 earthq_1 sch_el sch_jh sch_sh sch_uni pov_let inc_vf if vil_type==1, ///
 by(year) c(stat) stat(mean sd min max n) nototal
 
 cd "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project"
