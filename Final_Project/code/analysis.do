@@ -13,7 +13,7 @@ use "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\S
 
 * Clean strange data
 drop if vil_subd_dis>9000
-drop if vil_subd_cost>90000
+drop if vil_subd_cost>1000
 drop if pov_let>99000
 label variable unit_cost "Unit transportation cost in 000s Rp./km"
 label variable vil_subd_cost "Transportation cost in 000s Rp."
