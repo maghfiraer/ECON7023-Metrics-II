@@ -21,19 +21,20 @@ label variable landfall_1 "Landfall occurence average per year"
 label variable earthq_1 "Earthquake occurence average per year"
 label variable sch_sh "Number of Senior High School"
 
-foreach x of varlist unit_cost vil_subd_cost vil_subd_dis vil_subd_mode vil_subd_dur land_topo sea forest trans_river landfall_1 earthq_1 elec_pln elec_nonpln sch_el sch_jh sch_sh sch_uni pov_let inc_vf {
-  local t : var label `x'
-  local t = "\hspace{0.25cm} `t'"
-  lab var `x' "`t'"
-}
-
-
 * Rebalancing village
 egen count1 = count(village_id), by(village_id)
 drop if count1 == 1
 order village_id 
 order year unit_cost vil_subd_cost vil_subd_dis vil_subd_mode vil_subd_dur land_topo sea forest trans_river landfall_1 earthq_1 elec_pln elec_nonpln sch_el sch_jh sch_sh sch_uni pov_let inc_vf, after(village_id)
-describe
+drop count1
+
+
+
+foreach x of varlist unit_cost vil_subd_cost vil_subd_dis vil_subd_mode vil_subd_dur land_topo sea forest trans_river landfall_1 earthq_1 elec_pln elec_nonpln sch_el sch_jh sch_sh sch_uni pov_let inc_vf {
+  local t : var label `x'
+  local t = "\hspace{0.25cm} `t'"
+  lab var `x' "`t'"
+}
 
 * Produce Summary Statistics
 * Table 1 Option A
