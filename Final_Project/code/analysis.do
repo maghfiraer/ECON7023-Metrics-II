@@ -9,7 +9,7 @@
 *********************************************************************************
 
 clear
-use "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes_processed.dta"
+use "./processed_data/podes_processed.dta"
 
 * Clean strange data
 drop if vil_subd_dis>9000
@@ -43,8 +43,7 @@ estpost tabstat ///
 unit_cost vil_subd_cost landfall_1 earthq_1 elec_pln sch_jh sch_sh inc_vf if vil_type==1, ///
 by(year) c(stat) stat(mean sd min max n) nototal
 
-cd "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project"
-esttab using "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\output\table\table1.tex", replace ///
+esttab using "./output/table/table1.tex", replace ///
 refcat(unit_cost "\emph{Transportation Cost}" landfall_1 "\vspace{0.05em} \\ \emph{Natural Disaster}" elec_pln "\vspace{0.05em} \\ \emph{Infrastructure}" inc_vf "\vspace{0.05em} \\ \emph{Inter-government Transfer}", nolabel) ///
 	 cells(mean(fmt(2)) sd(par)) nostar  nonumber unstack ///
   nomtitle nonote obs label  ///
@@ -61,7 +60,7 @@ by(year) c(stat) stat(mean sd min max n) nototal
 esttab, cells("mean sd min max count")
 estout, cells("mean sd min max count")
 
-esttab using "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\output\table\table1b.tex", replace ////
+esttab using "./output/table/table1b.tex", replace ////
 refcat(unit_cost "\emph{Transportation Cost}" landfall_1 "\vspace{0.05em} \\ \emph{Natural Disaster}" elec_pln "\vspace{0.05em} \\ \emph{Infrastructure}" inc_vf "\vspace{0.05em} \\ \emph{Inter-government Transfer}", nolabel) ///
  cells("mean(fmt(2)) sd min max count(fmt(0))") nostar unstack nonumber ///
   compress nomtitle nonote noobs label booktabs ///

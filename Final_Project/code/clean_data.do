@@ -14,7 +14,7 @@
 clear
 
 * Import xls
-import excel "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\data\kemendes.xlsx", sheet("UTAMA") firstrow allstring clear
+import excel "./data/kemendes.xlsx", sheet("UTAMA") firstrow allstring clear
 drop in 74954/74957
 
 * Year
@@ -53,7 +53,7 @@ keep year village_id idm18 sidm18 inc_vf
 drop if missing(village_id)
 
 * Save processed data
-save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\kemendes.dta", replace
+save "./processed_data/kemendes.dta", replace
 
 *********************************************************************************
 * Structuring podes2017.dta														*
@@ -61,7 +61,7 @@ save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\
 clear
 
 * Open .dta
-use "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\sketch\PODES data\podes2017.dta"
+use "./data/podes2017.dta"
 
 * Preprocessing Data
 
@@ -242,11 +242,11 @@ label variable inc_rsg "Revenue from other sources"
 keep year village_id name_prov name_d name_subd name_vil id_prov id_d id_subd id_vil vil_type land_topo office_loc sea forest elec_pln elec_nonpln elec_na cook_fuel trans_river landfall_1 landfall_2 landfall_3 earthq_1 earthq_2 earthq_3 sch_el sch_jh sch_sh sch_uni pov_let vil_subd_mode vil_subd_dis vil_subd_dur vil_subd_cost vil_nsubd_mode vil_nsubd_dis vil_nsubd_dur vil_nsubd_cost inc_dom inc_rsg
 
 * Merge VF transfer from Kemendes
-merge 1:1 village_id year using "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\kemendes.dta"
+merge 1:1 village_id year using "./processed_data/kemendes.dta"
 drop _merge idm18 sidm18
 
 * Save processed data
-save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes17_processed.dta", replace
+save "./processed_data/podes17_processed.dta", replace
 
 *********************************************************************************
 * Structuring podes2014.dta														*
@@ -255,7 +255,7 @@ save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\
 clear
 
 * Open .dta
-use "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\sketch\PODES data\podes2014.dta"
+use "./data/podes2014.dta"
 
 * Preprocessing Data
 
@@ -463,7 +463,7 @@ label variable inc_rsg "Revenue from other sources"
 keep year village_id name_prov name_d name_subd name_vil id_prov id_d id_subd id_vil vil_type land_topo office_loc sea forest elec_pln elec_nonpln elec_na cook_fuel trans_river landfall_1 landfall_2 landfall_3 earthq_1 earthq_2 earthq_3 sch_el sch_jh sch_sh sch_uni pov_let vil_subd_mode vil_subd_dis vil_subd_dur vil_subd_cost vil_nsubd_mode vil_nsubd_dis vil_nsubd_dur vil_nsubd_cost inc_dom inc_vf inc_rsg
 
 * Save processed data
-save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes14_processed.dta", replace
+save "./processed_data/podes14_processed.dta", replace
 
 
 *********************************************************************************
@@ -472,7 +472,7 @@ save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\
 clear
 
 * Open .dta
-use "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\sketch\PODES data\podes2011.dta"
+use "./data/podes2011.dta"
 
 * Preprocessing Data
 
@@ -674,25 +674,25 @@ keep year village_id name_prov name_d name_subd name_vil id_prov id_d id_subd id
 
 
 * Save processed data
-save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes11_processed.dta", replace
+save "./processed_data/podes11_processed.dta", replace
 
 *********************************************************************************
 * Combine all data																*
 *********************************************************************************
 * Append data
-append using "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes17_processed.dta"
+append using "./processed_data/podes17_processed.dta"
 
-append using "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes14_processed.dta"
+append using "./processed_data/podes14_processed.dta"
 
 * Save processed data
-save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes_processed.dta", replace
+save "./processed_data/podes_processed.dta", replace
 
 * Erase temporary files
-erase "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes17_processed.dta"
+erase "./processed_data/podes17_processed.dta"
 
-erase "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes14_processed.dta"
+erase "./processed_data/podes14_processed.dta"
 
-erase "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes11_processed.dta"
+erase "./processed_data/podes11_processed.dta"
 
 *********************************************************************************
 * Generate year dummy															*
@@ -722,11 +722,11 @@ drop if count == 1
 *********************************************************************************
 * Save processed data 2014, 2018												*
 *********************************************************************************
-save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes_processed.dta", replace
+save "./processed_data/podes_processed.dta", replace
 
 
 *********************************************************************************
 * Save raw clean data															*
 *********************************************************************************
 restore
-save "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project\processed_data\podes_raw.dta", replace
+save "./processed_data/podes_raw.dta", replace

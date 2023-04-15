@@ -14,7 +14,8 @@ set more off, permanently
 capture log close
 capture graph drop _all
 
-cd "C:\Users\mramadhani3\OneDrive - Georgia Institute of Technology\Documents\Spring 23\Metrics II ECON7023\ECON7023-Metrics-II\Final_Project"
+* Set the location of project directory/clone location
+cd "/Users/macbook/Documents/GitHub/ECON7023-Metrics-II/Final_Project"
 
 * create log file
 local c_time_date = "`c(current_date)'"+"_" +"`c(current_time)'"
@@ -25,13 +26,13 @@ local time_string = subinstr("`time_string'", " ", "_", .)
 *********************************************************************************
 * Cleaning data																	*
 *********************************************************************************
-do "code\clean_data.do"
+do "./code/clean_data.do"
 
 *********************************************************************************
 * Analyzing data																*
 *********************************************************************************
 
-do "code\analysis.do"
+do "./code/analysis.do"
 
 
 
