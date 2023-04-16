@@ -1,0 +1,165 @@
+\documentclass[10pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts, graphicx, multicol, array}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{stata/stata}
+\usepackage{wrapfig}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\graphicspath{ {images/} }
+
+\newcommand\iid{\stackrel{\mathclap{iid}}{\sim}}
+\newcommand\asym{\stackrel{\mathclap{a}}{\sim}}
+\newcommand\convprob{\xrightarrow{p}}
+\newcommand\convdist{\xrightarrow{d}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\E}{\text{E}}
+\newcommand{\V}{\text{Var}}
+\newcommand{\Av}{\text{Avar}}
+\newcommand{\se}{\text{se}}
+\newcommand{\corr}{\text{Corr}}
+\newcommand{\cov}{\text{Cov}}
+\newcommand{\norm}{\text{Normal}}
+\newcommand{\indep}{\perp \!\!\! \perp}
+\newcommand{\Hy}{\text{H}}
+
+ 
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+ 
+\title{Homework 6}
+\author{ECON 7023: Econometrics II\\
+Maghfira Ramadhani\\
+April 18, 2023}
+\date{Spring 2023}
+\maketitle
+
+\section*{Chapter 11}
+\subsection*{Problem 11.2}
+Consider the following unobserved components model:
+\[y_{it}=\textbf{z}_{it}\pmb{\gamma}+\delta w_{it}+c_i+u_it,\ \ \ \ t=1,2,\ldots,T,\]
+where $\textbf{z}_{it}$ is a $1\times K$ vector of time-varying variables (which could include time-period dummies), $w_{it}$ is a time-varying scalar, $c_i$ is a time-constant unobserved effect, and $u_{it}$ is the idiosyncratic error. The $\textbf{z}_{it}$ are strictly exogenous in the sense that
+\[\E(\textbf{z}_{is}'u_{it})=0,\ \ \ \ \text{all }s,t=1,2,\ldots,T,\tag{11.99}\label{11.99}\]
+but $c_i$ is allowed to be arbitrarily correlated with each $\textbf{z}_{it}$. The variable $w_{it}$ is endogenous in the sense that it can be correlated with $u_{it}$ (as well as with $c_i$).
+\begin{enumerate}[label=\alph*.]
+\item Suppose that $T=2$, and that assumption \eqref{11.99} contains the only available orthogonality conditions. What are the properties of the OLS estimator of $\pmb{\gamma}$ and $\delta$ on the differenced data? Support your claim (but do not include asymptotic derivations).
+\\ \textit{Answer:}\\
+
+\item Under assumption \eqref{11.99}, still with $T=2$, write the liner reduced form for the difference $\Delta w_i$ as $\Delta w_i=\textbf{z}_{i1}\pmb{\pi}_1+\textbf{z}_{i2}\pmb{\pi}_2+r_i$ where, by construction, $r_i$ is uncorrelated with both $\textbf{z}_{i1}$ and $\textbf{z}_{i2}$. What condition on $(\pmb{\pi}_1,\pmb{\pi}_2)$ is needed to identify $\pmb{\gamma}$ and $\delta$? (Hint: It is useful to rewrite the reduced form of $\Delta w_i$ in terms of $\Delta \textbf{z}_i$ and, say, $\textbf{z}_{i1}$.) How can you test this condition?
+\\ \textit{Answer:}\\
+
+\item Now consider the general $T$ case, where we add to assumption \eqref{11.99} the assumption $\E(w_{is}u_{it})=0,s<t$, so that previous values of $w_{it}$ are uncorrelated with $u_{it}$. Explain carefully, including equations where appropriate, how would you estimate $\pmb{\gamma}$ and $\delta$?
+\\ \textit{Answer:}\\
+
+\item Again consider the general $T$ case, but now use the fixed effects transformation to eliminate $c_i$:
+\[\ddot{y}_{it}=\ddot{\textbf{z}}_{it}\pmb{\gamma}+\delta \ddot{w}_{it}+\ddot{u}_it.\]
+What are the properties of the IV estimators if you use $\ddot{\textbf{z}}_{it}$ and $w_{i,t-p},p\geq 1,$ as instruments in estimating this equation by pooled IV? (You can only use time periods $p+1,\ldots,T$ after the initial demeaning.)
+\\ \textit{Answer:}\\
+
+\end{enumerate}
+
+
+\subsection*{Problem 11.9}
+Consider model (11.1) under Assumptions FEIV.1 and FEIV.2.
+\begin{enumerate}[label=\alph*.]
+\item Show that, under the additional Assumption FEIV.3, the asymptotic variance of $\sqrt{N}(\hat{\pmb{\beta}}-{\pmb{\beta}})$ is $\sigma_u^2\{\E(\ddot{\textbf{X}}_i'\ddot{\textbf{Z}}_i)[\E(\ddot{\textbf{Z}}_i\ddot{\textbf{Z}}_i)]^{-1}\E(\ddot{\textbf{Z}}_i'\ddot{\textbf{X}}_i)\}^{-1}$.
+\\ \textit{Answer:}\\
+
+\item Propose a consistent estimator of $\sigma_u^2$.
+\\ \textit{Answer:}\\
+
+\item Show that the 2SLS estimator of $\pmb{\beta}$ from part a can be obtained by means of a dummy variable approach: estimate
+\[y_{it}=c_1d1_i+\cdots+c_NdN_i+\textbf{x}_{it}\pmb{\beta}+u_{it},\]
+by P2SLS, using instruments $(d1_i,d2_i,\ldots,dN_i,\textbf{z}_{it})$.(Hint: Use the obvious extension of Problem 5.1 to P2SLS, and repeatedly apply the algebra of partial regression.) This is another case where, even though we cannot estimate the $c_i$ consistently with fixed $T$, we still get a consistent estimator of $\pmb{\beta}$.
+\\ \textit{Answer:}\\
+
+\item In using the 2SLS approach from part c, explain why the usually reported standard errors are valid under Assumption FEIV.3.
+\\\textit{Answer:}\\
+
+\item How would you obtain valid standard errors for 2SLS without Assumption FEIV.3?
+\\\textit{Answer:}\\
+\end{enumerate}
+
+\subsection*{Problem 11.12}
+An unobserved effects model explaining current murder rates in terms of the number of executions in the last three years is
+\[mrdrte_{it}=\theta_t+\beta_1exec_{it}_\beta_2unem_{it}+c_i+u_{it},\]
+where $mrdrte_{it}$ is the number of murders in state $i$ during year $t$, per 10,000 people; $exec_{it}$ is the total number of executions for the current and prior two years; and $unem_{it}$ is the current unemployment rate, included as a control.
+\begin{enumerate}[label=\alph*.]
+\item Using the data for 1990 and 1993 in MURDER.RAW, estimate this model by first differencing. Notice that you should allow different year intercepts.
+\\ \textit{Answer:}\\
+
+\item Under what circumstances would $exec_{it}$ not be strictly exogenous (conditional on $c_i$)? Assuming that no further lags of $exec$ appear in the model and that $unem$ is strictly exogenous, propose a method for consistently estimating $\pmb{\beta}$ when $exec$ is not strictly exogenous.
+\\\textit{Answer:}\\
+
+\item Apply the method from part b to the data in MURDER.RAW. Be sure to also test the rank condition. Do your results differ much from those in part a? 
+\\\textit{Answer:}\\
+
+\item What happens to the estimates from parts a and c if Texas is dropped from the analysis?
+\\\textit{Answer:}\\
+\end{enumerate}
+
+\subsection*{Problem 11.15}
+Use the data in JTRAIN1.RAW for this question.
+\begin{enumerate}[label=\alph*.]
+\item Consider the simple equation \[\log(scrap_{it})=\theta_t+\beta_1hrsemp_{it}+c_i+u_{it},\] where $scrap_{it}$ is the scrap rate for firm $i$ in year $t$, and $hrsemp_{it}$ is hours of training per employee. Suppose that you difference to remove $c_i$, but you still think that $\Delta hrsemp_{it}$ and $\Delta \log(scrap_{it})$ are simultaneously determined. Under what assumption is $\Delta grant_{it}$ a valid IV for $\Delta hrsemp_{it}$?
+\\ \textit{Answer:}\\
+
+\item Using the differences from 1987 to 1988 only, test the rank condition for identification for the method described in part a.
+\\ \textit{Answer:}\\
+
+\item Estimate the FD equation by IV, and discuss the results.
+\\\textit{Answer:}\\
+
+\item Compare the IV estimates on the first differences with the OLS estimates on the first differences.
+\\\textit{Answer:}\\
+
+\item Use the IV method described in part a, but use all three years of data. How does the estimate of $\beta_1$ compare with only using two years of data? 
+\\\textit{Answer:}\\
+
+\end{enumerate}
+
+\subsection*{Problem 11.18}
+Let $\hat{\pmb{\beta}}$ be the REIV estimator.
+\begin{enumerate}[label=\alph*.]
+\item Derive $\Av[\sqrt{N}(\hat{\pmb{\beta}}_{REIV}-{\pmb{\beta}})]$ without Assumption REIV.3.
+\\ \textit{Answer:}\\
+
+\item Show how to consistently estimate the asymptotic variance in part a.
+\\ \textit{Answer:}\\
+
+\end{enumerate}
+
+\subsection*{Problem 11.19}
+Use the data in AIRFARE.RAW for this exercise.
+\begin{enumerate}[label=\alph*.]
+\item Estimate the reduced forms underlying the REIV and FEIV analysis in Example 11.1. Using fully robust $t$ statistics, is $concen$ sufficiently (partially) correlated with $lfare$?
+\\ \textit{Answer:}\\
+
+\item Redo the REIV estimation, but drop the route distance variables. What happens to the estimated elasticity of passenger demand with respect to $fare$?
+\\ \textit{Answer:}\\
+
+\item Now consider a model where the elasticity can depend on route distance:
+\begin{align*}
+    lpassen_{it}=&\theta_{t1}+\alpha_1 lfrare_{it}+\delta_1 ldist_i+\delta_2 ldist_i^2_\gamma_1(ldist_i-\mu_1)lfare_{it}\\
+    &+\gamma_2(ldist_i^2-\mu_2)lfare_{it}+c_{i1}+u_{it1},
+\end{align*}
+where $\mu_1=\E(ldist_i)$ and $\mu_2=\E(ldist_i^2)$. The means are subtracted before forming the interactions so that $\alpha_1$ is the average partial effect. In using REIV or FEIV to estimate this model, what should be the IVs for the interaction terms?
+\\ \textit{Answer:}\\
+
+\item Use the data in AIRFARE.RAW to estimate the model in part c, replacing $\mu_1$ and $\mu_2$ with their sample averages. How do the REIV and FEIV estimates of $\alpha_1$ compare with the estimates in Table 11.1?
+\\ \textit{Answer:}\\
+
+\item Obtain fully robust standard errors for the FEIV estimation and obtain a fully robust test of joint significance of the interaction terms. (Ignore the estimation of $\mu_1$ and $\mu_2$.) What is the robust 95 percent confidence interval for $\alpha_1$?
+\\ \textit{Answer:}\\
+
+\item Find the estimated elasticities for $dist=500$ ad $dist=1,500.$ What do you conclude?
+\end{enumerate}
+\\ \textit{Answer:}\\
+
+\end{document}
