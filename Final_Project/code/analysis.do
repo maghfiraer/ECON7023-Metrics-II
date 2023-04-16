@@ -3,7 +3,7 @@
 * PROJECT		: MEASURING VILLAGE INFRASTRUCTURE DEVELOPMENT IN INDONESIA		*
 * COURSE		: ECON 7023 Econometrics II										*
 * DESCRIPTION	: Clean data													*
-* INPUT			: podes_processed												*
+* INPUT			: \podes_processed												*
 * OUTPUT		: \output\figures, \output\table								*
 * STATA VERSION	: Stata/MP 17.0 (March 2022)									*
 *********************************************************************************
