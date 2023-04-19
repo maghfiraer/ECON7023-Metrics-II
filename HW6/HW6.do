@@ -17,15 +17,17 @@ texdoc do "./HW6/1112c.do"
 *11.12d
 texdoc do "./HW6/1112d.do"
 
-*Problem 10.8
+*Problem 11.15
 clear
-use ".\data\norway.dta"
-*10.8a
-texdoc do ".\HW5\108a.texdoc"
-*10.8b
-texdoc do ".\HW5\108b.texdoc"
-*10.8c
-texdoc do ".\HW5\108c.texdoc"
+use "./data/jtrain1.dta"
+*11.15b
+texdoc do "./HW6/1115b.do"
+*11.15c
+texdoc do "./HW6/1115c.do"
+*11.15d
+texdoc do "./HW6/1115d.do"
+*11.15e
+texdoc do "./HW6/1115e.do"
 
 *Problem 10.11
 clear
