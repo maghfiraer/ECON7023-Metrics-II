@@ -1,0 +1,8 @@
+texdoc init "./HW6/1112a.tex", replace
+
+/***
+FD Estimate
+***/
+texdoc stlog
+reg cmrdrte cexec cunem if d93
+texdoc stlog close
