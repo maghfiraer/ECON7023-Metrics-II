@@ -1,0 +1,44 @@
+. sum ldist if y00
+{\smallskip}
+    Variable {\VBAR}        Obs        Mean    Std. Dev.       Min        Max
+\HLI{13}{\PLUS}\HLI{57}
+       ldist {\VBAR}      1,149    6.696482    .6595331   4.553877   7.909857
+{\smallskip}
+. display log(500)-r(mean)
+-.48187347
+{\smallskip}
+. display log(1500)-r(mean)
+.61673882
+{\smallskip}
+. sum ldistsq if y00
+{\smallskip}
+    Variable {\VBAR}        Obs        Mean    Std. Dev.       Min        Max
+\HLI{13}{\PLUS}\HLI{57}
+     ldistsq {\VBAR}      1,149    45.27747    8.729749   20.73779   62.56583
+{\smallskip}
+. display (log(500)){\caret}2-r(mean)
+-6.6561169
+{\smallskip}
+. display (log(1500)){\caret}2-r(mean)
+8.2057217
+{\smallskip}
+. lincom lfare-.48187347*ldistxlfare-6.6561169*ldistsqxlfare
+{\smallskip}
+ ( 1)  lfare - .4818735*ldistxlfare - 6.656117*ldistsqxlfare = 0
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+     lpassen {\VBAR}      Coef.   Std. Err.      z    P>|z|     [95\% Conf. Interval]
+\HLI{13}{\PLUS}\HLI{64}
+         (1) {\VBAR}   .0474198   .7405484     0.06   0.949    -1.404028    1.498868
+\HLI{13}{\BOTT}\HLI{64}
+{\smallskip}
+. lincom lfare+.61673882*ldistxlfare+8.2057217*ldistsqxlfare
+{\smallskip}
+ ( 1)  lfare + .6167388*ldistxlfare + 8.205722*ldistsqxlfare = 0
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+     lpassen {\VBAR}      Coef.   Std. Err.      z    P>|z|     [95\% Conf. Interval]
+\HLI{13}{\PLUS}\HLI{64}
+         (1) {\VBAR}  -1.770791   1.142112    -1.55   0.121     -4.00929    .4677087
+\HLI{13}{\BOTT}\HLI{64}
+{\smallskip}
