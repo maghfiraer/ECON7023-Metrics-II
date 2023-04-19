@@ -124,7 +124,7 @@ where $mrdrte_{it}$ is the number of murders in state $i$ during year $t$, per 1
 \begin{enumerate}[label=\alph*.]
 \item Using the data for 1990 and 1993 in MURDER.RAW, estimate this model by first differencing. Notice that you should allow different year intercepts.
 \\ \textit{Answer:}\\
-First differenced estimates
+\input{HW6/1112a}
 
 \item Under what circumstances would $exec_{it}$ not be strictly exogenous (conditional on $c_i$)? Assuming that no further lags of $exec$ appear in the model and that $unem$ is strictly exogenous, propose a method for consistently estimating $\pmb{\beta}$ when $exec$ is not strictly exogenous.
 \\\textit{Answer:}\\
@@ -132,9 +132,11 @@ It will violate strict exogeneity if future execution is correlated with the all
 
 \item Apply the method from part b to the data in MURDER.RAW. Be sure to also test the rank condition. Do your results differ much from those in part a? 
 \\\textit{Answer:}\\
+\input{HW6/1112c}
 
 \item What happens to the estimates from parts a and c if Texas is dropped from the analysis?
 \\\textit{Answer:}\\
+\input{HW6/1112d}
 \end{enumerate}
 
 \subsection*{Problem 11.15}
@@ -146,15 +148,19 @@ We need to assume strict exogeneity for $grant_{it}.$ This means the grant is al
 
 \item Using the differences from 1987 to 1988 only, test the rank condition for identification for the method described in part a.
 \\ \textit{Answer:}\\
+\input{HW6/1115b}
 
 \item Estimate the FD equation by IV, and discuss the results.
 \\\textit{Answer:}\\
+\input{HW6/1115c}
 
 \item Compare the IV estimates on the first differences with the OLS estimates on the first differences.
 \\\textit{Answer:}\\
+\input{HW6/1115d}
 
 \item Use the IV method described in part a, but use all three years of data. How does the estimate of $\beta_1$ compare with only using two years of data? 
 \\\textit{Answer:}\\
+\input{HW6/1115e}
 
 \end{enumerate}
 
@@ -210,7 +216,9 @@ The endogenous variables are $lfare,\ (ldist-\mu_1)lfare,\ (ldist^2-\mu_2)lfare$
 \\ \textit{Answer:}\\
 
 \item Find the estimated elasticities for $dist=500$ ad $dist=1,500.$ What do you conclude?
-\end{enumerate}
 \\ \textit{Answer:}\\
+
+\end{enumerate}
+
 
 \end{document}
