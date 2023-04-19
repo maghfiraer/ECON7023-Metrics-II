@@ -1,0 +1,16 @@
+. egen avg_ldist=mean(ldist)
+{\smallskip}
+. gen dmldist=ldist - avg_ldist
+{\smallskip}
+. egen avg_ldistsq=mean(ldistsq)
+{\smallskip}
+. gen dmldistsq=ldistsq - avg_ldistsq
+{\smallskip}
+. gen ldistxlfare=dmldist*lfare
+{\smallskip}
+. gen ldistsqxlfare=dmldistsq*lfare
+{\smallskip}
+. gen ldistxconcen=dmldist*concen
+{\smallskip}
+. gen ldistsqxconcen=dmldistsq*concen
+{\smallskip}

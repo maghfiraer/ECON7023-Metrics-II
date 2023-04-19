@@ -29,14 +29,18 @@ texdoc do "./HW6/1115d.do"
 *11.15e
 texdoc do "./HW6/1115e.do"
 
-*Problem 10.11
+*Problem 11.19
 clear
-use ".\data\lowbirth.dta"
-*10.11b
-texdoc do ".\HW5\1011b.texdoc"
-*10.11c
-texdoc do ".\HW5\1011c.texdoc"
-*10.11d
-texdoc do ".\HW5\1011d.texdoc"
+use "./data/airfare.dta"
+*11.19a
+texdoc do "./HW6/1119a.do"
+*11.19b
+texdoc do "./HW6/1119b.do"
+*11.19d
+texdoc do "./HW6/1119d.do"
+*11.19e
+texdoc do "./HW6/1119e.do"
+*11.19f
+texdoc do "./HW6/1119f.do"
 
 clear

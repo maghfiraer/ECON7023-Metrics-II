@@ -1,0 +1,84 @@
+. xtivreg lpassen ldist ldistsq y98 y99 y00 (lfare ldistxlfa
+> re ldistsqxlfare= ///
+> concen ldistxconcen ldistsqxconcen), re
+{\smallskip}
+G2SLS random-effects IV regression              Number of ob
+> s                                                         
+>       =                                                   
+>              4,596
+Group variable: id                              Number of gr
+> oups                                                      
+>       =                                                   
+>              1,149
+{\smallskip}
+R-sq:                                           Obs per grou
+> p:
+     within  = 0.1318                                       
+>   min                                                     
+>       =                                                   
+>                  4
+     between = 0.0006                                       
+>   avg                                                     
+>       =                                                   
+>                4.0
+     overall = 0.0016                                       
+>   max                                                     
+>       =                                                   
+>                  4
+{\smallskip}
+                                                Wald chi2(8)
+>       =                                                   
+>             180.64
+corr(u_i, X)       = 0 (assumed)                Prob > chi2 
+>       =                                                   
+>             0.0000
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{46}
+\HLI{18}
+     lpassen {\VBAR}      Coef.   Std. Err.      z    P>|z|     [9
+> 5\% Con                                                    
+>       f. Interval]
+\HLI{13}{\PLUS}\HLI{46}
+\HLI{18}
+       lfare {\VBAR}  -1.049017   .3251395    -3.23   0.001    -1.
+> 686279                                                    
+>           -.411755
+ ldistxlfare {\VBAR}   29.65005   7.961528     3.72   0.000     14
+> .04574                                                    
+>           45.25436
+ldistsqxlf{\tytilde}e {\VBAR}   -2.33133   .6384701    -3.65   0.000    -3.
+> 582708                                                    
+>          -1.079951
+       ldist {\VBAR}  -157.9176   42.78275    -3.69   0.000    -24
+> 1.7703                                                    
+>          -74.06495
+     ldistsq {\VBAR}   12.45567   3.439382     3.62   0.000       
+> 5.7146                                                    
+>           19.19673
+         y98 {\VBAR}   .0319535   .0105573     3.03   0.002     .0
+> 112615                                                    
+>           .0526454
+         y99 {\VBAR}   .0799954   .0127614     6.27   0.000     .0
+> 549836                                                    
+>           .1050072
+         y00 {\VBAR}   .1570266   .0265846     5.91   0.000     .1
+> 049217                                                    
+>           .2091315
+       _cons {\VBAR}   505.0837   131.5074     3.84   0.000     24
+> 7.3339                                                    
+>           762.8334
+\HLI{13}{\PLUS}\HLI{46}
+\HLI{18}
+     sigma_u {\VBAR}  1.3686882
+     sigma_e {\VBAR}  .19436268
+         rho {\VBAR}  .98023276   (fraction of variance due to u_i
+> )
+\HLI{13}{\BOTT}\HLI{46}
+\HLI{18}
+{\lbr}p 0 16 -18{\rbr}Instrumented:   lfare ldistxlfare ldistsqxlfare{\lbr}
+> p_end{\rbr}
+{\lbr}p 0 16 -18{\rbr}Instruments:    ldist ldistsq y98 y99 y00 concen
+>  ldistxconcen ldistsqxconcen{\lbr}p_end{\rbr}
+\HLI{60}
+\HLI{18}
+{\smallskip}

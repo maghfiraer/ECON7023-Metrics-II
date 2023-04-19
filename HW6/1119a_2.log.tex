@@ -1,0 +1,67 @@
+. xtreg lfare concen y98 y99 y00, fe cluster(id)
+{\smallskip}
+Fixed-effects (within) regression               Number of ob
+> s                                                         
+>       =                                                   
+>              4,596
+Group variable: id                              Number of gr
+> oups                                                      
+>       =                                                   
+>              1,149
+{\smallskip}
+R-sq:                                           Obs per grou
+> p:
+     within  = 0.1352                                       
+>   min                                                     
+>       =                                                   
+>                  4
+     between = 0.0576                                       
+>   avg                                                     
+>       =                                                   
+>                4.0
+     overall = 0.0083                                       
+>   max                                                     
+>       =                                                   
+>                  4
+{\smallskip}
+                                                F(4,1148)   
+>       =                                                   
+>             120.06
+corr(u_i, Xb)  = -0.2033                        Prob > F    
+>       =                                                   
+>             0.0000
+{\smallskip}
+                                 (Std. Err. adjusted for 1,1
+> 49 clusters in id)
+\HLI{13}{\TOPT}\HLI{46}
+\HLI{18}
+             {\VBAR}               Robust
+       lfare {\VBAR}      Coef.   Std. Err.      t    P>|t|     [9
+> 5\% Con                                                    
+>       f. Interval]
+\HLI{13}{\PLUS}\HLI{46}
+\HLI{18}
+      concen {\VBAR}    .168859   .0494587     3.41   0.001     .0
+> 718194                                                    
+>           .2658985
+         y98 {\VBAR}   .0228328    .004163     5.48   0.000     .0
+> 146649                                                    
+>           .0310007
+         y99 {\VBAR}   .0363819   .0051275     7.10   0.000     .0
+> 263215                                                    
+>           .0464422
+         y00 {\VBAR}   .0977717   .0055054    17.76   0.000     .0
+> 869698                                                    
+>           .1085735
+       _cons {\VBAR}   4.953331   .0296765   166.91   0.000     4.
+> 895104                                                    
+>           5.011557
+\HLI{13}{\PLUS}\HLI{46}
+\HLI{18}
+     sigma_u {\VBAR}  .43389176
+     sigma_e {\VBAR}  .10651186
+         rho {\VBAR}  .94316439   (fraction of variance due to u_i
+> )
+\HLI{13}{\BOTT}\HLI{46}
+\HLI{18}
+{\smallskip}

@@ -1,0 +1,62 @@
+. xtreg lfare concen ldist ldistsq y98 y99 y00, re cluster(i
+> d)
+{\smallskip}
+Random-effects GLS regression                   Number of ob
+> s     =      4,596
+Group variable: id                              Number of gr
+> oups  =      1,149
+{\smallskip}
+R-sq:                                           Obs per grou
+> p:
+     within  = 0.1348                                       
+>   min =          4
+     between = 0.4176                                       
+>   avg =        4.0
+     overall = 0.4030                                       
+>   max =          4
+{\smallskip}
+                                                Wald chi2(6)
+>       =    1222.73
+corr(u_i, X)   = 0 (assumed)                    Prob > chi2 
+>       =     0.0000
+{\smallskip}
+                                 (Std. Err. adjusted for 1,1
+> 49 clusters in id)
+\HLI{13}{\TOPT}\HLI{46}
+\HLI{18}
+             {\VBAR}               Robust
+       lfare {\VBAR}      Coef.   Std. Err.      z    P>|z|     [9
+> 5\% Con                                                    
+>       f. Interval]
+\HLI{13}{\PLUS}\HLI{46}
+\HLI{18}
+      concen {\VBAR}   .2089935   .0422459     4.95   0.000      .
+> 126193                                                    
+>           .2917939
+       ldist {\VBAR}  -.8520921   .2720902    -3.13   0.002    -1.
+> 385379                                                    
+>          -.3188051
+     ldistsq {\VBAR}   .0974604   .0201417     4.84   0.000     .0
+> 579833                                                    
+>           .1369375
+         y98 {\VBAR}   .0224743   .0041461     5.42   0.000      .
+> 014348                                                    
+>           .0306005
+         y99 {\VBAR}   .0366898   .0051318     7.15   0.000     .0
+> 266317                                                    
+>            .046748
+         y00 {\VBAR}    .098212   .0055241    17.78   0.000     .0
+> 873849                                                    
+>            .109039
+       _cons {\VBAR}   6.222005   .9144067     6.80   0.000     4.
+> 429801                                                    
+>           8.014209
+\HLI{13}{\PLUS}\HLI{46}
+\HLI{18}
+     sigma_u {\VBAR}  .31933841
+     sigma_e {\VBAR}  .10651186
+         rho {\VBAR}  .89988885   (fraction of variance due to u_i
+> )
+\HLI{13}{\BOTT}\HLI{46}
+\HLI{18}
+{\smallskip}
