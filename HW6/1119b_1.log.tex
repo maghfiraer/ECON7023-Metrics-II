@@ -1,68 +1,30 @@
 . xtivreg lpassen y98 y99 y00 (lfare = concen), re
 {\smallskip}
-G2SLS random-effects IV regression              Number of ob
-> s                                                         
->       =                                                   
->              4,596
-Group variable: id                              Number of gr
-> oups                                                      
->       =                                                   
->              1,149
+G2SLS random-effects IV regression              Number of obs     =      4,596
+Group variable: id                              Number of groups  =      1,149
 {\smallskip}
-R-sq:                                           Obs per grou
-> p:
-     within  = 0.4327                                       
->   min                                                     
->       =                                                   
->                  4
-     between = 0.0487                                       
->   avg                                                     
->       =                                                   
->                4.0
-     overall = 0.0578                                       
->   max                                                     
->       =                                                   
->                  4
+R-sq:                                           Obs per group:
+     within  = 0.4327                                         min =          4
+     between = 0.0487                                         avg =        4.0
+     overall = 0.0578                                         max =          4
 {\smallskip}
-                                                Wald chi2(4)
->       =                                                   
->             219.33
-corr(u_i, X)       = 0 (assumed)                Prob > chi2 
->       =                                                   
->             0.0000
+                                                Wald chi2(4)      =     219.33
+corr(u_i, X)       = 0 (assumed)                Prob > chi2       =     0.0000
 {\smallskip}
-\HLI{13}{\TOPT}\HLI{46}
-\HLI{18}
-     lpassen {\VBAR}      Coef.   Std. Err.      z    P>|z|     [9
-> 5\% Con                                                    
->       f. Interval]
-\HLI{13}{\PLUS}\HLI{46}
-\HLI{18}
-       lfare {\VBAR}  -.6540984   .4019123    -1.63   0.104    -1.
-> 441832                                                    
->           .1336351
-         y98 {\VBAR}   .0342955    .011701     2.93   0.003      .
-> 011362                                                    
->            .057229
-         y99 {\VBAR}   .0847852   .0154938     5.47   0.000     .0
-> 544178                                                    
->           .1151525
-         y00 {\VBAR}    .146605   .0390819     3.75   0.000      .
-> 070006                                                    
->           .2232041
-       _cons {\VBAR}    9.28363   2.032528     4.57   0.000     5.
-> 299949                                                    
->           13.26731
-\HLI{13}{\PLUS}\HLI{46}
-\HLI{18}
+\HLI{13}{\TOPT}\HLI{64}
+     lpassen {\VBAR}      Coef.   Std. Err.      z    P>|z|     [95\% Conf. Interval]
+\HLI{13}{\PLUS}\HLI{64}
+       lfare {\VBAR}  -.6540984   .4019123    -1.63   0.104    -1.441832    .1336351
+         y98 {\VBAR}   .0342955    .011701     2.93   0.003      .011362     .057229
+         y99 {\VBAR}   .0847852   .0154938     5.47   0.000     .0544178    .1151525
+         y00 {\VBAR}    .146605   .0390819     3.75   0.000      .070006    .2232041
+       _cons {\VBAR}    9.28363   2.032528     4.57   0.000     5.299949    13.26731
+\HLI{13}{\PLUS}\HLI{64}
      sigma_u {\VBAR}  .91384976
      sigma_e {\VBAR}  .16964171
-         rho {\VBAR}   .9666879   (fraction of variance due to u_i
-> )
-\HLI{13}{\BOTT}\HLI{46}
-\HLI{18}
-{\lbr}p 0 16 -18{\rbr}Instrumented:   lfare{\lbr}p_end{\rbr}
-{\lbr}p 0 16 -18{\rbr}Instruments:    y98 y99 y00 concen{\lbr}p_end{\rbr}
-\HLI{60}
-\HLI{18}
+         rho {\VBAR}   .9666879   (fraction of variance due to u_i)
+\HLI{13}{\BOTT}\HLI{64}
+Instrumented:   lfare
+Instruments:    y98 y99 y00 concen
+\HLI{78}
 {\smallskip}
