@@ -40,7 +40,7 @@ foreach x of varlist unit_cost vil_subd_cost vil_subd_dis vil_subd_mode vil_subd
 * Table 1 Option A
 est clear
 estpost tabstat ///
-unit_cost vil_subd_cost landfall_1 earthq_1 elec_pln sch_jh sch_sh inc_vf if vil_type==1, ///
+unit_cost landfall_1 earthq_1 elec_pln sch_jh sch_sh inc_vf if vil_type==1, ///
 by(year) c(stat) stat(mean sd min max n) nototal
 
 esttab using "./output/table/table1.tex", replace ///
@@ -55,7 +55,7 @@ refcat(unit_cost "\emph{Transportation Cost}" landfall_1 "\vspace{0.05em} \\ \em
 
 est clear
 estpost tabstat ///
-unit_cost vil_subd_cost landfall_1 earthq_1 elec_pln sch_jh sch_sh inc_vf if vil_type==1, ///
+unit_cost landfall_1 earthq_1 elec_pln sch_jh sch_sh inc_vf if vil_type==1, ///
 by(year) c(stat) stat(mean sd min max n) nototal
 esttab, cells("mean sd min max count")
 estout, cells("mean sd min max count")
