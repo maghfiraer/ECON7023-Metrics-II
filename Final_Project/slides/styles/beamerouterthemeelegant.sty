@@ -1,5 +1,48 @@
+% Copyright 2007 by Till Tantau
+% Copyright 2015 by Vedran Mileti\'c, Joseph Wright
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+
+\setbeamercolor{section in head/foot}{parent=palette tertiary}
+\setbeamercolor{subsection in head/foot}{parent=palette secondary}
+
+
+\newif\ifbeamer@theme@subsection
+\beamer@theme@subsectiontrue
+
+%\DeclareOptionBeamer{footline}{\csname beamer@theme@footline@#1\endcsname}
+\DeclareOptionBeamer{subsection}[true]{\csname beamer@theme@subsection#1\endcsname}
+\ProcessOptionsBeamer
+
+
 \mode<presentation>
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+                                % Head
+\defbeamertemplate*{footline}{miniframes theme}
+{%
+  \begin{beamercolorbox}[colsep=1.5pt]{upper separation line head}
+  \end{beamercolorbox}
+  \begin{beamercolorbox}{section in head/foot}
+    \vskip1pt\insertnavigation{\paperwidth}\vskip1pt
+  \end{beamercolorbox}%
+  \ifbeamer@theme@subsection%
+    \begin{beamercolorbox}[colsep=1.5pt]{middle separation line head}
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+      leftskip=.3cm,rightskip=.3cm plus1fil]{subsection in head/foot}
+      \usebeamerfont{subsection in head/foot}%\insertsubsectionhead
+    \end{beamercolorbox}%
+  \fi%
+  \begin{beamercolorbox}[colsep=1.5pt]{lower separation line head}
+  \end{beamercolorbox}
+}
+
+%-------- Pasted form different
 % Set Margins around frame title
 \setbeamertemplate{frametitle}{\vspace{1cm} \color{primary}\insertframetitle \par\vskip1pt \color{secondary}{\small\insertframesubtitle} \vspace*{0.5cm}}
 
@@ -27,19 +70,23 @@
     \fi
  }{}
 
-%\setbeamertemplate{framesubtitle}{\color{primary}\insertframesubtitle\par\vskip6pt \vspace*{0.5cm}}
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ %\setbeamertemplate{framesubtitle}{\color{primary}\insertframesubtitle\par\vskip6pt \vspace*{0.5cm}}
 
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-% Footer
+ % Footer
 
 % Set Margins around footer
-\setbeamertemplate{footline}{
-\hspace*{10mm}
-{\scshape \insertshortauthor \hfill \insertshorttitle \hfill \insertframenumber{} / \inserttotalframenumber}
-\hspace*{10mm} 
-\vspace*{0.6cm}
-}
 
-\mode<all>
 
+
+%\setbeamertemplate{footline}{
+%\hspace*{10mm}
+%{\scshape \insertshortauthor \hfill \insertshorttitle \hfill \insertframenumber{} / %\inserttotalframenumber}
+%\hspace*{10mm} 
+%\vspace*{0.6cm}
+%}
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Navigation
+
+\mode
+<all>

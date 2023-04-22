@@ -15,7 +15,7 @@
 ]{beamer}
 
 \input{loadslides.tex} % Loads packages and some defined commands
-
+\setbeamertemplate{caption}[numbered]
 %% Pictograms
 
 \def\up{\textuparrow\,}
@@ -48,7 +48,7 @@
 
 % Generate title page
 {
-\setbeamertemplate{footline}{} 
+\setbeamertemplate{footline}{}
 \begin{frame}
   \titlepage
 \end{frame}
@@ -56,13 +56,15 @@
 \addtocounter{framenumber}{-1}
 
 % You can declare different parts as a parentof sections
-\begin{frame}{Table of Contents}
+\section{Introduction}
+{
+\setbeamertemplate{footline}{}
+\begin{frame}{Outline}
     \tableofcontents%[part=1]
 \end{frame}
-
+}
 %\makepart{Proposal}
 
-\section{Introduction}
 \begin{frame}
 \begin{itemize}
     \item infrastructure \up \so cost \up \citeauthor{hartojo_2022}
@@ -142,27 +144,18 @@
 
 \subsection{Data and descriptive statistics}
 \begin{frame}
-    \begin{itemize}
-        \item This study used village in Indonesia as the unit of analysis. 
-        \item I obtained the \al{Village Potential Statistics} data for the year 2011, 2014 and 2018 from Indonesia's Central Bureau of Statistics consisting of consecutively 77,961, 82,190, and 83,931 observations.
-        \item The survey covers the following module:
-        \begin{multicols}{2}
+\begin{columns}
+    \column{0.5\textwidth}
         \begin{itemize}
-            \item general information of village,
-            \item population and employment, 
-            \item housing and environment, 
-            \item natural disaster, 
-            \item education and health, 
-            \item sport and leisure, 
-            \item transportation and communication,
-            \item land use,
-            \item economic activity, 
-            \item security, 
-            \item \alb{local government}, 
-            \item community empowerment, and \item agriculture.
+            \item I obtained the Village Potential Statistics data for the year 2014 and 2018 from Indonesia's Central Bureau of Statistics complemented with village fund transfer data form Ministry of Village Development.
         \end{itemize}
-        \end{multicols}
-\end{itemize}
+    \column{0.5\textwidth}
+    \begin{table}[h]
+    \caption{Summary statistics of main variables. }
+    \scalebox{0.6}{\input{Final_Project/output/table/table1}}
+    \label{t1}\end{table}
+\end{columns}
+    
 \end{frame}
 \begin{frame}
 
@@ -246,8 +239,8 @@
     \end{table}
 \end{frame}
 
-\section{References}
-\begin{frame}[allowframebreaks]
+\section{}
+\begin{frame}{References}[allowframebreaks]
     \printbibliography
 \end{frame}
 \end{document}
