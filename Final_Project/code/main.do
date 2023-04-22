@@ -15,7 +15,7 @@ capture log close
 capture graph drop _all
 
 * Set the location of project directory/clone location
-cd "/Users/macbook/Documents/GitHub/ECON7023-Metrics-II/Final_Project"
+cd "/Users/macbook/Local/GitHub/ECON7023-Metrics-II/Final_Project"
 
 * create log file
 local c_time_date = "`c(current_date)'"+"_" +"`c(current_time)'"
