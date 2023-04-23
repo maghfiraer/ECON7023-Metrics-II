@@ -29,7 +29,11 @@ order year unit_cost vil_subd_cost vil_subd_dis vil_subd_mode vil_subd_dur land_
 drop count1
 
 
+*********************************************************************************
+* Create Summary Statistics														*
+*********************************************************************************
 
+* Create Space in the Label
 foreach x of varlist unit_cost vil_subd_cost vil_subd_dis vil_subd_mode vil_subd_dur land_topo sea forest trans_river landfall_1 earthq_1 elec_pln elec_nonpln sch_el sch_jh sch_sh sch_uni pov_let inc_vf {
   local t : var label `x'
   local t = "\hspace{0.25cm} `t'"
@@ -66,3 +70,10 @@ refcat(unit_cost "\emph{Transportation Cost}" landfall_1 "\vspace{0.05em} \\ \em
   compress nomtitle nonote noobs label booktabs ///
   eqlabels("2014" "2018") ///
   collabels("Mean" "S.D." "Min" "Max" "Obs.")
+
+
+*********************************************************************************
+* Create Treatment Dummy														*
+*********************************************************************************
+clear
+use "./processed_data/podes_processed.dta"
