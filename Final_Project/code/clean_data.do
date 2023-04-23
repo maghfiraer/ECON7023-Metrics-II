@@ -56,6 +56,15 @@ drop if missing(village_id)
 save "./processed_data/kemendes.dta", replace
 
 *********************************************************************************
+* Save without inc_vf															*
+*********************************************************************************
+
+drop year inc_vf
+
+* Save processed data
+save "./processed_data/kemendes_novf.dta", replace
+
+*********************************************************************************
 * Structuring podes2017.dta														*
 *********************************************************************************
 clear
@@ -77,6 +86,10 @@ destring r103, replace
 destring r104, replace
 gen double village_id=r101*100000000+r102*1000000+r103*1000+r104
 label variable village_id "Village ID"
+gen double subd_id=r101*100000+r102*1000+r103
+label variable subd_id "Subdistrict ID"
+gen double dist_id=r101*100+r102
+label variable dist_id "District ID"
 
 * Village, Subdistrict, District, Province Name
 rename r101n name_prov
@@ -231,15 +244,15 @@ label variable vil_nsubd_cost "Transportation cost from Village Office to Neighb
 gen inc_dom=.
 
 * Government VF Allocation
-gen inc_vf=.
+* gen inc_vf=.
 
 * Government Revenue Sharing / Grant
 gen inc_rsg=.
 label variable inc_dom "Revenue generated locally"
-label variable inc_vf "Revenue from village fund transfer"
+*label variable inc_vf "Revenue from village fund transfer"
 label variable inc_rsg "Revenue from other sources"
 
-keep year village_id name_prov name_d name_subd name_vil id_prov id_d id_subd id_vil vil_type land_topo office_loc sea forest elec_pln elec_nonpln elec_na cook_fuel trans_river landfall_1 landfall_2 landfall_3 earthq_1 earthq_2 earthq_3 sch_el sch_jh sch_sh sch_uni pov_let vil_subd_mode vil_subd_dis vil_subd_dur vil_subd_cost vil_nsubd_mode vil_nsubd_dis vil_nsubd_dur vil_nsubd_cost inc_dom inc_rsg
+keep year village_id subd_id dist_id name_prov name_d name_subd name_vil id_prov id_d id_subd id_vil vil_type land_topo office_loc sea forest elec_pln elec_nonpln elec_na cook_fuel trans_river landfall_1 landfall_2 landfall_3 earthq_1 earthq_2 earthq_3 sch_el sch_jh sch_sh sch_uni pov_let vil_subd_mode vil_subd_dis vil_subd_dur vil_subd_cost vil_nsubd_mode vil_nsubd_dis vil_nsubd_dur vil_nsubd_cost inc_dom inc_rsg
 
 * Merge VF transfer from Kemendes
 merge 1:1 village_id year using "./processed_data/kemendes.dta"
@@ -271,6 +284,10 @@ destring r103, replace
 destring r104, replace
 gen double village_id=r101*100000000+r102*1000000+r103*1000+r104
 label variable village_id "Village ID"
+gen double subd_id=r101*100000+r102*1000+r103
+label variable subd_id "Subdistrict ID"
+gen double dist_id=r101*100+r102
+label variable dist_id "District ID"
 
 * Village, Subdistrict, District, Province Name
 rename r101n name_prov
@@ -460,7 +477,7 @@ label variable inc_vf "Revenue from village fund transfer"
 label variable inc_rsg "Revenue from other sources"
 
 
-keep year village_id name_prov name_d name_subd name_vil id_prov id_d id_subd id_vil vil_type land_topo office_loc sea forest elec_pln elec_nonpln elec_na cook_fuel trans_river landfall_1 landfall_2 landfall_3 earthq_1 earthq_2 earthq_3 sch_el sch_jh sch_sh sch_uni pov_let vil_subd_mode vil_subd_dis vil_subd_dur vil_subd_cost vil_nsubd_mode vil_nsubd_dis vil_nsubd_dur vil_nsubd_cost inc_dom inc_vf inc_rsg
+keep year village_id subd_id dist_id name_prov name_d name_subd name_vil id_prov id_d id_subd id_vil vil_type land_topo office_loc sea forest elec_pln elec_nonpln elec_na cook_fuel trans_river landfall_1 landfall_2 landfall_3 earthq_1 earthq_2 earthq_3 sch_el sch_jh sch_sh sch_uni pov_let vil_subd_mode vil_subd_dis vil_subd_dur vil_subd_cost vil_nsubd_mode vil_nsubd_dis vil_nsubd_dur vil_nsubd_cost inc_dom inc_vf inc_rsg
 
 * Save processed data
 save "./processed_data/podes14_processed.dta", replace
@@ -493,6 +510,10 @@ rename nama_kec name_subd
 rename kode_kec id_subd
 rename nama_desa name_vil
 rename kode_desa id_vil
+gen double subd_id=id_prov*100000+id_d*1000+id_subd
+label variable subd_id "Subdistrict ID"
+gen double dist_id=id_prov*100+id_d
+label variable dist_id "District ID"
 
 * Village Type
 destring r301, replace
@@ -670,7 +691,7 @@ label variable inc_vf "Revenue from village fund transfer"
 label variable inc_rsg "Revenue from other sources"
 
 
-keep year village_id name_prov name_d name_subd name_vil id_prov id_d id_subd id_vil vil_type land_topo office_loc sea forest elec_pln elec_nonpln elec_na cook_fuel trans_river landfall_1 landfall_2 landfall_3 earthq_1 earthq_2 earthq_3 sch_el sch_jh sch_sh sch_uni pov_let vil_subd_mode vil_subd_dis vil_subd_dur vil_subd_cost vil_nsubd_mode vil_nsubd_dis vil_nsubd_dur vil_nsubd_cost inc_dom inc_vf inc_rsg
+keep year village_id subd_id dist_id name_prov name_d name_subd name_vil id_prov id_d id_subd id_vil vil_type land_topo office_loc sea forest elec_pln elec_nonpln elec_na cook_fuel trans_river landfall_1 landfall_2 landfall_3 earthq_1 earthq_2 earthq_3 sch_el sch_jh sch_sh sch_uni pov_let vil_subd_mode vil_subd_dis vil_subd_dur vil_subd_cost vil_nsubd_mode vil_nsubd_dis vil_nsubd_dur vil_nsubd_cost inc_dom inc_vf inc_rsg
 
 
 * Save processed data
@@ -684,8 +705,13 @@ append using "./processed_data/podes17_processed.dta"
 
 append using "./processed_data/podes14_processed.dta"
 
+* Merge IDM Status from Kemendes
+merge m:1 village_id using "./processed_data/kemendes_novf.dta"
+drop _merge
+
 * Save processed data
 save "./processed_data/podes_processed.dta", replace
+
 
 * Erase temporary files
 erase "./processed_data/podes17_processed.dta"
