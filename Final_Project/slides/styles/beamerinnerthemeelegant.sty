@@ -114,6 +114,12 @@
 \setbeamerfont{itemize/enumerate subbody}{size=\normalfont}
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 % Bibliography
-\setbeamertemplate{bibliography item}{}
+\setbeamertemplate{footnote}{
+  \parindent 0em\noindent%
+  \raggedright
+  \hbox to 1.8em{\hfil\insertfootnotemark}%
+  \insertfootnotetext\par%
+  \vspace{1ex} % Adjust the space as needed
+}
 
 \mode<all>

@@ -32,17 +32,11 @@
 \RequirePackage{colortbl}
 \RequirePackage{ragged2e}
 \RequirePackage{schemabloc}
-%\RequirePackage{natbib}
 \RequirePackage{caption}
 \RequirePackage{subcaption}
 \RequirePackage{tabularx}
 \RequirePackage{array}
 \RequirePackage{multirow}
-\usepackage[
-  style=authoryear, 
-]{biblatex}
-\addbibresource{references.bib}
-\newcolumntype{Y}{>{\centering\arraybackslash}X}
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -103,3 +97,25 @@
 \makeatother
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Set caption numbering
+\setbeamertemplate{caption}[numbered]
+
+% Bibliography
+\usepackage[authoryear,backend=biber]{natbib}
+\setcitestyle{aysep={}}
+\renewcommand{\bibfont}{\small}
+\setlength{\bibsep}{0pt}
+\setlength{\bibhang}{1.5em}
+% Modify plainnat bibliography style
+
+%% Pictograms
+\def\up{\textuparrow\,}
+\def\down{\textdownarrow\,}
+\def\flat{\textrightarrow\,}
+\def\then{$\rightsquigarrow\,$}
+\def\so{{$\Rightarrow\,$}}
+\def\tb{\textbar{}\,}
+\newcommand{\al}[1]{\textbf{\alert{#1}}}
+\newcommand{\alb}[1]{\textbf{\textcolor{blue}{#1}}}
+\newcommand{\alg}[1]{\textbf{\textcolor{teal}{#1}}}
+\newcommand{\alr}[1]{\textbf{\textcolor{red}{#1}}}
