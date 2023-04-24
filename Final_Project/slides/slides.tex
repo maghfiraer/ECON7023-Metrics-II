@@ -43,7 +43,7 @@
 \addtocounter{framenumber}{-1}
 
 % You can declare different parts as a parentof sections
-\section{Introduction}
+
 {
 \setbeamertemplate{footline}{}
 \begin{frame}{Outline}
@@ -51,38 +51,62 @@
 \end{frame}
 }
 %\makepart{Proposal}
-
+\section{Introduction}
 \begin{frame}
-    Unless the user enters their own custom frame titles and subtitles, Elegant Slides automatically inserts the section title and, if specified, the subsection title as frame titles and frame subtitles.
-\end{frame}
-
-\subsection{Research Question}
-\begin{frame}
+\begin{exampleblock}{Motivation}
 \begin{itemize}
-    \item infrastructure \up \so cost \up \citet{hartojo_2022}
-    \item This paper builds on literature on rural development and fossil fuel subsidy in Indonesia. Related literature has indicated that both subsidizing fuel and inter-government transfer has contributed to improving accessibility in rural areas. 
-    \item This research measures the magnitude of these mechanisms and tests whether they are complementary or supplementary. From a political economy perspective, infrastructure development is managed by the government directly, while the fuel subsidy is managed through the National Oil Company (NOC) as a delivery agent \citet{ichsan_2022}. This research exercises the cost-benefit of the options to substantially inform decision-makers.
+    \item Although Indonesia has been subsidizing fuel for a long time, high fuel prices were still observed in rural areas in the last decade. 
+    \item Therefore since 2016, the government initiated the One Price Fuel program to guarantee the availability of subsidized fuel in the appointed sub-districts. 
+    \item From a political economy perspective, infrastructure development is managed by the government directly, while the fuel subsidy is managed through the National Oil Company (NOC) as a delivery agent \citep{ichsan_2022}.
 \end{itemize}
+\end{exampleblock}
+\begin{exampleblock}{Research Question}
+\begin{itemize}
+    \item This research measures the magnitude of these mechanisms and tests whether they are complementary or supplementary. 
+    \item Which policy option is more efficient?
+\end{itemize}
+\end{exampleblock}
+
 \end{frame}
 
 \section{Institutional Context and Conceptual Framework}
-\subsection{Transportation structure in rural area}
+\subsection{Accessibility in rural area}
 \begin{frame}
+\begin{exampleblock}{Transportation Cost}
 \begin{itemize}
-    \item Developing countries have been focusing on decentralization and local government reform with the belief that they are \alert{\textbf{more efficient}} in bringing local development (\citet{vazquez_2017}) 
-    \item 
-    \item 
+    \item Transportation spending dominates energy spending \citep{sambodo_2019}
+    \item The lack of adequate and reliable infrastructure drives up the transportation cost \citep{sandee_2016}.
 \end{itemize}
+\end{exampleblock}
 \end{frame}
 
 \subsection{Fossil fuel subsidy regime}
 \begin{frame}
-    This frame has a custom title and a custom subtitle. \footnote{This is a footnote. See also \citet{hartojo_2022}. }
+    \begin{columns}[T,onlytextwidth]
+    \column{0.33\textwidth}
+      \textbf{Items}
+      \begin{itemize}
+        \item Cats 
+        \begin{itemize}
+            \item British Shorthair
+        \end{itemize}
+        \item Dogs \item Birds
+      \end{itemize}
+
+    \column{0.67\textwidth}
+        \begin{figure}[t]
+        \includegraphics[scale=0.4]{Final_Project/image/BBM Satu Harga.png}
+        \caption{New Distributor's Village Location of the Fuel Program}
+        \label{f:graph1}
+        \end{figure}
+    \end{columns}
 \end{frame}
 
 \subsection{Decentralization of development}
 \begin{frame}
-    This frame has a custom title and a custom subtitle. \footnote{This is a footnote. See also \citep{hartojo_2022}. }
+\begin{itemize}
+    \item Developing countries have been focusing on decentralization and local government reform with the belief that they are \alert{\textbf{more efficient}} in bringing local development \citep{vazquez_2017}
+\end{itemize}
 \end{frame}
 
 
@@ -91,7 +115,6 @@
     \subcaptionbox{Village status in 2014\label{f:panel1}}{\includegraphics[scale=0.2]{Final_Project/image/vdi2014.png}}\hfill
     \subcaptionbox{Village status in 2018\label{f:panel2}}{\includegraphics[scale=0.205]{Final_Project/image/vdi2018.jpg}}
     \caption{Indonesia's VDI's status}
-    \note{Source: Statistics Indonesia \citet{hartojo_2022}}
     \label{f:graph1}
     \end{figure}
 \end{frame}
@@ -100,13 +123,16 @@
 \subsection{Data Description}
 \begin{frame}
     \begin{itemize}
-        \item I obtained the \al{Village Potential Statistics} data for the year 2014 and 2018 from Indonesia's Central Bureau of Statistics complemented with village fund transfer data form Ministry of Village Development.
-        \item I measure rural accessibility using the \al{unit transportation cost} (in Rp/km) of each individual village. 
+        \item I obtained the \al{Village Potential Statistics} data for the years 2014 and 2018 from Indonesia's Central Bureau of Statistics complemented with village fund transfer data from the Ministry of Village Development.
+        \item I measure rural accessibility using the \al{log of unit transportation cost} (in Rp/km) of each individual village. 
         \footnote{I define unit transportation cost, $y_{it}$, as the \al{transportation cost} from the village office to the sub-district office (in thousands Rp), $c_{it}$, divided by the \al{distance} from the village office to the sub-district office (in km), $d_{it}$.
         \begin{equation}
         y_{it}=\frac{d_{it}}{c_{it}}    
         \end{equation}}
-        \item I define the treatment group as the
+        \item I obtain the list of 57 government-appointed new distributor's village locations from the NOC and then define all the villages that are in the same sub-district as the \al{treated} by the program. 
+        \begin{itemize}
+            \item \alg{For example}, suppose the government in 2016 gives the order for the NOC to build a new distribution point at village $A$. Village $A$ is in the same sub-district as villages $B,C$, and $D$. Then all villages $A,B,C$, and $D$ are treated.
+        \end{itemize}
     \end{itemize}
 \end{frame}
 
@@ -114,7 +140,7 @@
 \begin{frame}
     \begin{table}[h]
     \caption{Summary statistics of main variables. }
-    \scalebox{0.75}{\input{Final_Project/output/table/table1b}}
+    \scalebox{0.75}{\input{Final_Project/output/table/table1d}}
     \label{t1}\end{table}
 \end{frame}
 
@@ -142,24 +168,11 @@
 
 \subsection{Model Specification}
 \begin{frame}
-
-   \centering
-	\begin{minipage}[b]{0.5\textwidth}
-
-	  \begin{block}{Default}
-        Block content.
-      \end{block}
-
-      \begin{alertblock}{Alert}
-        Block content.
-      \end{alertblock}
-
-      \begin{exampleblock}{Example}
-        Block content.
-      \end{exampleblock}      
-      
-	\end{minipage}	
+    \begin{equation*}
+        \log(y_{it})=\alpha_i+\delta_1 prog_{it}+\gamma_1 VF_{it}+
+    \end{equation*}
 \end{frame}
+
 
 \section{Results}
 \subsection{Main Results}
