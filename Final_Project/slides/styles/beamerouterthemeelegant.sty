@@ -25,15 +25,13 @@
 % Footline
 \defbeamertemplate*{footline}{miniframes theme}
 {%
-  \begin{beamercolorbox}[ht=1ex,dp=10ex]{section in head/foot}
-    \begin{minipage}[t][0pt]{\paperwidth}
-    \insertnavigation{\paperwidth}\hfill\hspace{-0.2cm}
-    \end{minipage}
+  \begin{beamercolorbox}[ht=2ex,dp=7.5ex]{section in head/foot}
+    \begin{minipage}[t][0pt]{\dimexpr\paperwidth-1cm\relax}
+    \hspace{1.2cm}\insertnavigation\hfill
+    \end{minipage}\hspace{-1.2cm}
+    {\insertframenumber{} / \inserttotalframenumber}
   \end{beamercolorbox}%
 }
-
-
-
 
 
 
@@ -65,7 +63,7 @@
     \fi
  }{}
 
- %\setbeamertemplate{framesubtitle}{\color{primary}\insertframesubtitle\par\vskip6pt \vspace*{0.5cm}}
+ \setbeamertemplate{framesubtitle}{\color{primary}\insertframesubtitle\par\vskip6pt \vspace*{0.5cm}}
 
  % Footer
 
