@@ -744,6 +744,7 @@ preserve
 drop if year == 2011
 egen count = count(village_id), by(village_id)
 drop if count == 1
+drop count
 
 *********************************************************************************
 * Save processed data 2014, 2018												*
