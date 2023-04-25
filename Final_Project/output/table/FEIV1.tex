@@ -1,0 +1,23 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{8}{D{.}{.}{-1}}}
+\toprule
+                &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         &\multicolumn{1}{c}{(5)}         &\multicolumn{1}{c}{(6)}         &\multicolumn{1}{c}{(7)}         &\multicolumn{1}{c}{(8)}         \\
+\midrule
+Village Fund transfer&    0.005\sym{*}  &    0.004\sym{*}  &    0.005\sym{*}  &    0.004\sym{*}  &   -0.001         &   -0.004         &    0.000         &   -0.004         \\
+                &  (0.003)         &  (0.003)         &  (0.003)         &  (0.003)         &  (0.004)         &  (0.006)         &  (0.004)         &  (0.006)         \\
+\addlinespace
+Treatment       &   -2.722\sym{**} &   -2.611\sym{**} &   -2.740\sym{**} &   -2.593\sym{**} &   -2.211\sym{*}  &   -2.207\sym{*}  &   -2.279\sym{*}  &   -2.259\sym{*}  \\
+                &  (1.194)         &  (1.192)         &  (1.198)         &  (1.193)         &  (1.287)         &  (1.287)         &  (1.274)         &  (1.274)         \\
+\addlinespace
+y18             &                  &   -0.081         &                  &   -0.082         &                  &    0.323         &                  &    0.398         \\
+                &                  &  (0.111)         &                  &  (0.113)         &                  &  (0.433)         &                  &  (0.415)         \\
+\midrule
+Observations    &    73228         &    73228         &    73228         &    73228         &     6336         &     6336         &     6336         &     6336         \\
+Sample          & Province         & Province         & Province         & Province         & District         & District         & District         & District         \\
+Controls        &      Yes         &      Yes         &       No         &       No         &      Yes         &      Yes         &       No         &       No         \\
+Time Fixed Effects&       No         &      Yes         &       No         &      Yes         &       No         &      Yes         &       No         &      Yes         \\
+Village Fixed Effects&      Yes         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         \\
+\bottomrule
+\end{tabular}
+}
