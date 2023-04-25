@@ -197,7 +197,7 @@ esttab using "./output/table/POLS.tex", replace   ///
  b(3) se(3) ///
  keep(prog_par inc_vf) ///
  star(* 0.10 ** 0.05 *** 0.01) ///
- label booktabs nonotes nomtitle collabels(none) compress alignment(D{.}{.}{-1}) ///
+ label booktabs nonotes nomtitle collabels(inc_VF "Village Fund transfer") compress alignment(D{.}{.}{-1}) ///
  scalars("Sa Sample" "Con Controls" "TE Time Fixed Effects" "FE Village Fixed Effects") sfmt(3 0)
 
 xtreg unit_cost prog_par inc_vf i.year if dist_prog==1 & vil_type==1, fe robust
