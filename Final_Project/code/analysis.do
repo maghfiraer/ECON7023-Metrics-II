@@ -119,7 +119,7 @@ eststo: reg inc_vf pov_let if prov_prog==1
 eststo: reg inc_vf pov_let elec_pln if prov_prog==1
 eststo: reg inc_vf pov_let elec_pln forest sea if prov_prog==1
 esttab using "./output/table/firststage.tex", replace ///
- b(3) se(3) nomtitle label star(* 0.10 ** 0.05 *** 0.01) ///
+ b(3) se(3) nomtitle label star(* 0.10 ** 0.05 *** 0.01) r2 ///
  booktabs ///
  title("First Stage Regression")
  *addnotes("Add comment here")
