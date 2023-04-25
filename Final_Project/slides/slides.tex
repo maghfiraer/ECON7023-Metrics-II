@@ -111,36 +111,35 @@
         \label{f:graph1}
         \end{figure}
         \begin{itemize}
-            \item The price control regime implies variation in transportation costs in rural areas is due to distributional problems.
+            \item The price control regime implies variation in transportation costs in rural areas is due to \al{distributional problems}.
         \end{itemize}
     \column{0.5\textwidth}
         \begin{figure}[t]
         \includegraphics[scale=0.305]{Final_Project/image/BBM Satu Harga.png}
-        \caption{Distributor Location of the Fuel Program}
-        \label{f:graph3}
+        \caption{Location of the Program in 2016-2017}
+        \label{f:graph2}
         \end{figure}
         \begin{itemize}
-            \item The location choice of intervention is not randomly assigned, as they targeted the outermost underdeveloped region.
+            \item The location choice of intervention \al{is not randomly assigned}, as they targeted the outermost underdeveloped region.
         \end{itemize}
     \end{columns}
 \end{frame}
 
 \subsection{Decentralization of development}
-\begin{frame}
-\begin{itemize}
-    \item Developing countries believe \alg{decentralization and local government reform} are \alert{\textbf{more efficient}} in bringing local development \citep{vazquez_2017} and \al{providing public goods better} that central government \citep{arends2020}.
-    \item 
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}
-    \begin{figure}[t]
-    \subcaptionbox{Village status in 2014\label{f:panel1}}{\includegraphics[scale=0.2]{Final_Project/image/vdi2014.png}}\hfill
-    \subcaptionbox{Village status in 2018\label{f:panel2}}{\includegraphics[scale=0.205]{Final_Project/image/vdi2018.jpg}}
-    \caption{Indonesia's VDI's status}
-    \label{f:graph1}
-    \end{figure}
+\begin{frame}\setbeamercovered{transparent}
+    \begin{columns}[T,onlytextwidth]
+    \column{0.5\textwidth}
+      \begin{figure}[t]
+        \includegraphics[scale=0.205]{Final_Project/image/vdi2018.jpg}
+        \caption{Indonesia's VDI's status}
+        \label{f:graph3}
+        \end{figure}
+    \column{0.5\textwidth}
+        \begin{itemize}
+            \item Developing countries believe \alg{decentralization and local government reform} are \alert{\textbf{more efficient}} in bringing local development \citep{vazquez_2017} and \al{providing public goods better} that central government \citep{arends2020}.
+            \pause\item In 2014 the government enacted \al{village fund transfer} to implement decentralization at the village level\footnote{See Village Law No. 6 of 2014}. The allocation amount takes into account village conditions, i.e. poverty and geographic difficulty into account.
+        \end{itemize}
+    \end{columns}
 \end{frame}
 
 \section{Data}
@@ -154,11 +153,11 @@
         \begin{equation}
         y_{it}=\frac{d_{it}}{c_{it}}    
         \end{equation}}
-        \pause\item I obtain the list of 55 government-appointed new distributor's village locations from the NOC and then define all the villages that are in the same sub-district as the \al{treated} by the program, i.e. $D_{it}=1$, in the year 2014 all $D_{it}=0$. 
+        \pause\item I obtain the list of 55 government-appointed new distributor's village locations from the NOC and then define all the villages that are in the same sub-district as the \al{treated} by the program, i.e. $D_{it}=1$ in the year 2018. Note in the year 2014 all $D_{it}=0$. 
         \begin{itemize}
             \item \alg{For example}, suppose the government in 2016 gives the order for the NOC to build a new distribution point at village $A$. Village $A$ is in the same sub-district as villages $B,C$, and $D$. Then all villages $A,B,C$, and $D$ are treated.
         \end{itemize}
-        \pause\item Other data on geographic characteristics, i.e land topography, region boundary with forest or sea, river transportation use, and poverty are used as covariates.
+        \pause\item Other data on geographic characteristics, i.e land topography, region boundary with forest or sea, river transportation use, and poverty can be used as covariates or instruments.
     \end{itemize}
 \end{frame}
 
@@ -173,63 +172,36 @@
 \section{Empirical Strategy}
 \subsection{Identification}
 \begin{frame}
-
-   \centering
-	\begin{minipage}[b]{0.5\textwidth}
-
-	  \begin{block}{Default}
-        Block content.
-      \end{block}
-
-      \begin{alertblock}{Alert}
-        Block content.
-      \end{alertblock}
-
-      \begin{exampleblock}{Example}
-        Block content.
-      \end{exampleblock}      
-      
-	\end{minipage}	
+\begin{itemize}
+    \item Serial correlation should not be an issue since the panel is 4 years apart.
+    \item \al{Endogeneity} treat from Village Fund Transfer $(VF_{it})$ and Treatment $(D_{it})$
+    
+\end{itemize}
 \end{frame}
 
 \subsection{Model Specification}
 \begin{frame}
     \begin{equation*}
-        y_{it}=\alpha_i+\delta_1 prog_{it}+\gamma_1 VF_{it}+
+    \resizebox{.4\textwidth}{!}{%
+        y_{it}=\alpha_i+\delta_1 D_{it}+\gamma_1 VF_{it}+\textbf{X}\pmb{\beta}+\varepsilon_{it}
+    }%
     \end{equation*}
 \end{frame}
 
 
 \section{Results}
-\subsection{Main Results}
+\subsection{Main Findings}
 \begin{frame}
-    \begin{columns}[T,onlytextwidth]
-    \column{0.33\textwidth}
-      \textbf{Items}
-      \begin{itemize}
-        \item Cats 
-        \begin{itemize}
-            \item British Shorthair
-        \end{itemize}
-        \item Dogs \item Birds
-      \end{itemize}
-
-    \column{0.33\textwidth}
-      \textbf{Enumerations}
-      \begin{enumerate}
-        \item First 
-        \begin{enumerate}
-            \item First subpoint
-        \end{enumerate}
-        \item Second \item Last
-      \end{enumerate}
-
-    \column{0.33\textwidth}
-      \textbf{Descriptions}
-      \begin{description}
-        \item[Apples] Yes \item[Oranges] No \item[Grappes] No
-      \end{description}
-\end{columns}
+\setbeamercovered{transparent}
+    \begin{block}{Findings 1}
+        Block content.
+    \end{block}
+    \pause\begin{block}{Findings 2}
+        Block content.
+    \end{block}
+    \pause\begin{block}{Findings 3}
+        Block content.
+    \end{block}
 \end{frame}
 
 \subsection{Robustness}
@@ -263,6 +235,10 @@
 \end{columns}
 \end{frame}
 
+\subsection{Cost-Benefit Analysis}
+\begin{frame}
+    
+\end{frame}
 
 \section{Concluding Remarks}
 \begin{frame}
