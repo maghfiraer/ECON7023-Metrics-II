@@ -104,5 +104,8 @@ refcat(unit_cost "\emph{Transportation Cost}" landfall_1 "\vspace{0.05em} \\ \em
 
 
 *********************************************************************************
-* Run Regression														*
+* Run Regression																*
 *********************************************************************************
+
+* Simple regression
+xtreg unit_cost prog_par inc_vf, fe robust
