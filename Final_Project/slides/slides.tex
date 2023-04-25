@@ -55,30 +55,28 @@
 \begin{frame}
 \begin{columns}[T,onlytextwidth]
     \column{0.7\textwidth}
-\begin{exampleblock}{Motivation}
+\begin{block}{Motivation}
 \begin{itemize}
     \item Indonesia has been subsidizing fuel for a long time, but high fuel prices in rural areas was observed in the last decade. 
     \item Linking underdeveloped regions to growth centers is a challenge.
     \item One Price Fuel program started in 2016 to guarantee the availability of subsidized fuel at the same price control.
-    \item Political economy perspective of infrastructure development vs. fossil fuel subsidy \citep{ichsan_2022}.
+    \item Political economy perspective of infrastructure development vs. fossil fuel subsidy \citep{ichsan_2022,ichsan_2021}.
 \end{itemize}
-\end{exampleblock}
-\begin{exampleblock}{Research Question}
+\end{block}
+\begin{block}{Research Question}
 \begin{itemize}
     \item Does the fuel policy improve accessibility in rural areas?
     \item Which policy option is more efficient?
 \end{itemize}
-\end{exampleblock}
+\end{block}
     \column{0.3\textwidth}
     \begin{figure}[t]
         \includegraphics[scale=0.21]
         {Final_Project/image/bbm-papua-221017.jpg}
-        \label{f:graph1}
         \end{figure}
     \begin{figure}[t]
         \includegraphics[scale=0.21]
         {Final_Project/image/bbm-satu-harga_1.jpg}
-        \label{f:graph2}
         \end{figure}
 \end{columns}
 \end{frame}
@@ -86,30 +84,42 @@
 \section{Institutional Context and Conceptual Framework}
 \subsection{Accessibility in rural area}
 \begin{frame}
-\begin{exampleblock}{Transportation Cost}
+\begin{block}{Transportation cost in rural area}
+\begin{itemize}
+    \item Transportation spending \al{dominates energy spending} \citep{sambodo_2019}
+    \item The \al{lack of adequate and reliable infrastructure} drives up the transportation cost \citep{sandee_2016}.
+    \item We can treat unit transportation cost as the \alg{willingness to pay} or demand for transportation
+\end{itemize}
+\end{block}
+\begin{block}{Demand theory of transportation}
 \begin{itemize}
     \item Transportation spending \al{dominates energy spending} \citep{sambodo_2019}
     \item The \al{lack of adequate and reliable infrastructure} drives up the transportation cost \citep{sandee_2016}.
 \end{itemize}
-\end{exampleblock}
+\end{block}
 \end{frame}
 
 \subsection{Fossil fuel subsidy regime}
 \begin{frame}
     \begin{columns}[T,onlytextwidth]
-    \column{0.33\textwidth}
+    \column{0.5\textwidth}
       \begin{figure}[t]
-        \includegraphics[scale=0.4]{Final_Project/image/BBM Satu Harga.png}
-        \caption{New Distributor's Village Location of the Fuel Program}
-        \label{f:graph3}
+        \includegraphics[scale=0.52]{Final_Project/image/bbm-price-2014-2018.jpg}
+        \caption{Fuel Price Control 2014-2018}
+        \label{f:graph1}
         \end{figure}
-
-    \column{0.67\textwidth}
+        \begin{itemize}
+            \item The price control regime implies variation in transportation costs in rural areas is due to distributional problems.
+        \end{itemize}
+    \column{0.5\textwidth}
         \begin{figure}[t]
-        \includegraphics[scale=0.4]{Final_Project/image/BBM Satu Harga.png}
-        \caption{New Distributor's Village Location of the Fuel Program}
+        \includegraphics[scale=0.305]{Final_Project/image/BBM Satu Harga.png}
+        \caption{Distributor Location of the Fuel Program}
         \label{f:graph3}
         \end{figure}
+        \begin{itemize}
+            \item The location choice of intervention is not randomly assigned, as they targeted the outermost underdeveloped region.
+        \end{itemize}
     \end{columns}
 \end{frame}
 
@@ -137,14 +147,15 @@
     \begin{itemize}
         \item I obtained the \al{Village Potential Statistics} data for the years 2014 and 2018 from Indonesia's Central Bureau of Statistics complemented with village fund transfer data from the Ministry of Village Development.
         \item I measure rural accessibility using the \al{log of unit transportation cost} (in Rp/km) of each individual village. 
-        \footnote{I define unit transportation cost, $y_{it}$, as the \al{transportation cost} from the village office to the sub-district office (in thousands Rp), $c_{it}$, divided by the \al{distance} from the village office to the sub-district office (in km), $d_{it}$.
+        \footnote{I define \al{unit transportation cost}, $y_{it}$, as the \al{transportation cost} from the village office to the sub-district office (in thousands Rp), $c_{it}$, divided by the \al{distance} from the village office to the sub-district office (in km), $d_{it}$.
         \begin{equation}
         y_{it}=\frac{d_{it}}{c_{it}}    
         \end{equation}}
-        \item I obtain the list of 57 government-appointed new distributor's village locations from the NOC and then define all the villages that are in the same sub-district as the \al{treated} by the program, i.e. $D_{it}=1$. 
+        \item I obtain the list of 55 government-appointed new distributor's village locations from the NOC and then define all the villages that are in the same sub-district as the \al{treated} by the program, i.e. $D_{it}=1$. 
         \begin{itemize}
             \item \alg{For example}, suppose the government in 2016 gives the order for the NOC to build a new distribution point at village $A$. Village $A$ is in the same sub-district as villages $B,C$, and $D$. Then all villages $A,B,C$, and $D$ are treated.
         \end{itemize}
+        \item Other data on geographic characteristics, i.e land topography, region boundary with forest or sea, river transportation use, and poverty are used as covariates.
     \end{itemize}
 \end{frame}
 
@@ -283,5 +294,15 @@
 \begin{frame}[allowframebreaks]{References}
     \bibliographystyle{Final_Project/paper/bibliography.bst}
     \bibliography{references.bib}
+\end{frame}
+
+\begin{frame}{}
+  \centering
+  {\LARGE\emph{Thank you!}}\\
+  \vspace{1cm}
+  Any Comments, Suggestions, Ideas\\
+  \href{mailto:\maghfira.ramadhani@gatech.edu}{\faEnvelope\ \  \al{maghfira.ramadhani@gatech.edu}}\\
+  \href{http://maghfiraer.github.io}{\faHome\ \  \al{maghfiraer.github.io}} \\
+  \href{https://github.com/maghfiraer/ECON7023-Metrics-II/tree/main/Final_Project}{\faGithubSquare\ \  \al{Replication Code}}
 \end{frame}
 \end{document}
