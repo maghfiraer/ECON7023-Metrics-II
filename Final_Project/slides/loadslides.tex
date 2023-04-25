@@ -119,3 +119,13 @@
 \newcommand{\alb}[1]{\textbf{\textcolor{blue}{#1}}}
 \newcommand{\alg}[1]{\textbf{\textcolor{ForGreen}{#1}}}
 \newcommand{\alr}[1]{\textbf{\textcolor{red}{#1}}}
+
+% Email etc
+% Defines writer's email (optional)
+% Usage: \email{<email address>}
+\RequirePackage{fontawesome}
+\newcommand*{\email}[1]{\def\@email{#1}}
+
+% Defines writer's homepage (optional)
+% Usage: \homepage{<url>}
+\newcommand*{\homepage}[1]{\def\@homepage{#1}}
