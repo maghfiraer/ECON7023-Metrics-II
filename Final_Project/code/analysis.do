@@ -59,7 +59,7 @@ refcat(unit_cost "\emph{Transportation}" landfall_1 "\vspace{0.05em} \\ \emph{Na
 
 est clear
 estpost tabstat ///
-unit_cost landfall_1 earthq_1 elec_pln sch_jh sch_sh inc_vf if vil_type==1, ///
+unit_cost vil_subd_dur landfall_1 earthq_1 elec_pln sch_jh sch_sh inc_vf if vil_type==1, ///
 by(year) c(stat) stat(mean sd min max n) nototal
 esttab, cells("mean sd min max count")
 estout, cells("mean sd min max count")
@@ -74,7 +74,7 @@ refcat(unit_cost "\emph{Transportation}" landfall_1 "\vspace{0.05em} \\ \emph{Na
 * Table 1 Option C
 est clear
 estpost tabstat ///
-unit_cost landfall_1 earthq_1 elec_pln sch_jh sch_sh inc_vf if vil_type==1 & dist_prog==1, ///
+unit_cost vil_subd_dur landfall_1 earthq_1 elec_pln sch_jh sch_sh inc_vf if vil_type==1 & dist_prog==1, ///
 by(year) c(stat) stat(mean sd min max n) nototal
 
 esttab using "./output/table/table1c.tex", replace ///
