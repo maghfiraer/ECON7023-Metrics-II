@@ -450,9 +450,9 @@ eststo: xtreg unit_cost progcf prog_par inc_vf i.year if dist_prog==1 & vil_type
 
 esttab using "./output/table/POLS2.tex", replace   ///
  b(3) se(3) ///
- keep(prog_par inc_vf) ///
+ keep(progcf prog_par inc_vf) ///
  star(* 0.10 ** 0.05 *** 0.01) ///
- label booktabs nonotes nomtitle coeflabels(inc_vf "Village Fund transfer") compress alignment(D{.}{.}{-1}) ///
+ label booktabs nonotes nomtitle coeflabels(inc_vf "Village Fund transfer" progcf "Interaction terms") compress alignment(D{.}{.}{-1}) ///
  scalars("Sa Sample" "Con Controls" "TE Time Fixed Effects" "FE Village Fixed Effects") sfmt(3 0)
 
 
