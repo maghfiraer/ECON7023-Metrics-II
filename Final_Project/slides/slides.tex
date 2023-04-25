@@ -148,7 +148,7 @@
 \setbeamercovered{transparent}
     \begin{itemize}
         \item I obtained the \al{Village Potential Statistics} data for the years 2014 and 2018 from Indonesia's Central Bureau of Statistics complemented with village fund transfer data from the Ministry of Village Development.
-        \pause\item I measure rural accessibility using the \al{log of unit transportation cost} (in Rp/km) of each individual village $i$ for year $t$. 
+        \pause\item I measure rural accessibility using the \al{unit transportation cost} (in Rp/km) of each individual village $i$ for year $t$. 
         \footnote{I define \al{unit transportation cost}, $y_{it}$, as the \al{transportation cost} from the village $i$'s office to the sub-district office (in thousands Rp) at year $t$, $c_{it}$, divided by the \al{distance} from the village office $i$'s to the sub-district office (in km) at year $t$, $d_{it}$.
         \begin{equation}
         y_{it}=\frac{d_{it}}{c_{it}}    
@@ -174,7 +174,9 @@
 \begin{frame}
 \begin{itemize}
     \item Serial correlation should not be an issue since the panel is 4 years apart.
-    \item \al{Endogeneity} treat from Village Fund Transfer $(VF_{it})$ and Treatment $(D_{it})$
+    \item Following \citep{hausman78}, the specification test suggest
+    \item \al{Endogeneity} treat from Village Fund Transfer $(VF_{it})$ and Treatment $(D_{it})$, therefore I need to identify whether there is a good instrument available in the datasets.
+    \item 
     
 \end{itemize}
 \end{frame}
@@ -182,8 +184,8 @@
 \subsection{Model Specification}
 \begin{frame}
     \begin{equation*}
-    \resizebox{.4\textwidth}{!}{%
-        y_{it}=\alpha_i+\delta_1 D_{it}+\gamma_1 VF_{it}+\textbf{X}\pmb{\beta}+\varepsilon_{it}
+    \resizebox{.6\textwidth}{!}{%
+        y_{it}=\alpha_i+\theta_t+\delta_1 D_{it}+\gamma_1 VF_{it}+\textbf{X}\pmb{\beta}+\varepsilon_{it}
     }%
     \end{equation*}
 \end{frame}
@@ -287,7 +289,8 @@
 
 \appendix
 \section{Appendix}
-\begin{frame}{}{Appendix A}
+\subsection{First Stage Regression}
+\begin{frame}
     \begin{table}
         \caption{Largest cities in the world (source: Wikipedia)}
         \begin{tabular}{@{} lr @{}}
