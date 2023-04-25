@@ -170,24 +170,23 @@
 \end{frame}
 
 \section{Empirical Strategy}
-\subsection{Identification}
+\subsection{Identification and Model Specification}
 \begin{frame}
 \begin{itemize}
     \item Serial correlation should not be an issue since the panel is 4 years apart.
     \item Following \citet{hausman78}, the specification test suggest using \al{fixed effects}. \hyperlink{hausmanspec}{\beamergotobutton{Hausman test}}\label{hausmanclick}
-    \item \al{Endogeneity} treat from Village Fund Transfer $(VF_{it})$ and Treatment $(D_{it})$, therefore I need to identify whether there is a good instrument available in the datasets. \hyperlink{FSVF}{\beamergotobutton{$VF_{it}$}}\label{VFclick}\hyperlink{FSD}{\beamergotobutton{$D_{it}$}}\label{Dclick}
-    \item 
-    
-\end{itemize}
-\end{frame}
-
-\subsection{Model Specification}
-\begin{frame}
-    \begin{equation*}
+    \item Possible \al{endogeneity treat} from Village Fund Transfer $(VF_{it})$ and Treatment $(D_{it})$, therefore I need to identify whether there is a good instrument available in the datasets. \hyperlink{FSVF}{\beamergotobutton{$VF_{it}$}}\label{VFclick}\hyperlink{FSD}{\beamergotobutton{$D_{it}$}}\label{Dclick}
+    \item Following \citet{abadie2016}, I can use \al{Propensity Score Matching} to construct an artificial control group by matching each treated unit with a non-treated unit of similar characteristics.
+    \item I follow the following model specification
+    \begin{equation}
     \resizebox{.6\textwidth}{!}{%
-        y_{it}=\alpha_i+\theta_t+\delta_1 D_{it}+\gamma_1 VF_{it}+\textbf{X}\pmb{\beta}+\varepsilon_{it}
+        y_{it}=\alpha_i+\theta_t+\delta_1 D_{it}+\gamma_1 VF_{it}+\textbf{X}\pmb{\beta}+\varepsilon_{it}\label{ppt2}
     }%
-    \end{equation*}
+    \end{equation}
+    where $y_{it}$ represents the unit transportation cost in village $i$ in year $t$,
+    $\alpha_i$ represents the village fixed effects, $\theta_t$ represents time trend or time fixed effects, $D_{it}$ and $VF_{it}$ is the main variable of interests, and $\textbf{X}$ as vector of covariates.
+    \item \al{Fixed Effect Instrumental Variable} (FEIV) approach (similar to FDIV for $T=2$) can be applied to identify $\delta_1$ and $\gamma_1$ in equation \eqref{ppt2}.
+    \end{itemize}
 \end{frame}
 
 
@@ -294,17 +293,38 @@
 \label{FSVF}
     \begin{table}[h]
     \caption{First Stage Regression on Village Fund Transfer \hyperlink{VFclick}{\beamerreturnbutton{Back}}}
-    \scalebox{0.6}{\input{Final_Project/output/table/firststage}}    
+    \scalebox{0.6}{\input{Final_Project/output/table/firststageVF}}    
     \end{table}
 \end{frame}
 
 \begin{frame}
-\label{hausmanspec}
+\label{FSD}
     \begin{table}[h]
-    \caption{First Stage Regression on Village Fund Transfer \hyperlink{hausmanclick}{\beamerreturnbutton{Back}}}
-    \scalebox{0.55}{\input{Final_Project/output/table/firststage}}    
+    \caption{First Stage Regression on Treatment \hyperlink{Dclick}{\beamerreturnbutton{Back}}}
+    \scalebox{0.55}{\input{Final_Project/output/table/firststageD}}    
     \end{table}
     
+\end{frame}
+
+\subsection{Endogeneity Test}
+\begin{frame}
+\label{Endotest}
+    \begin{table}[h]
+    \caption{First Stage Regression on Treatment \hyperlink{Dclick}{\beamerreturnbutton{Back}}}
+    \scalebox{0.55}{\input{Final_Project/output/table/firststageD}}    
+    \end{table}
+    
+\end{frame}
+
+\subsection{Hausman Specification Test}
+\begin{frame}
+\label{hausmanspec}
+\begin{itemize}
+    \item Test of $H_0:$ difference in coefficients not systematic or the individual unobserved heterogeneity is correlated with the regressors. We can compute the Hausman statistic as \begin{equation*}
+        H=(\hat{\pmb{\delta}}_{FE}-\hat{\pmb{\delta}}_{RE})'\left[\hat{\Av}(\hat{\pmb{\delta}}_{FE})-\hat{\Av}(\hat{\pmb{\delta}}_{RE})\right]^{-1}(\hat{\pmb{\delta}}_{FE}-\hat{\pmb{\delta}}_{RE}) \asym \chi_M^2 \end{equation*}
+    \item The test yields a $\chi^2$-statistics of 15.96 with $P$-value of 0.0003, thus we cannot reject the null hypothesis. This suggests using fixed effects instead of random effects for panel data analysis. This test is valid under RE1-RE3, thus we can not strictly argue with it.\hyperlink{hausmanclick}{\beamerreturnbutton{Back}}
+
+\end{itemize}
 \end{frame}
 
 \end{document}
