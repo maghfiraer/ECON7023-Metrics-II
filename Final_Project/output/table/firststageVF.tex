@@ -1,40 +1,39 @@
 {
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-\begin{tabular}{l*{4}{c}}
+\begin{tabular}{l*{5}{c}}
 \toprule
-                    &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         \\
+                    &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         &\multicolumn{1}{c}{(5)}         \\
 \midrule
-Number of poverty statement request&       0.001\sym{***}&       0.001\sym{**} &       0.001\sym{**} &       0.001\sym{**} \\
-                    &     (0.000)         &     (0.000)         &     (0.000)         &     (0.000)         \\
+Number of poverty statement request&       0.001\sym{***}&       0.001\sym{**} &       0.001\sym{**} &       0.001\sym{**} &       0.001\sym{**} \\
+                    &     (0.000)         &     (0.000)         &     (0.000)         &     (0.000)         &     (0.000)         \\
 \addlinespace
-Number of PLN electricity user household&                     &       0.009\sym{***}&       0.009\sym{***}&       0.015\sym{***}\\
-                    &                     &     (0.001)         &     (0.001)         &     (0.001)         \\
+Number of PLN electricity user household&                     &       0.009\sym{***}&       0.009\sym{***}&       0.015\sym{***}&       0.014\sym{***}\\
+                    &                     &     (0.001)         &     (0.001)         &     (0.001)         &     (0.001)         \\
 \addlinespace
-Earthquake frequency [y-1]&                     &                     &       0.357         &       1.348\sym{***}\\
-                    &                     &                     &     (0.452)         &     (0.435)         \\
+Earthquake frequency [y-1]&                     &                     &       0.357         &       1.348\sym{***}&       0.923\sym{**} \\
+                    &                     &                     &     (0.452)         &     (0.435)         &     (0.435)         \\
 \addlinespace
-=1 if slope/valleys, =0 vast land&                     &                     &                     &      -7.731\sym{***}\\
-                    &                     &                     &                     &     (1.381)         \\
+=1 if slope/valleys, =0 vast land&                     &                     &                     &      -7.731\sym{***}&                     \\
+                    &                     &                     &                     &     (1.381)         &                     \\
 \addlinespace
-=1 if inside or border with forest, =0 outside forest&                     &                     &                     &      13.153\sym{***}\\
-                    &                     &                     &                     &     (1.441)         \\
+=1 if inside or border with forest, =0 outside forest&                     &                     &                     &      13.153\sym{***}&                     \\
+                    &                     &                     &                     &     (1.441)         &                     \\
 \addlinespace
-=1 if border with sea, =0 no border with sea&                     &                     &                     &      27.160\sym{***}\\
-                    &                     &                     &                     &     (1.824)         \\
+=1 if border with sea, =0 no border with sea&                     &                     &                     &      27.160\sym{***}&      28.802\sym{***}\\
+                    &                     &                     &                     &     (1.824)         &     (1.780)         \\
 \addlinespace
-=1 if river used for transportation, =0 otherwise&                     &                     &                     &      65.724\sym{***}\\
-                    &                     &                     &                     &     (3.883)         \\
+=1 if river used for transportation, =0 otherwise&                     &                     &                     &      65.724\sym{***}&      70.268\sym{***}\\
+                    &                     &                     &                     &     (3.883)         &     (3.760)         \\
 \addlinespace
-Constant            &     120.111\sym{***}&     114.038\sym{***}&     113.977\sym{***}&      97.267\sym{***}\\
-                    &     (0.625)         &     (0.863)         &     (0.881)         &     (1.204)         \\
+Constant            &     120.111\sym{***}&     114.038\sym{***}&     113.977\sym{***}&      97.267\sym{***}&      99.125\sym{***}\\
+                    &     (0.625)         &     (0.863)         &     (0.881)         &     (1.204)         &     (0.949)         \\
 \midrule
-Observations        &       87842         &       87842         &       87842         &       87842         \\
-\(R^{2}\)           &       0.000         &       0.002         &       0.002         &       0.017         \\
-Adjusted \(R^{2}\)  &       0.000         &       0.002         &       0.002         &       0.017         \\
-F                   &       8.047         &      55.568         &      37.051         &     134.336         \\
-p\_value             &                     &                     &                     &                     \\
+Observations        &       87842         &       87842         &       87842         &       87842         &       87842         \\
+\(R^{2}\)           &       0.000         &       0.002         &       0.002         &       0.017         &       0.016         \\
+Adjusted \(R^{2}\)  &       0.000         &       0.002         &       0.002         &       0.017         &       0.016         \\
+F                   &       8.047         &      55.568         &      37.051         &     134.336         &     136.159         \\
 \bottomrule
-\multicolumn{5}{l}{\footnotesize Standard errors in parentheses}\\
-\multicolumn{5}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\multicolumn{6}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{6}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
 \end{tabular}
 }

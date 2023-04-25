@@ -119,18 +119,20 @@ eststo: reg inc_vf pov_let if prov_prog==1, robust
 eststo: reg inc_vf pov_let elec_pln if prov_prog==1, robust
 eststo: reg inc_vf pov_let elec_pln earthq_1 if prov_prog==1, robust
 eststo: reg inc_vf pov_let elec_pln earthq_1 land_topo forest sea trans_river if prov_prog==1, robust
+eststo: reg inc_vf pov_let elec_pln earthq_1 sea trans_river if prov_prog==1, robust
 esttab using "./output/table/firststageVF.tex", replace ///
- b(3) se(3) nomtitle label star(* 0.10 ** 0.05 *** 0.01) r2 ar2 scalar(F p_value) ///
+ b(3) se(3) nomtitle label star(* 0.10 ** 0.05 *** 0.01) r2 ar2 scalar(F) ///
  booktabs
  *addnotes("Add comment here")
  
- est clear
+est clear
 eststo: reg prog_par pov_let if prov_prog==1, robust
 eststo: reg prog_par pov_let elec_pln if prov_prog==1, robust
 eststo: reg prog_par pov_let elec_pln earthq_1 if prov_prog==1, robust
 eststo: reg prog_par pov_let elec_pln earthq_1 land_topo forest sea trans_river if prov_prog==1, robust
+eststo: reg prog_par pov_let elec_pln earthq_1 sea trans_river if prov_prog==1, robust
 esttab using "./output/table/firststageD.tex", replace ///
- b(3) se(3) nomtitle label star(* 0.10 ** 0.05 *** 0.01) r2 ar2 scalar(F p_value) ///
+ b(3) se(3) nomtitle label star(* 0.10 ** 0.05 *** 0.01) r2 ar2 scalar(F) ///
  booktabs
  *addnotes("Add comment here")
 
@@ -143,12 +145,55 @@ esttab using "./output/table/firststageD.tex", replace ///
 * Simple regression
 xtreg lucost prog_par inc_vf if prov_prog==1, fe robust
 
-* xtivreg2 unit_cost prog_par (inc_vf = landfall_1 earthq_1 elec_pln sch_sh sch_jh pov_let) land_topo sea forest trans_river y18 if prov_prog==1, fe robust
-
 
 * Hausman (1978)
-xtreg lucost prog_par inc_vf if prov_prog==1, fe
+xtreg unit_cost prog_par inc_vf if prov_prog==1, fe
 estimates store fixed
-xtreg lucost prog_par inc_vf if prov_prog==1, re
+xtreg unit_cost prog_par inc_vf if prov_prog==1, re
 estimates store random
 hausman fixed random, sigmamore
+
+
+* PSM Abadie (2016)
+keep if prog_par
+keep match1
+bysort match1: gen weight=_N
+by match1: keep if _n==1
+ren match1 ob
+
+
+* Main regression table
+xtivreg2 unit_cost (prog_par inc_vf = pov_let elec_pln land_topo forest sea trans_river) earthq_1 sch_sh sch_jh y18 if prov_prog==1 & vil_type==1, fe robust
+xtivreg2 unit_cost (prog_par inc_vf = pov_let elec_pln land_topo forest sea trans_river) earthq_1 sch_sh sch_jh y18 if prov_prog==1 & vil_type==1, fe robust
+xtivreg2 unit_cost (prog_par inc_vf = pov_let elec_pln land_topo forest sea trans_river) earthq_1 sch_sh sch_jh y18 if dist_prog==1 & vil_type==1, fe robust
+xtivreg2 unit_cost prog_par (inc_vf = pov_let elec_pln earthq_1 land_topo forest sea trans_river) sch_sh sch_jh y18 if prov_prog==1 & vil_type==1, fe robust
+xtivreg2 lucost prog_par (inc_vf = pov_let elec_pln earthq_1 land_topo forest sea trans_river) sch_sh sch_jh y18 if prov_prog==1 & vil_type==1, fe robust
+xtivreg2 lucost prog_par (inc_vf = pov_let elec_pln earthq_1 land_topo forest sea trans_river) sch_sh sch_jh y18 if dist_prog==1 & vil_type==1, fe robust
+xtivreg2 unit_cost prog_par (inc_vf = pov_let elec_pln earthq_1 land_topo forest sea trans_river) sch_sh sch_jh y18 if dist_prog==1 & vil_type==1, fe robust
+
+
+*********************************************************************************
+* Run Regression																*
+*********************************************************************************
+global controls age* ttl_exp* tenure* not_smsa south union
+est clear
+
+*POLS
+eststo: xtreg unit_cost $controls, fe vce(robust)
+ estadd local  FE "Yes"
+ estadd local  TE "No"
+ 
+eststo: xtreg lucost $controls i.year, re vce(robust)
+ estadd local  FE  "No"
+ estadd local  TE  "Yes"
+ 
+eststo: xtreg lucost $controls i.year, fe vce(robust)
+ estadd local  FE  "Yes"
+ estadd local  TE  "Yes"
+ 
+esttab using "./graphs/guide80/regression2.tex", replace   ///
+ b(3) se(3) ///
+ keep($controls) ///
+ star(* 0.10 ** 0.05 *** 0.01) ///
+ label booktabs nonotes nomtitle collabels(none) compress alignment(D{.}{.}{-1}) ///
+ scalars("rho \$\rho\$" "TE Time fixed effects" "FE Panel fixed effects") sfmt(3 0)

@@ -173,7 +173,7 @@ rename r601dk7 earthq_1
 replace earthq_1=0 if missing(earthq_1)
 replace earthq_2=0 if missing(earthq_2)
 replace earthq_3=0 if missing(earthq_3)
-label variable earthq_1 "Earthquake frequency [y-1]"
+label variable earthq_1 "Earthquake frequency"
 label variable earthq_2 "Earthquake frequency [y-2]"
 label variable earthq_3 "Earthquake frequency [y-3]"
 
@@ -378,7 +378,7 @@ rename r601d_k7 earthq_1
 replace earthq_1=0 if missing(earthq_1)
 replace earthq_2=0 if missing(earthq_2)
 replace earthq_3=0 if missing(earthq_3)
-label variable earthq_1 "Earthquake frequency [y-1]"
+label variable earthq_1 "Earthquake frequency"
 label variable earthq_2 "Earthquake frequency [y-2]"
 label variable earthq_3 "Earthquake frequency [y-3]"
 
@@ -597,7 +597,7 @@ gen earthq_1=earth/3
 replace earthq_1=0 if missing(earthq_1)
 replace earthq_2=0 if missing(earthq_2)
 replace earthq_3=0 if missing(earthq_3)
-label variable earthq_1 "Earthquake frequency [y-1]"
+label variable earthq_1 "Earthquake frequency"
 label variable earthq_2 "Earthquake frequency [y-2]"
 label variable earthq_3 "Earthquake frequency [y-3]"
 
