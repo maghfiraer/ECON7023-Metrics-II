@@ -174,8 +174,8 @@
 \begin{frame}
 \begin{itemize}
     \item Serial correlation should not be an issue since the panel is 4 years apart.
-    \item Following \citep{hausman78}, the specification test suggest
-    \item \al{Endogeneity} treat from Village Fund Transfer $(VF_{it})$ and Treatment $(D_{it})$, therefore I need to identify whether there is a good instrument available in the datasets.
+    \item Following \citet{hausman78}, the specification test suggest using \al{fixed effects}. \hyperlink{hausmanspec}{\beamergotobutton{Hausman test}}\label{hausmanclick}
+    \item \al{Endogeneity} treat from Village Fund Transfer $(VF_{it})$ and Treatment $(D_{it})$, therefore I need to identify whether there is a good instrument available in the datasets. \hyperlink{FSVF}{\beamergotobutton{$VF_{it}$}}\label{VFclick}\hyperlink{FSD}{\beamergotobutton{$D_{it}$}}\label{Dclick}
     \item 
     
 \end{itemize}
@@ -291,9 +291,20 @@
 \section{Appendix}
 \subsection{First Stage Regression}
 \begin{frame}
+\label{FSVF}
     \begin{table}[h]
-    \caption{First Stage Regression on Village Fund Transfer}
-    \scalebox{0.5}{\input{Final_Project/output/table/firststage}}    
+    \caption{First Stage Regression on Village Fund Transfer \hyperlink{VFclick}{\beamerreturnbutton{Back}}}
+    \scalebox{0.6}{\input{Final_Project/output/table/firststage}}    
     \end{table}
 \end{frame}
+
+\begin{frame}
+\label{hausmanspec}
+    \begin{table}[h]
+    \caption{First Stage Regression on Village Fund Transfer \hyperlink{hausmanclick}{\beamerreturnbutton{Back}}}
+    \scalebox{0.55}{\input{Final_Project/output/table/firststage}}    
+    \end{table}
+    
+\end{frame}
+
 \end{document}
