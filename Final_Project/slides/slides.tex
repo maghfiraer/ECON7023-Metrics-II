@@ -95,7 +95,7 @@
 \end{block}}
 \onslide<2->{\begin{block}{Demand theory of transportation}
 \begin{itemize}
-    \item We follow previous literature on WTP for rural transportation from revealed preference, the affecting factors include \al{travel time, convenience}, and \al{trip purpose} i.e. work or education.   
+    \item We follow previous literature on WTP for rural transportation from revealed preference, the affecting factors include \al{travel time, convenience}, and \al{trip purpose} i.e. work or education.
 \end{itemize}
 \end{block}}
 \end{frame}
@@ -183,7 +183,7 @@
     }%
     \end{equation}
     where $y_{it}$ represents the unit transportation cost in village $i$ in year $t$,
-    $\alpha_i$ represents the village fixed effects, $\theta_t$ represents time trend or time fixed effects, $D_{it}$ and $VF_{it}$ is the main variable of interests, and $\textbf{X}$ as vector of covariates.
+    $\alpha_i$ represents the village fixed effects, $\theta_t$ represents time trend or time fixed effects, $D_{it}$ and $VF_{it}$ is the main variable of interests, and $\textbf{X}$ as vector of covariates affecting demand.
     \item \al{Fixed Effect Instrumental Variable} (FEIV) approach (similar to FDIV for $T=2$) can be applied to identify $\delta_1$ and $\gamma_1$ in equation \eqref{ppt2}.
     \end{itemize}
 \end{frame}
@@ -322,8 +322,15 @@
     \item Test of $H_0:$ difference in coefficients not systematic or the individual unobserved heterogeneity is correlated with the regressors. We can compute the Hausman statistic as \begin{equation*}
         H=(\hat{\pmb{\delta}}_{FE}-\hat{\pmb{\delta}}_{RE})'\left[\hat{\Av}(\hat{\pmb{\delta}}_{FE})-\hat{\Av}(\hat{\pmb{\delta}}_{RE})\right]^{-1}(\hat{\pmb{\delta}}_{FE}-\hat{\pmb{\delta}}_{RE}) \asym \chi_M^2 \end{equation*}
     \item The test yields a $\chi^2$-statistics of 15.96 with $P$-value of 0.0003, thus we cannot reject the null hypothesis. This suggests using fixed effects instead of random effects for panel data analysis. This test is valid under RE1-RE3, thus we can not strictly argue with it.\hyperlink{hausmanclick}{\beamerreturnbutton{Back}}
-
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+\label{FSD}
+    \begin{table}[h]
+    \caption{First Stage Regression on Treatment \hyperlink{Dclick}{\beamerreturnbutton{Back}}}
+    \scalebox{0.55}{\input{Final_Project/output/table/P}}    
+    \end{table}
 \end{frame}
 
 \end{document}
