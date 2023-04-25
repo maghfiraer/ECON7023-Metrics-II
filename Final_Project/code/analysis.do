@@ -44,11 +44,11 @@ foreach x of varlist unit_cost vil_subd_cost vil_subd_dis vil_subd_mode vil_subd
 * Table 1 Option A
 est clear
 estpost tabstat ///
-unit_cost landfall_1 earthq_1 elec_pln sch_jh sch_sh inc_vf if vil_type==1, ///
+unit_cost vil_subd_dur landfall_1 earthq_1 elec_pln sch_jh sch_sh inc_vf if vil_type==1, ///
 by(year) c(stat) stat(mean sd min max n) nototal
 
 esttab using "./output/table/table1.tex", replace ///
-refcat(unit_cost "\emph{Transportation Cost}" landfall_1 "\vspace{0.05em} \\ \emph{Natural Disaster}" elec_pln "\vspace{0.05em} \\ \emph{Infrastructure}" inc_vf "\vspace{0.05em} \\ \emph{Inter-government Transfer}", nolabel) ///
+refcat(unit_cost "\emph{Transportation}" landfall_1 "\vspace{0.05em} \\ \emph{Natural Disaster}" elec_pln "\vspace{0.05em} \\ \emph{Infrastructure}" inc_vf "\vspace{0.05em} \\ \emph{Inter-government Transfer}", nolabel) ///
 	 cells(mean(fmt(2)) sd(par)) nostar  nonumber unstack ///
   nomtitle nonote obs label  ///
    collabels(none) ///
@@ -65,7 +65,7 @@ esttab, cells("mean sd min max count")
 estout, cells("mean sd min max count")
 
 esttab using "./output/table/table1b.tex", replace ////
-refcat(unit_cost "\emph{Transportation Cost}" landfall_1 "\vspace{0.05em} \\ \emph{Natural Disaster}" elec_pln "\vspace{0.05em} \\ \emph{Infrastructure}" inc_vf "\vspace{0.05em} \\ \emph{Inter-government Transfer}", nolabel) ///
+refcat(unit_cost "\emph{Transportation}" landfall_1 "\vspace{0.05em} \\ \emph{Natural Disaster}" elec_pln "\vspace{0.05em} \\ \emph{Infrastructure}" inc_vf "\vspace{0.05em} \\ \emph{Inter-government Transfer}", nolabel) ///
  cells("mean(fmt(2)) sd min max count(fmt(0))") nostar unstack nonumber ///
   compress nomtitle nonote noobs label booktabs ///
   eqlabels("2014" "2018") ///
@@ -78,7 +78,7 @@ unit_cost landfall_1 earthq_1 elec_pln sch_jh sch_sh inc_vf if vil_type==1 & dis
 by(year) c(stat) stat(mean sd min max n) nototal
 
 esttab using "./output/table/table1c.tex", replace ///
-refcat(unit_cost "\emph{Transportation Cost}" landfall_1 "\vspace{0.05em} \\ \emph{Natural Disaster}" elec_pln "\vspace{0.05em} \\ \emph{Infrastructure}" inc_vf "\vspace{0.05em} \\ \emph{Inter-government Transfer}", nolabel) ///
+refcat(unit_cost "\emph{Transportation}" landfall_1 "\vspace{0.05em} \\ \emph{Natural Disaster}" elec_pln "\vspace{0.05em} \\ \emph{Infrastructure}" inc_vf "\vspace{0.05em} \\ \emph{Inter-government Transfer}", nolabel) ///
 	 cells(mean(fmt(2)) sd(par)) nostar  nonumber unstack ///
   nomtitle nonote obs label  ///
    collabels(none) ///
@@ -143,7 +143,11 @@ esttab using "./output/table/firststageD.tex", replace ///
 * Run Regression																*
 *********************************************************************************
 * Simple regression
-xtreg lucost prog_par inc_vf if prov_prog==1, fe robust
+xtreg unit_cost prog_par inc_vf i.year if prov_prog==1 & vil_type==1, fe robust
+xtreg unit_cost prog_par inc_vf pov_let elec_pln earthq_1 sea trans_river land_topo forest sch_sh sch_jh i.year if prov_prog==1 & vil_type==1, fe robust
+
+xtreg unit_cost prog_par inc_vf i.year if dist_prog==1 & vil_type==1, fe robust
+xtreg unit_cost prog_par inc_vf pov_let elec_pln earthq_1 sea trans_river land_topo forest sch_sh sch_jh i.year if dist_prog==1 & vil_type==1, fe robust
 
 
 * Hausman (1978)
@@ -163,8 +167,23 @@ ren match1 ob
 
 
 * Main regression table
-xtivreg2 unit_cost (prog_par inc_vf = pov_let elec_pln land_topo forest sea trans_river) earthq_1 sch_sh sch_jh y18 if prov_prog==1 & vil_type==1, fe robust
-xtivreg2 unit_cost (prog_par inc_vf = pov_let elec_pln land_topo forest sea trans_river) earthq_1 sch_sh sch_jh y18 if prov_prog==1 & vil_type==1, fe robust
+xtivreg2 unit_cost (prog_par inc_vf = pov_let elec_pln earthq_1 sea trans_river) land_topo forest sch_sh sch_jh y18 if prov_prog==1 & vil_type==1, fe robust
+
+xtivreg2 unit_cost (prog_par inc_vf = pov_let elec_pln earthq_1 sea trans_river) y18 if prov_prog==1 & vil_type==1, fe robust
+
+xtivreg2 unit_cost (prog_par inc_vf = pov_let elec_pln) y18 if prov_prog==1 & vil_type==1, fe robust
+xtivreg2 unit_cost (prog_par inc_vf = pov_let elec_pln) y18 if dist_prog==1 & vil_type==1, fe robust
+
+xtivreg2 unit_cost prog_par (inc_vf = pov_let elec_pln) y18 if prov_prog==1 & vil_type==1, fe robust
+xtivreg2 unit_cost prog_par (inc_vf = pov_let elec_pln) y18 if dist_prog==1 & vil_type==1, fe robust
+
+xtivreg2 unit_cost prog_par (inc_vf = pov_let elec_pln sea trans_river) y18 if prov_prog==1 & vil_type==1, fe robust
+
+xtivreg2 lucost (prog_par lvf = lpov lpln earthq_1 sea trans_river) land_topo forest sch_sh sch_jh y18 if prov_prog==1 & vil_type==1, fe robust
+
+xtivreg2 lucost (prog_par lvf = lpov lpln earthq_1 sea trans_river) land_topo forest sch_sh sch_jh y18 if dist_prog==1 & vil_type==1, fe robust
+
+xtivreg2 lucost (prog_par inc_vf = pov_let elec_pln earthq_1 sea trans_river) land_topo forest sch_sh sch_jh y18 if prov_prog==1 & vil_type==1, fe robust
 xtivreg2 unit_cost (prog_par inc_vf = pov_let elec_pln land_topo forest sea trans_river) earthq_1 sch_sh sch_jh y18 if dist_prog==1 & vil_type==1, fe robust
 xtivreg2 unit_cost prog_par (inc_vf = pov_let elec_pln earthq_1 land_topo forest sea trans_river) sch_sh sch_jh y18 if prov_prog==1 & vil_type==1, fe robust
 xtivreg2 lucost prog_par (inc_vf = pov_let elec_pln earthq_1 land_topo forest sea trans_river) sch_sh sch_jh y18 if prov_prog==1 & vil_type==1, fe robust

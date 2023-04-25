@@ -739,6 +739,15 @@ gen unit_cost=vil_subd_cost/vil_subd_dis
 * Generate log(unit_cost)
 gen lucost=log(unit_cost)
 label variable lucost "Log Unit Transport Cost"
+
+gen lvf=log(inc_vf)
+gen lpln=log(elec_pln)
+gen lpov=log(pov_let)
+label variable lvf "Log Village Fund Transfer"
+label variable lpln "Log Electricity Customer"
+label variable lpov "Log Poverty Statement"
+label variable vil_subd_dur "Travel Duration"
+
 replace trans_river=0 if missing(trans_river)
 
 save "./processed_data/podes_processed.dta", replace
