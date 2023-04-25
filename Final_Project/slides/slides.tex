@@ -175,7 +175,7 @@
     \item Serial correlation should not be an issue since the panel is 4 years apart.
     \item Following \citet{hausman78}, the specification test suggest using \al{fixed effects}. \hyperlink{hausmanspec}{\beamergotobutton{Hausman test}}\label{hausmanclick}
     \item Possible \al{endogeneity treat} from Village Fund Transfer $(VF_{it})$ and Treatment $(D_{it})$, therefore I need to identify whether there is a good instrument available in the datasets. \hyperlink{FSVF}{\beamergotobutton{$VF_{it}$}}\label{VFclick}\hyperlink{FSD}{\beamergotobutton{$D_{it}$}}\label{Dclick}
-    \item Following \citet{abadie2016}, I can use \al{Propensity Score Matching} to construct an artificial control group by matching each treated unit with a non-treated unit of similar characteristics.
+    \item Following \citet{abadie2016}, I can use \al{Propensity Score Matching} to construct an artificial control group by matching each treated unit with a non-treated unit of similar characteristics (\texit{to do})
     \item I follow the following model specification
     \begin{equation}
     \resizebox{.6\textwidth}{!}{%
@@ -194,48 +194,26 @@
 \begin{frame}
 \setbeamercovered{transparent}
     \begin{block}{Findings 1}
-        Panel OLS preliminary result indicates that only the fuel program significantly affected unit transportation costs in rural areas when using the province as sample, and both program significantly affects unit transportation cost when using the district as sample. \hyperlink{POLS}{\beamergotobutton{Panel OLS}}\label{POLSclick}
+        Panel OLS estimates indicates that only the fuel program significantly affected unit transportation costs in rural areas when using the province as sample, and both program significantly affects unit transportation cost when using the district as sample. \hyperlink{POLS}{\beamergotobutton{Panel OLS}}\label{POLSclick}
     \end{block}
     \pause\begin{block}{Findings 2}
-        Block content. \hyperlink{FEIV}{\beamergotobutton{FEIV}}\label{FEIVclick}
+        FEIV estimates yield insignificant estimates when we treat the treatment on the fuel program as endogenous. \hyperlink{FEIV}{\beamergotobutton{FEIV}}\label{FEIVclick}
     \end{block}
     \pause\begin{block}{Findings 3}
-        Block content.
+        FEIV estimates yield significant estimates when we treat the treatment on fuel program as exogenous. \hyperlink{FEIV1}{\beamergotobutton{FEIV1}}\\
     \end{block}
 \end{frame}
 
-\subsection{Cost-Benefit Analysis}
-\begin{frame}
-    
-\end{frame}
+%\subsection{Cost-Benefit Analysis}
+%\begin{frame}
+   
+%\end{frame}
 
 \section{Concluding Remarks}
 \begin{frame}
-    \begin{table}
-        \caption{Largest cities in the world (source: Wikipedia)}
-        \begin{tabular}{@{} lr @{}}
-          \toprule
-          City & Population\\
-          \midrule
-          Mexico City & 20,116,842\\
-          Shanghai & 19,210,000\\
-          Peking & 15,796,450\\
-          Istanbul & 14,160,467\\
-          \bottomrule
-        \end{tabular}
-        \hspace*{1cm}
-            \setlength\extrarowheight{3pt}
-        \begin{tabular}{|lr|}
-          \hline
-          \rowcolor{primary}\color{white}City & \color{white}Population\\
-          \hline
-          Mexico City & 20,116,842\\
-          Shanghai & 19,210,000\\
-          Peking & 15,796,450\\
-          Istanbul & 14,160,467\\
-          \hline
-        \end{tabular}
-    \end{table}
+    \begin{itemize}
+        \item This preliminary conclusion is that the two policies significantly affect the transportation cost in rural areas but 
+    \end{itemize}
 \end{frame}
 
 \section{}
@@ -317,6 +295,14 @@
     \begin{table}[h]
     \caption{FEIV Result with $VF_{it}$ as endogenours \hyperlink{FEIVclick}{\beamerreturnbutton{Back}}}
     \scalebox{0.8}{\input{Final_Project/output/table/FEIV1}}    
+    \end{table}
+\end{frame}
+
+\begin{frame}
+\label{FEIV2}
+    \begin{table}[h]
+    \caption{FEIV Result with $VF_{it}$ as endogenours \hyperlink{FEIVclick}{\beamerreturnbutton{Back}}}
+    \scalebox{0.8}{\input{Final_Project/output/table/FEIV2}}    
     \end{table}
 \end{frame}
 
