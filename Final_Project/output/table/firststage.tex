@@ -1,28 +1,19 @@
 {
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-\begin{tabular}{l*{3}{c}}
+\begin{tabular}{l*{5}{c}}
 \toprule
-                    &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         \\
+                    &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         &\multicolumn{1}{c}{(5)}         \\
 \midrule
-Number of poverty statement request&       0.001\sym{**} &       0.001\sym{*}  &       0.001\sym{*}  \\
-                    &     (0.000)         &     (0.000)         &     (0.000)         \\
+Revenue from village fund transfer&       0.048\sym{*}  &       0.896\sym{***}&       0.279\sym{***}&       0.170\sym{**} &       0.161\sym{**} \\
+                    &     (0.029)         &     (0.291)         &     (0.088)         &     (0.080)         &     (0.078)         \\
 \addlinespace
-Number of PLN electricity user household&                     &       0.009\sym{***}&       0.013\sym{***}\\
-                    &                     &     (0.001)         &     (0.001)         \\
-\addlinespace
-=1 if inside or border with forest, =0 outside forest&                     &                     &      16.178\sym{***}\\
-                    &                     &                     &     (1.352)         \\
-\addlinespace
-=1 if border with sea, =0 no border with sea&                     &                     &      25.999\sym{***}\\
-                    &                     &                     &     (1.626)         \\
-\addlinespace
-Constant            &     120.111\sym{***}&     114.038\sym{***}&     101.620\sym{***}\\
-                    &     (0.626)         &     (0.790)         &     (1.030)         \\
+Treatment           &     -22.009\sym{**} &    -106.907\sym{***}&     -45.137\sym{***}&     -34.253\sym{***}&     -33.359\sym{***}\\
+                    &     (9.937)         &    (34.139)         &    (13.888)         &    (12.911)         &    (12.661)         \\
 \midrule
-Observations        &       87842         &       87842         &       87842         \\
-\(R^{2}\)           &       0.000         &       0.002         &       0.006         \\
+Observations        &       75962         &       75962         &       75962         &       75962         &       75962         \\
+\(R^{2}\)           &      -0.003         &      -0.559         &      -0.058         &      -0.023         &      -0.021         \\
 \bottomrule
-\multicolumn{4}{l}{\footnotesize Standard errors in parentheses}\\
-\multicolumn{4}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\multicolumn{6}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{6}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
 \end{tabular}
 }

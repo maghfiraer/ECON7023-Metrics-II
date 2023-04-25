@@ -115,9 +115,11 @@ esttab using "./output/table/firststagecorr.tex", replace unstack not noobs comp
 
 * Compare First Stage Regression
 est clear
-eststo: reg inc_vf pov_let if prov_prog==1
-eststo: reg inc_vf pov_let elec_pln if prov_prog==1
-eststo: reg inc_vf pov_let elec_pln forest sea if prov_prog==1
+eststo: xtivreg2 unit_cost prog_par (inc_vf=pov_let) if prov_prog==1, fe robust first
+eststo: xtivreg2 unit_cost prog_par (inc_vf=pov_let elec_pln) if prov_prog==1, fe robust first
+eststo: xtivreg2 unit_cost prog_par (inc_vf=pov_let elec_pln landfall_1 earthq_1) if prov_prog==1, fe robust first
+eststo: xtivreg2 unit_cost prog_par (inc_vf=pov_let elec_pln landfall_1 earthq_1 land_topo forest sea trans_river) if prov_prog==1, fe robust first
+eststo: xtivreg2 unit_cost prog_par (inc_vf=pov_let elec_pln landfall_1 earthq_1 land_topo forest sea trans_river sch_jh sch_sh) if prov_prog==1, fe robust first
 esttab using "./output/table/firststage.tex", replace ///
  b(3) se(3) nomtitle label star(* 0.10 ** 0.05 *** 0.01) r2 ///
  booktabs
