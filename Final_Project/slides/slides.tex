@@ -53,50 +53,52 @@
 %\makepart{Proposal}
 \section{Introduction}
 \begin{frame}
+\setbeamercovered{transparent}
 \begin{columns}[T,onlytextwidth]
     \column{0.7\textwidth}
-\begin{block}{Motivation}
+\onslide<1->{\begin{block}{Motivation}
 \begin{itemize}
-    \item Indonesia has been subsidizing fuel for a long time, but high fuel prices in rural areas was observed in the last decade. 
+    \item Indonesia has been subsidizing fuel for a long time, but high fuel prices in rural areas were observed in the last decade. 
     \item Linking underdeveloped regions to growth centers is a challenge.
     \item One Price Fuel program started in 2016 to guarantee the availability of subsidized fuel at the same price control.
     \item Political economy perspective of infrastructure development vs. fossil fuel subsidy \citep{ichsan_2022,ichsan_2021}.
 \end{itemize}
-\end{block}
-\begin{block}{Research Question}
+\end{block}}
+\onslide<2->{\begin{block}{Research Question}
 \begin{itemize}
     \item Does the fuel policy improve accessibility in rural areas?
     \item Which policy option is more efficient?
 \end{itemize}
-\end{block}
+\end{block}}
     \column{0.3\textwidth}
-    \begin{figure}[t]
+    \onslide<1->{\begin{figure}[t]
         \includegraphics[scale=0.21]
         {Final_Project/image/bbm-papua-221017.jpg}
         \end{figure}
     \begin{figure}[t]
         \includegraphics[scale=0.21]
         {Final_Project/image/bbm-satu-harga_1.jpg}
-        \end{figure}
+        \end{figure}}
 \end{columns}
 \end{frame}
 
 \section{Institutional Context and Conceptual Framework}
 \subsection{Accessibility in rural area}
 \begin{frame}
-\begin{block}{Transportation cost in rural area}
+\setbeamercovered{transparent}
+\onslide<1->{\begin{block}{Transportation cost in rural area}
 \begin{itemize}
     \item Transportation spending \al{dominates energy spending} \citep{sambodo_2019}
     \item The \al{lack of adequate and reliable infrastructure} drives up the transportation cost \citep{sandee_2016}.
     \item We can treat unit transportation cost as the \alg{willingness to pay} or demand for transportation
 \end{itemize}
-\end{block}
-\begin{block}{Demand theory of transportation}
+\end{block}}
+\onslide<2->{\begin{block}{Demand theory of transportation}
 \begin{itemize}
     \item Transportation spending \al{dominates energy spending} \citep{sambodo_2019}
     \item The \al{lack of adequate and reliable infrastructure} drives up the transportation cost \citep{sandee_2016}.
 \end{itemize}
-\end{block}
+\end{block}}
 \end{frame}
 
 \subsection{Fossil fuel subsidy regime}
@@ -144,18 +146,19 @@
 \section{Data}
 \subsection{Data Description}
 \begin{frame}
+\setbeamercovered{transparent}
     \begin{itemize}
         \item I obtained the \al{Village Potential Statistics} data for the years 2014 and 2018 from Indonesia's Central Bureau of Statistics complemented with village fund transfer data from the Ministry of Village Development.
-        \item I measure rural accessibility using the \al{log of unit transportation cost} (in Rp/km) of each individual village. 
-        \footnote{I define \al{unit transportation cost}, $y_{it}$, as the \al{transportation cost} from the village office to the sub-district office (in thousands Rp), $c_{it}$, divided by the \al{distance} from the village office to the sub-district office (in km), $d_{it}$.
+        \pause\item I measure rural accessibility using the \al{log of unit transportation cost} (in Rp/km) of each individual village $i$ for year $t$. 
+        \footnote{I define \al{unit transportation cost}, $y_{it}$, as the \al{transportation cost} from the village $i$'s office to the sub-district office (in thousands Rp) at year $t$, $c_{it}$, divided by the \al{distance} from the village office $i$'s to the sub-district office (in km) at year $t$, $d_{it}$.
         \begin{equation}
         y_{it}=\frac{d_{it}}{c_{it}}    
         \end{equation}}
-        \item I obtain the list of 55 government-appointed new distributor's village locations from the NOC and then define all the villages that are in the same sub-district as the \al{treated} by the program, i.e. $D_{it}=1$. 
+        \pause\item I obtain the list of 55 government-appointed new distributor's village locations from the NOC and then define all the villages that are in the same sub-district as the \al{treated} by the program, i.e. $D_{it}=1$, in the year 2014 all $D_{it}=0$. 
         \begin{itemize}
             \item \alg{For example}, suppose the government in 2016 gives the order for the NOC to build a new distribution point at village $A$. Village $A$ is in the same sub-district as villages $B,C$, and $D$. Then all villages $A,B,C$, and $D$ are treated.
         \end{itemize}
-        \item Other data on geographic characteristics, i.e land topography, region boundary with forest or sea, river transportation use, and poverty are used as covariates.
+        \pause\item Other data on geographic characteristics, i.e land topography, region boundary with forest or sea, river transportation use, and poverty are used as covariates.
     \end{itemize}
 \end{frame}
 
@@ -192,7 +195,7 @@
 \subsection{Model Specification}
 \begin{frame}
     \begin{equation*}
-        \log(y_{it})=\alpha_i+\delta_1 prog_{it}+\gamma_1 VF_{it}+
+        y_{it}=\alpha_i+\delta_1 prog_{it}+\gamma_1 VF_{it}+
     \end{equation*}
 \end{frame}
 
@@ -304,5 +307,35 @@
   \href{mailto:\maghfira.ramadhani@gatech.edu}{\faEnvelope\ \  \al{maghfira.ramadhani@gatech.edu}}\\
   \href{http://maghfiraer.github.io}{\faHome\ \  \al{maghfiraer.github.io}} \\
   \href{https://github.com/maghfiraer/ECON7023-Metrics-II/tree/main/Final_Project}{\faGithubSquare\ \  \al{Replication Code}}
+\end{frame}
+
+\appendix
+\section{Appendix}
+\begin{frame}{}{Appendix A}
+    \begin{table}
+        \caption{Largest cities in the world (source: Wikipedia)}
+        \begin{tabular}{@{} lr @{}}
+          \toprule
+          City & Population\\
+          \midrule
+          Mexico City & 20,116,842\\
+          Shanghai & 19,210,000\\
+          Peking & 15,796,450\\
+          Istanbul & 14,160,467\\
+          \bottomrule
+        \end{tabular}
+        \hspace*{1cm}
+            \setlength\extrarowheight{3pt}
+        \begin{tabular}{|lr|}
+          \hline
+          \rowcolor{primary}\color{white}City & \color{white}Population\\
+          \hline
+          Mexico City & 20,116,842\\
+          Shanghai & 19,210,000\\
+          Peking & 15,796,450\\
+          Istanbul & 14,160,467\\
+          \hline
+        \end{tabular}
+    \end{table}
 \end{frame}
 \end{document}
