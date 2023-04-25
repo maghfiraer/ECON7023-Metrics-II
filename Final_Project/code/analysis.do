@@ -117,11 +117,10 @@ esttab using "./output/table/firststagecorr.tex", replace unstack not noobs comp
 est clear
 eststo: reg inc_vf pov_let if prov_prog==1, robust
 eststo: reg inc_vf pov_let elec_pln if prov_prog==1, robust
-eststo: reg inc_vf pov_let elec_pln landfall_1 earthq_1 if prov_prog==1, robust
-eststo: reg inc_vf pov_let elec_pln landfall_1 earthq_1 land_topo forest sea trans_river if prov_prog==1, robust
-eststo: reg inc_vf pov_let elec_pln landfall_1 earthq_1 land_topo forest sea trans_river sch_jh sch_sh if prov_prog==1, robust
+eststo: reg inc_vf pov_let elec_pln earthq_1 if prov_prog==1, robust
+eststo: reg inc_vf pov_let elec_pln earthq_1 land_topo forest sea trans_river if prov_prog==1, robust
 esttab using "./output/table/firststage.tex", replace ///
- b(3) se(3) nomtitle label star(* 0.10 ** 0.05 *** 0.01) r2 ///
+ b(3) se(3) nomtitle label star(* 0.10 ** 0.05 *** 0.01) r2 ar2 scalar(F p_value) ///
  booktabs
  *addnotes("Add comment here")
 
