@@ -175,7 +175,6 @@
     \item Serial correlation should not be an issue since the panel is 4 years apart.
     \item Following \citet{hausman78}, the specification test suggest using \al{fixed effects}. \hyperlink{hausmanspec}{\beamergotobutton{Hausman test}}\label{hausmanclick}
     \item Possible \al{endogeneity treat} from Village Fund Transfer $(VF_{it})$ and Treatment $(D_{it})$, therefore I need to identify whether there is a good instrument available in the datasets. \hyperlink{FSVF}{\beamergotobutton{$VF_{it}$}}\label{VFclick}\hyperlink{FSD}{\beamergotobutton{$D_{it}$}}\label{Dclick}
-    \item Following \citet{abadie2016}, I can use \al{Propensity Score Matching} to construct an artificial control group by matching each treated unit with a non-treated unit of similar characteristics (\texit{to do})
     \item I follow the following model specification
     \begin{equation}
     \resizebox{.6\textwidth}{!}{%
@@ -197,10 +196,13 @@
         Panel OLS estimates indicates that \al{only the fuel program significantly affected unit transportation costs} in rural areas when using the \al{province as sample}, and \alg{both program significantly affects unit transportation cost} when using the \alg{district as sample}. \hyperlink{POLS}{\beamergotobutton{Panel OLS}}\label{POLSclick}
     \end{block}
     \pause\begin{block}{Findings 2}
-        FEIV estimates yield insignificant estimates. Endogeneity tests against $H_0$ that village fund transfer and fuel program are exogenous yields a $P$-value of consecutively 0.9103 and 0.5125, indicating that \al{the null hypothesis can not be rejected}. It might be \alg{better to use Panel OLS} instead \hyperlink{FEIV}{\beamergotobutton{FEIV}}\label{FEIVclick} \hyperlink{FEIV2}{\beamergotobutton{FEIV2}}
+        FEIV estimates yield insignificant estimates. Endogeneity tests against $H_0$ that village fund transfer and fuel program are exogenous yield a $P$-value of consecutively 0.9103 and 0.5125, indicating that \al{the null hypothesis can not be rejected}. It might be \alg{better to use Panel OLS} instead. \hyperlink{FEIV}{\beamergotobutton{FEIV}}\label{FEIVclick} \hyperlink{FEIV2}{\beamergotobutton{FEIV2}}
     \end{block}
-    \begin{block}{Findings 3}
-        I enrich the analysis by generating an interaction variable between programs to explore the complementary effect of both programs. \hyperlink{POLS2}{\beamergotobutton{Panel OLS 2}}
+    \pause\begin{block}{Findings 3}
+        I enrich the analysis by generating an interaction variable between programs to explore the complementary effect of both programs. The interaction term is statistically insignificant. \hyperlink{POLS1}{\beamergotobutton{Panel OLS 2}}
+    \end{block}
+    \pause\begin{block}{Further Investigation}
+        The cost-benefit analysis could be performed to estimate the efficiency of the programs considering we already identify the effect of both programs.
     \end{block}
 \end{frame}
 
@@ -212,7 +214,13 @@
 \section{Concluding Remarks}
 \begin{frame}
     \begin{itemize}
-        \item This preliminary conclusion is that the two policies significantly affect the transportation cost in rural areas but 
+        \item This research finds out that both rural fuel distribution program and inter-government transfer \al{significantly reduces} unit transportation cost in rural areas.
+        \item Further cost-benefit analysis on a marginal change of unit transportation per amount of budget spent could \al{substantially inform policy-makers}.
+        \item Further recommendation:
+        \begin{itemize}
+        \item The limited nature of the data really limits the analysis in this paper, thus I suggest \al{collecting more data} by adding one more year of observation to be able to implement a more robust analysis on time-varying variation.
+        \item Following \citet{abadie2016}, I suggest implementing \al{Propensity Score Matching} to construct an artificial control group by matching each treated unit with a non-treated unit of similar characteristics.
+        \end{itemize}
     \end{itemize}
 \end{frame}
 
