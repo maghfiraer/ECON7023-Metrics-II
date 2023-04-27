@@ -11,7 +11,7 @@
 
 
 \documentclass[
-11pt,notheorems,compress,hyperref={pdfauthor=Maghfira Ramadhani}
+12pt,notheorems,compress,hyperref={pdfauthor=Maghfira Ramadhani}
 ]{beamer}
 
 \input{loadslides.tex} % Loads packages and some defined commands
@@ -163,7 +163,7 @@
 \subsection{Summary Statistics}
 \begin{frame}
     \begin{table}[h]
-    \caption{Summary statistics of main variables. }
+    \caption{Summary statistics of main variables. \hyperlink{summprovince}{\beamergotobutton{Province as Sample}}\label{summary}}
     \scalebox{0.75}{\input{Final_Project/output/table/table1d}}
     \label{t1}\end{table}
 \end{frame}
@@ -195,21 +195,20 @@
     \begin{block}{Findings 1}
         Panel OLS estimates indicates that \al{only the fuel program significantly affected unit transportation costs} in rural areas when using the \al{province as sample}, and \alg{both program significantly affects unit transportation cost} when using the \alg{district as sample}. \hyperlink{POLS}{\beamergotobutton{Panel OLS}}\label{POLSclick}
     \end{block}
-    \pause\begin{block}{Findings 2}
+    \begin{block}{Findings 2}
         FEIV estimates yield insignificant estimates. Endogeneity tests against $H_0$ that village fund transfer and fuel program are exogenous yield a $P$-value of consecutively 0.9103 and 0.5125, indicating that \al{the null hypothesis can not be rejected}. It might be \alg{better to use Panel OLS} instead. \hyperlink{FEIV}{\beamergotobutton{FEIV}}\label{FEIVclick} \hyperlink{FEIV2}{\beamergotobutton{FEIV2}}
     \end{block}
-    \pause\begin{block}{Findings 3}
-        I enrich the analysis by generating an interaction variable between programs to explore the complementary effect of both programs. The interaction term is statistically insignificant. \hyperlink{POLS1}{\beamergotobutton{Panel OLS 2}}
-    \end{block}
-    \pause\begin{block}{Further Investigation}
-        The cost-benefit analysis could be performed to estimate the efficiency of the programs considering we already identify the effect of both programs.
+    \begin{block}{Findings 3}
+        I enrich the analysis by generating an interaction variable between programs to explore the complementary effect of both programs. The interaction term is statistically insignificant. \hyperlink{POLS1}{\beamergotobutton{Panel OLS 2}}\label{BacktoPOLS}
     \end{block}
 \end{frame}
 
-%\subsection{Cost-Benefit Analysis}
-%\begin{frame}
-   
-%\end{frame}
+\subsection{Cost-Benefit Analysis}
+\begin{frame}
+   \begin{itemize}
+       \item The cost-benefit analysis could be performed to estimate the efficiency of the programs considering we already identify the effect of both programs.
+   \end{itemize}
+\end{frame}
 
 \section{Concluding Remarks}
 \begin{frame}
@@ -242,6 +241,15 @@
 
 \appendix
 \section{Appendix}
+\subsection{Summary Statistics}
+\begin{frame}
+\label{summprovince}
+    \begin{table}[h]
+    \caption{Summary statistics of main variables. \hyperlink{summary}{\beamergotobutton{Back}}}
+    \scalebox{0.75}{\input{Final_Project/output/table/table1d}}
+    \end{table}
+\end{frame}
+
 \subsection{First Stage Regression}
 \begin{frame}
 \label{FSVF}
@@ -292,7 +300,7 @@
 \begin{frame}
 \label{POLS1}
     \begin{table}[h]
-    \caption{POLS Result with interaction terms \hyperlink{POLSclick}{\beamerreturnbutton{Back}}}
+    \caption{POLS Result with interaction terms \hyperlink{BacktoPOLS}{\beamerreturnbutton{Back}}}
     \scalebox{0.8}{\input{Final_Project/output/table/POLS2}}    
     \end{table}
 \end{frame}
