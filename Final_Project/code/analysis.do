@@ -282,8 +282,7 @@ esttab using "./output/table/FEIV.tex", replace   ///
  keep(prog_par inc_vf y18) ///
  star(* 0.10 ** 0.05 *** 0.01) ///
  label booktabs nomtitle coeflabels(inc_vf "Village Fund transfer") compress alignment(D{.}{.}{-1}) ///
- scalars("Sa Sample" "Con Controls" "TE Time Fixed Effects" "FE Village Fixed Effects") sfmt(3 0) ///
- r2 ar2
+ scalars("Sa Sample" "Con Controls" "TE Time Fixed Effects" "FE Village Fixed Effects") sfmt(3 0)
 
 xtreg unit_cost prog_par inc_vf i.year if dist_prog==1 & vil_type==1, fe robust
 xtreg unit_cost prog_par inc_vf pov_let elec_pln earthq_1 sea trans_river land_topo forest sch_sh sch_jh i.year if dist_prog==1 & vil_type==1, fe robust
@@ -345,8 +344,7 @@ esttab using "./output/table/FEIV1.tex", replace   ///
  keep(prog_par inc_vf y18) ///
  star(* 0.10 ** 0.05 *** 0.01) ///
  label booktabs nomtitle coeflabels(inc_vf "Village Fund transfer") compress alignment(D{.}{.}{-1}) ///
- scalars("Sa Sample" "Con Controls" "TE Time Fixed Effects" "FE Village Fixed Effects") sfmt(3 0) ///
- r2 ar2
+ scalars("Sa Sample" "Con Controls" "TE Time Fixed Effects" "FE Village Fixed Effects") sfmt(3 0)
 
 xtreg unit_cost prog_par inc_vf i.year if dist_prog==1 & vil_type==1, fe robust
 xtreg unit_cost prog_par inc_vf pov_let elec_pln earthq_1 sea trans_river land_topo forest sch_sh sch_jh i.year if dist_prog==1 & vil_type==1, fe robust
@@ -409,8 +407,7 @@ esttab using "./output/table/FEIV2.tex", replace   ///
  keep(prog_par inc_vf y18) ///
  star(* 0.10 ** 0.05 *** 0.01) ///
  label booktabs nomtitle coeflabels(inc_vf "Village Fund transfer") compress alignment(D{.}{.}{-1}) ///
- scalars("Sa Sample" "Con Controls" "TE Time Fixed Effects" "FE Village Fixed Effects") sfmt(3 0) ///
- r2 ar2
+ scalars("Sa Sample" "Con Controls" "TE Time Fixed Effects" "FE Village Fixed Effects") sfmt(3 0) 
 
 xtreg unit_cost prog_par inc_vf i.year if dist_prog==1 & vil_type==1, fe robust
 xtreg unit_cost prog_par inc_vf pov_let elec_pln earthq_1 sea trans_river land_topo forest sch_sh sch_jh i.year if dist_prog==1 & vil_type==1, fe robust
