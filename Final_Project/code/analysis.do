@@ -110,7 +110,7 @@ by(year) c(stat) stat(mean sd min max n) nototal
 esttab, cells("mean sd min max count")
 estout, cells("mean sd min max count")
 
-esttab using "./output/table/table1d.tex", replace ////
+esttab using "./output/table/table1e.tex", replace ////
 refcat(unit_cost "\emph{Transportation Cost}" landfall_1 "\vspace{0.05em} \\ \emph{Natural Disaster}" elec_pln "\vspace{0.05em} \\ \emph{Infrastructure}" inc_vf "\vspace{0.05em} \\ \emph{Inter-government Transfer}", nolabel) ///
  cells("mean(fmt(2)) sd min max count(fmt(0))") nostar unstack nonumber ///
   compress nomtitle nonote noobs label booktabs ///
