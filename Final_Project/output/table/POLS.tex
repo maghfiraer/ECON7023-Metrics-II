@@ -1,10 +1,10 @@
 {
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-\begin{tabular}{l*{8}{D{.}{.}{-1}}}
+\makebox[\linewidth][c]{\begin{tabular}{l*{8}{D{.}{.}{-1}}}
 \toprule
                 &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         &\multicolumn{1}{c}{(5)}         &\multicolumn{1}{c}{(6)}         &\multicolumn{1}{c}{(7)}         &\multicolumn{1}{c}{(8)}         \\
 \midrule
-Treatment       &   -2.260\sym{**} &   -2.191\sym{*}  &   -2.244\sym{**} &   -2.173\sym{*}  &   -2.159\sym{*}  &   -2.380\sym{**} &   -2.134\sym{*}  &   -2.430\sym{**} \\
+Treatment       &   -2.260\sym{**} &   -2.191\sym{*}  &   -2.244\sym{**} &   -2.173\sym{*}  &   -2.159\sym{*}  &  \marktopleft{a1} -2.380\sym{**} &   -2.134\sym{*}  &   -2.430\sym{**} \\
                 &  (1.142)         &  (1.146)         &  (1.142)         &  (1.147)         &  (1.147)         &  (1.184)         &  (1.141)         &  (1.178)         \\
 \addlinespace
 Village Fund transfer&    0.000         &    0.000         &    0.000         &    0.000         &   -0.001\sym{*}  &   -0.001\sym{*}  &   -0.001\sym{*}  &   -0.001\sym{*}  \\
@@ -16,9 +16,9 @@ Adjusted \(R^{2}\)&    0.000         &    0.000         &    0.000         &    
 Sample          & Province         & Province         & Province         & Province         & District         & District         & District         & District         \\
 Controls        &      Yes         &      Yes         &       No         &       No         &      Yes         &      Yes         &       No         &       No         \\
 Time Fixed Effects&       No         &      Yes         &       No         &      Yes         &       No         &      Yes         &       No         &      Yes         \\
-Village Fixed Effects&      Yes         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         \\
+Village Fixed Effects&      Yes         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes   \markbottomright{a1}      &      Yes         &      Yes         \\
 \bottomrule
 \multicolumn{9}{l}{\footnotesize Standard errors in parentheses}\\
 \multicolumn{9}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
 \end{tabular}
-}
+}}
