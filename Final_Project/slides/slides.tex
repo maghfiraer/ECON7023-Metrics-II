@@ -150,7 +150,7 @@
         \pause\item I measure rural accessibility using the \al{unit transportation cost} (in Rp/km) of each individual village $i$ for year $t$. 
         \footnote{I define \al{unit transportation cost}, $y_{it}$, as the \al{transportation cost} from the village $i$'s office to the sub-district office (in thousands Rp) at year $t$, $c_{it}$, divided by the \al{distance} from the village office $i$'s to the sub-district office (in km) at year $t$, $d_{it}$.
         \begin{equation}
-        y_{it}=\frac{d_{it}}{c_{it}}    
+        y_{it}=d_{it}/c_{it}    
         \end{equation}}
         \pause\item I obtain the list of 55 government-appointed new distributor's village locations from the NOC and then define all the villages that are in the same sub-district as the \al{treated} by the program, i.e. $D_{it}=1$ in the year 2018. Note in the year 2014 all $D_{it}=0$. 
         \begin{itemize}
@@ -183,7 +183,7 @@
     \end{equation}
     where $y_{it}$ represents the unit transportation cost in village $i$ in year $t$,
     $\alpha_i$ represents the village fixed effects, $\theta_t$ represents time trend or time fixed effects, $D_{it}$ and $VF_{it}$ is the main variable of interests, and $\textbf{X}$ as vector of covariates affecting demand.
-    \item \al{Fixed Effect Instrumental Variable} (FEIV) approach (similar to FDIV for $T=2$) can be applied to identify $\delta_1$ and $\gamma_1$ in equation \eqref{ppt2}.
+    \item If the two main variables are endogenous, \al{Fixed Effect Instrumental Variable} (FEIV) approach (similar to FDIV for $T=2$) can be applied to identify $\delta_1$ and $\gamma_1$ in equation \eqref{ppt2}.
     \end{itemize}
 \end{frame}
 
@@ -199,14 +199,21 @@
         FEIV estimates yield insignificant estimates. Endogeneity tests against $H_0$ that village fund transfer and fuel program are exogenous yield a $P$-value of consecutively 0.9103 and 0.5125, indicating that \al{the null hypothesis can not be rejected}. It might be \alg{better to use Panel OLS} instead. \hyperlink{FEIV}{\beamergotobutton{FEIV}}\label{FEIVclick} \hyperlink{FEIV2}{\beamergotobutton{FEIV2}}
     \end{block}
     \begin{block}{Findings 3}
-        I enrich the analysis by generating an interaction variable between programs to explore the complementary effect of both programs. The interaction term is statistically insignificant. \hyperlink{POLS1}{\beamergotobutton{Panel OLS 2}}\label{BacktoPOLS}
+        I enrich the analysis by generating an interaction variable between programs to explore the complementary effect of both programs. The interaction term is \al{statistically insignificant}. \hyperlink{POLS1}{\beamergotobutton{Panel OLS 2}}\label{BacktoPOLS}
     \end{block}
 \end{frame}
 
 \subsection{Cost-Benefit Analysis}
 \begin{frame}
    \begin{itemize}
-       \item The cost-benefit analysis could be performed to estimate the efficiency of the programs considering we already identify the effect of both programs.
+       \item The village fund transfer reduces unit transport cost by \al{1 Rp/km} per millions Rp spent.
+       \item The fuel program reduces unit transport costs by \al{2,380 Rp/km} per gas station built.
+       \item The capital cost of building one remote gas station is reported to be around 3 billion Rp and the profit margin of sales is 195 Rp/Liter\footnote{See \href{https://www.cnbcindonesia.com/news/20201213090547-4-208715/bangun-spbu-bbm-satu-harga-ternyata-lama-balik-modalnya}{https://www.cnbcindonesia.com/news/20201213090547-4-208715/bangun-spbu-bbm-satu-harga-ternyata-lama-balik-modalnya}} and average total sales per location of 383 kL\footnote{obtained from Indonesian Downstream Oil and Gas Authority} in the 2016-2017 period.
+       \item Thus we can estimate the benefit/net cost of the fuel program as
+       \begin{equation*}
+           \left. B/C&=\frac{2,380 \text{Rp/km}}{\text{location}}\middle/\underbrace{\frac{3,000 \text{ million Rp}-\frac{195\text{ Rp}}{kL}\times 383\text{ kL}\times\frac{\text{ million Rp}}{10^6\text{ Rp}}}{\text{location}}}_{\displaystyle Net\ Cost = Capital\ Cost - Sales\ Profit} \right.=0.79\ \frac{\text{Rp/km}}{\text{millions Rp spent}}.
+       \end{equation*}
+       \item Village fund transfer \alg{is more efficient} than the fuel program in increasing rural accessibility.
    \end{itemize}
 \end{frame}
 
@@ -214,7 +221,7 @@
 \begin{frame}
     \begin{itemize}
         \item This research finds out that both rural fuel distribution program and inter-government transfer \al{significantly reduces} unit transportation cost in rural areas.
-        \item Further cost-benefit analysis on a marginal change of unit transportation per amount of budget spent could \al{substantially inform policy-makers}.
+        \item The village fund transfer successfully reduces unit transport cost by \alg{1 Rp/km per million Rp spent}, while the fuel program reduces unit transport cost by \al{0.79 Rp/km per million Rp spent}. The indicates that the \alg{fund transfer to local government is more efficient in improving rural accessibility.}
         \item Further recommendation:
         \begin{itemize}
         \item The limited nature of the data really limits the analysis in this paper, thus I suggest \al{collecting more data} by adding one more year of observation to be able to implement a more robust analysis on time-varying variation.
@@ -246,7 +253,7 @@
 \label{summprovince}
     \begin{table}[h]
     \caption{Summary statistics of main variables. \hyperlink{summary}{\beamergotobutton{Back}}}
-    \scalebox{0.75}{\input{Final_Project/output/table/table1d}}
+    \scalebox{0.75}{\input{Final_Project/output/table/table1e}}
     \end{table}
 \end{frame}
 
@@ -261,16 +268,6 @@
 
 \begin{frame}
 \label{FSD}
-    \begin{table}[h]
-    \caption{First Stage Regression on Treatment \hyperlink{Dclick}{\beamerreturnbutton{Back}}}
-    \scalebox{0.55}{\input{Final_Project/output/table/firststageD}}    
-    \end{table}
-    
-\end{frame}
-
-\subsection{Endogeneity Test}
-\begin{frame}
-\label{Endotest}
     \begin{table}[h]
     \caption{First Stage Regression on Treatment \hyperlink{Dclick}{\beamerreturnbutton{Back}}}
     \scalebox{0.55}{\input{Final_Project/output/table/firststageD}}    
