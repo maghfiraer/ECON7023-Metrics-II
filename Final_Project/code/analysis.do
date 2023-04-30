@@ -112,7 +112,7 @@ esttab, cells("mean sd min max count")
 estout, cells("mean sd min max count")
 
 esttab using "./output/table/table1d1.tex", replace ////
-refcat(unit_cost "\emph{Transportation}" landfall_1 "\\ \emph{Natural Disaster}" elec_pln "\\ \emph{Infrastructure}" land_topo "\\ \emph{Geographic condition}" pov_let "\\ \emph{Economic condition}" inc_vf "\\ \emph{Inter-government Transfer}", nolabel) ///
+refcat(unit_cost "\emph{Transportation}" landfall_1 "\emph{Natural Disaster}" elec_pln "\emph{Infrastructure}" land_topo "\emph{Geographic condition}" pov_let "\emph{Economic condition}" inc_vf "\emph{Inter-government Transfer}", nolabel) ///
  cells("mean(fmt(2)) sd min max count(fmt(0))") nostar unstack nonumber ///
   compress nomtitle nonote noobs label booktabs ///
   eqlabels("2014" "2018") ///
@@ -144,7 +144,7 @@ esttab, cells("mean sd min max count")
 estout, cells("mean sd min max count")
 
 esttab using "./output/table/table1e1.tex", replace ////
-refcat(unit_cost "\emph{Transportation}" landfall_1 "\\ \emph{Natural Disaster}" elec_pln "\\ \emph{Infrastructure}" land_topo "\\ \emph{Geographic condition}" pov_let "\\ \emph{Economic condition}" inc_vf "\\ \emph{Inter-government Transfer}", nolabel) ///
+refcat(unit_cost "\emph{Transportation}" landfall_1 "\emph{Natural Disaster}" elec_pln "\emph{Infrastructure}" land_topo "\emph{Geographic condition}" pov_let "\emph{Economic condition}" inc_vf "\emph{Inter-government Transfer}", nolabel) ///
  cells("mean(fmt(2)) sd min max count(fmt(0))") nostar unstack nonumber ///
   compress nomtitle nonote noobs label booktabs ///
   eqlabels("2014" "2018") ///
