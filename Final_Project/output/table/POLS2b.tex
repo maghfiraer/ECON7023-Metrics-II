@@ -1,0 +1,27 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{4}{D{.}{.}{-1}}}
+\toprule
+                &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         \\
+\midrule
+Interaction terms&    0.001         &    0.001         &    0.002         &    0.003         \\
+                &  (0.003)         &  (0.003)         &  (0.003)         &  (0.003)         \\
+\addlinespace
+Treatment       &   -2.456         &   -2.419         &   -2.890\sym{*}  &   -2.995\sym{*}  \\
+                &  (1.617)         &  (1.617)         &  (1.674)         &  (1.659)         \\
+\addlinespace
+Village Fund transfer&    0.000         &    0.000         &   -0.001\sym{*}  &   -0.001\sym{*}  \\
+                &  (0.000)         &  (0.000)         &  (0.001)         &  (0.001)         \\
+\midrule
+Observations    &    75254         &    75254         &     6579         &     6579         \\
+\(R^{2}\)       &    0.000         &    0.000         &    0.007         &    0.003         \\
+Adjusted \(R^{2}\)&    0.000         &    0.000         &    0.006         &    0.002         \\
+Sample          & Province         & Province         & District         & District         \\
+Controls        &      Yes         &       No         &      Yes         &       No         \\
+Time Fixed Effects&      Yes         &      Yes         &      Yes         &      Yes         \\
+Village Fixed Effects&      Yes         &      Yes         &      Yes         &      Yes         \\
+\bottomrule
+\multicolumn{5}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{5}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{tabular}
+}

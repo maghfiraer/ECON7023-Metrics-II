@@ -95,7 +95,23 @@ esttab, cells("mean sd min max count")
 estout, cells("mean sd min max count")
 
 esttab using "./output/table/table1d.tex", replace ////
-refcat(unit_cost "\emph{Transportation Cost}" landfall_1 "\vspace{0.05em} \\ \emph{Natural Disaster}" elec_pln "\vspace{0.05em} \\ \emph{Infrastructure}" inc_vf "\vspace{0.05em} \\ \emph{Inter-government Transfer}", nolabel) ///
+refcat(unit_cost "\emph{Transportation}" landfall_1 "\vspace{0.05em} \\ \emph{Natural Disaster}" elec_pln "\vspace{0.05em} \\ \emph{Infrastructure}" inc_vf "\vspace{0.05em} \\ \emph{Inter-government Transfer}", nolabel) ///
+ cells("mean(fmt(2)) sd min max count(fmt(0))") nostar unstack nonumber ///
+  compress nomtitle nonote noobs label booktabs ///
+  eqlabels("2014" "2018") ///
+  collabels("Mean" "S.D." "Min" "Max" "Obs.")
+
+ * Table 1 Option D1
+
+est clear
+estpost tabstat ///
+unit_cost vil_subd_dur landfall_1 earthq_1 elec_pln sch_jh sch_sh land_topo sea forest trans_river inc_vf if vil_type==1 & dist_prog==1, ///
+by(year) c(stat) stat(mean sd min max n) nototal
+esttab, cells("mean sd min max count")
+estout, cells("mean sd min max count")
+
+esttab using "./output/table/table1d1.tex", replace ////
+refcat(unit_cost "\emph{Transportation}" landfall_1 "\vspace{0.05em} \\ \emph{Natural Disaster}" elec_pln "\vspace{0.05em} \\ \emph{Infrastructure}" land_topo "\vspace{0.05em} \\ \emph{Geographic condition}" inc_vf "\vspace{0.05em} \\ \emph{Inter-government Transfer}", nolabel) ///
  cells("mean(fmt(2)) sd min max count(fmt(0))") nostar unstack nonumber ///
   compress nomtitle nonote noobs label booktabs ///
   eqlabels("2014" "2018") ///
@@ -111,7 +127,23 @@ esttab, cells("mean sd min max count")
 estout, cells("mean sd min max count")
 
 esttab using "./output/table/table1e.tex", replace ////
-refcat(unit_cost "\emph{Transportation Cost}" landfall_1 "\vspace{0.05em} \\ \emph{Natural Disaster}" elec_pln "\vspace{0.05em} \\ \emph{Infrastructure}" inc_vf "\vspace{0.05em} \\ \emph{Inter-government Transfer}", nolabel) ///
+refcat(unit_cost "\emph{Transportation}" landfall_1 "\vspace{0.05em} \\ \emph{Natural Disaster}" elec_pln "\vspace{0.05em} \\ \emph{Infrastructure}" inc_vf "\vspace{0.05em} \\ \emph{Inter-government Transfer}", nolabel) ///
+ cells("mean(fmt(2)) sd min max count(fmt(0))") nostar unstack nonumber ///
+  compress nomtitle nonote noobs label booktabs ///
+  eqlabels("2014" "2018") ///
+  collabels("Mean" "S.D." "Min" "Max" "Obs.")
+  
+  * Table 1 Option E1
+
+est clear
+estpost tabstat ///
+unit_cost vil_subd_dur landfall_1 earthq_1 elec_pln sch_jh sch_sh land_topo sea forest trans_river inc_vf if vil_type==1 & prov_prog==1, ///
+by(year) c(stat) stat(mean sd min max n) nototal
+esttab, cells("mean sd min max count")
+estout, cells("mean sd min max count")
+
+esttab using "./output/table/table1e1.tex", replace ////
+refcat(unit_cost "\emph{Transportation}" landfall_1 "\vspace{0.05em} \\ \emph{Natural Disaster}" elec_pln "\vspace{0.05em} \\ \emph{Infrastructure}" land_topo "\vspace{0.05em} \\ \emph{Geographic condition}" inc_vf "\vspace{0.05em} \\ \emph{Inter-government Transfer}", nolabel) ///
  cells("mean(fmt(2)) sd min max count(fmt(0))") nostar unstack nonumber ///
   compress nomtitle nonote noobs label booktabs ///
   eqlabels("2014" "2018") ///
@@ -225,6 +257,42 @@ esttab using "./output/table/POLS.tex", replace   ///
  scalars("Sa Sample" "Con Controls" "TE Time Fixed Effects" "FE Village Fixed Effects") sfmt(3 0) ///
  r2 ar2
 
+* Simple POLSb
+est clear
+
+
+eststo: xtreg unit_cost prog_par inc_vf vil_subd_dur pov_let sch_sh land_topo trans_river i.year if prov_prog==1 & vil_type==1, fe robust
+ estadd local  FE "Yes"
+ estadd local  TE "Yes"
+ estadd local  Sa "Province"
+ estadd local  Con "Yes"
+
+eststo: xtreg unit_cost prog_par inc_vf i.year if prov_prog==1 & vil_type==1, fe robust
+ estadd local  FE "Yes"
+ estadd local  TE "Yes"
+ estadd local  Sa "Province"
+ estadd local  Con "No"
+ 
+eststo: xtreg unit_cost prog_par inc_vf vil_subd_dur pov_let sch_sh land_topo trans_river i.year if dist_prog==1 & vil_type==1, fe robust
+ estadd local  FE "Yes"
+ estadd local  TE "Yes"
+ estadd local  Sa "District"
+ estadd local  Con "Yes"
+
+eststo: xtreg unit_cost prog_par inc_vf i.year if dist_prog==1 & vil_type==1, fe robust
+ estadd local  FE "Yes"
+ estadd local  TE "Yes"
+ estadd local  Sa "District"
+ estadd local  Con "No"
+
+esttab using "./output/table/POLSb.tex", replace   ///
+ b(3) se(3) ///
+ keep(prog_par inc_vf) ///
+ star(* 0.10 ** 0.05 *** 0.01) ///
+ label booktabs nomtitle coeflabels(inc_vf "Village Fund transfer") compress alignment(D{.}{.}{-1}) ///
+ scalars("Sa Sample" "Con Controls" "TE Time Fixed Effects" "FE Village Fixed Effects") sfmt(3 0) ///
+ r2 ar2
+ 
 * FEIV
 global controls vil_subd_dur sch_sh land_topo trans_river
 est clear
@@ -346,9 +414,40 @@ esttab using "./output/table/FEIV1.tex", replace   ///
  label booktabs nomtitle coeflabels(inc_vf "Village Fund transfer") compress alignment(D{.}{.}{-1}) ///
  scalars("Sa Sample" "Con Controls" "TE Time Fixed Effects" "FE Village Fixed Effects") sfmt(3 0)
 
-xtreg unit_cost prog_par inc_vf i.year if dist_prog==1 & vil_type==1, fe robust
-xtreg unit_cost prog_par inc_vf pov_let elec_pln earthq_1 sea trans_river land_topo forest sch_sh sch_jh i.year if dist_prog==1 & vil_type==1, fe robust
+* FEIV1
+global controls vil_subd_dur sch_sh land_topo trans_river
+est clear
 
+eststo: xtivreg2 unit_cost prog_par ( inc_vf=pov_let elec_pln earthq_1) $controls y18 if prov_prog==1 & vil_type==1, fe robust
+ estadd local  FE "Yes"
+ estadd local  TE "Yes"
+ estadd local  Sa "Province"
+ estadd local  Con "Yes"
+
+eststo: xtivreg2 unit_cost prog_par ( inc_vf=pov_let elec_pln earthq_1) y18 if prov_prog==1 & vil_type==1, fe robust
+ estadd local  FE "Yes"
+ estadd local  TE "Yes"
+ estadd local  Sa "Province"
+ estadd local  Con "No"
+ 
+eststo: xtivreg2 unit_cost prog_par ( inc_vf=pov_let elec_pln earthq_1) $controls y18 if dist_prog==1 & vil_type==1, fe robust
+ estadd local  FE "Yes"
+ estadd local  TE "Yes"
+ estadd local  Sa "District"
+ estadd local  Con "Yes"
+
+eststo: xtivreg2 unit_cost prog_par ( inc_vf=pov_let elec_pln earthq_1) y18 if dist_prog==1 & vil_type==1, fe robust
+ estadd local  FE "Yes"
+ estadd local  TE "Yes"
+ estadd local  Sa "District"
+ estadd local  Con "No"
+
+esttab using "./output/table/FEIV1b.tex", replace   ///
+ b(3) se(3) ///
+ keep(prog_par inc_vf y18) ///
+ star(* 0.10 ** 0.05 *** 0.01) ///
+ label booktabs nomtitle coeflabels(inc_vf "Village Fund transfer") compress alignment(D{.}{.}{-1}) ///
+ scalars("Sa Sample" "Con Controls" "TE Time Fixed Effects" "FE Village Fixed Effects") sfmt(3 0) 
 
 * FEIV2
 global controls vil_subd_dur sch_sh land_topo trans_river
@@ -409,8 +508,41 @@ esttab using "./output/table/FEIV2.tex", replace   ///
  label booktabs nomtitle coeflabels(inc_vf "Village Fund transfer") compress alignment(D{.}{.}{-1}) ///
  scalars("Sa Sample" "Con Controls" "TE Time Fixed Effects" "FE Village Fixed Effects") sfmt(3 0) 
 
-xtreg unit_cost prog_par inc_vf i.year if dist_prog==1 & vil_type==1, fe robust
-xtreg unit_cost prog_par inc_vf pov_let elec_pln earthq_1 sea trans_river land_topo forest sch_sh sch_jh i.year if dist_prog==1 & vil_type==1, fe robust
+* FEIV2b
+global controls vil_subd_dur sch_sh land_topo trans_river
+est clear
+
+eststo: xtivreg2 unit_cost inc_vf (prog_par=pov_let elec_pln earthq_1) $controls y18 if prov_prog==1 & vil_type==1, fe robust
+ estadd local  FE "Yes"
+ estadd local  TE "Yes"
+ estadd local  Sa "Province"
+ estadd local  Con "Yes"
+
+eststo: xtivreg2 unit_cost inc_vf ( prog_par=pov_let elec_pln earthq_1) y18 if prov_prog==1 & vil_type==1, fe robust
+ estadd local  FE "Yes"
+ estadd local  TE "Yes"
+ estadd local  Sa "Province"
+ estadd local  Con "No"
+ 
+
+eststo: xtivreg2 unit_cost inc_vf ( prog_par=pov_let elec_pln earthq_1) $controls y18 if dist_prog==1 & vil_type==1, fe robust
+ estadd local  FE "Yes"
+ estadd local  TE "Yes"
+ estadd local  Sa "District"
+ estadd local  Con "Yes"
+
+eststo: xtivreg2 unit_cost inc_vf ( prog_par=pov_let elec_pln earthq_1) y18 if dist_prog==1 & vil_type==1, fe robust
+ estadd local  FE "Yes"
+ estadd local  TE "Yes"
+ estadd local  Sa "District"
+ estadd local  Con "No"
+
+esttab using "./output/table/FEIV2b.tex", replace   ///
+ b(3) se(3) ///
+ keep(prog_par inc_vf y18) ///
+ star(* 0.10 ** 0.05 *** 0.01) ///
+ label booktabs nomtitle coeflabels(inc_vf "Village Fund transfer") compress alignment(D{.}{.}{-1}) ///
+ scalars("Sa Sample" "Con Controls" "TE Time Fixed Effects" "FE Village Fixed Effects") sfmt(3 0) 
 
 
 gen progcf=prog_par*inc_vf
@@ -474,5 +606,38 @@ esttab using "./output/table/POLS2.tex", replace   ///
  scalars("Sa Sample" "Con Controls" "TE Time Fixed Effects" "FE Village Fixed Effects") sfmt(3 0) ///
  r2 ar2
 
+* Simple POLS2b
+est clear
 
+eststo: xtreg unit_cost progcf prog_par inc_vf vil_subd_dur pov_let sch_sh land_topo trans_river i.year if prov_prog==1 & vil_type==1, fe robust
+ estadd local  FE "Yes"
+ estadd local  TE "Yes"
+ estadd local  Sa "Province"
+ estadd local  Con "Yes"
+
+eststo: xtreg unit_cost progcf prog_par inc_vf i.year if prov_prog==1 & vil_type==1, fe robust
+ estadd local  FE "Yes"
+ estadd local  TE "Yes"
+ estadd local  Sa "Province"
+ estadd local  Con "No"
+
+eststo: xtreg unit_cost progcf prog_par inc_vf vil_subd_dur pov_let sch_sh land_topo trans_river i.year if dist_prog==1 & vil_type==1, fe robust
+ estadd local  FE "Yes"
+ estadd local  TE "Yes"
+ estadd local  Sa "District"
+ estadd local  Con "Yes"
+
+eststo: xtreg unit_cost progcf prog_par inc_vf i.year if dist_prog==1 & vil_type==1, fe robust
+ estadd local  FE "Yes"
+ estadd local  TE "Yes"
+ estadd local  Sa "District"
+ estadd local  Con "No"
+
+esttab using "./output/table/POLS2b.tex", replace   ///
+ b(3) se(3) ///
+ keep(progcf prog_par inc_vf) ///
+ star(* 0.10 ** 0.05 *** 0.01) ///
+ label booktabs nomtitle coeflabels(inc_vf "Village Fund transfer" progcf "Interaction terms") compress alignment(D{.}{.}{-1}) ///
+ scalars("Sa Sample" "Con Controls" "TE Time Fixed Effects" "FE Village Fixed Effects") sfmt(3 0) ///
+ r2 ar2
 

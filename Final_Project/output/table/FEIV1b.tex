@@ -1,0 +1,25 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{4}{D{.}{.}{-1}}}
+\toprule
+                &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         \\
+\midrule
+Village Fund transfer&    0.004\sym{*}  &    0.004\sym{*}  &   -0.004         &   -0.004         \\
+                &  (0.003)         &  (0.003)         &  (0.006)         &  (0.006)         \\
+\addlinespace
+Treatment       &   -2.611\sym{**} &   -2.593\sym{**} &   -2.207\sym{*}  &   -2.259\sym{*}  \\
+                &  (1.192)         &  (1.193)         &  (1.287)         &  (1.274)         \\
+\addlinespace
+y18             &   -0.081         &   -0.082         &    0.323         &    0.398         \\
+                &  (0.111)         &  (0.113)         &  (0.433)         &  (0.415)         \\
+\midrule
+Observations    &    73228         &    73228         &     6336         &     6336         \\
+Sample          & Province         & Province         & District         & District         \\
+Controls        &      Yes         &       No         &      Yes         &       No         \\
+Time Fixed Effects&      Yes         &      Yes         &      Yes         &      Yes         \\
+Village Fixed Effects&      Yes         &      Yes         &      Yes         &      Yes         \\
+\bottomrule
+\multicolumn{5}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{5}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{tabular}
+}
