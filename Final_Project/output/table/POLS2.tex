@@ -1,30 +1,30 @@
 {
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-\begin{tabular}{l*{8}{D{.}{.}{-1}}}
+\begin{tabular}{l*{4}{D{.}{.}{-1}}}
 \toprule
-                &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         &\multicolumn{1}{c}{(5)}         &\multicolumn{1}{c}{(6)}         &\multicolumn{1}{c}{(7)}         &\multicolumn{1}{c}{(8)}         \\
+                &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         \\
 \midrule
-Interaction terms&    0.001         &    0.001         &    0.001         &    0.001         &    0.002         &    0.002         &    0.003         &    0.003         \\
-                &  (0.003)         &  (0.003)         &  (0.003)         &  (0.003)         &  (0.003)         &  (0.003)         &  (0.003)         &  (0.003)         \\
+Interaction terms&    0.001         &    0.001         &    0.002         &    0.003         \\
+                &  (0.003)         &  (0.003)         &  (0.003)         &  (0.003)         \\
 \addlinespace
-Treatment       &   -2.525         &   -2.456         &   -2.491         &   -2.419         &   -2.648         &   -2.890\sym{*}  &   -2.669         &   -2.995\sym{*}  \\
-                &  (1.613)         &  (1.617)         &  (1.613)         &  (1.617)         &  (1.647)         &  (1.674)         &  (1.631)         &  (1.659)         \\
+Treatment       &   -2.482         &   -2.419         &   -2.774\sym{*}  &   -2.995\sym{*}  \\
+                &  (1.615)         &  (1.617)         &  (1.658)         &  (1.659)         \\
 \addlinespace
-Village Fund transfer&    0.000         &    0.000         &    0.000         &    0.000         &   -0.001\sym{*}  &   -0.001\sym{*}  &   -0.001\sym{*}  &   -0.001\sym{*}  \\
-                &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         &  (0.001)         &  (0.001)         &  (0.001)         &  (0.001)         \\
+Village Fund transfer&    0.000         &    0.000         &   -0.001\sym{*}  &   -0.001\sym{*}  \\
+                &  (0.000)         &  (0.000)         &  (0.001)         &  (0.001)         \\
 \addlinespace
-Time trend      &                  &   -0.080         &                  &   -0.072         &                  &    0.245         &                  &    0.311         \\
-                &                  &  (0.111)         &                  &  (0.111)         &                  &  (0.305)         &                  &  (0.284)         \\
+Time trend      &   -0.086         &   -0.072         &    0.247         &    0.311         \\
+                &  (0.113)         &  (0.111)         &  (0.306)         &  (0.284)         \\
 \midrule
-Observations    &    75254         &    75254         &    75254         &    75254         &     6579         &     6579         &     6579         &     6579         \\
-\(R^{2}\)       &    0.000         &    0.000         &    0.000         &    0.000         &    0.007         &    0.007         &    0.003         &    0.003         \\
-Adjusted \(R^{2}\)&    0.000         &    0.000         &    0.000         &    0.000         &    0.006         &    0.006         &    0.002         &    0.002         \\
-Sample          & Province         & Province         & Province         & Province         & District         & District         & District         & District         \\
-Controls        &      Yes         &      Yes         &       No         &       No         &      Yes         &      Yes         &       No         &       No         \\
-Time Fixed Effects&       No         &      Yes         &       No         &      Yes         &       No         &      Yes         &       No         &      Yes         \\
-Village Fixed Effects&      Yes         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         \\
+Observations    &    75254         &    75254         &     6579         &     6579         \\
+\(R^{2}\)       &    0.000         &    0.000         &    0.008         &    0.003         \\
+Adjusted \(R^{2}\)&    0.000         &    0.000         &    0.006         &    0.002         \\
+Sample          & Province         & Province         & District         & District         \\
+Controls        &      Yes         &       No         &      Yes         &       No         \\
+Time Fixed Effects&      Yes         &      Yes         &      Yes         &      Yes         \\
+Village Fixed Effects&      Yes         &      Yes         &      Yes         &      Yes         \\
 \bottomrule
-\multicolumn{9}{l}{\footnotesize Standard errors in parentheses}\\
-\multicolumn{9}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\multicolumn{5}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{5}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
 \end{tabular}
 }

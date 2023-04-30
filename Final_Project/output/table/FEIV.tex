@@ -1,25 +1,25 @@
 {
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-\begin{tabular}{l*{8}{D{.}{.}{-1}}}
+\begin{tabular}{l*{4}{D{.}{.}{-1}}}
 \toprule
-                &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         &\multicolumn{1}{c}{(5)}         &\multicolumn{1}{c}{(6)}         &\multicolumn{1}{c}{(7)}         &\multicolumn{1}{c}{(8)}         \\
+                &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         \\
 \midrule
-Treatment       &   18.297         & -132.775         &   16.617         & -135.896         &    3.825         &  -18.464         &    5.232         &  -19.610         \\
-                & (14.523)         &(198.007)         & (13.596)         &(206.572)         &  (6.469)         & (28.313)         &  (6.040)         & (25.312)         \\
+Treatment       &   45.491         &   46.524         &  -19.958         &  -20.692\sym{*}  \\
+                & (64.781)         & (62.875)         & (12.716)         & (11.538)         \\
 \addlinespace
-Village Fund transfer&    0.003         &    0.017         &    0.003         &    0.018         &   -0.005         &   -0.008         &   -0.005         &   -0.008         \\
-                &  (0.003)         &  (0.018)         &  (0.003)         &  (0.019)         &  (0.007)         &  (0.010)         &  (0.006)         &  (0.009)         \\
+Village Fund transfer&   -0.001         &   -0.001         &   -0.008         &   -0.009         \\
+                &  (0.007)         &  (0.007)         &  (0.007)         &  (0.007)         \\
 \addlinespace
-Time trend      &                  &    1.104         &                  &    1.100         &                  &    2.210         &                  &    2.438         \\
-                &                  &  (1.809)         &                  &  (1.838)         &                  &  (3.170)         &                  &  (2.837)         \\
+Time trend      &   -0.518         &   -0.516         &    2.385\sym{*}  &    2.568\sym{**} \\
+                &  (0.626)         &  (0.598)         &  (1.369)         &  (1.266)         \\
 \midrule
-Observations    &    73228         &    73228         &    73228         &    73228         &     6336         &     6336         &     6336         &     6336         \\
-Sample          & Province         & Province         & Province         & Province         & District         & District         & District         & District         \\
-Controls        &      Yes         &      Yes         &       No         &       No         &      Yes         &      Yes         &       No         &       No         \\
-Time Fixed Effects&       No         &      Yes         &       No         &      Yes         &       No         &      Yes         &       No         &      Yes         \\
-Village Fixed Effects&      Yes         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         \\
+Observations    &    73228         &    73228         &     6336         &     6336         \\
+Sample          & Province         & Province         & District         & District         \\
+Controls        &      Yes         &       No         &      Yes         &       No         \\
+Time Fixed Effects&      Yes         &      Yes         &      Yes         &      Yes         \\
+Village Fixed Effects&      Yes         &      Yes         &      Yes         &      Yes         \\
 \bottomrule
-\multicolumn{9}{l}{\footnotesize Standard errors in parentheses}\\
-\multicolumn{9}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\multicolumn{5}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{5}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
 \end{tabular}
 }
