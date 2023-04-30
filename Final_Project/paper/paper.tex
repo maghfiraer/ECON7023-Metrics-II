@@ -15,6 +15,23 @@
 % Enter PDF file with figures here:
 \newcommand{\pdf}{figures.pdf}
 
+% Custom math
+\newcommand\iid{\stackrel{\mathclap{iid}}{\sim}}
+\newcommand\asym{\stackrel{\mathclap{a}}{\sim}}
+\newcommand\convprob{\xrightarrow{p}}
+\newcommand\convdist{\xrightarrow{d}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\E}{\text{E}}
+\newcommand{\V}{\text{Var}}
+\newcommand{\Av}{\text{Avar}}
+\newcommand{\se}{\text{se}}
+\newcommand{\corr}{\text{Corr}}
+\newcommand{\cov}{\text{Cov}}
+\newcommand{\norm}{\text{Normal}}
+\newcommand{\indep}{\perp \!\!\! \perp}
+\newcommand{\Hy}{\text{H}}
+
 % Fill out paper:
 \begin{document}
 \title{Improving Rural Accessibility in Indonesia: Fuel Subsidy versus Infrastructure Development}
@@ -59,44 +76,65 @@ Developing countries believe decentralization and local government reform are mo
 
 \section{Data}\label{s:data}
 
-I obtained the Village Potential Statistics data for the years 2014 and 2018 from Indonesia's Central Bureau of Statistics complemented with village fund transfer data from the Ministry of Village Development.
+I obtained the Village Potential Statistics data for the years 2014 and 2018 from Indonesia's Central Bureau of Statistics complemented with village fund transfer data from the Ministry of Village Development. The original survey covers general information about the village, population and employment, housing and environment, natural disaster, education and health, sport and leisure, transportation and communication, land use, economic activity, security, local government, community empowerment, and agriculture. However, not all the variables are published due to potential inaccuracy issues. The original data consists of consecutively 82,190 and 83,931 observations of villages in rural and urban areas. I then clean the data to only include non-urban areas.
 
-I measure rural accessibility using the unit transportation cost (in Rp/km) of each individual village $i$ for year $t$. I define unit transportation cost, $y_{it}$, as the transportation cost from the village $i$'s office to the sub-district office (in thousands Rp) at year $t$, $c_{it}$, divided by the distance from the village office $i$'s to the sub-district office (in km) at year $t$, $d_{it}$.
+
+I measure rural accessibility using the unit transportation cost (in Rp/km) of each individual village $i$ for the year $t$. I define unit transportation cost, $y_{it}$, as the transportation cost from the village $i$'s office to the sub-district office (in thousands Rp) at year $t$, $c_{it}$, divided by the distance from the village office $i$'s to the sub-district office (in km) at year $t$, $d_{it}$.
 \begin{equation}
         y_{it}=d_{it}/c_{it}    
 \end{equation}
 
-I obtain the list of 55 government-appointed new distributor's village locations from the NOC and then define all the villages that are in the same sub-district as treated by the program, i.e. $D_{it}=1$ in the year 2018. Note in the year 2014 all $D_{it}=0$. 
-
-For example, suppose the government in 2016 gives the order for the NOC to build a new distribution point at village $A$. Village $A$ is in the same sub-district as villages $B,C$, and $D$. Then all villages $A,B,C$, and $D$ are treated.
-
-Other data on geographic characteristics, i.e land topography, region boundary with forest or sea, river transportation use, and poverty can be used as covariates or instruments.
+I obtain the list of 55 government-appointed new distributor's village locations from the NOC and then define all the villages that are in the same sub-district as treated by the program, i.e. $D_{it}=1$ in the year 2018. Note that in the year 2014 all villages have $D_{it}=0$. For example, suppose the government in 2016 gives the order for the NOC to build a new distribution point at village $A$. Village $A$ is in the same sub-district as villages $B,C$, and $D$. Then all villages $A,B,C$, and $D$ are treated.
 
 
 \section{Empirical strategy}\label{s:strategy}
 
-I observed village level as the unit of analysis. I obtained a proprietary Village Potential Statistics data for the year 2011, 2014 and 2018 from Indonesia's Central Bureau of Statistics consisting of consecutively 77,961, 82,190, and 83,931 observations of village in rural and urban areas. The original survey covers the general information of village, population and employment, housing and environment, natural disaster, education and health, sport and leisure, transportation and communication, land use, economic activity, security, local government, community empowerment, and agriculture. However, the data on transportation cost are not collected in the year 2011, and also the data about village government budget is not available for the year 2018.  
+I observed the village level as the unit of analysis. Other data on geographic characteristics, i.e land topography, region boundary with forest or sea, river transportation use, and poverty can be used as covariates or instruments.
 
-\subsection{Measuring rural accessibility with transportation cost}
+I follow the following model specification
+\begin{equation}
+    y_{it}=\alpha_i+\theta_t+\delta_1 D_{it}+\gamma_1 VF_{it}+\textbf{X}\pmb{\beta}+\varepsilon_{it}\label{e1}
+\end{equation}
+where $y_{it}$ represents the unit transportation cost in village $i$ in year $t$,
+$\alpha_i$ represents the village fixed effects, $\theta_t$ represents time trend or time fixed effects, $D_{it}$ and $VF_{it}$ is the main variable of interests, and $\textbf{X}$ as vector of covariates affecting demand. Serial correlation should not be an issue in this model since the panel is 4 years apart. 
 
+I perform \citet{hausman78} specification test. The test of $H_0:$ difference in coefficients not systematic or the individual unobserved heterogeneity is correlated with the regressors. We can compute the Hausman statistic as \begin{equation*}
+        H=(\hat{\pmb{\delta}}_{FE}-\hat{\pmb{\delta}}_{RE})'\left[\hat{\Av}(\hat{\pmb{\delta}}_{FE})-\hat{\Av}(\hat{\pmb{\delta}}_{RE})\right]^{-1}(\hat{\pmb{\delta}}_{FE}-\hat{\pmb{\delta}}_{RE}) \asym \chi_M^2 \end{equation*}
+The test yields a $\chi^2$-statistics of 15.96 with $P$-value of 0.0003, thus we cannot reject the null hypothesis. This suggests using fixed effects instead of random effects for panel data analysis. This test is valid under RE1-RE3, thus we can not strictly argue with it.
 
+Possible endogeneity treats from Village Fund Transfer $(VF_{it})$ and Treatment $(D_{it})$, therefore I need to identify whether there is a good instrument available in the dataset. If the two main variables are endogenous, \al{Fixed Effect Instrumental Variable} (FEIV) approach (similar to FDIV for $T=2$) can be applied to identify $\delta_1$ and $\gamma_1$ in equation \eqref{e1}.
 
 \section{Results}\label{s:result}
-\subsection{Preliminary findings}
+\subsection{Main findings}
 
+\paragraph{Findings 1}
+        Panel OLS estimates indicates that \al{only the fuel program significantly affected unit transportation costs} in rural areas when using the \al{province as sample}, and \alg{both program significantly affects unit transportation cost} when using the \alg{district as sample}. 
+        
+\paragraph{Findings 2}
+        FEIV estimates yield insignificant estimates. Endogeneity tests against $H_0$ that village fund transfer and fuel program are exogenous yield a $P$-value of consecutively 0.9103 and 0.5125, indicating that \al{the null hypothesis can not be rejected}. It might be \alg{better to use Panel OLS} instead.
 
+\paragraph{Findings 3}
+        I enrich the analysis by generating an interaction variable between programs to explore the complementary effect of both programs. The interaction term is \al{statistically insignificant}.
 
-\paragraph{Another paragraph} At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. 
-
-\paragraph{Yet another paragraph} At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. 
-
-
+\subsection{Benefit-cost analysis}
+The village fund transfer reduces unit transport cost by \al{1 Rp/km} per millions Rp spent. The fuel program reduces unit transport costs by \al{2,380 Rp/km} per gas station built. The capital cost of building one remote gas station is reported to be around 3 billion Rp and the profit margin of sales is 195 Rp/Liter\footnote{See \href{https://www.cnbcindonesia.com/news/20201213090547-4-208715/bangun-spbu-bbm-satu-harga-ternyata-lama-balik-modalnya}{https://www.cnbcindonesia.com/news/20201213090547-4-208715/bangun-spbu-bbm-satu-harga-ternyata-lama-balik-modalnya}} and average total sales per location of 383 kL\footnote{The figures is obtained from Indonesian Downstream Oil and Gas Authority} in the 2016-2017 period.
+Thus we can estimate the benefit/net cost of the fuel program as
+\begin{align*}
+   \left. B/C&=\frac{2,380 \text{ Rp/km}}{\text{location}}\middle/\underbrace{\frac{3,000 \text{ million Rp}-\frac{195\text{ Rp}}{kL}\times 383\text{ kL}\times\frac{\text{ million Rp}}{10^6\text{ Rp}}}{\text{location}}}_{\displaystyle \text{Net Cost} = \text{Capital Cost} - \text{Sales Profit}} \right.\\
+   &=0.79\ \frac{\text{Rp/km}}{\text{millions Rp spent}}.
+\end{align*}
+Village fund transfer \alg{is more efficient} than the fuel program in increasing rural accessibility.
 
 \section{Conclusion}\label{s:conclusion}
 
-To conclude, at vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. 
+This research finds out that both rural fuel distribution program and inter-government transfer significantly reduces unit transportation cost in rural areas. 
 
-At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint.
+The village fund transfer successfully reduces unit transport cost by 1 Rp/km per million Rp spent, while the fuel program reduces unit transport cost by 0.79 Rp/km per million Rp spent. This indicates that the fund transfer to local government is more efficient in improving rural accessibility.
+
+\paragraph{Further recommendation}
+The limited nature of the data really limits the analysis in this paper, thus I suggest collecting more data by adding one more year of observation to be able to implement a more robust analysis on time-varying variation.
+
+Following \citet{abadie2016}, I suggest implementing Propensity Score Matching to construct an artificial control group by matching each treated unit with a non-treated unit of similar characteristics.
 
 \bibliography{\bib}
 
@@ -108,16 +146,20 @@ At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praes
 
 \begin{table}[h]
 \caption{Summary statistics of main variables with the province-level as sample} 
-\scalebox{0.85}{\input{Final_Project/output/table/table1e}}
-\note{Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non recusandae. Ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat}
+\scalebox{0.79}{\input{Final_Project/output/table/table1e1}}
+\note{The sample is all the villages in the provinces where the fuel program exists.}
 \label{t:1}\end{table}
 
 
 \begin{table}[h]
 \caption{Summary statistics of main variables with the district-level as sample} 
-\scalebox{0.85}{\input{Final_Project/output/table/table1d}}
-\note{Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non recusandae. Ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat}
+\scalebox{0.79}{\input{Final_Project/output/table/table1d1}}
+\note{The sample is all the villages in the districts where the fuel program exists.}
 \label{t:2}\end{table}
+
+
+
+
 \end{landscape}
 
 \section{Figures}
