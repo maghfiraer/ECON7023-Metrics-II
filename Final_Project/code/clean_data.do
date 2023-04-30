@@ -746,7 +746,7 @@ gen lpov=log(pov_let)
 label variable lvf "Log Village Fund Transfer"
 label variable lpln "Log Electricity Customer"
 label variable lpov "Log Poverty Statement"
-label variable vil_subd_dur "Travel Duration"
+label variable vil_subd_dur "Travel Duration (hr)"
 
 replace trans_river=0 if missing(trans_river)
 

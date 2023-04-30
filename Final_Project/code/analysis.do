@@ -20,6 +20,7 @@ label variable vil_subd_cost "Transportation cost in 000s Rp."
 label variable landfall_1 "Landfall occurence average per year"
 label variable earthq_1 "Earthquake occurence average per year"
 label variable sch_sh "Number of Senior High School"
+label variable vil_subd_dur "Travel duration (hrs)"
 
 * Rebalancing village
 egen count1 = count(village_id), by(village_id)
@@ -105,13 +106,13 @@ refcat(unit_cost "\emph{Transportation}" landfall_1 "\vspace{0.05em} \\ \emph{Na
 
 est clear
 estpost tabstat ///
-unit_cost vil_subd_dur landfall_1 earthq_1 elec_pln sch_jh sch_sh land_topo sea forest trans_river inc_vf if vil_type==1 & dist_prog==1, ///
+unit_cost vil_subd_dur landfall_1 earthq_1 elec_pln sch_jh sch_sh land_topo sea forest trans_river pov_let inc_vf if vil_type==1 & dist_prog==1, ///
 by(year) c(stat) stat(mean sd min max n) nototal
 esttab, cells("mean sd min max count")
 estout, cells("mean sd min max count")
 
 esttab using "./output/table/table1d1.tex", replace ////
-refcat(unit_cost "\emph{Transportation}" landfall_1 "\vspace{0.05em} \\ \emph{Natural Disaster}" elec_pln "\vspace{0.05em} \\ \emph{Infrastructure}" land_topo "\vspace{0.05em} \\ \emph{Geographic condition}" inc_vf "\vspace{0.05em} \\ \emph{Inter-government Transfer}", nolabel) ///
+refcat(unit_cost "\emph{Transportation}" landfall_1 "\\ \emph{Natural Disaster}" elec_pln "\\ \emph{Infrastructure}" land_topo "\\ \emph{Geographic condition}" pov_let "\\ \emph{Economic condition}" inc_vf "\\ \emph{Inter-government Transfer}", nolabel) ///
  cells("mean(fmt(2)) sd min max count(fmt(0))") nostar unstack nonumber ///
   compress nomtitle nonote noobs label booktabs ///
   eqlabels("2014" "2018") ///
@@ -137,13 +138,13 @@ refcat(unit_cost "\emph{Transportation}" landfall_1 "\vspace{0.05em} \\ \emph{Na
 
 est clear
 estpost tabstat ///
-unit_cost vil_subd_dur landfall_1 earthq_1 elec_pln sch_jh sch_sh land_topo sea forest trans_river inc_vf if vil_type==1 & prov_prog==1, ///
+unit_cost vil_subd_dur landfall_1 earthq_1 elec_pln sch_jh sch_sh land_topo sea forest trans_river pov_let inc_vf if vil_type==1 & prov_prog==1, ///
 by(year) c(stat) stat(mean sd min max n) nototal
 esttab, cells("mean sd min max count")
 estout, cells("mean sd min max count")
 
 esttab using "./output/table/table1e1.tex", replace ////
-refcat(unit_cost "\emph{Transportation}" landfall_1 "\vspace{0.05em} \\ \emph{Natural Disaster}" elec_pln "\vspace{0.05em} \\ \emph{Infrastructure}" land_topo "\vspace{0.05em} \\ \emph{Geographic condition}" inc_vf "\vspace{0.05em} \\ \emph{Inter-government Transfer}", nolabel) ///
+refcat(unit_cost "\emph{Transportation}" landfall_1 "\\ \emph{Natural Disaster}" elec_pln "\\ \emph{Infrastructure}" land_topo "\\ \emph{Geographic condition}" pov_let "\\ \emph{Economic condition}" inc_vf "\\ \emph{Inter-government Transfer}", nolabel) ///
  cells("mean(fmt(2)) sd min max count(fmt(0))") nostar unstack nonumber ///
   compress nomtitle nonote noobs label booktabs ///
   eqlabels("2014" "2018") ///
