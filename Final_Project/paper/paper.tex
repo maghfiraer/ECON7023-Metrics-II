@@ -1,12 +1,13 @@
 \documentclass[letterpaper,12pt,leqno]{article}
 \usepackage{paper}
+\usepackage{pdflscape}
 \bibliographystyle{bibliography}
 
 % Enter paper title:
-\hypersetup{pdftitle={Paper Example}}
+\hypersetup{pdftitle={Improving Rural Accessibility in Indonesia: Fuel Subsidy versus Infrastructure Development}}
 
 % Enter permanent URL to paper
-%\available{https://github.com/pmichaillat/latex-paper}
+\codeavailable{https://github.com/maghfiraer/ECON7023-Metrics-II/tree/main/Final_Project}
 
 % Enter BibTeX file with references:
 \newcommand{\bib}{bibliography.bib}
@@ -18,87 +19,59 @@
 \begin{document}
 \title{Improving Rural Accessibility in Indonesia: Fuel Subsidy versus Infrastructure Development}
 \author{Maghfira Ramadhani
-\thanks{Maghfira Ramadhani: Georgia Institute of Technology. Acknowledgments.}}
-\date{March 2023}                       
+\thanks{Maghfira Ramadhani: Ph.D. student at Georgia Institute of Technology, maghfira.ramadhani@gatech.edu}}
+\date{April 2023}                       
 \begin{titlepage}\maketitle
 
-Indonesia have been subsidizing transportation cost for a long time.
+Indonesia has been subsidizing transportation costs for a long time.
 
 \end{titlepage}\section{Introduction}\label{s:introduction}
  
-\paragraph{Research question} Lorem ipsum dolor sit amet,  pariatur.\footnote{Excepteur sint, sunt in culpa qui officia deserunt mollit anim id est laborum.}
+\paragraph{Research question} Although Indonesia has been subsidizing fuel for a long time, high fuel prices were still observed in rural areas in the last decade since they were unable to get the fuel from the official fuel supply chain \citep{liputan_2016, jawapos_2017}. Therefore since 2016, the government initiated the One Price Fuel program to guarantee the availability of subsidized fuel in these areas. The government in collaboration with the National Oil Company started to build a new gas station in the targeted outermost and less-developed village so that they get the fuel at the same price as any other gas station. This program is expected to bring development to the village level by reducing energy costs which could improve the overall village's economic activity. On the other hand, decentralization of development to the village level has been implemented since 2014, when the central government initiate an annual fiscal transfer to the village government to improve their financial capability in bringing development to the last miles\footnote{See Village Law No. 6 of 2014}. This research measures the impact of these government programs in improving rural accessibility at the village level and exercising the efficiency of each specific program.
 
-\paragraph{Answer to the question} Lorem ipsum dolor sit amet. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+\paragraph{Answer to the question} In addressing the research question, this research uses unit transportation cost to measure accessibility. Specifically in rural areas, \citet{sambodo_2019} find that transportation spending dominates energy spending which could limit people's mobility and slow economic development. On the other hand, the lack of adequate and reliable infrastructure drives up the transportation cost \citep{sandee_2016}. I treat the unit transportation cost as the willingness to pay for transportation in rural areas, therefore we control for other factors affecting the demand structure to get the causal effect. I use panel data analysis to measure the impact of the two programs in improving rural accessibility. Regarding the fuel program, I obtain the list of 55 government-appointed new distributor locations from the National Oil Company (NOC). I use the village fund transferred to the village government as a proxy for village infrastructure development. From a political economy perspective, infrastructure development is managed by the government directly, while the fuel subsidy is managed through the National Oil Company (NOC) as a delivery agent \citep{ichsan_2022}. This research evaluates the efficiency of the program by comparing the reduction of transportation cost per budget spent as the benefit-cost ratio.
 
-\paragraph{Related literature} This study build insight from previous research regarding impact evaluation of government programs on village-level development. \citet{asher_2020} .\footnote{In reprehenderit in eu fugiat nulla pariatur \citep{LMS18a}.}
+\paragraph{Related literature} This paper builds on the literature on rural development and fossil fuel subsidy in Indonesia. Related literature has indicated that both subsidizing fuel and inter-government transfer contributed to improving the general economic condition in rural areas \citep{sambodo_2019,ichsan_2021,hartojo_2022}. \citep{sambodo_2019} find that villages with better access to energy tend to divert away their spending more productively thus having better health outcomes. \citep{ichsan_2021} argued that the fuel program is a short-term remedy for reducing transportation costs in rural areas, and believes that infrastructure development is the sustainable way to do so. On the effect of village fund transfer, \citet{hartojo_2022} show that the transfer effectively improved rural economic growth in rural areas. This research is the first to evaluate and compare the impact of both programs in improving accessibility at the village level.
 
+\paragraph{Outline} The rest of the paper is organized as follows. I develop the institutional context and conceptual framework for the discussion in Section \ref{s:framework}. Section \ref{s:data} describes the data and its summary statistics. Section \ref{s:result} discusses the findings and provides a robustness check and evaluates the benefit-cost of the programs. Section \ref{s:conclusion} provides a concluding remark of the discussion.
 
-\paragraph{Outline} The rest of the paper is organized as follows. I develop the conceptual framework for the discussion in Section \ref{s:framework}. Section \ref{s:context} describe the institutional context and background of infrastructure development agenda in Indonesia. I provide the data and the descriptive statistics along with preliminary evidence in Section \ref{s:strategy}. Section \ref{s:conclusion} provides a concluding remark of the discussion.
+\section{Institutional Context and Conceptual framework}\label{s:framework}
 
-\section{Conceptual framework}\label{s:framework}
-
-In this section, I discussed the conceptual framework for understanding the impact of ... on rural accessibility.
+In this section, I discussed the institutional context of Indonesia and build a conceptual framework for understanding the impact of how the fossil fuel program and village development can improve rural accessibility.
 
 \subsection{Accessibility in rural area}
 
-Connectivity challenges in Indonesia \citep{sandee_2016}. Regarding rural accessibility, the challenge mainly related to intra-island connectivity ---links within individual islands--- is linking underdeveloped regions to growth centers. In the densely populated part of Java island, the city as the center of growth, the challenges of connectivity is mostly congestion-based challenge causing high-cost for mobility. In contrast, in the rural areas of Java, we can still find a village that we can only access by motorcycle or even only by foot. This challenge is somewhat similar in other main islands such as Sumatra, Kalimantan, Sulawesi and Papua. In these other mainlands, the challenges are the existence of adequate and reliable infrastructure that drives up the transportation cost.
+\paragraph{Accessibility challenge in Indonesia}
+Following \citet{sandee_2016}, regarding rural accessibility in Indonesia, the challenge mainly related to intra-island connectivity ---links within individual islands--- is linking underdeveloped regions to growth centers. In the densely populated part of Java island, the city is the center of growth, the challenges of connectivity are mostly congestion-based challenges causing high-cost for mobility. In contrast, in the rural areas of Java, we can still find a village that we can only access by motorcycle or even only by foot. This challenge is somewhat similar in other main islands such as Sumatra, Kalimantan, Sulawesi, and Papua. In these other mainlands, the challenges are the existence of adequate and reliable infrastructure that drives up transportation costs. The government initiatives in attracting foreign capital and facilitating public-private partnerships in bringing a large-scale infrastructure development have been a policy priority since 2015 \citep{pwc_2016}.
 
-\subsection{Transportation demand in rural area} 
 
-\begin{proposition}\label{p:type1}  Lorem ipsum dolor sit amet $z \in \mathbb{R}$, consectetur adipiscing elit
-\begin{equation}
-\bm{S}^*(z) = \frac{S(z)}{23 -\zeta\gamma [45- S(z)] + \ln(y)}.
-\label{e:type1}\end{equation}
-Ut enim ad minim veniam, sunt in culpa qui officia deserunt mollit anim id est laborum:
-\begin{equation}
-\mathcal{S}^*(z) = S(z) \times \mathbb{E}(N(z)) + \alpha \beta - \sum_{i=0}^{+\infty}\mathcal{F}^{i}-\exp(\lambda \mu).
-\label{e:type1steps}\end{equation}
-\end{proposition}
+\paragraph{Transportation cost as a measure of accessibility} We can treat unit transportation cost as the willingness to pay or demand for transportation. We follow previous literature on willingness to pay for rural transportation from revealed preference, the affecting factors include travel time, convenience, and trip purpose i.e. work or education.
 
-\begin{proof} There is a simple proof to this result. It gives equation \eqref{e:type1steps}.\end{proof} 
 
-Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur $\bm{\alpha(X)}$. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum \eqref{e:type1}, excepteur sint occaecat cupidatat non proident $z^*$:
-\begin{equation*}
-\frac{\mathcal{S}(z^*)}{1 -\theta + \theta \mathcal{S}(z^*)} = \sum_{i=0}^{+\infty}F^{i} - \Lambda(i).
-\end{equation*}
-From this definition we obtain the following results (details of the proof are relegated to appendix~\ref{a:appendix1}):
-
-\begin{lemma}\label{p:cv} Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat $\alpha$:
-\begin{equation}
-z^* = \int_{0}^{\infty} \alpha(i) \cdot \frac{1-\beta}{1-\alpha(i)\beta}\,di.
-\label{e:cv}\end{equation}
-Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua $\mathcal{Z}(\alpha)$. \end{lemma}
-
-Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Combining equation \eqref{e:cv} with other results, we obtain the following corollary (the proof is in appendix~\ref{a:subappendix}): 
-
-\begin{corollary} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua:
-\begin{equation*}
-\mathbb{E}(N(z^*)) \approx \frac{1-\mathbb{P}(\alpha\pi)}{1-\pi}- \frac{f(y)}{z(p)^*} +P(\Gamma).
-\end{equation*}\end{corollary}
-
-\subsection{Transportation structure}
-
-Indonesia have been subsidizing fuel subsidy for a long time. It is argued that subsidizing fuel will bring development.
-
-\section{Institutional context and background}\label{s:context}
-
-The government initiatives in attracting foreign capital and facilitating public-private partnership in bringing a large-scale infrastructure development has been a policy priority since 2015 \citep{pwc_2016}.
 
 \subsection{Fossil fuel subsidy regime}
 
-Indonesia used to be a large oil exporter in the oil boom period in 1970s and 1980s and the National Oil Company (NOC), Pertamina contributed a big part in delivering the fuel subsidy to the public \citep{ichsan_2022}. However, as the production decline there has been increased pressure for subsidy reform
+Indonesia used to be a large oil exporter in the oil boom period in the 1970s and 1980s and the National Oil Company (NOC), Pertamina contributed a big part in delivering the fuel subsidy to the public \citep{ichsan_2022}. However, as the production declined, there has been increased pressure for subsidy reform. 
 
 \subsection{Decentralization of development}
 
-Figure~\ref{f:graph1} depicts the result.
+Developing countries believe decentralization and local government reform are more efficient in bringing local development \citep{vazquez_2017} and providing public goods better than central government \citep{arends2020}. In 2014 the government enacted village fund transfer to implement decentralization at the village level. The allocation amount takes into account village conditions, i.e. poverty and geographic difficulty into account.
 
+\section{Data}\label{s:data}
 
-\begin{figure}[t]
-\subcaptionbox{Village status in 2014\label{f:panel1}}{\includegraphics[scale=0.2]{Final_Project/image/vdi2014.png}}\hfill
-\subcaptionbox{Village status in 2018\label{f:panel2}}{\includegraphics[scale=0.205]{Final_Project/image/vdi2018.jpg}}
-\caption{Indonesia's VDI's status}
-\note{Source: Statistics Indonesia \citet{hartojo_2022}}
-\label{f:graph1}\end{figure}
+I obtained the Village Potential Statistics data for the years 2014 and 2018 from Indonesia's Central Bureau of Statistics complemented with village fund transfer data from the Ministry of Village Development.
+
+I measure rural accessibility using the unit transportation cost (in Rp/km) of each individual village $i$ for year $t$. I define unit transportation cost, $y_{it}$, as the transportation cost from the village $i$'s office to the sub-district office (in thousands Rp) at year $t$, $c_{it}$, divided by the distance from the village office $i$'s to the sub-district office (in km) at year $t$, $d_{it}$.
+\begin{equation}
+        y_{it}=d_{it}/c_{it}    
+\end{equation}
+
+I obtain the list of 55 government-appointed new distributor's village locations from the NOC and then define all the villages that are in the same sub-district as treated by the program, i.e. $D_{it}=1$ in the year 2018. Note in the year 2014 all $D_{it}=0$. 
+
+For example, suppose the government in 2016 gives the order for the NOC to build a new distribution point at village $A$. Village $A$ is in the same sub-district as villages $B,C$, and $D$. Then all villages $A,B,C$, and $D$ are treated.
+
+Other data on geographic characteristics, i.e land topography, region boundary with forest or sea, river transportation use, and poverty can be used as covariates or instruments.
+
 
 \section{Empirical strategy}\label{s:strategy}
 
@@ -106,31 +79,11 @@ I observed village level as the unit of analysis. I obtained a proprietary Villa
 
 \subsection{Measuring rural accessibility with transportation cost}
 
-\paragraph{Another paragraph} Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. 
-
-\paragraph{Another result in a panel} Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Figure \ref{f:panel1} displays cum soluta nobis est eligendi optio, cumque nihil impedit. Quod maxime placeat, facere possimus, omnis voluptas assumenda est in figure \ref{f:panel2}.
 
 
-\subsection{Data and Descriptive Statistics}
-
-At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. 
-
-\paragraph{Paragraph title} Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non recusandae.
-
+\section{Results}\label{s:result}
 \subsection{Preliminary findings}
 
-A full-page graph is on figure \ref{f:graph2}. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.
-
-\begin{figure}[p]
-\subcaptionbox{Caption for panel a}{\includegraphics[scale=\sfig,page=1]{\pdf}}\hfill
-\subcaptionbox{Caption for panel b}{\includegraphics[scale=\sfig,page=2]{\pdf}}\vfig
-\subcaptionbox{Caption for panel}{\includegraphics[scale=\sfig,page=3]{\pdf}}\hfill
-\subcaptionbox{Caption for panel}{\includegraphics[scale=\sfig,page=4]{\pdf}}\vfig
-\subcaptionbox{Caption for panel}{\includegraphics[scale=\sfig,page=5]{\pdf}}\hfill
-\subcaptionbox{Caption for panel}{\includegraphics[scale=\sfig,page=1]{\pdf}}
-\caption{Caption for the graph}
-\note{Note for the graph. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat from \citet[section 3]{MS22b}.}
-\label{f:graph2}\end{figure}
 
 
 \paragraph{Another paragraph} At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. 
@@ -138,29 +91,6 @@ A full-page graph is on figure \ref{f:graph2}. Nam libero tempore, cum soluta no
 \paragraph{Yet another paragraph} At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. 
 
 
-\begin{table}[t]
-\caption{Caption for the table}
-\begin{tabular*}{\textwidth}[]{p{3.3cm}@{\extracolsep\fill}cccc}
-\toprule
-& Timeline & Natural rate & Monetary  & Government \\
-&  & of interest &  policy & spending\\
-\midrule
-\multicolumn{5}{l}{A. Qui dolorem eum fugiat}\\
-ZLB: & $t\in (0,T) $ & $r^n<0$ & $i=0$  & -- \\
-Normal times: & $t>T$ &  $r^n>0$ & $i= r^n + \phi \pi$  & --   \\
-\midrule
-\multicolumn{5}{l}{B. Nam libero tempore, cum soluta nobis}\\
-ZLB: & $t\in (0,T)$ & $r^n<0$ & $i=0$  & -- \\
-Forward guidance: & $t\in (T,T+\Delta)$ & $r^n>0$ & $i=0$  & --\\
-Normal times: & $t>T+\Delta$ & $r^n>0$ & $i= r^n + \phi \pi$  & -- \\
-\midrule
-\multicolumn{5}{l}{C. At vero eos et accusamus}\\
-ZLB: & $t\in (0,T) $ & $r^n<0$ & $i=0$  & $g>0$  \\
-Normal times: & $t>T$ & $r^n>0$ & $i= r^n + \phi \pi$  & $g=0$   \\
-\bottomrule
-\end{tabular*}
-\note{Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non recusandae. Ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat \citep[table 1]{MS21a}.}
-\label{t:table}\end{table}
 
 \section{Conclusion}\label{s:conclusion}
 
@@ -173,39 +103,40 @@ At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praes
 % Fill out appendix:
 \newpage
 \appendix
-\section{Appendix title}\label{a:appendix1}
+\begin{landscape}
+\section{Tables}\label{a:table}
 
-We extend the model of section~\ref{s:section} by introducing a quadratic cost. Obcaecati cupiditate non provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. 
+\begin{table}[h]
+\caption{Summary statistics of main variables with the province-level as sample} 
+\scalebox{0.85}{\input{Final_Project/output/table/table1e}}
+\note{Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non recusandae. Ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat}
+\label{t:1}\end{table}
 
-\subsection{Subsection title} 
 
-At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. 
+\begin{table}[h]
+\caption{Summary statistics of main variables with the district-level as sample} 
+\scalebox{0.85}{\input{Final_Project/output/table/table1d}}
+\note{Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non recusandae. Ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat}
+\label{t:2}\end{table}
+\end{landscape}
 
-\subsection{Another subsection}
+\section{Figures}
 
- Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus \citep{MS22a}. A corrolary in the appendix is as follows:
+\begin{figure}[h]
+\includegraphics[scale=0.7]{Final_Project/image/bbm-price-2014-2018.jpg}
+\caption{Subsidized Fuel Price at Government's Price Control 2014-2018}
+\note{Source: \citet{ichsan_2022}}
+\label{f:graph1}
+\end{figure}
 
-\begin{corollary} Similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga:
-\begin{equation*}
-\mathbb{E}(\Omega) = \mathbb{P}(\omega\cdot \mu - \xi) - \sum_{i=0}^{m}\sum_{j=-\infty}^{n} \sigma(i,j) + 123^{56}.
-\end{equation*}\end{corollary}
+\begin{figure}[h]
+\subcaptionbox{Village status in 2014\label{f:panel1}}{\includegraphics[scale=0.2]{Final_Project/image/vdi2014.png}}\hfill
+\subcaptionbox{Village status in 2018\label{f:panel2}}{\includegraphics[scale=0.205]{Final_Project/image/vdi2018.jpg}}
+\caption{Indonesia's Village Development Index status}
+\note{Source: Statistics Indonesia from \citet{hartojo_2022}}
+\label{f:1}\end{figure}
+ 
 
-\paragraph{A paragraph with some math} Temporibus autem quibusdam $\xi$ et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae $1-\gamma$. Itaque earum rerum hic $S(z^*)$ tenetur a sapiente delectus $\mathcal{B}^\theta$, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat $\mathcal{V}^i$. Aggregating these scenarios, we obtain the continuation value:
-\begin{equation}
-\mathbb{V}^r = (1-\gamma) \times 0 +\gamma S(z^*) v^s+\gamma [1-S(z^*)] \mathcal{V}^i-c.
-\label{e:appendix1}\end{equation}
-
-\paragraph{Paragraph with links to appendix equations} Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur $\mathcal{C}$? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? Equation \eqref{e:appendix1} shows that autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.
-
-\subsection{Larger figure, without panel, in the appendix} 
-
-At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga in figure \ref{f:appendix1}.
-
-\begin{figure}[t]
-\includegraphics[scale=\mfig,page=1]{\pdf}
-\caption{Caption for the larger graph}
-\note{Note for the larger graph. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus.}
-\label{f:appendix1}\end{figure}
 
 \section{Another section}\label{a:appendix2}
 
@@ -213,14 +144,7 @@ At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praes
 
 \subsection{Even larger figure, without panel, in the appendix} 
 
-At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga, as showed in figure \ref{f:appendix2}.
-
-\begin{figure}[t]
-\includegraphics[scale=\lfig,page=3]{\pdf}
-\caption{Caption for the even larger graph}
-\note{Note for the larger graph. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus.}
-\label{f:appendix2}\end{figure}
-
+At vero e
 
 \subsection{Final subsection with footnote and references}\label{a:subappendix}
 
