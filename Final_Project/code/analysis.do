@@ -353,9 +353,43 @@ esttab using "./output/table/FEIV.tex", replace   ///
  label booktabs nomtitle coeflabels(inc_vf "Village Fund transfer") compress alignment(D{.}{.}{-1}) ///
  scalars("Sa Sample" "Con Controls" "TE Time Fixed Effects" "FE Village Fixed Effects") sfmt(3 0)
 
-xtreg unit_cost prog_par inc_vf i.year if dist_prog==1 & vil_type==1, fe robust
-xtreg unit_cost prog_par inc_vf pov_let elec_pln earthq_1 sea trans_river land_topo forest sch_sh sch_jh i.year if dist_prog==1 & vil_type==1, fe robust
+* FEIV
+global controls vil_subd_dur sch_sh land_topo trans_river
+est clear
 
+eststo: xtivreg2 unit_cost (prog_par inc_vf=pov_let elec_pln earthq_1) $controls y18 if prov_prog==1 & vil_type==1, fe robust
+ estadd local  FE "Yes"
+ estadd local  TE "Yes"
+ estadd local  Sa "Province"
+ estadd local  Con "Yes"
+
+
+eststo: xtivreg2 unit_cost (prog_par inc_vf=pov_let elec_pln earthq_1) y18 if prov_prog==1 & vil_type==1, fe robust
+ estadd local  FE "Yes"
+ estadd local  TE "Yes"
+ estadd local  Sa "Province"
+ estadd local  Con "No"
+
+
+eststo: xtivreg2 unit_cost (prog_par inc_vf=pov_let elec_pln earthq_1) $controls y18 if dist_prog==1 & vil_type==1, fe robust
+ estadd local  FE "Yes"
+ estadd local  TE "Yes"
+ estadd local  Sa "District"
+ estadd local  Con "Yes"
+
+eststo: xtivreg2 unit_cost (prog_par inc_vf=pov_let elec_pln earthq_1) y18 if dist_prog==1 & vil_type==1, fe robust
+ estadd local  FE "Yes"
+ estadd local  TE "Yes"
+ estadd local  Sa "District"
+ estadd local  Con "No"
+
+esttab using "./output/table/FEIVb.tex", replace   ///
+ b(3) se(3) ///
+ keep(prog_par inc_vf y18) ///
+ star(* 0.10 ** 0.05 *** 0.01) ///
+ label booktabs nomtitle coeflabels(inc_vf "Village Fund transfer") compress alignment(D{.}{.}{-1}) ///
+ scalars("Sa Sample" "Con Controls" "TE Time Fixed Effects" "FE Village Fixed Effects") sfmt(3 0)
+ 
 * FEIV1
 global controls vil_subd_dur sch_sh land_topo trans_river
 est clear
