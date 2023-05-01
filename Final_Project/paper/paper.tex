@@ -118,8 +118,7 @@ In equation \eqref{e:2} the main effect to be identified are the impact of the f
 
 \paragraph{Endogeneity} As we have discussed in subsection \ref{ss:fuelsubsidy} and \ref{ss:decentral}, there are possible endogeneity threats from Village Fund Transfer $(VF_{it})$ and Treatment $(D_{it})$. In the process of allocating village fund transfers, the central and provincial governments take into account the village conditions such as poverty and geographic difficulty. Also, in deciding which location to build a new remote gas station, the government may take into account the village conditions as well when proposing a target area. After the recommended location is proposed to the NOC, the NOC will evaluate the economic feasibility of the new location and assess whether or not an interested business partner to invest in the remote area. 
 
-Based on the potential endogeneity problem, I need to identify whether there is a good instrument available in the dataset. For this purpose, I run several first-stage regressions to evaluate potential instrumental variables candidate for $(VF_{it})$ and $(D_{it})$. From the possible combination of instrument for $(VF_{it})$
-
+Based on the potential endogeneity problem, I need to identify whether there is a good instrument available in the dataset. For this purpose, I run several first-stage regressions to evaluate potential instrumental variables candidates for $(VF_{it})$ and $(D_{it})$ as shown in Table \ref{t:FSVF} and Table \ref{t:FSD}. From the possible combination of instruments for both variables, I decided to choose poverty statements, number of electricity customers, earthquake frequency, sea border status, and river transportation use as the instrumental variables as it gives reasonably high $F$-statistics in the first stage regressions.
 
 If the two main variables are indeed endogenous, the Fixed Effect Instrumental Variable (FEIV) approach (similar to First Difference Instrumental Variable for $T=2$) can be applied to identify $\delta_1$ and $\gamma_1$ in equation \eqref{e:2}. However, if 
 
@@ -145,16 +144,20 @@ The test yields a $\chi^2$-statistics of 15.96 with $P$-value of 0.0003, thus we
 Following the estimates from subsection \ref{ss:findings}, the village fund transfer reduces unit transport cost by 1 Rp/km per million Rp spent, while the fuel program reduces unit transport costs by 2,380 Rp/km per gas station built. The capital cost of building one remote gas station is reported to be around 3 billion Rp and the profit margin of sales is 195 Rp/Liter \footnote{See \href{https://www.cnbcindonesia.com/news/20201213090547-4-208715/bangun-spbu-bbm-satu-harga-ternyata-lama-balik-modalnya}{https://www.cnbcindonesia.com/news/20201213090547-4-208715/bangun-spbu-bbm-satu-harga-ternyata-lama-balik-modalnya}} and average total sales per location of 383 kL in the 2016-2017 period \footnote{The figures is obtained from Indonesian Downstream Oil and Gas Authority}.
 Thus we can estimate the benefit/net cost of the fuel program as
 \begin{align*}
-   \left. B/C&=\frac{2,380 \text{ Rp/km}}{\text{location}}\middle/\underbrace{\frac{3,000 \text{ million Rp}-\frac{195\text{ Rp}}{kL}\times 383\text{ kL}\times\frac{\text{ million Rp}}{10^6\text{ Rp}}}{\text{location}}}_{\displaystyle \text{Net Cost} = \text{Capital Cost} - \text{Sales Profit}} \right.\\
-   &=0.79\ \frac{\text{Rp/km}}{\text{millions Rp spent}}.
+   B/C_{Fuel}&=\left.\frac{2,321 \text{ Rp/km}}{\text{location}}\right/ \underbrace{\frac{3,000 \text{ million Rp}-\frac{195\text{ Rp}}{kL}\times 383\text{ kL}\times\frac{\text{ million Rp}}{10^6\text{ Rp}}}{\text{location}}}_{\displaystyle \text{Net Cost} = \text{Capital Cost} - \text{Sales Profit}}.\\
+   &= \frac{1000 \times |\hat{\delta}_1|}{2999.925} \ \frac{\text{Rp/km}}{\text{millions Rp spent}}=0.77\ \frac{\text{Rp/km}}{\text{millions Rp spent}}.
 \end{align*}
-Village fund transfer is more efficient than the fuel program in increasing rural accessibility.
+While we treat the benefit/cost of the village fund transfer as it is, $\hat{\gamma}_1$. From the point estimates, we suggest that the efficiency of the fuel program is lower than the village fund transfers. Thus, we can use the Wald test for the following linear hypothesis.
+\begin{align*}
+    &\Hy_0: B/C_{Fuel}-B/C_{VF}=0.33|\hat{\delta}_1|-|\hat{\gamma}_1|>0 \Leftrightarrow -0.33\hat{\delta}_1+\hat{\gamma}_1<0
+\end{align*}
+since we know that both $\hat{\delta}_1,\hat{\gamma}_1<0$. The Wald test yields a $t$-statistics of 1.97 which means we can not reject the null hypothesis even at 5\% significance level. Thus, we can accept with reasonable certainty that the Village fund transfer is more efficient than the fuel program in increasing rural accessibility.
 
 \section{Conclusion}\label{s:conclusion}
 
 This research finds out that both rural fuel distribution program and inter-government transfer significantly reduces unit transportation cost in rural areas. 
 
-The village fund transfer successfully reduces unit transport cost by 1 Rp/km per million Rp spent, while the fuel program reduces unit transport cost by 0.79 Rp/km per million Rp spent. This indicates that the fund transfer to local government is more efficient in improving rural accessibility.
+The village fund transfer successfully reduces unit transport cost by 1 Rp/km per million Rp spent, while the fuel program reduces unit transport cost by 0.77 Rp/km per million Rp spent. This indicates that the fund transfer to local government is more efficient in improving rural accessibility.
 
 \paragraph{Further recommendation}
 The limited nature of the data really limits the analysis in this paper, thus I suggest collecting more data by adding one more year of observation to be able to implement a more robust analysis on time-varying variation.
