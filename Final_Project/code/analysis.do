@@ -391,6 +391,8 @@ est clear
 
 xtivreg2 unit_cost prog_par (inc_vf=pov_let elec_pln earthq_1 sea trans_river) $controls y18 if dist_prog==1 & vil_type==1, fe robust endog(inc_vf)
 xtivreg2 unit_cost inc_vf (prog_par=pov_let elec_pln earthq_1 sea trans_river) $controls y18 if dist_prog==1 & vil_type==1, fe robust endog(prog_par)
+xtivreg2 unit_cost  (prog_par inc_vf=pov_let elec_pln earthq_1 sea trans_river) $controls y18 if dist_prog==1 & vil_type==1, fe robust endog(inc_vf)
+xtivreg2 unit_cost  (prog_par inc_vf=pov_let elec_pln earthq_1 sea trans_river) $controls y18 if dist_prog==1 & vil_type==1, fe robust endog(prog_par)
 
 * Confidence interval of hypothesis testing
 
