@@ -1,6 +1,7 @@
 \documentclass[letterpaper,12pt,leqno]{article}
 \usepackage{paper}
 \usepackage{pdflscape}
+\usepackage{float}
 \bibliographystyle{bibliography}
 
 % Enter paper title:
@@ -66,13 +67,21 @@ Following \citet{sandee_2016}, regarding rural accessibility in Indonesia, the c
 
 
 
-\subsection{Fossil fuel subsidy regime}
+\subsection{Fossil fuel subsidy regime}\label{ss:fuelsubsidy}
 
-Indonesia used to be a large oil exporter in the oil boom period in the 1970s and 1980s and the National Oil Company (NOC), Pertamina contributed a big part in delivering the fuel subsidy to the public \citep{ichsan_2022}. However, as the production declined, there has been increased pressure for subsidy reform. 
+\paragraph{Political economy of fuel subsidy} Indonesia used to be a large oil exporter in the oil boom period in the 1970s and 1980s and the National Oil Company (NOC), Pertamina contributed a big part in delivering the fuel subsidy to the public \citep{ichsan_2022}. However, as the production declined, there has been increased pressure for subsidy reform. The Indonesian government has gradually decreased the amount of fuel subsidies. The decision to reduce fuel subsidies is politically hard in Indonesia as it is usually opposed by the parliament as well as protests by the general public.
 
-\subsection{Decentralization of development}
+Even without the removal of the fuel subsidies, people in rural areas already experienced high-priced fuel \citep{liputan_2016, jawapos_2017}. The extreme price gap indicates poor infrastructure in remote areas, including the lack of roads, pipelines, and storage facilities \citep{ichsan_2021}. To address this issue, the government introduced the One Price Fuel policy in 2016 aimed at ensuring the distribution of Solar and Premium at a single price across Indonesia, including 500 remote areas, by 2024. The government claimed that One Price Fuel would improve the affordability of subsidized fuels for people in rural areas, where prices varied from Rp 7,000 to 100,000/liter\footnote{See BBM 1 Harga Keadilan Energi Untuk Masyarakat 3T di NKRI, BPH Migas, Jarakta (2019)}. However, Pertamina's profitability was also affected by the introduction of the One Price Fuel policy\footnote{See Regulation of Minister of Energy and Mineral Resources No. 36/2016}. Without the allocation of a supporting budget from the government, the assigned companies (Pertamina and AKR Corporindo) were forced to invest in infrastructure directly. In some cases, where the cost of such infrastructure was prohibitive, the companies resorted to extremely expensive short-term measures such as transporting fuel to remote regions by air\footnote{See \href{https://www.merdeka.com/uang/pertamina-angkut-bbm-papua-gunakan-pesawat-kapasitas-4000-liter.html}{https://www.merdeka.com/uang/pertamina-angkut-bbm-papua-gunakan-pesawat-...}}. To add, only 2.6 percent of Pertamina fueling stations is fully owned and operated by Pertamina in 2019 \citep{pertamina_2020}. This implies that Pertamina needs to rely on partnerships with local entrepreneurs to have the capacity to build a new remote gas station. Thus, the selection of the candidates for the Fuel Program is not random and follows certain screening criteria set up by the government, and then the feasibility is evaluated financially by Pertamina.
+
+\paragraph{Fuel price regime} The introduction of the One Price Fuel policy implies a single fuel price at every gas station in Indonesia. Previously the government used to set the fuel price based on its economic price which is different for each specific area. The historical price control for the Solar and Premium is shown in Figure \ref{f:1}.
+
+
+
+\subsection{Decentralization of development}\label{ss:decentral}
 
 Developing countries believe decentralization and local government reform are more efficient in bringing local development \citep{vazquez_2017} and providing public goods better than central government \citep{arends2020}. In 2014 the government enacted village fund transfer to implement decentralization at the village level. The allocation amount takes into account village conditions, i.e. poverty and geographic difficulty into account.
+
+\paragraph{Village fund allocation mechanism} Describe the village fund transfer mechanism.
 
 \section{Data}\label{s:data}
 
@@ -91,7 +100,7 @@ I measure rural accessibility using the unit transportation cost (in Rp/km) of e
         y_{it}=c_{it}/d_{it}\label{e:1}
 \end{equation}
 
-I obtain the list of 55 government-appointed new distributor village locations that were built in 2016 and 2017 from the NOC. Figure \ref{f:3} show the detailed map of these locations. define all the villages that are in the same sub-district as treated by the program, i.e. $D_{it}=1$ in the year 2018. Note that in the year 2014, all villages have $D_{it}=0$. For example, suppose the government in 2016 gives the order for the NOC to build a new distribution point at village $A$. Village $A$ is in the same sub-district as villages $B,C$, and $D$. Then all villages $A,B,C$, and $D$ are treated. To extend the discussion, I use two different samples at the province level and the district level. The other main explanatory variable is the village fund transfer measured in millions Rp.
+I obtain the list of 55 government-appointed new distributor village locations that were built in 2016 and 2017 from the NOC. Figure \ref{f:3} show the detailed map of these locations. I define all the villages that are in the same sub-district as treated by the program, i.e. $D_{it}=1$ in the year 2018. Note that in the year 2014, all villages have $D_{it}=0$. For example, suppose the government in 2016 gives the order for the NOC to build a new distribution point at village $A$. Village $A$ is in the same sub-district as villages $B,C$, and $D$. Then all villages $A,B,C$, and $D$ are treated. To extend the discussion, I use two different samples at the province level and the district level. The other main explanatory variable is the village fund transfer measured in millions Rp.
 
 The summary statistics of the variables are presented in Table \ref{t:1} and Table \ref{t:2}. As seen in both tables, the  unit transportation cost is on average lower in 2018 than in 2014. Also the village fund transfer on average increased in 2018 than in 2014.
 
@@ -100,37 +109,46 @@ The summary statistics of the variables are presented in Table \ref{t:1} and Tab
 
 I follow the following model specification
 \begin{equation}
-    y_{it}=\alpha_i+\theta_t+\delta_1 D_{it}+\gamma_1 VF_{it}+\textbf{X}\pmb{\beta}+\varepsilon_{it}\label{e:2}
+    y_{it}=\alpha_i+\theta_t+\delta_1 D_{it}+\gamma_1 VF_{it}+\textbf{X}\pmb{\beta}+\varepsilon_{it},\label{e:2}
 \end{equation}
 where $y_{it}$ represents the unit transportation cost in village $i$ in year $t$,
-$\alpha_i$ represents the village fixed effects, $\theta_t$ represents time trend or time fixed effects, $D_{it}$ and $VF_{it}$ is the main variable of interests, and $\textbf{X}$ as vector of covariates affecting demand. In equation \eqref{e:2}, the impact of the fuel program on the transport cost is given by the coefficient $\delta_1$, while the impact of the village fund transfer. Serial correlation should not be an issue in this model since the panel is 4 years apart. 
+$\alpha_i$ represents the village fixed effects, $\theta_t$ represents time trend or time fixed effects, $D_{it}$ and $VF_{it}$ is the main variable of interests, and $\textbf{X}$ as vector of covariates affecting demand. 
 
-I perform \citet{hausman78} specification test. The test of $H_0:$ difference in coefficients not systematic or the individual unobserved heterogeneity is correlated with the regressors. We can compute the Hausman statistic as \begin{equation*}
+In equation \eqref{e:2} the main effect to be identified are the impact of the fuel program on the transport cost given by the coefficient $\delta_1$; and the impact of the village fund transfer on the transport cost given by the coefficient $\gamma_1$. Serial correlation should not be an issue in this model since the panel is 4 years apart. The following paragraphs discuss the strategy to estimate the above model.
+
+\paragraph{Endogeneity} As we have discussed in subsection \ref{ss:fuelsubsidy} and \ref{ss:decentral}, there are possible endogeneity threats from Village Fund Transfer $(VF_{it})$ and Treatment $(D_{it})$. In the process of allocating village fund transfers, the central and provincial governments take into account the village conditions such as poverty and geographic difficulty. Also, in deciding which location to build a new remote gas station, the government may take into account the village conditions as well when proposing a target area. After the recommended location is proposed to the NOC, the NOC will evaluate the economic feasibility of the new location and assess whether or not an interested business partner to invest in the remote area. 
+
+Based on the potential endogeneity problem, I need to identify whether there is a good instrument available in the dataset. For this purpose, I run several first-stage regressions to evaluate potential instrumental variables candidate for $(VF_{it})$ and $(D_{it})$. From the possible combination of instrument for $(VF_{it})$
+
+
+If the two main variables are indeed endogenous, the Fixed Effect Instrumental Variable (FEIV) approach (similar to First Difference Instrumental Variable for $T=2$) can be applied to identify $\delta_1$ and $\gamma_1$ in equation \eqref{e:2}. However, if 
+
+\paragraph{Panel data specification} I perform \citet{hausman78} specification test to test against the random effect specification. I test against $H_0$ that the difference in coefficients is not systematic or that the individual unobserved heterogeneity is correlated with the regressors. We can compute the Hausman statistic as \begin{equation*}
         H=(\hat{\pmb{\delta}}_{FE}-\hat{\pmb{\delta}}_{RE})'\left[\hat{\Av}(\hat{\pmb{\delta}}_{FE})-\hat{\Av}(\hat{\pmb{\delta}}_{RE})\right]^{-1}(\hat{\pmb{\delta}}_{FE}-\hat{\pmb{\delta}}_{RE}) \asym \chi_M^2 \end{equation*}
 The test yields a $\chi^2$-statistics of 15.96 with $P$-value of 0.0003, thus we cannot reject the null hypothesis. This suggests using fixed effects instead of random effects for panel data analysis. This test is valid under RE1-RE3, thus we can not strictly argue with it.
 
-Possible endogeneity treats from Village Fund Transfer $(VF_{it})$ and Treatment $(D_{it})$, therefore I need to identify whether there is a good instrument available in the dataset. If the two main variables are endogenous, \al{Fixed Effect Instrumental Variable} (FEIV) approach (similar to FDIV for $T=2$) can be applied to identify $\delta_1$ and $\gamma_1$ in equation \eqref{e1}.
+\paragraph{Estimation strategy}
 
 \section{Results}\label{s:result}
-\subsection{Main findings}
+\subsection{Main findings}\label{ss:findings}
 
-\paragraph{Findings 1}
+\paragraph{Findings from Panel OLS estimates}
         Panel OLS estimates indicates that \al{only the fuel program significantly affected unit transportation costs} in rural areas when using the \al{province as sample}, and \alg{both program significantly affects unit transportation cost} when using the \alg{district as sample}. 
         
-\paragraph{Findings 2}
+\paragraph{Findings from FEIV estimates}
         FEIV estimates yield insignificant estimates. Endogeneity tests against $H_0$ that village fund transfer and fuel program are exogenous yield a $P$-value of consecutively 0.9103 and 0.5125, indicating that \al{the null hypothesis can not be rejected}. It might be \alg{better to use Panel OLS} instead.
 
-\paragraph{Findings 3}
+\paragraph{Findings from Panel OLS estimates with interaction terms}
         I enrich the analysis by generating an interaction variable between programs to explore the complementary effect of both programs. The interaction term is \al{statistically insignificant}.
 
 \subsection{Benefit-cost analysis}
-The village fund transfer reduces unit transport cost by \al{1 Rp/km} per millions Rp spent. The fuel program reduces unit transport costs by \al{2,380 Rp/km} per gas station built. The capital cost of building one remote gas station is reported to be around 3 billion Rp and the profit margin of sales is 195 Rp/Liter\footnote{See \href{https://www.cnbcindonesia.com/news/20201213090547-4-208715/bangun-spbu-bbm-satu-harga-ternyata-lama-balik-modalnya}{https://www.cnbcindonesia.com/news/20201213090547-4-208715/bangun-spbu-bbm-satu-harga-ternyata-lama-balik-modalnya}} and average total sales per location of 383 kL\footnote{The figures is obtained from Indonesian Downstream Oil and Gas Authority} in the 2016-2017 period.
+Following the estimates from subsection \ref{ss:findings}, the village fund transfer reduces unit transport cost by 1 Rp/km per million Rp spent, while the fuel program reduces unit transport costs by 2,380 Rp/km per gas station built. The capital cost of building one remote gas station is reported to be around 3 billion Rp and the profit margin of sales is 195 Rp/Liter \footnote{See \href{https://www.cnbcindonesia.com/news/20201213090547-4-208715/bangun-spbu-bbm-satu-harga-ternyata-lama-balik-modalnya}{https://www.cnbcindonesia.com/news/20201213090547-4-208715/bangun-spbu-bbm-satu-harga-ternyata-lama-balik-modalnya}} and average total sales per location of 383 kL in the 2016-2017 period \footnote{The figures is obtained from Indonesian Downstream Oil and Gas Authority}.
 Thus we can estimate the benefit/net cost of the fuel program as
 \begin{align*}
    \left. B/C&=\frac{2,380 \text{ Rp/km}}{\text{location}}\middle/\underbrace{\frac{3,000 \text{ million Rp}-\frac{195\text{ Rp}}{kL}\times 383\text{ kL}\times\frac{\text{ million Rp}}{10^6\text{ Rp}}}{\text{location}}}_{\displaystyle \text{Net Cost} = \text{Capital Cost} - \text{Sales Profit}} \right.\\
    &=0.79\ \frac{\text{Rp/km}}{\text{millions Rp spent}}.
 \end{align*}
-Village fund transfer \alg{is more efficient} than the fuel program in increasing rural accessibility.
+Village fund transfer is more efficient than the fuel program in increasing rural accessibility.
 
 \section{Conclusion}\label{s:conclusion}
 
@@ -151,53 +169,64 @@ Following \citet{abadie2016}, I suggest implementing Propensity Score Matching t
 \begin{landscape}
 \section{Tables}\label{a:table}
 
-\begin{table}[h]
+\begin{table}[H]
 \caption{Summary statistics of variables with the province-level as sample} 
 \scalebox{0.85}{\input{Final_Project/output/table/table1e1}}
 \note{The sample is all the villages in the provinces where the fuel program exists.}
 \label{t:1}\end{table}
 
 
-\begin{table}[h]
+\begin{table}[H]
 \caption{Summary statistics of variables with the district-level as sample} 
 \scalebox{0.85}{\input{Final_Project/output/table/table1d1}}
 \note{The sample is all the villages in the districts where the fuel program exists.}
 \label{t:2}\end{table}
 
+
+\begin{table}[H]
+\caption{First Stage Regression on Village Fund Transfer ($VF_{it}$)}
+\scalebox{0.8}{\input{Final_Project/output/table/firststageVF}}    
+\label{t:FSVF}\end{table}
+
+
+\begin{table}[H]
+\caption{First Stage Regression on Treatment ($D_{it}$)}
+\scalebox{0.8}{\input{Final_Project/output/table/firststageD}}    
+\label{t:FSD}\end{table}
 \end{landscape}
 
-\begin{table}[h]
+\begin{table}[H]
 \caption{Panel OLS estimates} 
-\scalebox{0.85}{\input{Final_Project/output/table/POLSb}}
+\scalebox{0.8}{\input{Final_Project/output/table/POLS}}
 \label{t:pols}\end{table}
 
-\begin{table}[h]
+\begin{table}[H]
 \caption{FEIV estimates with $D_{it}$ and $VF_{it}$ as endogenous variables}
-\scalebox{0.8}{\input{Final_Project/output/table/FEIVb}}    
+\scalebox{0.8}{\input{Final_Project/output/table/FEIV}}    
 \label{t:FEIV}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[H]
 \caption{FEIV estimates with $VF_{it}$ as endogenous variable}
-\scalebox{0.8}{\input{Final_Project/output/table/FEIV1b}}    
+\scalebox{0.8}{\input{Final_Project/output/table/FEIV1}}    
 \label{t:FEIV1}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[H]
 \caption{FEIV estimates with $D_{it}$ as endogenous variable}
-\scalebox{0.8}{\input{Final_Project/output/table/FEIV2b}}    
+\scalebox{0.8}{\input{Final_Project/output/table/FEIV2}}    
 \label{t:FEIV2}\end{table}
 
 
-\begin{table}[h]
+\begin{table}[H]
 \caption{Panel OLS estimates with interaction terms} 
-\scalebox{0.85}{\input{Final_Project/output/table/POLS2b}}
+\scalebox{0.8}{\input{Final_Project/output/table/POLS2}}
 \label{t:pols2}\end{table}
-
-
+\\
+\pagebreak
 \section{Figures}
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \includegraphics[scale=0.7]{Final_Project/image/bbm-price-2014-2018.jpg}
 \caption{Subsidized Fuel Price at Government's Price Control 2014-2018}
 \note{Source: \citet{ichsan_2022}}
@@ -205,7 +234,7 @@ Following \citet{abadie2016}, I suggest implementing Propensity Score Matching t
 \end{figure}
 
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \subcaptionbox{Village status in 2014\label{f:panel1}}{\includegraphics[scale=0.4]{Final_Project/image/vdi2014.png}}\hfill
 \subcaptionbox{Village status in 2018\label{f:panel2}}{\includegraphics[scale=0.41]{Final_Project/image/vdi2018.jpg}}
 \caption{Indonesia's Village Development Index status}
@@ -213,7 +242,7 @@ Following \citet{abadie2016}, I suggest implementing Propensity Score Matching t
 \label{f:2}\end{figure}
 
 \begin{landscape}
-\begin{figure}[t]
+\begin{figure}[h!]
 \includegraphics[scale=0.8]{Final_Project/image/BBM Satu Harga.png}
 \caption{Location of the One Price Fuel Program in 2016-2017}
 \label{f:3}
