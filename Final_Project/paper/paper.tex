@@ -120,25 +120,22 @@ In equation \eqref{e:2} the main effect to be identified are the impact of the f
 
 Based on the potential endogeneity problem, I need to identify whether there is a good instrument available in the dataset. For this purpose, I run several first-stage regressions to evaluate potential instrumental variables candidates for $(VF_{it})$ and $(D_{it})$ as shown in Table \ref{t:FSVF} and Table \ref{t:FSD}. From the possible combination of instruments for both variables, I decided to choose poverty statements, number of electricity customers, earthquake frequency, sea border status, and river transportation use as the instrumental variables as it gives reasonably high $F$-statistics in the first stage regressions.
 
-If the two main variables are indeed endogenous, the Fixed Effect Instrumental Variable (FEIV) approach (similar to First Difference Instrumental Variable for $T=2$) can be applied to identify $\delta_1$ and $\gamma_1$ in equation \eqref{e:2}. However, if 
+If the two main variables are indeed endogenous, the Fixed Effect Instrumental Variable (FEIV) approach (similar to First Difference Instrumental Variable for $T=2$) can be applied to identify $\delta_1$ and $\gamma_1$ in equation \eqref{e:2}.  
 
 \paragraph{Panel data specification} I perform \citet{hausman78} specification test to test against the random effect specification. I test against $H_0$ that the difference in coefficients is not systematic or that the individual unobserved heterogeneity is correlated with the regressors. We can compute the Hausman statistic as \begin{equation*}
         H=(\hat{\pmb{\delta}}_{FE}-\hat{\pmb{\delta}}_{RE})'\left[\hat{\Av}(\hat{\pmb{\delta}}_{FE})-\hat{\Av}(\hat{\pmb{\delta}}_{RE})\right]^{-1}(\hat{\pmb{\delta}}_{FE}-\hat{\pmb{\delta}}_{RE}) \asym \chi_M^2 \end{equation*}
 The test yields a $\chi^2$-statistics of 15.96 with $P$-value of 0.0003, thus we cannot reject the null hypothesis. This suggests using fixed effects instead of random effects for panel data analysis. This test is valid under RE1-RE3, thus we can not strictly argue with it.
 
-\paragraph{Estimation strategy}
+\paragraph{Estimation strategy} Based on the analysis given in the previous paragraph, I would first estimate the equation using FEIV using poverty statements, number of electricity customers, earthquake frequency, sea border status, and river transportation use as the instrumental variables by assuming three different cases. First, we run FEIV assuming $VF_{it}$ is endogenous and perform an endogeneity test on $VF_{it}$. Second, we run FEIV assuming $VF_{it}$ is endogenous and perform an endogeneity test on $VF_{it}$. Third, we run FEIV assuming $VF_{it}$ and $D_{it}$ are endogenous and perform an endogeneity test on both. If there is enough evidence from these tests to show that any of the variables are endogenous we can trust the FEIV estimates. Otherwise, it is better to use the panel OLS estimates if we cannot reject that the variables are exogenous. We also exercise the province-level sample and district-level sample.
 
 \section{Results}\label{s:result}
 \subsection{Main findings}\label{ss:findings}
 
-\paragraph{Findings from Panel OLS estimates}
-        Panel OLS estimates indicates that \al{only the fuel program significantly affected unit transportation costs} in rural areas when using the \al{province as sample}, and \alg{both program significantly affects unit transportation cost} when using the \alg{district as sample}. 
+\paragraph{Findings from Panel OLS estimates} Panel OLS estimates as shown in Table \ref{t:pols} indicate that only the fuel program significantly affected unit transportation costs in rural areas at less than 10\% significant level when using the province level as the sample. When I use the district level as the sample, the fuel program reduces the unit transportation costs by on average 2,321 Rp/km per gas station built at less than 5\% significant level. The village fund also significantly reduces the unit transportation costs by 1 Rp/km per million Rp of fund transfer. We find the time intercept to be statistically insignificant in all cases but have a higher variance when we use control variables.
         
-\paragraph{Findings from FEIV estimates}
-        FEIV estimates yield insignificant estimates. Endogeneity tests against $H_0$ that village fund transfer and fuel program are exogenous yield a $P$-value of consecutively 0.9103 and 0.5125, indicating that \al{the null hypothesis can not be rejected}. It might be \alg{better to use Panel OLS} instead.
+\paragraph{Findings from FEIV estimates} We generate three FEIV estimates to test the endogeneity of the two explanatory variables as shown in Table \ref{t:FEIV}, \ref{t:FEIV1} and \ref{t:FEIV2}. All the FEIV estimates yield insignificant estimates with large standard errors. The endogeneity tests against $H_0$ that village fund transfer and fuel program are exogenous yield a $P$-value of consecutively 0.8411 and 0.5578, indicating that the null hypothesis can not be rejected. Also when both variables are assumed to be endogenous the endogeneity test against $H_0$ that village fund transfer and fuel program are exogenous yields a $P$-value of consecutively 0.6626 and 0.5166, indicating that the null hypothesis can not be rejected either. Since there is not enough evidence that the fuel program and village fund transfer are endogenous, there is not enough certainty to trust the FEIV estimates.
 
-\paragraph{Findings from Panel OLS estimates with interaction terms}
-        I enrich the analysis by generating an interaction variable between programs to explore the complementary effect of both programs. The interaction term is \al{statistically insignificant}.
+\paragraph{Findings from Panel OLS estimates with interaction terms} In this further investigation, I add an interaction variable between programs to explore the complementary effect of both programs. The panel OLS estimates as shown in Table \ref{t:pols2} yield a statistically insignificant result for the interaction terms. Thus, there is not enough evidence of a complementary effect between the two programs.
 
 \subsection{Benefit-cost analysis}
 Following the estimates from subsection \ref{ss:findings}, the village fund transfer reduces unit transport cost by 1 Rp/km per million Rp spent, while the fuel program reduces unit transport costs by 2,380 Rp/km per gas station built. The capital cost of building one remote gas station is reported to be around 3 billion Rp and the profit margin of sales is 195 Rp/Liter \footnote{See \href{https://www.cnbcindonesia.com/news/20201213090547-4-208715/bangun-spbu-bbm-satu-harga-ternyata-lama-balik-modalnya}{https://www.cnbcindonesia.com/news/20201213090547-4-208715/bangun-spbu-bbm-satu-harga-ternyata-lama-balik-modalnya}} and average total sales per location of 383 kL in the 2016-2017 period \footnote{The figures is obtained from Indonesian Downstream Oil and Gas Authority}.
@@ -152,6 +149,10 @@ While we treat the benefit/cost of the village fund transfer as it is, $\hat{\ga
     &\Hy_0: B/C_{Fuel}-B/C_{VF}=0.33|\hat{\delta}_1|-|\hat{\gamma}_1|>0 \Leftrightarrow -0.33\hat{\delta}_1+\hat{\gamma}_1<0
 \end{align*}
 since we know that both $\hat{\delta}_1,\hat{\gamma}_1<0$. The Wald test yields a $t$-statistics of 1.97 which means we can not reject the null hypothesis even at 5\% significance level. Thus, we can accept with reasonable certainty that the Village fund transfer is more efficient than the fuel program in increasing rural accessibility.
+
+\subsection{Discussion}
+In the following paragraph, I will discuss the caveat
+
 
 \section{Conclusion}\label{s:conclusion}
 
