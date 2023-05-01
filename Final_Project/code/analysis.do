@@ -399,3 +399,9 @@ xtivreg2 unit_cost  (prog_par inc_vf=pov_let elec_pln earthq_1 sea trans_river) 
 xtreg unit_cost prog_par inc_vf vil_subd_dur pov_let sch_sh land_topo trans_river sea forest y18 if dist_prog==1 & vil_type==1, fe robust
 lincom  -(1000/((3000-195*383/1000000)))*prog_par + inc_vf
 
+* Hausman (1978)
+xtreg unit_cost prog_par inc_vf vil_subd_dur pov_let sch_sh land_topo trans_river sea forest if dist_prog==1, fe
+estimates store fixed
+xtreg unit_cost prog_par inc_vf vil_subd_dur pov_let sch_sh land_topo trans_river sea forest if dist_prog==1, re
+estimates store random
+hausman fixed random, sigmamore
