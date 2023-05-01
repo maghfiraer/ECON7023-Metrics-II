@@ -236,30 +236,30 @@ esttab using "./output/table/POLS.tex", replace   ///
  r2 ar2
 
 * FEIV
-global controls vil_subd_dur sch_sh land_topo trans_river
+global controls vil_subd_dur sch_sh land_topo forest
 est clear
 
-eststo: xtivreg2 unit_cost (prog_par inc_vf=pov_let elec_pln earthq_1 sea forest) $controls y18 if prov_prog==1 & vil_type==1, fe robust
+eststo: xtivreg2 unit_cost (prog_par inc_vf=pov_let elec_pln earthq_1 sea trans_river) $controls y18 if prov_prog==1 & vil_type==1, fe robust
  estadd local  FE "Yes"
  estadd local  TE "Yes"
  estadd local  Sa "Province"
  estadd local  Con "Yes"
 
 
-eststo: xtivreg2 unit_cost (prog_par inc_vf=pov_let elec_pln earthq_1 sea forest) y18 if prov_prog==1 & vil_type==1, fe robust
+eststo: xtivreg2 unit_cost (prog_par inc_vf=pov_let elec_pln earthq_1 sea trans_river) y18 if prov_prog==1 & vil_type==1, fe robust
  estadd local  FE "Yes"
  estadd local  TE "Yes"
  estadd local  Sa "Province"
  estadd local  Con "No"
 
 
-eststo: xtivreg2 unit_cost (prog_par inc_vf=pov_let elec_pln earthq_1 sea forest) $controls y18 if dist_prog==1 & vil_type==1, fe robust
+eststo: xtivreg2 unit_cost (prog_par inc_vf=pov_let elec_pln earthq_1 sea trans_river) $controls y18 if dist_prog==1 & vil_type==1, fe robust
  estadd local  FE "Yes"
  estadd local  TE "Yes"
  estadd local  Sa "District"
  estadd local  Con "Yes"
 
-eststo: xtivreg2 unit_cost (prog_par inc_vf=pov_let elec_pln earthq_1 sea forest) y18 if dist_prog==1 & vil_type==1, fe robust
+eststo: xtivreg2 unit_cost (prog_par inc_vf=pov_let elec_pln earthq_1 sea trans_river) y18 if dist_prog==1 & vil_type==1, fe robust
  estadd local  FE "Yes"
  estadd local  TE "Yes"
  estadd local  Sa "District"
@@ -274,28 +274,28 @@ esttab using "./output/table/FEIV.tex", replace   ///
 
 
 * FEIV1
-global controls vil_subd_dur sch_sh land_topo trans_river
+global controls vil_subd_dur sch_sh land_topo forest
 est clear
 
-eststo: xtivreg2 unit_cost prog_par ( inc_vf=pov_let elec_pln earthq_1 sea forest) $controls y18 if prov_prog==1 & vil_type==1, fe robust
+eststo: xtivreg2 unit_cost prog_par ( inc_vf=pov_let elec_pln earthq_1 sea trans_river) $controls y18 if prov_prog==1 & vil_type==1, fe robust
  estadd local  FE "Yes"
  estadd local  TE "Yes"
  estadd local  Sa "Province"
  estadd local  Con "Yes"
 
-eststo: xtivreg2 unit_cost prog_par ( inc_vf=pov_let elec_pln earthq_1 sea forest) y18 if prov_prog==1 & vil_type==1, fe robust
+eststo: xtivreg2 unit_cost prog_par ( inc_vf=pov_let elec_pln earthq_1 sea trans_river) y18 if prov_prog==1 & vil_type==1, fe robust
  estadd local  FE "Yes"
  estadd local  TE "Yes"
  estadd local  Sa "Province"
  estadd local  Con "No"
  
-eststo: xtivreg2 unit_cost prog_par ( inc_vf=pov_let elec_pln earthq_1 sea forest) $controls y18 if dist_prog==1 & vil_type==1, fe robust
+eststo: xtivreg2 unit_cost prog_par ( inc_vf=pov_let elec_pln earthq_1 sea trans_river) $controls y18 if dist_prog==1 & vil_type==1, fe robust
  estadd local  FE "Yes"
  estadd local  TE "Yes"
  estadd local  Sa "District"
  estadd local  Con "Yes"
 
-eststo: xtivreg2 unit_cost prog_par ( inc_vf=pov_let elec_pln earthq_1 sea forest) y18 if dist_prog==1 & vil_type==1, fe robust
+eststo: xtivreg2 unit_cost prog_par ( inc_vf=pov_let elec_pln earthq_1 sea trans_river) y18 if dist_prog==1 & vil_type==1, fe robust
  estadd local  FE "Yes"
  estadd local  TE "Yes"
  estadd local  Sa "District"
@@ -309,29 +309,29 @@ esttab using "./output/table/FEIV1.tex", replace   ///
  scalars("Sa Sample" "Con Controls" "TE Time Fixed Effects" "FE Village Fixed Effects") sfmt(3 0) 
 
 * FEIV2b
-global controls vil_subd_dur sch_sh land_topo trans_river
+global controls vil_subd_dur sch_sh land_topo forest
 est clear
 
-eststo: xtivreg2 unit_cost inc_vf (prog_par=pov_let elec_pln earthq_1 sea forest) $controls y18 if prov_prog==1 & vil_type==1, fe robust
+eststo: xtivreg2 unit_cost inc_vf (prog_par=pov_let elec_pln earthq_1 sea trans_river) $controls y18 if prov_prog==1 & vil_type==1, fe robust
  estadd local  FE "Yes"
  estadd local  TE "Yes"
  estadd local  Sa "Province"
  estadd local  Con "Yes"
 
-eststo: xtivreg2 unit_cost inc_vf ( prog_par=pov_let elec_pln earthq_1 sea forest) y18 if prov_prog==1 & vil_type==1, fe robust
+eststo: xtivreg2 unit_cost inc_vf ( prog_par=pov_let elec_pln earthq_1 sea trans_river) y18 if prov_prog==1 & vil_type==1, fe robust
  estadd local  FE "Yes"
  estadd local  TE "Yes"
  estadd local  Sa "Province"
  estadd local  Con "No"
  
 
-eststo: xtivreg2 unit_cost inc_vf ( prog_par=pov_let elec_pln earthq_1 sea forest) $controls y18 if dist_prog==1 & vil_type==1, fe robust
+eststo: xtivreg2 unit_cost inc_vf ( prog_par=pov_let elec_pln earthq_1 sea trans_river) $controls y18 if dist_prog==1 & vil_type==1, fe robust
  estadd local  FE "Yes"
  estadd local  TE "Yes"
  estadd local  Sa "District"
  estadd local  Con "Yes"
 
-eststo: xtivreg2 unit_cost inc_vf ( prog_par=pov_let elec_pln earthq_1 sea forest) y18 if dist_prog==1 & vil_type==1, fe robust
+eststo: xtivreg2 unit_cost inc_vf ( prog_par=pov_let elec_pln earthq_1 sea trans_river) y18 if dist_prog==1 & vil_type==1, fe robust
  estadd local  FE "Yes"
  estadd local  TE "Yes"
  estadd local  Sa "District"
@@ -386,8 +386,14 @@ esttab using "./output/table/POLS2.tex", replace   ///
  
 *---------
 * Endogeneity Test
-global controls vil_subd_dur sch_sh land_topo trans_river
+global controls vil_subd_dur sch_sh land_topo forest
 est clear
 
-xtivreg2 unit_cost prog_par (inc_vf=pov_let elec_pln earthq_1 sea forest) $controls y18 if dist_prog==1 & vil_type==1, fe robust endog(inc_vf)
-xtivreg2 unit_cost inc_vf (prog_par=pov_let elec_pln earthq_1 sea forest) $controls y18 if dist_prog==1 & vil_type==1, fe robust endog(prog_par)
+xtivreg2 unit_cost prog_par (inc_vf=pov_let elec_pln earthq_1 sea trans_river) $controls y18 if dist_prog==1 & vil_type==1, fe robust endog(inc_vf)
+xtivreg2 unit_cost inc_vf (prog_par=pov_let elec_pln earthq_1 sea trans_river) $controls y18 if dist_prog==1 & vil_type==1, fe robust endog(prog_par)
+
+* Confidence interval of hypothesis testing
+
+xtreg unit_cost prog_par inc_vf vil_subd_dur pov_let sch_sh land_topo trans_river sea forest y18 if dist_prog==1 & vil_type==1, fe robust
+lincom  -(1000/((3000-195*383/1000000)))*prog_par + inc_vf
+
